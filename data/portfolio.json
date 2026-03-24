@@ -1,0 +1,1223 @@
+{
+  "personalInfo": {
+    "name": "Ibrahim Tolgar Sasmaz",
+    "nameTr": "İbrahim Tolgar Şaşmaz",
+    "title": "Head of Digital | AI Transformation Leader",
+    "location": "Munich, Germany",
+    "email": "tolgar@sasmaz.digital",
+    "phone": "+49 151 24107365",
+    "website": "https://sasmaz.digital",
+    "linkedin": "https://linkedin.com/in/ibrahim-tolgar-sasmaz",
+    "profilePhoto": "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/profile-picture_55e611b5.jpeg"
+  },
+  "heroMetrics": [
+    {
+      "value": 12,
+      "suffix": "+",
+      "label": {
+        "en": "Years Experience",
+        "tr": "Yıl Deneyim",
+        "de": "Jahre Erfahrung"
+      }
+    },
+    {
+      "value": 10,
+      "suffix": "+",
+      "label": {
+        "en": "Team Members Led",
+        "tr": "Yönetilen Ekip",
+        "de": "Geführtes Team"
+      }
+    },
+    {
+      "value": 8,
+      "suffix": "-Figure",
+      "label": {
+        "en": "Budget Managed",
+        "tr": "Yönetilen Bütçe",
+        "de": "Verwaltetes Budget"
+      }
+    },
+    {
+      "value": 3,
+      "suffix": "",
+      "label": {
+        "en": "Markets Led",
+        "tr": "Yönetilen Pazarlar",
+        "de": "Geführte Märkte"
+      }
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "company": "NAOS Deutschland (BIODERMA)",
+      "role": {
+        "en": "Head of Digital",
+        "tr": "Dijital Başkanı",
+        "de": "Head of Digital"
+      },
+      "location": "Munich, Germany",
+      "period": {
+        "en": "04/2024 – Present",
+        "tr": "04/2024 – Günümüz",
+        "de": "04/2024 – Heute"
+      },
+      "current": true,
+      "budget": "8-figure EUR annual digital budget",
+      "team": "Direct: 1 FTE + cross-functional teams",
+      "achievements": {
+        "en": [
+          "+35% e-commerce sell-out growth through ROI-focused optimization",
+          "+14pp contribution margin uplift",
+          "Reduced OPEX by ~15-18% via operating model simplification",
+          "Designed GenAI chatbot for personalized product recommendations",
+          "PIM-integrated GenAI knowledge system for sales teams",
+          "OCR- and GenAI-driven creative localization: +60% CTR, +25% conversion",
+          "Built Power BI–integrated analytics for sell-out reporting & forecasting",
+          "Developed pricing intelligence covering compliance and competitor benchmarking",
+          "Low-code applications using Power Apps and Power Automate",
+          "Digital prescription platform connecting doctors, patients, and pharmacies"
+        ],
+        "tr": [
+          "ROI odaklı optimizasyon ile %35 e-ticaret satış büyümesi",
+          "+14pp katkı marjı artışı",
+          "İşletme modeli sadeleştirmesiyle OPEX'i ~%15-18 azaltma",
+          "Kişiselleştirilmiş ürün önerileri için GenAI chatbot tasarımı",
+          "Satış ekipleri için PIM entegre GenAI bilgi sistemi",
+          "OCR ve GenAI destekli kreatif yerelleştirme: +%60 CTR, +%25 dönüşüm",
+          "Satış raporlaması ve tahmin için Power BI entegre analitik",
+          "Fiyat uyumu ve rakip kıyaslaması kapsayan fiyat zekası",
+          "Power Apps ve Power Automate ile düşük kodlu uygulamalar",
+          "Doktorlar, hastalar ve eczaneleri bağlayan dijital reçete platformu"
+        ],
+        "de": [
+          "+35% E-Commerce-Umsatzwachstum durch ROI-fokussierte Optimierung",
+          "+14pp Deckungsbeitragssteigerung",
+          "OPEX-Reduzierung um ~15-18% durch Betriebsmodellvereinfachung",
+          "GenAI-Chatbot für personalisierte Produktempfehlungen entwickelt",
+          "PIM-integriertes GenAI-Wissenssystem für Vertriebsteams",
+          "OCR- und GenAI-gesteuerte kreative Lokalisierung: +60% CTR, +25% Conversion",
+          "Power BI-integrierte Analytik für Sell-out-Reporting & Prognosen",
+          "Preisintelligenz für Compliance und Wettbewerber-Benchmarking",
+          "Low-Code-Anwendungen mit Power Apps und Power Automate",
+          "Digitale Rezeptplattform für Ärzte, Patienten und Apotheken"
+        ]
+      },
+      "color": "#2563EB"
+    },
+    {
+      "id": 2,
+      "company": "NAOS Türkiye (BIODERMA / Institut Esthederm / Etat Pur)",
+      "role": {
+        "en": "Digital Marketing & CRM Manager",
+        "tr": "Dijital Pazarlama & CRM Müdürü",
+        "de": "Digital Marketing & CRM Manager"
+      },
+      "location": "Istanbul, Turkey",
+      "period": {
+        "en": "04/2022 – 04/2024",
+        "tr": "04/2022 – 04/2024",
+        "de": "04/2022 – 04/2024"
+      },
+      "current": false,
+      "budget": "9-figure TRY annual budget",
+      "team": "10 FTE cross-functional",
+      "achievements": {
+        "en": [
+          "+20% growth in user acquisition",
+          "+40% increase in online revenue",
+          "LTV increased by +69%, LTV/CAC improved by ~+60%",
+          "Omnichannel platform with Microsoft Dynamics 365 CRM, ERP, SaaS integrations",
+          "NFC/QR-integrated e-prescription platform",
+          "Advanced audience segmentation and CLV/LTV models"
+        ],
+        "tr": [
+          "Kullanıcı ediniminde %20 büyüme",
+          "Online gelirde %40 artış",
+          "LTV %69 artış, LTV/CAC ~%60 iyileşme",
+          "Microsoft Dynamics 365 CRM, ERP, SaaS entegrasyonlu omnichannel platform",
+          "NFC/QR entegre e-reçete platformu",
+          "Gelişmiş hedef kitle segmentasyonu ve CLV/LTV modelleri"
+        ],
+        "de": [
+          "+20% Wachstum bei der Nutzerakquise",
+          "+40% Steigerung des Online-Umsatzes",
+          "LTV um +69% gestiegen, LTV/CAC um ~+60% verbessert",
+          "Omnichannel-Plattform mit Microsoft Dynamics 365 CRM, ERP, SaaS-Integrationen",
+          "NFC/QR-integrierte E-Rezept-Plattform",
+          "Erweiterte Zielgruppensegmentierung und CLV/LTV-Modelle"
+        ]
+      },
+      "color": "#3B82F6"
+    },
+    {
+      "id": 3,
+      "company": "NAOS Türkiye",
+      "role": {
+        "en": "Digital Marketing Manager",
+        "tr": "Dijital Pazarlama Müdürü",
+        "de": "Digital Marketing Manager"
+      },
+      "location": "Istanbul, Turkey",
+      "period": {
+        "en": "03/2021 – 04/2022",
+        "tr": "03/2021 – 04/2022",
+        "de": "03/2021 – 04/2022"
+      },
+      "current": false,
+      "budget": "Multi-channel paid media budget",
+      "team": "6 FTE + agency management",
+      "achievements": {
+        "en": [
+          "+35% increase in website traffic",
+          "~2.6 SERP positions improvement",
+          "Email open rates +10pp uplift, CTR +2pp",
+          "Twitter Trending Topic campaign",
+          "Full-funnel performance marketing across Google, Meta, TikTok"
+        ],
+        "tr": [
+          "Website trafiğinde %35 artış",
+          "~2.6 SERP pozisyonu iyileşmesi",
+          "E-posta açılma oranı +10pp artış, CTR +2pp",
+          "Twitter Trending Topic kampanyası",
+          "Google, Meta, TikTok'ta tam dönüşüm hunisi performans pazarlaması"
+        ],
+        "de": [
+          "+35% Steigerung des Website-Traffics",
+          "~2,6 SERP-Positionen Verbesserung",
+          "E-Mail-Öffnungsrate +10pp Steigerung, CTR +2pp",
+          "Twitter Trending Topic Kampagne",
+          "Full-Funnel Performance Marketing über Google, Meta, TikTok"
+        ]
+      },
+      "color": "#60A5FA"
+    },
+    {
+      "id": 4,
+      "company": "D&R / idefix",
+      "role": {
+        "en": "Digital Marketing Manager",
+        "tr": "Dijital Pazarlama Müdürü",
+        "de": "Digital Marketing Manager"
+      },
+      "location": "Istanbul, Turkey",
+      "period": {
+        "en": "01/2020 – 03/2021",
+        "tr": "01/2020 – 03/2021",
+        "de": "01/2020 – 03/2021"
+      },
+      "current": false,
+      "budget": "8-figure budget governance",
+      "team": "Cross-functional coordination",
+      "achievements": {
+        "en": [
+          "Growth delivery across performance, CRM, SEO/SEM and CRO",
+          "Experimentation roadmap to improve conversion outcomes",
+          "Mobile app advertising and user acquisition",
+          "Coordinated creative and production agencies"
+        ],
+        "tr": [
+          "Performans, CRM, SEO/SEM ve CRO genelinde büyüme sağlama",
+          "Dönüşüm sonuçlarını iyileştirmek için deneme yol haritası",
+          "Mobil uygulama reklamcılığı ve kullanıcı edinimi",
+          "Kreatif ve prodüksiyon ajanslarını koordine etme"
+        ],
+        "de": [
+          "Wachstumslieferung über Performance, CRM, SEO/SEM und CRO",
+          "Experimentierfahrplan zur Verbesserung der Conversion-Ergebnisse",
+          "Mobile App-Werbung und Nutzerakquise",
+          "Koordination von Kreativ- und Produktionsagenturen"
+        ]
+      },
+      "color": "#93C5FD"
+    },
+    {
+      "id": 5,
+      "company": "D&R / idefix",
+      "role": {
+        "en": "Digital Marketing Specialist",
+        "tr": "Dijital Pazarlama Uzmanı",
+        "de": "Digital Marketing Specialist"
+      },
+      "location": "Istanbul, Turkey",
+      "period": {
+        "en": "05/2017 – 01/2020",
+        "tr": "05/2017 – 01/2020",
+        "de": "05/2017 – 01/2020"
+      },
+      "current": false,
+      "achievements": {
+        "en": [
+          "Hands-on SEO, on-site marketing and CRO experimentation",
+          "Segmentation-based CRM and personalization journeys",
+          "A/B testing across landing pages and user flows"
+        ],
+        "tr": [
+          "Uygulamalı SEO, site içi pazarlama ve CRO denemeleri",
+          "Segmentasyon tabanlı CRM ve kişiselleştirme yolculukları",
+          "Açılış sayfaları ve kullanıcı akışlarında A/B testleri"
+        ],
+        "de": [
+          "Praktisches SEO, On-Site-Marketing und CRO-Experimente",
+          "Segmentierungsbasierte CRM- und Personalisierungsreisen",
+          "A/B-Tests auf Landing Pages und User Flows"
+        ]
+      },
+      "color": "#BFDBFE"
+    },
+    {
+      "id": 6,
+      "company": "8digits (SaaS Analytics & CRO Startup)",
+      "role": {
+        "en": "Account Manager",
+        "tr": "Hesap Yöneticisi",
+        "de": "Account Manager"
+      },
+      "location": "Istanbul, Turkey",
+      "period": {
+        "en": "05/2016 – 05/2017",
+        "tr": "05/2016 – 05/2017",
+        "de": "05/2016 – 05/2017"
+      },
+      "current": false,
+      "achievements": {
+        "en": [
+          "CRO roadmaps for multi-vertical enterprise clients",
+          "Funnel diagnostics and optimization backlogs",
+          "Analytics dashboards and reporting frameworks"
+        ],
+        "tr": [
+          "Çok sektörlü kurumsal müşteriler için CRO yol haritaları",
+          "Dönüşüm hunisi tanılamaları ve optimizasyon backlogleri",
+          "Analitik panolar ve raporlama çerçeveleri"
+        ],
+        "de": [
+          "CRO-Roadmaps für Multi-Vertikal-Unternehmenskunden",
+          "Trichterdiagnosen und Optimierungs-Backlogs",
+          "Analytics-Dashboards und Reporting-Frameworks"
+        ]
+      },
+      "color": "#DBEAFE"
+    },
+    {
+      "id": 7,
+      "company": "Emarsys (SAP Marketing Cloud)",
+      "role": {
+        "en": "Client Manager",
+        "tr": "Müşteri Yöneticisi",
+        "de": "Client Manager"
+      },
+      "location": "Istanbul, Turkey",
+      "period": {
+        "en": "01/2015 – 05/2016",
+        "tr": "01/2015 – 05/2016",
+        "de": "01/2015 – 05/2016"
+      },
+      "current": false,
+      "achievements": {
+        "en": [
+          "Enterprise CRM & marketing automation consulting",
+          "Segmentation architecture, lifecycle journeys, trigger programs",
+          "Client training, workshops, and enablement sessions"
+        ],
+        "tr": [
+          "Kurumsal CRM ve pazarlama otomasyonu danışmanlığı",
+          "Segmentasyon mimarisi, yaşam döngüsü yolculukları, tetikleyici programlar",
+          "Müşteri eğitimleri, atölyeler ve etkinleştirme oturumları"
+        ],
+        "de": [
+          "Enterprise CRM & Marketing-Automatisierungsberatung",
+          "Segmentierungsarchitektur, Lifecycle-Journeys, Trigger-Programme",
+          "Kundenschulungen, Workshops und Enablement-Sessions"
+        ]
+      },
+      "color": "#EFF6FF"
+    },
+    {
+      "id": 8,
+      "company": "Lidyana.com",
+      "role": {
+        "en": "CRM & Email Marketing Specialist",
+        "tr": "CRM & E-posta Pazarlama Uzmanı",
+        "de": "CRM & E-Mail-Marketing-Spezialist"
+      },
+      "location": "Istanbul, Turkey",
+      "period": {
+        "en": "03/2014 – 01/2015",
+        "tr": "03/2014 – 01/2015",
+        "de": "03/2014 – 01/2015"
+      },
+      "current": false,
+      "achievements": {
+        "en": [
+          "Lifecycle and promotional CRM programs",
+          "A/B testing, deliverability, list hygiene",
+          "Trigger-based lifecycle communication flows"
+        ],
+        "tr": [
+          "Yaşam döngüsü ve promosyon CRM programları",
+          "A/B testleri, teslim edilebilirlik, liste hijyeni",
+          "Tetikleyici tabanlı yaşam döngüsü iletişim akışları"
+        ],
+        "de": [
+          "Lifecycle- und Promotions-CRM-Programme",
+          "A/B-Tests, Zustellbarkeit, Listenhygiene",
+          "Trigger-basierte Lifecycle-Kommunikationsflüsse"
+        ]
+      },
+      "color": "#F0F9FF"
+    }
+  ],
+  "education": [
+    {
+      "degree": {
+        "en": "Master's Degree – Marketing Management",
+        "tr": "Yüksek Lisans – Pazarlama Yönetimi",
+        "de": "Master-Abschluss – Marketing Management"
+      },
+      "institution": "Istanbul University",
+      "period": "2014 – 2016",
+      "location": "Istanbul, Turkey"
+    },
+    {
+      "degree": {
+        "en": "University Diploma – Molecular Biology & Genetics",
+        "tr": "Lisans – Moleküler Biyoloji & Genetik",
+        "de": "Universitätsdiplom – Molekularbiologie & Genetik"
+      },
+      "institution": "Istanbul Technical University",
+      "period": "2008 – 2013",
+      "location": "Istanbul, Turkey"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Prompt Design in Vertex AI",
+      "issuer": "Google Cloud",
+      "date": "2024",
+      "color": "#4285F4",
+      "icon": "🤖",
+      "image": "https://images.credly.com/size/680x680/images/cef82b2e-970a-4318-8e59-c3e26b7f5c19/image.png",
+      "verificationUrl": "https://www.credly.com/badges/391cb992-5ff5-42df-896e-1de840988ffd/linked_in_profile"
+    },
+    {
+      "title": "Applied Marketing Analytics",
+      "issuer": "Kellogg Executive Education – Northwestern University",
+      "date": "May–July 2023",
+      "credentialId": "78013424",
+      "color": "#4E2A84",
+      "icon": "📊",
+      "verificationUrl": "https://execedcertificate.kellogg.northwestern.edu/40bd6093-18a0-4efd-b8e5-72426dc5eb17#acc.YlaUFKus"
+    },
+    {
+      "title": "Leading Growth Strategy",
+      "issuer": "Kellogg Executive Education – Northwestern University",
+      "date": "April–June 2023",
+      "credentialId": "76459333",
+      "color": "#4E2A84",
+      "icon": "📈",
+      "verificationUrl": "https://execedcertificate.kellogg.northwestern.edu/24609ae7-a914-47ea-b708-b352f47810c0#acc.Jkz7jgAY"
+    },
+    {
+      "title": "Digital Marketing: Customer Engagement, Planning & Analytics",
+      "issuer": "Emeritus / Columbia Business School",
+      "date": "May 2022",
+      "color": "#003087",
+      "icon": "🎯",
+      "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/Digital%20Marketing-Emeritus_f2c8d3a1.jpg",
+      "verificationUrl": "https://certificates.emeritus.org/5421f7d9-20ce-4d07-a124-07cc02fd9fa8#acc.Ap0Pu3ST"
+    },
+    {
+      "title": "Leadership and Talent Management",
+      "issuer": "Engaged4Results",
+      "date": "2015",
+      "color": "#2563EB",
+      "icon": "👥"
+    }
+  ],
+  "languages": [
+    {
+      "name": {
+        "en": "Turkish",
+        "tr": "Türkçe",
+        "de": "Türkisch"
+      },
+      "level": {
+        "en": "Native",
+        "tr": "Anadil",
+        "de": "Muttersprache"
+      },
+      "proficiency": 100
+    },
+    {
+      "name": {
+        "en": "English",
+        "tr": "İngilizce",
+        "de": "Englisch"
+      },
+      "level": {
+        "en": "Expert (C2)",
+        "tr": "Uzman (C2)",
+        "de": "Experte (C2)"
+      },
+      "proficiency": 95
+    },
+    {
+      "name": {
+        "en": "German",
+        "tr": "Almanca",
+        "de": "Deutsch"
+      },
+      "level": {
+        "en": "Elementary (A2)",
+        "tr": "Temel (A2)",
+        "de": "Elementar (A2)"
+      },
+      "proficiency": 30
+    }
+  ],
+  "skills": [
+    "Digital Transformation",
+    "Growth Strategy",
+    "Go-to-Market Strategy",
+    "Stakeholder Management",
+    "Team Leadership",
+    "Generative AI Systems Design",
+    "Data-Driven Decision Making",
+    "Pricing Intelligence",
+    "CLV/LTV Modeling",
+    "Funnel Diagnostics",
+    "Behavioral Analysis",
+    "Digital Platform Design",
+    "Low-Code Development",
+    "Marketing Automation",
+    "Omnichannel Strategy",
+    "Performance Marketing",
+    "CRM Strategy",
+    "E-commerce Growth",
+    "Power BI",
+    "Power Apps",
+    "Microsoft Dynamics 365"
+  ],
+  "toolsData": [
+    {
+      "category": {
+        "en": "Performance Marketing & Paid Media",
+        "tr": "Performans Pazarlama & Ücretli Medya",
+        "de": "Performance Marketing & Paid Media"
+      },
+      "icon": "📢",
+      "color": "#EF4444",
+      "tools": [
+        "Google Ads",
+        "Meta Ads",
+        "TikTok Ads",
+        "Facebook Business Manager",
+        "Awin",
+        "Google Merchant Center",
+        "Primetag"
+      ]
+    },
+    {
+      "category": {
+        "en": "Web Analytics & Attribution",
+        "tr": "Web Analitik & Atıf",
+        "de": "Web-Analytics & Attribution"
+      },
+      "icon": "📊",
+      "color": "#F97316",
+      "tools": [
+        "Google Analytics 4 (GA4)",
+        "Google Tag Manager",
+        "Google Search Console",
+        "Hotjar",
+        "Looker Studio"
+      ]
+    },
+    {
+      "category": {
+        "en": "CRM & Customer Lifecycle",
+        "tr": "CRM & Müşteri Yaşam Döngüsü",
+        "de": "CRM & Customer Lifecycle"
+      },
+      "icon": "🎯",
+      "color": "#8B5CF6",
+      "tools": [
+        "Emarsys",
+        "Euromsg",
+        "Insider",
+        "MS Dynamics 365"
+      ]
+    },
+    {
+      "category": {
+        "en": "Data, BI & Reporting",
+        "tr": "Veri, BI & Raporlama",
+        "de": "Daten, BI & Reporting"
+      },
+      "icon": "📈",
+      "color": "#2563EB",
+      "tools": [
+        "Power BI",
+        "Looker Studio",
+        "Advanced Excel Modelling"
+      ]
+    },
+    {
+      "category": {
+        "en": "AI & Workflow Automation",
+        "tr": "Yapay Zeka & İş Akışı Otomasyonu",
+        "de": "KI & Workflow-Automatisierung"
+      },
+      "icon": "🤖",
+      "color": "#10B981",
+      "tools": [
+        "Power Apps",
+        "Power Automate",
+        "Copilot Studio",
+        "n8n",
+        "OpenAI API",
+        "Google API"
+      ]
+    },
+    {
+      "category": {
+        "en": "AI Platforms & LLM Ecosystem",
+        "tr": "Yapay Zeka Platformları & LLM Ekosistemi",
+        "de": "KI-Plattformen & LLM-Ökosystem"
+      },
+      "icon": "🧠",
+      "color": "#6366F1",
+      "tools": [
+        "ChatGPT",
+        "Gemini",
+        "Hugging Face",
+        "Google AI Studio"
+      ]
+    },
+    {
+      "category": {
+        "en": "AI Product Development",
+        "tr": "Yapay Zeka Ürün Geliştirme",
+        "de": "KI-Produktentwicklung"
+      },
+      "icon": "⚡",
+      "color": "#F59E0B",
+      "tools": [
+        "Replit",
+        "Bubble AI",
+        "Builder.io",
+        "Lovable",
+        "Anything.io",
+        "YouWare"
+      ]
+    },
+    {
+      "category": {
+        "en": "Marketplace & Retail Intelligence",
+        "tr": "Pazar Yeri & Perakende Zekası",
+        "de": "Marketplace & Retail Intelligence"
+      },
+      "icon": "🛒",
+      "color": "#EC4899",
+      "tools": [
+        "Amazon Vendor Center",
+        "Helium 10",
+        "Profitero",
+        "Mikmak"
+      ]
+    },
+    {
+      "category": {
+        "en": "Market & Competitive Intelligence",
+        "tr": "Pazar & Rekabet Zekası",
+        "de": "Markt- & Wettbewerbsintelligenz"
+      },
+      "icon": "🔍",
+      "color": "#14B8A6",
+      "tools": [
+        "IQVIA",
+        "SEMrush"
+      ]
+    },
+    {
+      "category": {
+        "en": "Project & Agile Governance",
+        "tr": "Proje & Çevik Yönetim",
+        "de": "Projekt- & Agile-Governance"
+      },
+      "icon": "📋",
+      "color": "#64748B",
+      "tools": [
+        "Wrike",
+        "Jira",
+        "Asana"
+      ]
+    },
+    {
+      "category": {
+        "en": "PIM / CMS",
+        "tr": "PIM / CMS",
+        "de": "PIM / CMS"
+      },
+      "icon": "📦",
+      "color": "#7C3AED",
+      "tools": [
+        "Drupal",
+        "Quable"
+      ]
+    },
+    {
+      "category": {
+        "en": "Social & Brand Management",
+        "tr": "Sosyal & Marka Yönetimi",
+        "de": "Social & Brand Management"
+      },
+      "icon": "💬",
+      "color": "#0EA5E9",
+      "tools": [
+        "Facelift"
+      ]
+    },
+    {
+      "category": {
+        "en": "Creative & Asset Production",
+        "tr": "Kreatif & Varlık Üretimi",
+        "de": "Kreativ & Asset-Produktion"
+      },
+      "icon": "🎨",
+      "color": "#F43F5E",
+      "tools": [
+        "Canva"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "category": "vibe",
+      "title": "Gamebook AI Web Application",
+      "description": {
+        "en": "AI-powered interactive gamebook creation platform with vibe coding, enabling users to design branching narratives and interactive stories",
+        "tr": "Vibe kodlama ile yapay zeka destekli interaktif oyun kitabı oluşturma platformu, kullanıcıların dallanmış hikayeleri tasarlamasını sağlar",
+        "de": "KI-gestützte interaktive Gamebook-Erstellungsplattform mit Vibe-Coding für Benutzer zum Entwerfen von Verzweigungsnarrativen"
+      },
+      "url": "https://gamebooks-ai.sasmaz.digital/",
+      "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/gamebook-ai_cda8491e.jpg",
+      "videoUrl": "https://youtu.be/bH4_P2bp7C4",
+      "ctaButtons": [
+        {
+          "label": {
+            "en": "See Demo",
+            "tr": "Demoyu Gör",
+            "de": "Demo ansehen"
+          },
+          "type": "video"
+        },
+        {
+          "label": {
+            "en": "Go To App",
+            "tr": "Uygulamaya Git",
+            "de": "Zur App"
+          },
+          "type": "link",
+          "url": "https://gamebooks-ai.sasmaz.digital/"
+        }
+      ],
+      "tags": [
+        {
+          "name": "AI",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "Generative AI",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "Interactive Storytelling",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Entertainment Tech",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": false
+    },
+    {
+      "category": "vibe",
+      "title": "CO2 Score iOS Mobile Application",
+      "description": {
+        "en": "Carbon footprint tracking mobile application for iOS, helping users measure and reduce their environmental impact with real-time analytics",
+        "tr": "iOS için gerçek zamanlı analitik ile kullanıcıların çevresel etkisini ölçmesine ve azaltmasına yardımcı olan karbon ayak izi takip uygulaması",
+        "de": "iOS-App zur Verfolgung des Kohlenstoff-Fußabdrucks mit Echtzeit-Analysen zur Messung und Verringerung der Umweltauswirkungen"
+      },
+      "url": "https://apps.apple.com/de/app/co-score/id6755812154",
+      "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/co2-score_bdc78059.jpg",
+      "videoUrl": "https://youtube.com/shorts/b4fXNgPNyJo?feature=share",
+      "ctaButtons": [
+        {
+          "label": {
+            "en": "See How It Works",
+            "tr": "Nasıl Çalıştığını Gör",
+            "de": "So funktioniert es"
+          },
+          "type": "video"
+        },
+        {
+          "label": {
+            "en": "Go To App",
+            "tr": "Uygulamaya Git",
+            "de": "Zur App"
+          },
+          "type": "link",
+          "url": "https://apps.apple.com/de/app/co-score/id6755812154"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Mobile App",
+          "category": "Platform",
+          "color": "bg-orange-100 text-orange-700"
+        },
+        {
+          "name": "AI Analytics",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "Environmental Tracking",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Sustainability",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": false
+    },
+    {
+      "category": "vibe",
+      "title": "360 Real Estate Suite",
+      "description": {
+        "en": "Comprehensive real estate management web application with CRM, property listing, tenant management, and financial reporting capabilities",
+        "tr": "CRM, gayrimenkul listeleme, kiracı yönetimi ve finansal raporlama yetenekleri ile kapsamlı gayrimenkul yönetim web uygulaması",
+        "de": "Umfassende Immobilienverwaltungs-Webanwendung mit CRM, Immobilienauflistung und Finanzberichterstattung"
+      },
+      "url": "https://www.360estatesuite.com/",
+      "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/360-estate-suite_55c0d9dd.jpg",
+      "videoUrl": "https://youtube.com/shorts/4g_5AYje-8o?feature=share",
+      "ctaButtons": [
+        {
+          "label": {
+            "en": "See Demo",
+            "tr": "Demoyu Gör",
+            "de": "Demo ansehen"
+          },
+          "type": "video"
+        },
+        {
+          "label": {
+            "en": "Go To App",
+            "tr": "Uygulamaya Git",
+            "de": "Zur App"
+          },
+          "type": "link",
+          "url": "https://www.360estatesuite.com/"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Web App",
+          "category": "Platform",
+          "color": "bg-orange-100 text-orange-700"
+        },
+        {
+          "name": "SaaS Platform",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "CRM & Property Management",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "PropTech",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": false
+    },
+    {
+      "category": "vibe",
+      "title": "See The Impact",
+      "description": {
+        "en": "Social impact measurement and visualization platform enabling NGOs and social enterprises to track, measure, and communicate their societal contributions",
+        "tr": "Sosyal etkileri olcmek ve gorsellestirilmek icin STKlar ve sosyal isletmelerin katkilarini izlemesine olanak taniyarak sosyal etki platformu",
+        "de": "Plattform zur Messung und Visualisierung sozialer Wirkung fuer NGOs und Sozialunternehmen"
+      },
+      "url": "https://www.seetheimpact.info/",
+      "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/see-the-impact_c877e5af.jpg",
+      "videoUrl": "https://youtube.com/shorts/qZj16uAWSas?feature=share",
+      "ctaButtons": [
+        {
+          "label": {
+            "en": "See Demo",
+            "tr": "Demoyu Gör",
+            "de": "Demo ansehen"
+          },
+          "type": "video"
+        },
+        {
+          "label": {
+            "en": "Try It",
+            "tr": "Dene",
+            "de": "Probieren"
+          },
+          "type": "link",
+          "url": "https://www.seetheimpact.info/"
+        }
+      ],
+      "tags": [
+        {
+          "name": "Web App",
+          "category": "Platform",
+          "color": "bg-orange-100 text-orange-700"
+        },
+        {
+          "name": "Data Analytics",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "Impact Measurement",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Social Impact",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": false
+    },
+    {
+      "category": "vibe",
+      "title": "TranslASSET AI",
+      "description": {
+        "en": "AI-powered asset translation and localization platform",
+        "tr": "Yapay zeka destekli varlık çeviri ve yerelleştirme platformu",
+        "de": "KI-gestützte Asset-Übersetzungs- und Lokalisierungsplattform"
+      },
+      "url": null,
+      "tags": [
+        {
+          "name": "AI",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "OCR & Localization",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Content Automation",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Martech",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": true
+    },
+    {
+      "category": "vibe",
+      "title": "Pricing Validation & Intelligence System",
+      "description": {
+        "en": "AI & ML driven platform connecting PIM for pricing validation across online sellers and competitor benchmarking",
+        "tr": "Çevrimiçi satıcılarda fiyat doğrulama ve rakip kıyaslaması için PIM'i bağlayan yapay zeka ve makine öğrenimi destekli platform",
+        "de": "KI & ML-gesteuerte Plattform zur Preisvalidierung über Online-Verkäufer und Wettbewerber-Benchmarking"
+      },
+      "url": null,
+      "tags": [
+        {
+          "name": "AI / ML",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "Price Optimization",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Competitive Intelligence",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Retail Analytics",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": true
+    },
+    {
+      "category": "powerapps",
+      "title": "BIODERMA 360 e-Prescription System",
+      "description": {
+        "en": "End-to-end digital prescription platform connecting doctors, patients, and pharmacies with real-time dashboards, inventory management, and compliance tracking for regulated healthcare",
+        "tr": "Düzenlemeye tabi sağlık hizmetleri için gerçek zamanlı panolar, envanter yönetimi ve uyum takibi ile doktorları, hastaları ve eczaneleri birbirine bağlayan uçtan uca dijital reçete platformu",
+        "de": "End-to-End-Digitalrezept-Plattform mit Echtzeit-Dashboards, Bestandsverwaltung und Compliance-Tracking für regulierte Gesundheitswesen"
+      },
+      "url": "https://youtu.be/8qtZvOQKWtg",
+      "tags": [
+        {
+          "name": "Power Apps",
+          "category": "Enterprise Tools",
+          "color": "bg-yellow-100 text-yellow-700"
+        },
+        {
+          "name": "Digital Prescription Platform",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Healthcare Compliance",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "HealthTech",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": false
+    },
+    {
+      "category": "powerapps",
+      "title": "BIODERMA AI-Driven Visit Planning",
+      "description": {
+        "en": "AI-powered mobile application for intelligent field visit planning and optimization, using machine learning to allocate resources and maximize territory coverage",
+        "tr": "Makine öğrenimi kullanarak kaynakları tahsis etmeye ve bölge kapsamını en üst düzeye çıkarmaya yönelik yapay zeka destekli mobil uygulama",
+        "de": "KI-gestützte mobile App mit Machine Learning für optimale Ressourcenallokation und Gebietsverwaltung"
+      },
+      "url": null,
+      "tags": [
+        {
+          "name": "Power Apps",
+          "category": "Enterprise Tools",
+          "color": "bg-yellow-100 text-yellow-700"
+        },
+        {
+          "name": "AI",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "Field Visit Optimization",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Healthcare CRM",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": true
+    },
+    {
+      "category": "powerapps",
+      "title": "BIODERMA Tasky AI",
+      "description": {
+        "en": "AI-powered task management and workflow automation web application with intelligent task prioritization, team collaboration, and automated follow-up systems",
+        "tr": "Akıllı görev önceliklendirmesi, ekip işbirliği ve otomatik takip sistemleri ile yapay zeka destekli görev yönetimi ve iş akışı otomasyonu web uygulaması",
+        "de": "KI-gestützte Aufgabenverwaltungs-App mit intelligenter Priorisierung, Teamzusammenarbeit und automatisierten Follow-up-Systemen"
+      },
+      "url": null,
+      "tags": [
+        {
+          "name": "Power Apps",
+          "category": "Enterprise Tools",
+          "color": "bg-yellow-100 text-yellow-700"
+        },
+        {
+          "name": "AI",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "Workflow Automation",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        },
+        {
+          "name": "Enterprise Productivity",
+          "category": "Domain",
+          "color": "bg-green-100 text-green-700"
+        }
+      ],
+      "confidential": true
+    },
+    {
+      "category": "powerapps",
+      "title": "360° Real-Time Executive Dashboard",
+      "description": {
+        "en": "Comprehensive executive dashboard with real-time KPIs, sell-out forecasting, predictive analytics, and integrated Power BI visualizations for strategic decision-making",
+        "tr": "Stratejik kararlar icin gercek zamanli KPIlar, satis tahmini ve analitik ile yonetici panosu",
+        "de": "Umfassendes Executive-Dashboard mit Echtzeit-KPIs, Prognosen und integrierten Power BI-Visualisierungen fuer strategische Entscheidungen"
+      },
+      "url": null,
+      "tags": [
+        {
+          "name": "Power BI",
+          "category": "Enterprise Tools",
+          "color": "bg-yellow-100 text-yellow-700"
+        },
+        {
+          "name": "Power Apps",
+          "category": "Enterprise Tools",
+          "color": "bg-yellow-100 text-yellow-700"
+        },
+        {
+          "name": "Predictive Analytics",
+          "category": "Technology",
+          "color": "bg-purple-100 text-purple-700"
+        },
+        {
+          "name": "Executive Intelligence",
+          "category": "Capability",
+          "color": "bg-blue-100 text-blue-700"
+        }
+      ],
+      "confidential": true
+    }
+  ],
+  "awards": [
+    {
+      "title": "Felis Awards 2019 – Best Integrated Campaign",
+      "result": "WINNER",
+      "campaign": "Okumak Ne Güzel Şey",
+      "brand": "idefix",
+      "url": "https://mediacat.com/felis-2019-entegre-kampanyalar-bolumu-felis-kazanan-tum-isler/7/",
+      "color": "#F59E0B",
+      "icon": "🏆"
+    },
+    {
+      "title": "MIXX Awards Türkiye 2020 – Best Integrated Campaign",
+      "result": "Bronze",
+      "campaign": "Okumak Ne Güzel Şey",
+      "brand": "idefix",
+      "url": "https://iabtr.org/duyuru/mixx-awards-turkiye-kazananlar-galerisi-guncellendi/",
+      "color": "#CD7F32",
+      "icon": "🥉"
+    },
+    {
+      "title": "Social Media Awards Turkey 2020",
+      "result": "Silver – Social Media Data Analytics",
+      "campaign": "",
+      "brand": "idefix",
+      "url": "https://www.marketingturkiye.com.tr/haberler/social-media-awards-turkey-2020-odulleri-sahiplerini-buldu/",
+      "color": "#9CA3AF",
+      "icon": "🥈"
+    }
+  ],
+  "caseStudies": [
+    {
+      "brand": "BIODERMA",
+      "partner": "RTB House",
+      "result": "32% Higher Viewability & 22% Higher Video Completion Rate",
+      "url": "https://www.rtbhouse.com/case-studies/bioderma-streaming-video-ad"
+    },
+    {
+      "brand": "BIODERMA",
+      "partner": "MIKMAK",
+      "result": "3.3× Higher Purchase Intent Rate & 5.6× Higher Attributable Sales",
+      "url": "https://www.mikmak.com/case-studies/bioderma-turkey-ucs"
+    },
+    {
+      "brand": "D&R",
+      "partner": "CRITEO",
+      "result": "22% Higher ROI with AI-Powered Personalization",
+      "url": "https://www.criteo.com/success-stories/dr/"
+    },
+    {
+      "brand": "idefix",
+      "partner": "Related Digital",
+      "result": "600% ROI Through AI-Powered Personalization",
+      "url": "https://www.relateddigital.com/wp-content/uploads/2023/08/idefix-CaseStudy-EN.pdf"
+    },
+    {
+      "brand": "idefix",
+      "partner": "Google",
+      "result": "10% Revenue Growth & 5% Lower Acquisition Cost",
+      "url": "https://www.thinkwithgoogle.com/_qs/documents/10220/Google_Retail_Playbook_2020_FIN.pdf"
+    },
+    {
+      "brand": "D&R",
+      "partner": "Related Digital",
+      "result": "98% Higher Customer Engagement with AI-Powered Personalization",
+      "url": "https://www.relateddigital.com/wp-content/uploads/2023/08/dr-CaseStudy.pdf"
+    }
+  ],
+  "speakingMentoring": [
+    {
+      "role": {
+        "en": "Guest Speaker",
+        "tr": "Konuk Konuşmacı",
+        "de": "Gastredner"
+      },
+      "institution": "Anadolu University",
+      "topic": {
+        "en": "Marketing Strategy, Innovation and Digital Transformation in \"Sıfırın Altında Marketing (SAM'25)\"",
+        "tr": "\"Sıfırın Altında Marketing (SAM'25)\" etkinliğinde Pazarlama Stratejisi, İnovasyon ve Dijital Dönüşüm",
+        "de": "Marketingstrategie, Innovation und digitale Transformation bei \"Sıfırın Altında Marketing (SAM'25)\""
+      },
+      "url": "https://www.instagram.com/p/C61EFAPtbdF/"
+    },
+    {
+      "role": {
+        "en": "Guest Speaker",
+        "tr": "Konuk Konuşmacı",
+        "de": "Gastredner"
+      },
+      "institution": "18 Mart University",
+      "topic": {
+        "en": "E-Commerce & Digital Marketing",
+        "tr": "E-Ticaret & Dijital Pazarlama",
+        "de": "E-Commerce & Digitales Marketing"
+      },
+      "url": "https://utl.bigaubf.comu.edu.tr/arsiv/etkinlikler/e-ticaret-ve-dijital-pazarlama-egitimi-r45.html"
+    },
+    {
+      "role": {
+        "en": "Mentor",
+        "tr": "Mentor",
+        "de": "Mentor"
+      },
+      "institution": "Istanbul Technical University",
+      "topic": {
+        "en": "Career mentorship and industry guidance for senior-year students – ITU Mentor & Mentee Program",
+        "tr": "Son sınıf öğrencileri için kariyer mentorluğu – İTÜ Mentor & Mentee Programı",
+        "de": "Karrierementoring für Studenten im letzten Studienjahr – ITU Mentor & Mentee-Programm"
+      },
+      "url": "https://drive.google.com/file/d/1YZNB2IrMmGRpK-D4Thdsg7mRkoQVKpD7/view?usp=sharing"
+    }
+  ]
+}
