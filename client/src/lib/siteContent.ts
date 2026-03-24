@@ -1,8 +1,8 @@
 export const highlightMetrics = [
-  { value: "12+", label: "years building growth systems" },
-  { value: "+35%", label: "e-commerce sell-out growth delivered" },
-  { value: "+14pp", label: "contribution margin uplift" },
-  { value: "+69%", label: "LTV improvement in CRM programs" },
+  { value: "12+", label: "Years Experience" },
+  { value: "10+", label: "Team Members Led" },
+  { value: "8-Figure", label: "Budget Managed" },
+  { value: "3", label: "Markets Led" },
 ];
 
 export const capabilityPillars = [

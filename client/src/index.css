@@ -297,6 +297,14 @@
     backdrop-filter: blur(14px);
   }
 
+  .portfolio-panel-light {
+    border-radius: 1.75rem;
+    border: 1px solid #dce7f9;
+    background: linear-gradient(180deg, #ffffff, #f8fbff);
+    padding: 1.5rem;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+  }
+
   .portfolio-horizontal-grid {
     display: grid;
     gap: 1rem;
@@ -309,6 +317,15 @@
 
   .portfolio-horizontal-grid > * {
     scroll-snap-align: start;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
   @media (min-width: 1024px) {
