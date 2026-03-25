@@ -806,36 +806,41 @@ export default function Home() {
         <section id="journey" ref={journeyRef} className="bg-white py-20 dark:bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading eyebrow={t.journeyEyebrow} title={t.journeyTitle} dark={false} />
-            <div className="rounded-[2rem] border border-[#dce7f9] bg-white p-8 shadow-[0_20px_55px_rgba(15,23,42,0.06)]">
-              <div className="hide-scrollbar relative overflow-x-auto">
-                <div className="relative min-w-[1280px] px-8 pt-4 pb-3">
-                  <div className="absolute left-12 right-12 top-[7.4rem] h-1 rounded-full bg-[#d8e6ff]" />
-                  <div className="absolute left-12 right-12 top-[7.4rem] h-1 overflow-hidden rounded-full">
-                    <div
-                      className="h-full rounded-full bg-[linear-gradient(90deg,#2563eb_0%,#60a5fa_100%)] transition-[width] duration-300 ease-out"
-                      style={{ width: `${journeyProgress * 100}%` }}
-                    />
-                  </div>
-                  <div className="relative grid grid-cols-8 gap-10">
-                    {orderedCareerTimeline.map((item, index) => {
-                      const itemProgress = orderedCareerTimeline.length === 1 ? 1 : index / (orderedCareerTimeline.length - 1);
-                      const isHighlighted = Math.abs(journeyProgress - itemProgress) < 0.07 || journeyProgress > itemProgress;
-                      return (
-                        <button
-                          key={`${item.year}-${item.company}`}
-                          type="button"
-                          onClick={() => setExperienceModal(item)}
-                          className="flex flex-col items-center text-center"
-                        >
-                          <div className={`min-h-[88px] text-base font-bold leading-tight ${isHighlighted ? "text-[#0f172a]" : "text-[#4b5b72]"}`}>{item.role}</div>
-                          <div className={`relative z-10 mt-3 flex h-[82px] w-[82px] items-center justify-center rounded-full border-[7px] bg-white shadow-[0_14px_26px_rgba(15,23,42,0.12)] transition-all duration-300 ${isHighlighted ? "scale-[1.08] border-[#cfe1ff]" : "border-[#eef3fa]"}`}>
-                            <img src={item.logo} alt={item.company} className="max-h-[44px] max-w-[44px] object-contain" />
-                          </div>
-                          <div className={`mt-4 min-h-[3rem] text-lg font-medium ${isHighlighted ? "text-[#0f172a]" : "text-[#66768e]"}`}>{getTimelineDisplayDate(item.year)}</div>
-                        </button>
-                      );
-                    })}
-                  </div>
+            <div className="rounded-[2rem] border border-[#dce7f9] bg-white p-5 shadow-[0_20px_55px_rgba(15,23,42,0.06)] sm:p-6 lg:p-8">
+              <div className="relative overflow-hidden px-2 pt-4 pb-3 sm:px-4 lg:px-6">
+                <div className="absolute left-6 right-6 top-[7.05rem] h-1 rounded-full bg-[#d8e6ff] sm:left-8 sm:right-8 lg:left-10 lg:right-10" />
+                <div className="absolute left-6 right-6 top-[7.05rem] h-1 overflow-hidden rounded-full sm:left-8 sm:right-8 lg:left-10 lg:right-10">
+                  <div
+                    className="h-full rounded-full bg-[linear-gradient(90deg,#2563eb_0%,#60a5fa_100%)] transition-[width] duration-300 ease-out"
+                    style={{ width: `${journeyProgress * 100}%` }}
+                  />
+                </div>
+                <div
+                  className="relative grid gap-3 sm:gap-4 lg:gap-6"
+                  style={{ gridTemplateColumns: `repeat(${orderedCareerTimeline.length}, minmax(0, 1fr))` }}
+                >
+                  {orderedCareerTimeline.map((item, index) => {
+                    const itemProgress = orderedCareerTimeline.length === 1 ? 1 : index / (orderedCareerTimeline.length - 1);
+                    const isHighlighted = Math.abs(journeyProgress - itemProgress) < 0.07 || journeyProgress > itemProgress;
+                    return (
+                      <button
+                        key={`${item.year}-${item.company}`}
+                        type="button"
+                        onClick={() => setExperienceModal(item)}
+                        className="flex min-w-0 flex-col items-center text-center"
+                      >
+                        <div className={`min-h-[96px] text-sm font-bold leading-tight sm:min-h-[88px] sm:text-[0.95rem] lg:text-[1.02rem] ${isHighlighted ? "text-[#0f172a]" : "text-[#4b5b72]"}`}>
+                          {item.role}
+                        </div>
+                        <div className={`relative z-10 mt-3 flex h-[68px] w-[68px] items-center justify-center rounded-full border-[6px] bg-white shadow-[0_14px_26px_rgba(15,23,42,0.12)] transition-all duration-300 sm:h-[74px] sm:w-[74px] lg:h-[82px] lg:w-[82px] ${isHighlighted ? "scale-[1.08] border-[#cfe1ff]" : "border-[#eef3fa]"}`}>
+                          <img src={item.logo} alt={item.company} className="max-h-[36px] max-w-[36px] object-contain sm:max-h-[40px] sm:max-w-[40px] lg:max-h-[44px] lg:max-w-[44px]" />
+                        </div>
+                        <div className={`mt-4 min-h-[2.5rem] text-base font-medium sm:text-[1.05rem] lg:text-lg ${isHighlighted ? "text-[#0f172a]" : "text-[#66768e]"}`}>
+                          {getTimelineDisplayDate(item.year)}
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -1233,7 +1238,7 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
-  const colors = ["#3567e5", "#20b888", "#8b5cf6", "#f59e0b", "#ef4444", "#22b0cb"];
+  const colors = ["#9f0023", "#ffe89a", "#1f4873", "#18d23e", "#4280e8", "#ff9314"];
 
   useEffect(() => {
     const node = ref.current;
@@ -1251,32 +1256,39 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
     return () => observer.disconnect();
   }, []);
 
+  const chartHeight = 360;
+
   return (
-    <div ref={ref} className="grid grid-cols-6 items-end gap-4 pt-4">
+    <div ref={ref} className="grid grid-cols-6 items-end gap-3 pt-4 sm:gap-4">
       {labels.map((label, index) => {
         const isActive = activeIndex === index;
+        const normalizedHeight = Math.max((values[index] / 70) * chartHeight, 120);
         return (
           <button
             key={label}
             type="button"
             onMouseEnter={() => setActiveIndex(index)}
             onFocus={() => setActiveIndex(index)}
-            className="group relative flex h-[22rem] flex-col justify-end text-center"
+            className="group relative flex h-[30rem] flex-col justify-end text-center"
           >
             {isActive ? (
-              <div className={`absolute left-1/2 top-4 z-10 min-w-[10rem] -translate-x-1/2 rounded-[1.4rem] border px-5 py-4 text-left shadow-xl ${dark ? "border-white/10 bg-[#102230] text-white" : "border-[#e4ecf8] bg-white text-[#0f172a]"}`}>
+              <div className={`absolute left-1/2 top-6 z-10 min-w-[10rem] -translate-x-1/2 rounded-[1.4rem] border px-5 py-4 text-left shadow-xl ${dark ? "border-white/10 bg-[#102230] text-white" : "border-[#e4ecf8] bg-white text-[#0f172a]"}`}>
                 <div className="font-['Space_Grotesk'] text-lg font-bold leading-tight">{label}</div>
                 <div className="mt-1 text-2xl font-bold text-[#2563eb]">{`+${values[index]}%`}</div>
               </div>
             ) : null}
-            <div className="relative flex h-[18rem] items-end justify-center pt-10">
-              <div className="absolute inset-x-2 bottom-0 top-2 rounded-t-[1rem] border-x border-t border-dashed border-[#d5dfef] dark:border-white/10" />
+            <div className="relative flex h-[24rem] items-end justify-center">
+              <div className="absolute inset-x-3 bottom-[3.8rem] top-2 rounded-t-[1rem] border-x border-t border-dashed border-[#d5dfef] dark:border-white/10" />
               <div
-                className="relative z-10 w-[78%] rounded-t-[1rem] shadow-[0_10px_25px_rgba(37,99,235,0.16)] transition-all duration-700 ease-out group-hover:-translate-y-1"
-                style={{ height: `${visible ? Math.max(values[index], 12) : 0}%`, backgroundColor: colors[index], transitionDelay: `${index * 90}ms` }}
+                className="relative z-10 w-[78%] rounded-t-[2rem] rounded-b-[2rem] shadow-[0_18px_30px_rgba(15,23,42,0.10)] transition-all duration-700 ease-out group-hover:-translate-y-1"
+                style={{
+                  height: visible ? `${normalizedHeight}px` : "0px",
+                  backgroundColor: colors[index],
+                  transitionDelay: `${index * 90}ms`,
+                }}
               />
             </div>
-            <div className={`mt-4 text-sm leading-5 ${dark ? "text-white/72" : "text-[#5f6d83]"}`}>{label}</div>
+            <div className={`mt-4 text-sm leading-5 sm:text-[0.95rem] ${dark ? "text-white/72" : "text-[#5f6d83]"}`}>{label}</div>
           </button>
         );
       })}
