@@ -197,7 +197,7 @@ export const aiProducts = [
     category: "Vibe coding / Generative storytelling",
     image: "/assets/apps/images/gamebook-ai.jpg",
     video: "/assets/apps/videos/Gamebook AI.mp4",
-    url: "https://gamebooks-ai.sasmaz.digital/",
+    url: "https://ai-gamebook.store/",
     summary:
       "Interactive gamebook creation platform where users become characters inside AI-generated story worlds with visuals and sound.",
     outcome:
