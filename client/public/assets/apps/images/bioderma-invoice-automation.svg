@@ -1,0 +1,17 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="44" fill="#0B1421"/>
+  <rect x="70" y="70" width="1060" height="760" rx="32" fill="#F8FBFF"/>
+  <rect x="124" y="144" width="410" height="564" rx="28" fill="#F4F8FF"/>
+  <rect x="584" y="144" width="492" height="564" rx="28" fill="#0F2743"/>
+  <rect x="178" y="214" width="302" height="44" rx="12" fill="#DBEAFE"/>
+  <rect x="178" y="290" width="246" height="18" rx="9" fill="#CBD5E1"/>
+  <rect x="178" y="332" width="276" height="18" rx="9" fill="#CBD5E1"/>
+  <rect x="178" y="374" width="228" height="18" rx="9" fill="#CBD5E1"/>
+  <rect x="644" y="214" width="170" height="170" rx="18" fill="#FFFFFF"/>
+  <path d="M680 288H778" stroke="#2563EB" stroke-width="14" stroke-linecap="round"/>
+  <path d="M698 252L730 220L762 252" stroke="#2563EB" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="644" y="444" width="278" height="52" rx="16" fill="#8CC8FF"/>
+  <rect x="644" y="522" width="206" height="52" rx="16" fill="#DCFCE7"/>
+  <text x="124" y="122" fill="#0F172A" font-family="Arial, sans-serif" font-size="34" font-weight="700">BIODERMA Invoice Automation System</text>
+  <text x="124" y="790" fill="#5F6D83" font-family="Arial, sans-serif" font-size="30">OCR-driven invoice extraction and document consolidation</text>
+</svg>

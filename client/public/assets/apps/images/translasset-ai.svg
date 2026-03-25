@@ -1,0 +1,27 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="44" fill="#0B1324"/>
+  <rect x="56" y="56" width="1088" height="788" rx="32" fill="url(#paint0_linear)"/>
+  <rect x="112" y="128" width="290" height="560" rx="24" fill="#F8FBFF"/>
+  <rect x="440" y="128" width="302" height="560" rx="24" fill="#102748"/>
+  <rect x="780" y="128" width="308" height="560" rx="24" fill="#F8FBFF"/>
+  <rect x="150" y="184" width="212" height="132" rx="18" fill="#EAF2FF"/>
+  <rect x="482" y="184" width="216" height="36" rx="12" fill="#1D4ED8"/>
+  <rect x="482" y="246" width="216" height="36" rx="12" fill="#334155"/>
+  <rect x="482" y="308" width="216" height="36" rx="12" fill="#0EA5E9"/>
+  <rect x="824" y="184" width="220" height="140" rx="18" fill="#EAF2FF"/>
+  <path d="M196 516H318" stroke="#1D4ED8" stroke-width="16" stroke-linecap="round"/>
+  <path d="M536 438C566 398 620 398 650 438" stroke="#8CC8FF" stroke-width="14" stroke-linecap="round"/>
+  <path d="M536 494H650" stroke="#8CC8FF" stroke-width="14" stroke-linecap="round"/>
+  <path d="M864 470H1000" stroke="#2563EB" stroke-width="16" stroke-linecap="round"/>
+  <path d="M864 520H970" stroke="#60A5FA" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="600" cy="580" r="82" fill="#0EA5E9"/>
+  <path d="M565 580L590 605L640 555" stroke="white" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="118" y="112" fill="#B9D2FF" font-family="Arial, sans-serif" font-size="34" font-weight="700">TranslASSET AI</text>
+  <text x="118" y="740" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="32">Creative localization workflow</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="56" y1="56" x2="1144" y2="844" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F1E35"/>
+      <stop offset="1" stop-color="#183A6B"/>
+    </linearGradient>
+  </defs>
+</svg>

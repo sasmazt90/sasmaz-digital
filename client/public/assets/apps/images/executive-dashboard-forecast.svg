@@ -1,0 +1,18 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="44" fill="#091524"/>
+  <rect x="72" y="72" width="1056" height="756" rx="32" fill="#F8FBFF"/>
+  <rect x="128" y="136" width="944" height="168" rx="26" fill="#EAF2FF"/>
+  <rect x="128" y="348" width="444" height="410" rx="26" fill="#F4F8FF"/>
+  <rect x="628" y="348" width="444" height="410" rx="26" fill="#F4F8FF"/>
+  <path d="M186 694V452" stroke="#1D4ED8" stroke-width="28" stroke-linecap="round"/>
+  <path d="M270 694V528" stroke="#1D4ED8" stroke-width="28" stroke-linecap="round"/>
+  <path d="M354 694V410" stroke="#1D4ED8" stroke-width="28" stroke-linecap="round"/>
+  <path d="M438 694V484" stroke="#1D4ED8" stroke-width="28" stroke-linecap="round"/>
+  <path d="M730 634L812 556L878 590L970 468" stroke="#22C55E" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="730" cy="634" r="12" fill="#22C55E"/>
+  <circle cx="812" cy="556" r="12" fill="#22C55E"/>
+  <circle cx="878" cy="590" r="12" fill="#22C55E"/>
+  <circle cx="970" cy="468" r="12" fill="#22C55E"/>
+  <text x="128" y="122" fill="#0F172A" font-family="Arial, sans-serif" font-size="34" font-weight="700">360° Real-Time Executive Dashboard and Forecast</text>
+  <text x="128" y="790" fill="#5F6D83" font-family="Arial, sans-serif" font-size="30">Predictive sell-out analytics, seasonality and stock planning</text>
+</svg>

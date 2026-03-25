@@ -1,0 +1,20 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="44" fill="#071B2A"/>
+  <rect x="74" y="74" width="1052" height="752" rx="34" fill="#F8FBFF"/>
+  <rect x="130" y="144" width="370" height="610" rx="34" fill="#0D2740"/>
+  <rect x="560" y="144" width="510" height="286" rx="28" fill="#EAF2FF"/>
+  <rect x="560" y="468" width="510" height="286" rx="28" fill="#F4F8FF"/>
+  <rect x="192" y="222" width="244" height="376" rx="26" fill="#FFFFFF"/>
+  <rect x="628" y="210" width="250" height="36" rx="12" fill="#2563EB"/>
+  <rect x="628" y="270" width="372" height="24" rx="10" fill="#B9D2FF"/>
+  <rect x="628" y="316" width="320" height="24" rx="10" fill="#B9D2FF"/>
+  <rect x="628" y="534" width="170" height="136" rx="18" fill="#DBEAFE"/>
+  <rect x="832" y="534" width="170" height="136" rx="18" fill="#DCFCE7"/>
+  <circle cx="792" cy="724" r="38" fill="#2563EB"/>
+  <path d="M774 724L786 736L810 712" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="318" cy="644" r="36" fill="#8CC8FF"/>
+  <path d="M318 624V664" stroke="#0F172A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M298 644H338" stroke="#0F172A" stroke-width="10" stroke-linecap="round"/>
+  <text x="130" y="122" fill="#0F172A" font-family="Arial, sans-serif" font-size="34" font-weight="700">BIODERMA 360 e-Prescription System</text>
+  <text x="130" y="790" fill="#5F6D83" font-family="Arial, sans-serif" font-size="30">NFC-enabled prescription journey and conversion mapping</text>
+</svg>

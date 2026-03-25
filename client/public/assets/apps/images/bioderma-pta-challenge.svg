@@ -1,0 +1,15 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="44" fill="#091422"/>
+  <rect x="72" y="72" width="1056" height="756" rx="32" fill="#F8FBFF"/>
+  <rect x="130" y="146" width="944" height="182" rx="28" fill="#EAF2FF"/>
+  <rect x="130" y="374" width="420" height="382" rx="26" fill="#F4F8FF"/>
+  <rect x="594" y="374" width="480" height="382" rx="26" fill="#F4F8FF"/>
+  <path d="M222 460L308 426L394 460V572C394 622 352 666 308 692C264 666 222 622 222 572V460Z" fill="#2563EB"/>
+  <path d="M690 638L766 562L824 604L930 470" stroke="#F59E0B" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="690" cy="638" r="12" fill="#F59E0B"/>
+  <circle cx="766" cy="562" r="12" fill="#F59E0B"/>
+  <circle cx="824" cy="604" r="12" fill="#F59E0B"/>
+  <circle cx="930" cy="470" r="12" fill="#F59E0B"/>
+  <text x="130" y="122" fill="#0F172A" font-family="Arial, sans-serif" font-size="34" font-weight="700">BIODERMA PTA Challenge Web Application</text>
+  <text x="130" y="790" fill="#5F6D83" font-family="Arial, sans-serif" font-size="30">Receipt scanning, OCR validation and pharmacy leaderboard mechanics</text>
+</svg>

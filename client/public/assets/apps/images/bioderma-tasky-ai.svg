@@ -1,0 +1,19 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="44" fill="#0A1420"/>
+  <rect x="72" y="72" width="1056" height="756" rx="32" fill="#F7FAFF"/>
+  <rect x="128" y="136" width="944" height="110" rx="24" fill="#EAF2FF"/>
+  <rect x="128" y="286" width="270" height="470" rx="24" fill="#F4F8FF"/>
+  <rect x="465" y="286" width="270" height="470" rx="24" fill="#F4F8FF"/>
+  <rect x="802" y="286" width="270" height="470" rx="24" fill="#F4F8FF"/>
+  <rect x="164" y="338" width="198" height="84" rx="18" fill="#DBEAFE"/>
+  <rect x="164" y="450" width="198" height="84" rx="18" fill="#FFFFFF"/>
+  <rect x="164" y="562" width="198" height="84" rx="18" fill="#FFFFFF"/>
+  <rect x="501" y="338" width="198" height="84" rx="18" fill="#DCFCE7"/>
+  <rect x="501" y="450" width="198" height="84" rx="18" fill="#FFFFFF"/>
+  <rect x="501" y="562" width="198" height="84" rx="18" fill="#FFFFFF"/>
+  <rect x="838" y="338" width="198" height="84" rx="18" fill="#FEE2E2"/>
+  <rect x="838" y="450" width="198" height="84" rx="18" fill="#FFFFFF"/>
+  <rect x="838" y="562" width="198" height="84" rx="18" fill="#FFFFFF"/>
+  <text x="128" y="122" fill="#0F172A" font-family="Arial, sans-serif" font-size="34" font-weight="700">BIODERMA Tasky AI Web Application</text>
+  <text x="128" y="790" fill="#5F6D83" font-family="Arial, sans-serif" font-size="30">Internal workflow and task management across teams</text>
+</svg>

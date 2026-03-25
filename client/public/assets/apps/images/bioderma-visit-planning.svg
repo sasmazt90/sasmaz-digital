@@ -1,0 +1,21 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="44" fill="#0B1422"/>
+  <rect x="78" y="78" width="1044" height="744" rx="30" fill="#F8FBFF"/>
+  <rect x="138" y="142" width="312" height="600" rx="34" fill="#0F2743"/>
+  <rect x="500" y="142" width="560" height="278" rx="28" fill="#EAF2FF"/>
+  <rect x="500" y="462" width="560" height="280" rx="28" fill="#F4F8FF"/>
+  <path d="M218 598C218 520 280 458 358 458C436 458 498 520 498 598" stroke="#8CC8FF" stroke-width="16"/>
+  <circle cx="312" cy="256" r="64" fill="#FFFFFF"/>
+  <path d="M312 220V292" stroke="#2563EB" stroke-width="18" stroke-linecap="round"/>
+  <path d="M276 256H348" stroke="#2563EB" stroke-width="18" stroke-linecap="round"/>
+  <path d="M580 242L654 198L726 236L784 182L876 220" stroke="#2563EB" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="580" cy="242" r="12" fill="#2563EB"/>
+  <circle cx="654" cy="198" r="12" fill="#2563EB"/>
+  <circle cx="726" cy="236" r="12" fill="#2563EB"/>
+  <circle cx="784" cy="182" r="12" fill="#2563EB"/>
+  <circle cx="876" cy="220" r="12" fill="#2563EB"/>
+  <rect x="562" y="526" width="180" height="156" rx="20" fill="#DBEAFE"/>
+  <rect x="768" y="526" width="230" height="156" rx="20" fill="#DCFCE7"/>
+  <text x="138" y="122" fill="#0F172A" font-family="Arial, sans-serif" font-size="34" font-weight="700">BIODERMA AI-Driven Visit Planning</text>
+  <text x="138" y="786" fill="#5F6D83" font-family="Arial, sans-serif" font-size="30">Field force routing, CLV prioritization and traffic-aware planning</text>
+</svg>

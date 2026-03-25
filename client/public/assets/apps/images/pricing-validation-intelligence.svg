@@ -1,0 +1,22 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="44" fill="#0D1526"/>
+  <rect x="72" y="72" width="1056" height="756" rx="30" fill="#F7FAFF"/>
+  <rect x="130" y="138" width="940" height="120" rx="24" fill="#EAF1FF"/>
+  <rect x="130" y="302" width="420" height="438" rx="24" fill="#142B4E"/>
+  <rect x="580" y="302" width="490" height="438" rx="24" fill="#F3F7FE"/>
+  <rect x="174" y="188" width="250" height="28" rx="12" fill="#2563EB"/>
+  <rect x="174" y="352" width="184" height="24" rx="10" fill="#8CC8FF"/>
+  <rect x="174" y="410" width="332" height="28" rx="10" fill="#E2E8F0"/>
+  <rect x="174" y="468" width="284" height="28" rx="10" fill="#E2E8F0"/>
+  <rect x="174" y="526" width="242" height="28" rx="10" fill="#E2E8F0"/>
+  <rect x="626" y="356" width="390" height="220" rx="22" fill="#FFFFFF"/>
+  <path d="M674 546L754 460L822 506L946 390" stroke="#2563EB" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="674" cy="546" r="14" fill="#2563EB"/>
+  <circle cx="754" cy="460" r="14" fill="#2563EB"/>
+  <circle cx="822" cy="506" r="14" fill="#2563EB"/>
+  <circle cx="946" cy="390" r="14" fill="#2563EB"/>
+  <rect x="626" y="612" width="172" height="44" rx="14" fill="#DBEAFE"/>
+  <rect x="820" y="612" width="196" height="44" rx="14" fill="#DCFCE7"/>
+  <text x="130" y="122" fill="#0F172A" font-family="Arial, sans-serif" font-size="34" font-weight="700">Pricing Validation &amp; Intelligence</text>
+  <text x="130" y="786" fill="#5F6D83" font-family="Arial, sans-serif" font-size="30">Price compliance, benchmarking and margin control</text>
+</svg>
