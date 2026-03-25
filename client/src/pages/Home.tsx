@@ -43,6 +43,13 @@ type CarouselCard = {
   content: ReactNode;
 };
 
+type AwardItem = {
+  title: string;
+  subtitle: string;
+  level: string;
+  org: string;
+};
+
 const navItems = [
   { key: "about", href: "#about" },
   { key: "journey", href: "#journey" },
@@ -64,6 +71,51 @@ const heroPhotos = [
   "/assets/photos/naos-annual-meeting-2023.png",
   "/assets/photos/naos-annual-meeting-2022.png",
   "/assets/photos/naos-annual-meeting-2021.png",
+];
+
+const atsTags = [
+  "Digital Transformation",
+  "Growth Strategy",
+  "Go-to-Market Strategy",
+  "Stakeholder Management",
+  "Team Leadership",
+  "Generative AI Systems Design",
+  "Data-Driven Decision Making",
+  "Pricing Intelligence",
+  "CLV/LTV Modeling",
+  "Funnel Diagnostics",
+  "Behavioral Analysis",
+  "Digital Platform Design",
+  "Low-Code Development",
+  "Marketing Automation",
+  "Omnichannel Strategy",
+  "Performance Marketing",
+  "CRM Strategy",
+  "E-commerce Growth",
+  "Power BI",
+  "Power Apps",
+  "Microsoft Dynamics 365",
+];
+
+const awards: AwardItem[] = [
+  {
+    title: "Felis Awards 2019 - Best Integrated Campaign",
+    subtitle: '"Okumak Ne Guzel Sey"',
+    level: "Winner",
+    org: "idefix",
+  },
+  {
+    title: "MIXX Awards Turkiye 2020 - Best Integrated Campaign",
+    subtitle: '"Okumak Ne Guzel Sey"',
+    level: "Bronze",
+    org: "idefix",
+  },
+  {
+    title: "Social Media Awards Turkey 2020",
+    subtitle: "Silver - Social Media Data Analytics",
+    level: "Silver",
+    org: "idefix",
+  },
 ];
 
 const translations = {
@@ -96,10 +148,15 @@ const translations = {
     impactTitle: "Concrete business outcomes delivered across markets and growth stages.",
     impactSubtitle: "Key performance improvements (%)",
     competencyTitle: "Competency profile",
-    productsEyebrow: "Vibe Coding & AI Products",
-    productsTitle: "Applications personally built with AI, low-code and no-code execution.",
-    workEyebrow: "Selected Work",
-    workTitle: "Representative case studies and digital video production work.",
+    productsEyebrow: "AI Innovation & Product Portfolio",
+    productsTitle: "AI-powered applications and operational solutions built across experimental product concepts and enterprise-grade workflow design.",
+    vibeCodingTitle: "Vibe Coding",
+    powerAppsTitle: "Power Apps",
+    powerAppsSubtitle: "Low-code enterprise applications built with Microsoft Power Apps and Power Automate for streamlined operations and digital transformation.",
+    workEyebrow: "Industry Impact & Recognition",
+    workTitle: "Award-winning campaigns, measurable growth case studies and contributions to the digital marketing community.",
+    awardsTitle: "Awards",
+    caseStudiesTitle: "Selected Case Studies",
     videoTitle: "Digital Video Production",
     videoSubtitle: "Selected video production work developed across brand communication, campaign activation and commercial storytelling.",
     toolsEyebrow: "AI-Driven Marketing Technology Stack",
@@ -306,7 +363,7 @@ export default function Home() {
   const [activeExperience, setActiveExperience] = useState(careerTimeline.length - 1);
   const [mediaModal, setMediaModal] = useState<MediaModal>(null);
   const [heroPhotoIndex, setHeroPhotoIndex] = useState(0);
-  const t = translations[language];
+  const t = translations[language] as typeof translations.en;
   const activeCareer = careerTimeline[activeExperience] as TimelineItem;
 
   useEffect(() => {
@@ -320,59 +377,59 @@ export default function Home() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const productCards = useMemo<CarouselCard[]>(
-    () =>
-      aiProducts.map((product) => ({
-        key: product.title,
-        content: (
-          <article className="portfolio-panel-light dark:!border-white/10 dark:!bg-[#102230] dark:shadow-none flex h-full min-h-[450px] flex-col">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">{product.category}</p>
-                <h3 className="mt-3 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">{product.title}</h3>
-              </div>
-              {product.confidential ? <span className="rounded-full border border-amber-300/40 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700">Confidential</span> : null}
-            </div>
-            {product.image ? (
-              <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20">
-                <img src={product.image} alt={product.title} className="aspect-[16/10] w-full object-cover" />
-              </div>
-            ) : (
-              <div className="mt-5 rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/65">
-                Private enterprise project. Public visuals intentionally withheld.
-              </div>
-            )}
-            <p className="mt-5 text-sm leading-7 text-[#526073] dark:text-white/76">{product.summary}</p>
-            <p className="mt-3 text-sm leading-7 text-[#6b778c] dark:text-white/58">{product.outcome}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {product.tags.map((tag) => (
-                <span key={tag} className="rounded-full border border-[#dce7f9] bg-[#f7faff] px-3 py-1 text-xs font-semibold text-[#43506a] dark:border-white/10 dark:bg-white/6 dark:text-white/74">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <div className="mt-auto flex flex-wrap gap-3 pt-6">
-              {product.video ? (
-                <button
-                  type="button"
-                  onClick={() => setMediaModal({ type: "video", url: product.video!, title: product.title })}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#0f172a] px-4 py-2.5 text-sm font-bold text-white dark:bg-[#2563eb]"
-                >
-                  <Play size={15} />
-                  {t.watchWalkthrough}
-                </button>
-              ) : null}
-              {product.url && !product.confidential ? (
-                <a href={product.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/6 dark:text-white">
-                  {t.openLive}
-                </a>
-              ) : null}
-            </div>
-          </article>
-        ),
-      })),
-    [aiProducts, t.openLive, t.watchWalkthrough],
-  );
+  const buildProductCard = (product: (typeof aiProducts)[number], portrait: boolean) => ({
+    key: product.title,
+    content: (
+      <article className="portfolio-panel-light dark:!border-white/10 dark:!bg-[#102230] dark:shadow-none flex h-full min-h-[450px] flex-col">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">{product.category}</p>
+            <h3 className="mt-3 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">{product.title}</h3>
+          </div>
+          {product.confidential ? <span className="rounded-full border border-amber-300/40 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700">Confidential</span> : null}
+        </div>
+        {product.image ? (
+          <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20">
+            <img src={product.image} alt={product.title} className={`${portrait ? "aspect-[4/5]" : "aspect-[16/10]"} w-full object-cover object-top`} />
+          </div>
+        ) : (
+          <div className="mt-5 rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/65">
+            Private enterprise project. Public visuals intentionally withheld.
+          </div>
+        )}
+        <p className="mt-5 text-sm leading-7 text-[#526073] dark:text-white/76">{product.summary}</p>
+        <p className="mt-3 text-sm leading-7 text-[#6b778c] dark:text-white/58">{product.outcome}</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {product.tags.map((tag) => (
+            <span key={tag} className="rounded-full border border-[#dce7f9] bg-[#f7faff] px-3 py-1 text-xs font-semibold text-[#43506a] dark:border-white/10 dark:bg-white/6 dark:text-white/74">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="mt-auto flex flex-wrap gap-3 pt-6">
+          {product.video ? (
+            <button
+              type="button"
+              onClick={() => setMediaModal({ type: "video", url: product.video!, title: product.title })}
+              className="inline-flex items-center gap-2 rounded-full bg-[#2563eb] px-4 py-2.5 text-sm font-bold text-white"
+            >
+              <Play size={15} />
+              {t.watchWalkthrough}
+            </button>
+          ) : null}
+          {product.url && !product.confidential ? (
+            <a href={product.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/6 dark:text-white">
+              {t.openLive}
+            </a>
+          ) : null}
+        </div>
+      </article>
+    ),
+  });
+
+  const vibeCards = useMemo<CarouselCard[]>(() => aiProducts.slice(0, 4).map((product) => buildProductCard(product, true)), [aiProducts, t.openLive, t.watchWalkthrough]);
+
+  const powerAppCards = useMemo<CarouselCard[]>(() => aiProducts.slice(4).map((product) => buildProductCard(product, false)), [aiProducts, t.openLive, t.watchWalkthrough]);
 
   const videoCards = useMemo<CarouselCard[]>(
     () =>
@@ -445,31 +502,26 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#f5f8fc] text-[#0f172a] transition-colors dark:bg-[#06131a] dark:text-white">
       <header className="sticky top-0 z-40 border-b border-[#d6e0f0] bg-white/88 backdrop-blur-xl dark:border-white/10 dark:bg-[#07141c]/84">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-          <a href="#top" className="min-w-fit font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.28em] text-[#2563eb] dark:text-[#8cc8ff]">
-            Tolgar Sasmaz
-          </a>
-          <nav className="hidden flex-1 items-center justify-center gap-2 overflow-x-auto text-sm text-[#516079] dark:text-white/68 lg:flex">
+        <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 py-4 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-8">
+          <div className="hidden lg:block" />
+          <nav className="hidden items-center justify-center gap-2 overflow-x-auto text-sm text-[#516079] dark:text-white/68 lg:flex">
             {navItems.map((item) => (
               <a key={item.key} href={item.href} className="min-w-fit rounded-full px-3 py-2 transition hover:bg-[#eff5ff] hover:text-[#0f172a] dark:hover:bg-white/8 dark:hover:text-white">
                 {t.nav[item.key]}
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
-            <div className="inline-flex rounded-full border border-[#dce7f9] bg-white p-1 dark:border-white/10 dark:bg-white/6">
-              {(["en", "de", "tr"] as Language[]).map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => setLanguage(item)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] transition ${
-                    language === item ? "bg-[#2563eb] text-white dark:bg-[#8cc8ff] dark:text-[#051119]" : "text-[#64748b] dark:text-white/66"
-                  }`}
-                >
-                  {item}
-                </button>
-              ))}
+          <div className="flex items-center justify-end gap-2">
+            <div className="relative">
+              <select
+                value={language}
+                onChange={(event) => setLanguage(event.target.value as Language)}
+                className="rounded-full border border-[#dce7f9] bg-white px-4 py-2 text-sm font-semibold uppercase tracking-[0.12em] text-[#0f172a] outline-none dark:border-white/10 dark:bg-white/6 dark:text-white"
+              >
+                <option value="en">EN</option>
+                <option value="de">DE</option>
+                <option value="tr">TR</option>
+              </select>
             </div>
             <button
               type="button"
@@ -486,6 +538,9 @@ export default function Home() {
       <main id="top">
         <section className="relative overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f5f8fc_52%,#edf4ff_100%)] dark:bg-[linear-gradient(180deg,#07141c_0%,#0b1f29_54%,#07141c_100%)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(37,99,235,0.08),transparent_28%),radial-gradient(circle_at_88%_30%,rgba(59,130,246,0.12),transparent_24%)] dark:bg-[radial-gradient(circle_at_16%_22%,rgba(76,162,255,0.16),transparent_26%),radial-gradient(circle_at_86%_28%,rgba(77,201,255,0.10),transparent_22%)]" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] opacity-70 lg:block">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(74,144,255,0.35)_0,rgba(74,144,255,0.0)_8%),radial-gradient(circle_at_60%_35%,rgba(74,144,255,0.28)_0,rgba(74,144,255,0.0)_7%),radial-gradient(circle_at_40%_58%,rgba(74,144,255,0.28)_0,rgba(74,144,255,0.0)_7%),radial-gradient(circle_at_75%_62%,rgba(74,144,255,0.32)_0,rgba(74,144,255,0.0)_7%),radial-gradient(circle_at_30%_78%,rgba(74,144,255,0.26)_0,rgba(74,144,255,0.0)_7%),linear-gradient(115deg,transparent_0%,transparent_18%,rgba(116,171,255,0.35)_18.5%,transparent_19.2%,transparent_100%),linear-gradient(150deg,transparent_0%,transparent_34%,rgba(116,171,255,0.24)_34.6%,transparent_35.2%,transparent_100%),linear-gradient(72deg,transparent_0%,transparent_56%,rgba(116,171,255,0.2)_56.4%,transparent_57%,transparent_100%)]" />
+          </div>
           <div className="relative mx-auto grid max-w-7xl gap-14 px-4 py-14 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:py-20">
             <div className="flex flex-col justify-center space-y-8">
               <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#d8e6ff] bg-[#eef4ff] px-4 py-2 text-sm font-semibold text-[#2563eb] dark:border-[#163243] dark:bg-[#0f2530] dark:text-[#8cc8ff]">
@@ -526,7 +581,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative flex flex-col items-center gap-6 lg:items-end">
+            <div className="relative flex flex-col items-center gap-0 pt-4 lg:items-end lg:pt-0">
               <div className="w-full max-w-[430px] rounded-[2rem] border border-[#dce7f9] bg-white p-2 shadow-[0_28px_80px_rgba(15,23,42,0.10)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
                 <div className="relative overflow-hidden rounded-[1.6rem]">
                   {heroPhotos.map((photo, index) => (
@@ -538,9 +593,6 @@ export default function Home() {
                     />
                   ))}
                   <div className="relative aspect-[4/4.8] w-full" />
-                  <div className="absolute bottom-4 right-4 rounded-[1rem] bg-[#2563eb] px-6 py-3 text-lg font-bold text-white shadow-[0_12px_30px_rgba(37,99,235,0.35)]">
-                    {t.heroLabel}
-                  </div>
                   <div className="absolute bottom-4 left-4 flex gap-2">
                     {heroPhotos.map((photo, index) => (
                       <button
@@ -555,7 +607,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="grid w-full max-w-[540px] gap-4 sm:grid-cols-2">
+              <div className="relative z-10 -mt-7 grid w-full max-w-[540px] gap-4 sm:grid-cols-2 lg:-mt-12">
                 {highlightMetrics.map((metric) => (
                   <div key={metric.label} className="rounded-[1.8rem] border border-[#dce7f9] bg-white px-6 py-5 text-center shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
                     <AnimatedMetric value={metric.value} colorClass="text-[#2563eb] dark:text-[#8cc8ff]" />
@@ -582,6 +634,16 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+                <div className="pt-2">
+                  <div className="mb-4 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">ATS Alignment</div>
+                  <div className="flex flex-wrap gap-3">
+                    {atsTags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-[#bfd3f6] bg-[#f4f8ff] px-4 py-2 text-sm font-semibold text-[#2751a6] dark:border-white/10 dark:bg-white/5 dark:text-white/78">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="grid gap-4">
@@ -589,11 +651,11 @@ export default function Home() {
                 {education.map((item) => (
                   <div key={item.degree} className="flex gap-4 rounded-2xl border border-[#e4ecf8] bg-[#f8fbff] p-4 dark:border-white/10 dark:bg-white/4">
                     {item.logo ? (
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white p-2 dark:bg-white/92">
+                      <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl bg-white p-2 dark:bg-white/92">
                         <img src={item.logo} alt={item.school} className="max-h-full max-w-full object-contain" />
                       </div>
                     ) : (
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#eef4ff] font-['Space_Grotesk'] text-lg font-bold text-[#2563eb] dark:bg-[#163243] dark:text-[#8cc8ff]">IU</div>
+                      <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl border border-[#bfd3f6] bg-[#eef4ff] font-['Space_Grotesk'] text-2xl font-bold text-[#2563eb] dark:border-white/10 dark:bg-[#163243] dark:text-[#8cc8ff]">IU</div>
                     )}
                     <div>
                       <h4 className="font-['Space_Grotesk'] text-lg font-bold text-[#0f172a] dark:text-white">{item.degree}</h4>
@@ -625,35 +687,41 @@ export default function Home() {
         <section id="journey" className="bg-[#edf3fb] py-20 dark:bg-[#081920]">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading eyebrow={t.journeyEyebrow} title={t.journeyTitle} dark={theme === "dark"} />
-            <div className="rounded-[2rem] border border-[#d8e3f2] bg-white p-6 shadow-[0_24px_60px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-[#0d2330] dark:shadow-none sm:p-8">
-              <div className="hide-scrollbar relative overflow-x-auto pb-6">
-                <div className="min-w-[1080px] px-5 pt-3">
-                  <div className="absolute left-10 right-10 top-[10.4rem] h-1 rounded-full bg-[#cfe0ff] dark:bg-[#1a4d6a]" />
-                  <div className="relative grid grid-cols-8 gap-6">
-                    {careerTimeline.map((item, index) => {
-                      const isActive = index === activeExperience;
-                      return (
-                        <button
-                          key={`${item.year}-${item.company}`}
-                          type="button"
-                          onMouseEnter={() => setActiveExperience(index)}
-                          onFocus={() => setActiveExperience(index)}
-                          onClick={() => setActiveExperience(index)}
-                          className="group flex flex-col items-center text-center"
-                        >
-                          <div className={`min-h-[96px] text-base font-bold leading-tight transition ${isActive ? "text-[#0f172a] dark:text-white" : "text-[#4b5b72] dark:text-white/62"}`}>{item.role}</div>
-                          <div className={`relative z-10 mt-4 flex h-[92px] w-[92px] items-center justify-center rounded-full border-8 bg-white shadow-[0_16px_30px_rgba(15,23,42,0.12)] transition dark:bg-white ${isActive ? "border-[#dce9ff] ring-4 ring-[#edf4ff]" : "border-[#eef3fa] group-hover:border-[#dce9ff]"}`}>
-                            <img src={item.logo} alt={item.company} className="max-h-[56px] max-w-[56px] object-contain" />
+            <div className="rounded-[2rem] border border-[#183847] bg-[linear-gradient(180deg,#102831_0%,#142f39_100%)] p-6 text-white shadow-[0_24px_60px_rgba(15,23,42,0.16)] sm:p-8">
+              <div className="hide-scrollbar overflow-x-auto pb-6">
+                <div className="flex min-w-max gap-4">
+                  {[...careerTimeline].reverse().map((item) => {
+                    const actualIndex = careerTimeline.findIndex((entry) => entry.year === item.year && entry.company === item.company);
+                    const isActive = actualIndex === activeExperience;
+                    return (
+                      <button
+                        key={`${item.year}-${item.company}`}
+                        type="button"
+                        onMouseEnter={() => setActiveExperience(actualIndex)}
+                        onFocus={() => setActiveExperience(actualIndex)}
+                        onClick={() => setActiveExperience(actualIndex)}
+                        className={`w-[210px] rounded-[1.8rem] border px-5 py-5 text-left transition ${
+                          isActive ? "border-[#4d8bb5] bg-[#0f3140]" : "border-white/10 bg-white/6 hover:border-white/20 hover:bg-white/8"
+                        }`}
+                      >
+                        <div className="text-sm font-bold uppercase tracking-[0.28em] text-white/55">{item.year}</div>
+                        <div className="mt-5 flex items-start gap-4">
+                          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.4rem] bg-white p-2">
+                            <img src={item.logo} alt={item.company} className="max-h-full max-w-full object-contain" />
                           </div>
-                          <div className={`mt-5 text-lg font-semibold transition ${isActive ? "text-[#0f172a] dark:text-white" : "text-[#66768e] dark:text-white/58"}`}>{compactTimelineDates[index] ?? item.year}</div>
-                        </button>
-                      );
-                    })}
-                  </div>
+                          <div>
+                            <div className="font-['Space_Grotesk'] text-[1.05rem] font-bold leading-tight text-white">{item.company}</div>
+                            <div className="mt-1 text-sm uppercase tracking-[0.18em] text-[#8fd1ff]">{item.role}</div>
+                          </div>
+                        </div>
+                        <div className="mt-6 text-lg text-white/62">{item.brand}</div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
-              <div className="mt-6 grid gap-6 rounded-[1.9rem] border border-[#d7e5f7] bg-[linear-gradient(180deg,#0d2d3a_0%,#123847_100%)] p-6 text-white shadow-[0_24px_60px_rgba(7,18,31,0.24)] lg:grid-cols-[0.84fr_1.16fr]">
+              <div className="mt-2 grid gap-6 rounded-[1.9rem] border border-[#23485a] bg-[linear-gradient(180deg,#0d2d3a_0%,#123847_100%)] p-6 text-white shadow-[0_24px_60px_rgba(7,18,31,0.24)] lg:grid-cols-[0.84fr_1.16fr]">
                 <div className="space-y-5">
                   <div className="inline-flex rounded-full border border-[#5daee9]/30 bg-[#173f50] px-4 py-2 text-sm font-bold uppercase tracking-[0.22em] text-[#c7ebff]">{activeCareer.year}</div>
                   <div className="space-y-2">
@@ -685,47 +753,47 @@ export default function Home() {
           <SectionHeading eyebrow={t.impactEyebrow} title={t.impactTitle} dark={theme === "dark"} />
           <div className="grid gap-6 lg:grid-cols-2">
             <Panel title={t.impactSubtitle} icon={<Sparkles size={18} className="text-[#2563eb] dark:text-[#8cc8ff]" />} dark={theme === "dark"}>
-              <div className="grid gap-4">
-                {t.measurableLabels.map((label, index) => (
-                  <div key={label}>
-                    <div className="mb-2 flex items-center justify-between text-sm">
-                      <span className="font-semibold text-[#0f172a] dark:text-white">{label}</span>
-                      <span className="text-[#64748b] dark:text-white/58">{measurableImpactValues[index]}%</span>
-                    </div>
-                    <div className="h-3 rounded-full bg-[#e8eef8] dark:bg-white/10">
-                      <div className="h-3 rounded-full bg-[linear-gradient(90deg,#2563eb,#60a5fa)] dark:bg-[linear-gradient(90deg,#60a5fa,#8cc8ff)]" style={{ width: `${Math.min(measurableImpactValues[index], 100)}%` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <ImpactChart labels={t.measurableLabels} values={measurableImpactValues} dark={theme === "dark"} />
             </Panel>
             <Panel title={t.competencyTitle} icon={<BriefcaseBusiness size={18} className="text-[#2563eb] dark:text-[#8cc8ff]" />} dark={theme === "dark"}>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {t.competencies.map((item) => (
-                  <div key={item.label} className="rounded-[1.25rem] border border-[#e4ecf8] bg-[#f8fbff] p-4 dark:border-white/10 dark:bg-white/4">
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-semibold text-[#0f172a] dark:text-white">{item.label}</span>
-                      <span className="text-sm text-[#2563eb] dark:text-[#8cc8ff]">{item.value}/100</span>
-                    </div>
-                    <div className="mt-3 h-2.5 rounded-full bg-[#e6edf7] dark:bg-white/10">
-                      <div className="h-2.5 rounded-full bg-[#2563eb] dark:bg-[#8cc8ff]" style={{ width: `${item.value}%` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <RadarChart skills={t.competencies} dark={theme === "dark"} />
             </Panel>
           </div>
         </section>
 
         <section id="products" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionHeading eyebrow={t.productsEyebrow} title={t.productsTitle} dark={theme === "dark"} />
-          <Carousel cards={productCards} />
+          <div className="space-y-12">
+            <div>
+              <h3 className="mb-4 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.vibeCodingTitle ?? "Vibe Coding"}</h3>
+              <Carousel cards={vibeCards} />
+            </div>
+            <div>
+              <h3 className="mb-2 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.powerAppsTitle ?? "Power Apps"}</h3>
+              <p className="mb-6 max-w-4xl text-lg text-[#5b667b] dark:text-white/68">{t.powerAppsSubtitle ?? ""}</p>
+              <Carousel cards={powerAppCards} />
+            </div>
+          </div>
         </section>
 
         <section id="work" className="border-y border-[#dce6f5] bg-white py-20 dark:border-white/10 dark:bg-[#081920]">
           <div className="mx-auto max-w-7xl space-y-16 px-4 sm:px-6 lg:px-8">
+            <SectionHeading eyebrow={t.workEyebrow} title={t.workTitle} dark={theme === "dark"} />
             <div>
-              <SectionHeading eyebrow={t.workEyebrow} title={t.workTitle} dark={theme === "dark"} />
+              <h3 className="mb-5 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.awardsTitle ?? "Awards"}</h3>
+              <div className="grid gap-4 lg:grid-cols-3">
+                {awards.map((award) => (
+                  <div key={award.title} className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 shadow-[0_16px_30px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
+                    <div className="inline-flex rounded-full bg-[#fff1c9] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#b97300]">{award.level}</div>
+                    <h4 className="mt-5 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">{award.title}</h4>
+                    <p className="mt-2 text-lg italic text-[#64748b] dark:text-white/56">{award.subtitle}</p>
+                    <p className="mt-6 text-sm font-semibold uppercase tracking-[0.18em] text-[#2563eb] dark:text-[#8cc8ff]">{award.org}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="mb-5 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.caseStudiesTitle ?? "Selected Case Studies"}</h3>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {caseStudies.map((study) => (
                   <a key={study.brand} href={study.url} target="_blank" rel="noreferrer" className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 transition hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_16px_30px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none">
@@ -744,6 +812,25 @@ export default function Home() {
               <SectionHeading eyebrow={t.videoTitle} title={t.videoSubtitle} dark={theme === "dark"} />
               <Carousel cards={videoCards} />
             </div>
+            <div>
+              <h3 className="mb-5 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.speakingTitle}</h3>
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {speaking.map((item) => (
+                  <a key={`${item.title}-${item.org}`} href={item.url} target="_blank" rel="noreferrer" className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 transition hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_16px_30px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none">
+                    <div className="flex items-start gap-4">
+                      <div className="flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center rounded-[1.25rem] bg-white p-3 dark:bg-white/90">
+                        <img src={item.logo} alt={item.org} className="max-h-full max-w-full object-contain" />
+                      </div>
+                      <div>
+                        <div className="inline-flex rounded-full bg-[#def6e8] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#0d9f4f]">{item.title}</div>
+                        <h4 className="mt-3 font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{item.org}</h4>
+                        <p className="mt-3 text-sm leading-7 text-[#556273] dark:text-white/72">{item.detail}</p>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -756,26 +843,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl space-y-14 px-4 sm:px-6 lg:px-8">
             <div>
               <SectionHeading eyebrow={t.credentialsEyebrow} title={t.credentialsTitle} dark={theme === "dark"} />
-              <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-                <Panel title={t.speakingTitle} icon={<BriefcaseBusiness size={18} className="text-[#2563eb] dark:text-[#8cc8ff]" />} dark={theme === "dark"}>
-                  {speaking.map((item) => (
-                    <a key={`${item.title}-${item.org}`} href={item.url} target="_blank" rel="noreferrer" className="flex gap-4 rounded-2xl border border-[#e4ecf8] bg-[#f8fbff] p-4 transition hover:border-[#cfdef7] hover:bg-white dark:border-white/10 dark:bg-white/4 dark:hover:border-white/16 dark:hover:bg-white/5">
-                      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2 dark:bg-white/92">
-                        <img src={item.logo} alt={item.org} className="max-h-full max-w-full object-contain" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold uppercase tracking-[0.22em] text-[#2563eb] dark:text-[#8cc8ff]">{item.title}</div>
-                        <h4 className="mt-2 font-['Space_Grotesk'] text-lg font-bold text-[#0f172a] dark:text-white">{item.org}</h4>
-                        <p className="mt-2 text-sm leading-7 text-[#556273] dark:text-white/72">{item.detail}</p>
-                      </div>
-                    </a>
-                  ))}
-                </Panel>
-                <div>
-                  <SectionHeading eyebrow={t.certificationsTitle} title="" dark={theme === "dark"} />
-                  <Carousel cards={certificationCards} />
-                </div>
-              </div>
+              <Carousel cards={certificationCards} />
             </div>
 
           </div>
@@ -939,6 +1007,87 @@ function preserveAffixes(value: string, numeric: number) {
   const parts = splitMetricValue(value);
   if (parts.numeric === null) return value;
   return `${parts.prefix}${formatMetricNumber(numeric, parts.decimals)}${parts.suffix}`;
+}
+
+function ImpactChart({ labels, values, dark }: { labels: readonly string[]; values: readonly number[]; dark: boolean }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const colors = ["#3567e5", "#20b888", "#8b5cf6", "#f59e0b", "#ef4444", "#22b0cb"];
+
+  return (
+    <div className="grid grid-cols-6 items-end gap-3 pt-4">
+      {labels.map((label, index) => {
+        const isActive = activeIndex === index;
+        return (
+          <button key={label} type="button" onMouseEnter={() => setActiveIndex(index)} onFocus={() => setActiveIndex(index)} className="group relative flex h-[22rem] flex-col justify-end text-center">
+            {isActive ? (
+              <div className={`absolute left-1/2 top-10 z-10 -translate-x-1/2 rounded-[1.4rem] border px-5 py-4 text-left shadow-xl ${dark ? "border-white/10 bg-[#102230] text-white" : "border-[#e4ecf8] bg-white text-[#0f172a]"}`}>
+                <div className="font-['Space_Grotesk'] text-xl font-bold">{label}</div>
+                <div className="mt-1 text-2xl font-bold text-[#2563eb]">{`+${values[index]}%`}</div>
+              </div>
+            ) : null}
+            <div className="relative flex h-[20rem] items-end justify-center rounded-t-[1rem] bg-transparent">
+              <div className={`absolute inset-x-0 bottom-0 rounded-t-[1rem] transition-all duration-300 ${isActive ? "opacity-100" : "opacity-0"} bg-[#d8d8d8]`} style={{ height: "100%" }} />
+              <div
+                className="relative z-10 w-full rounded-t-[1rem] transition-all duration-300 group-hover:-translate-y-1"
+                style={{ height: `${values[index]}%`, backgroundColor: colors[index] }}
+              />
+            </div>
+            <div className={`mt-4 text-sm leading-5 ${dark ? "text-white/68" : "text-[#66768e]"}`}>{label}</div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function RadarChart({ skills, dark }: { skills: ReadonlyArray<{ readonly label: string; readonly value: number }>; dark: boolean }) {
+  const size = 340;
+  const center = size / 2;
+  const radius = 125;
+  const angles = skills.map((_, index) => (Math.PI * 2 * index) / skills.length - Math.PI / 2);
+  const levelFractions = [0.2, 0.4, 0.6, 0.8, 1];
+  const polygonPoints = skills
+    .map((skill, index) => {
+      const r = (skill.value / 100) * radius;
+      const x = center + Math.cos(angles[index]) * r;
+      const y = center + Math.sin(angles[index]) * r;
+      return `${x},${y}`;
+    })
+    .join(" ");
+
+  return (
+    <div className="flex items-center justify-center py-2">
+      <svg viewBox={`0 0 ${size} ${size}`} className="h-[22rem] w-[22rem] overflow-visible">
+        {levelFractions.map((fraction) => {
+          const points = skills
+            .map((_, index) => {
+              const r = radius * fraction;
+              const x = center + Math.cos(angles[index]) * r;
+              const y = center + Math.sin(angles[index]) * r;
+              return `${x},${y}`;
+            })
+            .join(" ");
+          return <polygon key={fraction} points={points} fill="none" stroke={dark ? "rgba(255,255,255,0.12)" : "#d8e3f2"} strokeWidth="1" />;
+        })}
+        {skills.map((_, index) => {
+          const x = center + Math.cos(angles[index]) * radius;
+          const y = center + Math.sin(angles[index]) * radius;
+          return <line key={index} x1={center} y1={center} x2={x} y2={y} stroke={dark ? "rgba(255,255,255,0.12)" : "#d8e3f2"} strokeWidth="1" />;
+        })}
+        <polygon points={polygonPoints} fill="rgba(37,99,235,0.18)" stroke="#2563eb" strokeWidth="3" />
+        {skills.map((skill, index) => {
+          const labelRadius = radius + 24;
+          const x = center + Math.cos(angles[index]) * labelRadius;
+          const y = center + Math.sin(angles[index]) * labelRadius;
+          return (
+            <text key={skill.label} x={x} y={y} textAnchor="middle" dominantBaseline="middle" fontSize="12" fill={dark ? "rgba(255,255,255,0.72)" : "#6b778c"}>
+              {skill.label}
+            </text>
+          );
+        })}
+      </svg>
+    </div>
+  );
 }
 
 function Carousel({ cards }: { cards: CarouselCard[] }) {
