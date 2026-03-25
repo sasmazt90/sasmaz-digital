@@ -57,13 +57,17 @@ const navItems = [
   { key: "products", href: "#products" },
   { key: "work", href: "#work" },
   { key: "tools", href: "#tools" },
-  { key: "credentials", href: "#credentials" },
   { key: "contact", href: "#contact" },
 ] as const;
 
 const toYoutubeEmbed = (url: string) => {
   const match = url.match(/(?:youtu\.be\/|v=)([^?&]+)/);
   return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+};
+
+const toYoutubeThumbnail = (url: string) => {
+  const match = url.match(/(?:youtu\.be\/|v=)([^?&]+)/);
+  return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : "";
 };
 
 const heroPhotos = [
@@ -126,15 +130,14 @@ const translations = {
       impact: "Impact",
       products: "Products",
       work: "Work",
-      tools: "Tools",
-      credentials: "Credentials",
+      tools: "Competencies",
       contact: "Contact",
     },
     badge: "Head of Digital & AI Transformation Leader",
     title: "Head of Digital & CRM | E-Commerce & Growth | AI, Analytics & Transformation",
     summary:
       "Senior digital and business transformation leader with 12+ years of experience delivering technology-driven growth, commercial rigor and scalable operating models across regulated healthcare, retail and consumer markets.",
-    cta: "Get in Touch",
+    cta: "Contact",
     heroLabel: "Head of Digital",
     aboutEyebrow: "About",
     aboutTitle: "A leadership profile built on measurable commercial outcomes.",
@@ -148,8 +151,8 @@ const translations = {
     impactTitle: "Concrete business outcomes delivered across markets and growth stages.",
     impactSubtitle: "Key performance improvements (%)",
     competencyTitle: "Competency profile",
-    productsEyebrow: "AI Innovation & Product Portfolio",
-    productsTitle: "AI-powered applications and operational solutions built across experimental product concepts and enterprise-grade workflow design.",
+    productsEyebrow: "AI Innovation, Digital Video & Product Portfolio",
+    productsTitle: "AI-powered applications, digital video production and operating solutions built across experimental product concepts and enterprise-grade workflow design.",
     vibeCodingTitle: "Vibe Coding",
     powerAppsTitle: "Power Apps",
     powerAppsSubtitle: "Low-code enterprise applications built with Microsoft Power Apps and Power Automate for streamlined operations and digital transformation.",
@@ -159,10 +162,10 @@ const translations = {
     caseStudiesTitle: "Selected Case Studies",
     videoTitle: "Digital Video Production",
     videoSubtitle: "Selected video production work developed across brand communication, campaign activation and commercial storytelling.",
-    toolsEyebrow: "AI-Driven Marketing Technology Stack",
-    toolsTitle: "Platforms and tools used to design scalable growth systems across CRM, analytics, performance and business intelligence.",
-    credentialsEyebrow: "Credentials",
-    credentialsTitle: "Education, speaking engagements and certifications supporting the work.",
+    toolsEyebrow: "Core Competencies",
+    toolsTitle: "Technology stack and advanced certifications supporting CRM, analytics, performance marketing and AI-enabled growth systems.",
+    credentialsEyebrow: "Advanced Certifications",
+    credentialsTitle: "Advanced Certifications",
     stageEyebrow: "Leadership Moments",
     stageTitle: "Selected moments from annual meetings, business storytelling and executive presentations.",
     contactEyebrow: "Contact",
@@ -195,15 +198,14 @@ const translations = {
       impact: "Impact",
       products: "Produkte",
       work: "Cases",
-      tools: "Tools",
-      credentials: "Profile",
+      tools: "Kompetenzen",
       contact: "Kontakt",
     },
     badge: "Head of Digital & AI Transformation Leader",
     title: "Head of Digital & CRM | E-Commerce & Growth | AI, Analytics & Transformation",
     summary:
       "Führungskraft für digitale Transformation mit über 12 Jahren Erfahrung in technologiegetriebenem Wachstum, operativer Exzellenz und skalierbaren Modellen in regulierten Healthcare-, Retail- und Consumer-Umfeldern.",
-    cta: "Kontakt aufnehmen",
+    cta: "Kontakt",
     heroLabel: "Head of Digital",
     aboutEyebrow: "Überblick",
     aboutTitle: "Ein Führungsprofil mit klarem Fokus auf messbare Geschäftsergebnisse.",
@@ -259,15 +261,14 @@ const translations = {
       impact: "Etki",
       products: "Ürünler",
       work: "Projeler",
-      tools: "Tool'lar",
-      credentials: "Profil",
+      tools: "Yetkinlikler",
       contact: "İletişim",
     },
     badge: "Head of Digital & AI Transformation Leader",
     title: "Head of Digital & CRM | E-Commerce & Growth | AI, Analytics & Transformation",
     summary:
       "Regüle sağlık, perakende ve tüketici odaklı sektörlerde teknoloji destekli büyüme, ticari disiplin ve ölçeklenebilir operasyon modelleri geliştiren 12+ yıllık deneyime sahip dijital dönüşüm lideri.",
-    cta: "İletişime Geç",
+    cta: "Contact",
     heroLabel: "Head of Digital",
     aboutEyebrow: "Hakkımda",
     aboutTitle: "Ölçülebilir ticari sonuçlara odaklanan bir liderlik profili.",
@@ -365,6 +366,34 @@ export default function Home() {
   const [heroPhotoIndex, setHeroPhotoIndex] = useState(0);
   const t = translations[language] as typeof translations.en;
   const activeCareer = careerTimeline[activeExperience] as TimelineItem;
+  const backgroundImage = theme === "dark" ? "/assets/backgrounds/background-dark-theme.jpg" : "/assets/backgrounds/background-light-theme.jpg";
+  const portfolioSection = {
+    eyebrow:
+      language === "de"
+        ? "KI-Innovation, Digital Video & Produktportfolio"
+        : language === "tr"
+          ? "AI Innovation, Digital Video & Product Portfolio"
+          : "AI Innovation, Digital Video & Product Portfolio",
+    title:
+      language === "de"
+        ? "KI-gestuetzte Anwendungen, digitale Videoproduktion und operative Produktsysteme aus experimentellen Konzepten und skalierbaren Workflow-Designs."
+        : language === "tr"
+          ? "Deneysel urun fikirlerinden kurumsal workflow tasarimlarina uzanan AI uygulamalari, dijital video prodüksiyonlari ve operasyonel urun sistemleri."
+          : "AI-powered applications, digital video production and operating solutions built across experimental product concepts and enterprise-grade workflow design.",
+  };
+  const competenciesSection = {
+    eyebrow: "Core Competencies",
+    title:
+      language === "de"
+        ? "Technology Stack und Advanced Certifications als Fundament fuer skalierbare CRM-, Analytics-, Performance- und AI-Growth-Systeme."
+        : language === "tr"
+          ? "CRM, analitik, performans pazarlamasi ve AI destekli buyume sistemlerini destekleyen teknoloji stack'i ve ileri seviye sertifikasyonlar."
+          : "Technology stack and advanced certifications supporting CRM, analytics, performance marketing and AI-enabled growth systems.",
+    technologyStack:
+      language === "de" ? "Technology Stack" : language === "tr" ? "Technology Stack" : "Technology Stack",
+    advancedCertifications:
+      language === "de" ? "Advanced Certifications" : language === "tr" ? "Advanced Certifications" : "Advanced Certifications",
+  };
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -382,31 +411,33 @@ export default function Home() {
     content: (
       <article className="portfolio-panel-light dark:!border-white/10 dark:!bg-[#102230] dark:shadow-none flex h-full min-h-[450px] flex-col">
         <div className="flex items-start justify-between gap-3">
-          <div>
+          <div className="min-h-[5.5rem]">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">{product.category}</p>
             <h3 className="mt-3 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">{product.title}</h3>
           </div>
           {product.confidential ? <span className="rounded-full border border-amber-300/40 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700">Confidential</span> : null}
         </div>
         {product.image ? (
-          <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20">
+          <div className={`mt-5 overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "h-[360px]" : "h-[250px]"}`}>
             <img src={product.image} alt={product.title} className={`${portrait ? "aspect-[4/5]" : "aspect-[16/10]"} w-full object-cover object-top`} />
           </div>
         ) : (
-          <div className="mt-5 rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/65">
+          <div className="mt-5 flex h-[250px] items-center rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/65">
             Private enterprise project. Public visuals intentionally withheld.
           </div>
         )}
-        <p className="mt-5 text-sm leading-7 text-[#526073] dark:text-white/76">{product.summary}</p>
-        <p className="mt-3 text-sm leading-7 text-[#6b778c] dark:text-white/58">{product.outcome}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-5 min-h-[7.5rem]">
+          <p className="text-sm leading-7 text-[#526073] dark:text-white/76">{product.summary}</p>
+          <p className="mt-3 text-sm leading-7 text-[#6b778c] dark:text-white/58">{product.outcome}</p>
+        </div>
+        <div className="mt-4 min-h-[4.5rem] flex flex-wrap content-start gap-2">
           {product.tags.map((tag) => (
             <span key={tag} className="rounded-full border border-[#dce7f9] bg-[#f7faff] px-3 py-1 text-xs font-semibold text-[#43506a] dark:border-white/10 dark:bg-white/6 dark:text-white/74">
               {tag}
             </span>
           ))}
         </div>
-        <div className="mt-auto flex flex-wrap gap-3 pt-6">
+        <div className="mt-auto flex min-h-[4rem] flex-wrap items-end gap-3 pt-6">
           {product.video ? (
             <button
               type="button"
@@ -441,8 +472,8 @@ export default function Home() {
             onClick={() => setMediaModal({ type: "youtube", url: video.url, title: video.title })}
             className="group h-full overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white text-left transition hover:border-[#cadcf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none"
           >
-            <div className="relative aspect-video overflow-hidden">
-              <iframe src={toYoutubeEmbed(video.url)} title={video.title} className="pointer-events-none h-full w-full scale-[1.01]" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
+            <div className="relative h-[220px] overflow-hidden">
+              <img src={toYoutubeThumbnail(video.url)} alt={video.title} className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent" />
               <div className="absolute bottom-4 left-4 flex items-center gap-3">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#0f172a]">
@@ -451,7 +482,7 @@ export default function Home() {
                 <span className="text-sm font-bold uppercase tracking-[0.2em] text-white/90">{t.watchVideo}</span>
               </div>
             </div>
-            <div className="p-5">
+            <div className="min-h-[96px] p-5">
               <h3 className="font-['Space_Grotesk'] text-lg font-bold text-[#0f172a] dark:text-white">{video.title}</h3>
             </div>
           </button>
@@ -500,7 +531,16 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-[#f5f8fc] text-[#0f172a] transition-colors dark:bg-[#06131a] dark:text-white">
+    <div
+      className="min-h-screen bg-[#f5f8fc] text-[#0f172a] transition-colors dark:bg-[#06131a] dark:text-white"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundPosition: "center top",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+      }}
+    >
       <header className="sticky top-0 z-40 border-b border-[#d6e0f0] bg-white/88 backdrop-blur-xl dark:border-white/10 dark:bg-[#07141c]/84">
         <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 py-4 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-8">
           <div className="hidden lg:block" />
@@ -536,7 +576,7 @@ export default function Home() {
       </header>
 
       <main id="top">
-        <section className="relative overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f5f8fc_52%,#edf4ff_100%)] dark:bg-[linear-gradient(180deg,#07141c_0%,#0b1f29_54%,#07141c_100%)]">
+        <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.84)_0%,rgba(245,248,252,0.76)_52%,rgba(237,244,255,0.82)_100%)] dark:bg-[linear-gradient(180deg,rgba(7,20,28,0.86)_0%,rgba(11,31,41,0.82)_54%,rgba(7,20,28,0.9)_100%)]">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(37,99,235,0.08),transparent_28%),radial-gradient(circle_at_88%_30%,rgba(59,130,246,0.12),transparent_24%)] dark:bg-[radial-gradient(circle_at_16%_22%,rgba(76,162,255,0.16),transparent_26%),radial-gradient(circle_at_86%_28%,rgba(77,201,255,0.10),transparent_22%)]" />
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] opacity-70 lg:block">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(74,144,255,0.35)_0,rgba(74,144,255,0.0)_8%),radial-gradient(circle_at_60%_35%,rgba(74,144,255,0.28)_0,rgba(74,144,255,0.0)_7%),radial-gradient(circle_at_40%_58%,rgba(74,144,255,0.28)_0,rgba(74,144,255,0.0)_7%),radial-gradient(circle_at_75%_62%,rgba(74,144,255,0.32)_0,rgba(74,144,255,0.0)_7%),radial-gradient(circle_at_30%_78%,rgba(74,144,255,0.26)_0,rgba(74,144,255,0.0)_7%),linear-gradient(115deg,transparent_0%,transparent_18%,rgba(116,171,255,0.35)_18.5%,transparent_19.2%,transparent_100%),linear-gradient(150deg,transparent_0%,transparent_34%,rgba(116,171,255,0.24)_34.6%,transparent_35.2%,transparent_100%),linear-gradient(72deg,transparent_0%,transparent_56%,rgba(116,171,255,0.2)_56.4%,transparent_57%,transparent_100%)]" />
@@ -554,7 +594,7 @@ export default function Home() {
                   Sasmaz
                 </h1>
                 <p className="text-xl font-semibold leading-tight text-[#2563eb] dark:text-[#8cc8ff] sm:text-2xl">{t.title}</p>
-                <p className="max-w-2xl text-lg leading-8 text-[#5b667b] dark:text-white/72 sm:text-[1.28rem] sm:leading-[1.85]">{t.summary}</p>
+                <p className="max-w-2xl text-[1.02rem] leading-8 text-[#5b667b] dark:text-white/72 sm:text-[1.1rem]">{t.summary}</p>
               </div>
               <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-base text-[#64748b] dark:text-white/64">
                 <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 transition hover:text-[#2563eb] dark:hover:text-[#8cc8ff]">
@@ -621,21 +661,14 @@ export default function Home() {
 
         <section id="about" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionHeading eyebrow={t.aboutEyebrow} title={t.aboutTitle} dark={theme === "dark"} />
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="rounded-[2rem] border border-[#dce7f9] bg-white p-8 shadow-[0_20px_55px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
-              <div className="grid gap-6 text-base leading-8 text-[#556273] dark:text-white/74 sm:text-lg">
-                <p>{t.aboutBody1}</p>
-                <p>{t.aboutBody2}</p>
-                <div className="grid gap-3 pt-2">
-                  {[...storyHighlights, ...capabilityPillars.map((pillar) => pillar.description)].slice(0, 4).map((item) => (
-                    <div key={item} className="flex items-start gap-3 rounded-2xl border border-[#e4ecf8] bg-[#f8fbff] p-4 dark:border-white/10 dark:bg-white/4">
-                      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-[#2563eb] dark:bg-[#8cc8ff]" />
-                      <p className="text-sm leading-7 text-[#415166] dark:text-white/78">{item}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="pt-2">
-                  <div className="mb-4 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">ATS Alignment</div>
+              <div className="grid gap-6 text-[1.1rem] leading-9 text-[#556273] dark:text-white/74">
+                <p>I am a seasoned digital and business transformation leader with more than twelve years of experience delivering technology-driven growth in regulated healthcare and consumer markets.</p>
+                <p>My expertise spans digital marketing, omnichannel strategy, CRM and e-commerce, data analytics and AI, low-code development, and regulated digital health solutions.</p>
+                <p>Currently leading DACH digital transformation at NAOS Deutschland (BIODERMA) in Munich, I combine strategic vision with hands-on execution to deliver measurable business impact.</p>
+                <div className="pt-3">
+                  <div className="mb-4 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">Core Competencies</div>
                   <div className="flex flex-wrap gap-3">
                     {atsTags.map((tag) => (
                       <span key={tag} className="rounded-full border border-[#bfd3f6] bg-[#f4f8ff] px-4 py-2 text-sm font-semibold text-[#2751a6] dark:border-white/10 dark:bg-white/5 dark:text-white/78">
@@ -651,11 +684,11 @@ export default function Home() {
                 {education.map((item) => (
                   <div key={item.degree} className="flex gap-4 rounded-2xl border border-[#e4ecf8] bg-[#f8fbff] p-4 dark:border-white/10 dark:bg-white/4">
                     {item.logo ? (
-                      <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl bg-white p-2 dark:bg-white/92">
+                      <div className="flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-2xl bg-white p-2 dark:bg-white/92">
                         <img src={item.logo} alt={item.school} className="max-h-full max-w-full object-contain" />
                       </div>
                     ) : (
-                      <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl border border-[#bfd3f6] bg-[#eef4ff] font-['Space_Grotesk'] text-2xl font-bold text-[#2563eb] dark:border-white/10 dark:bg-[#163243] dark:text-[#8cc8ff]">IU</div>
+                      <div className="flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-2xl border border-[#bfd3f6] bg-[#eef4ff] font-['Space_Grotesk'] text-2xl font-bold text-[#2563eb] dark:border-white/10 dark:bg-[#163243] dark:text-[#8cc8ff]">IU</div>
                     )}
                     <div>
                       <h4 className="font-['Space_Grotesk'] text-lg font-bold text-[#0f172a] dark:text-white">{item.degree}</h4>
@@ -687,64 +720,62 @@ export default function Home() {
         <section id="journey" className="bg-[#edf3fb] py-20 dark:bg-[#081920]">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading eyebrow={t.journeyEyebrow} title={t.journeyTitle} dark={theme === "dark"} />
-            <div className="rounded-[2rem] border border-[#183847] bg-[linear-gradient(180deg,#102831_0%,#142f39_100%)] p-6 text-white shadow-[0_24px_60px_rgba(15,23,42,0.16)] sm:p-8">
-              <div className="hide-scrollbar overflow-x-auto pb-6">
-                <div className="flex min-w-max gap-4">
-                  {[...careerTimeline].reverse().map((item) => {
-                    const actualIndex = careerTimeline.findIndex((entry) => entry.year === item.year && entry.company === item.company);
-                    const isActive = actualIndex === activeExperience;
-                    return (
-                      <button
-                        key={`${item.year}-${item.company}`}
-                        type="button"
-                        onMouseEnter={() => setActiveExperience(actualIndex)}
-                        onFocus={() => setActiveExperience(actualIndex)}
-                        onClick={() => setActiveExperience(actualIndex)}
-                        className={`w-[210px] rounded-[1.8rem] border px-5 py-5 text-left transition ${
-                          isActive ? "border-[#4d8bb5] bg-[#0f3140]" : "border-white/10 bg-white/6 hover:border-white/20 hover:bg-white/8"
-                        }`}
-                      >
-                        <div className="text-sm font-bold uppercase tracking-[0.28em] text-white/55">{item.year}</div>
-                        <div className="mt-5 flex items-start gap-4">
-                          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.4rem] bg-white p-2">
-                            <img src={item.logo} alt={item.company} className="max-h-full max-w-full object-contain" />
+            <div className="rounded-[2rem] border border-[#dce7f9] bg-white p-8 shadow-[0_20px_55px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
+              <div className="hide-scrollbar relative overflow-x-auto pb-8">
+                <div className="relative min-w-[1120px] px-6 pt-4">
+                  <div className="absolute left-8 right-8 top-[7.2rem] h-1 rounded-full bg-[#b9d3ff] dark:bg-[#2f5d7f]" />
+                  <div className="relative grid grid-cols-8 gap-4">
+                    {careerTimeline.map((item, index) => {
+                      const isActive = index === activeExperience;
+                      return (
+                        <button
+                          key={`${item.year}-${item.company}`}
+                          type="button"
+                          onMouseEnter={() => setActiveExperience(index)}
+                          onFocus={() => setActiveExperience(index)}
+                          onClick={() => setActiveExperience(index)}
+                          className="flex flex-col items-center text-center"
+                        >
+                          <div className={`min-h-[72px] text-base font-bold leading-tight ${isActive ? "text-[#0f172a] dark:text-white" : "text-[#4b5b72] dark:text-white/62"}`}>{item.role}</div>
+                          <div className={`relative z-10 mt-3 flex h-[76px] w-[76px] items-center justify-center rounded-full border-[7px] bg-white shadow-[0_14px_26px_rgba(15,23,42,0.12)] ${isActive ? "border-[#dce9ff]" : "border-[#eef3fa]"}`}>
+                            <img src={item.logo} alt={item.company} className="max-h-[42px] max-w-[42px] object-contain" />
                           </div>
-                          <div>
-                            <div className="font-['Space_Grotesk'] text-[1.05rem] font-bold leading-tight text-white">{item.company}</div>
-                            <div className="mt-1 text-sm uppercase tracking-[0.18em] text-[#8fd1ff]">{item.role}</div>
-                          </div>
-                        </div>
-                        <div className="mt-6 text-lg text-white/62">{item.brand}</div>
-                      </button>
-                    );
-                  })}
+                          <div className={`mt-4 text-lg ${isActive ? "text-[#0f172a] dark:text-white" : "text-[#66768e] dark:text-white/58"}`}>{compactTimelineDates[index] ?? item.year}</div>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 
-              <div className="mt-2 grid gap-6 rounded-[1.9rem] border border-[#23485a] bg-[linear-gradient(180deg,#0d2d3a_0%,#123847_100%)] p-6 text-white shadow-[0_24px_60px_rgba(7,18,31,0.24)] lg:grid-cols-[0.84fr_1.16fr]">
-                <div className="space-y-5">
-                  <div className="inline-flex rounded-full border border-[#5daee9]/30 bg-[#173f50] px-4 py-2 text-sm font-bold uppercase tracking-[0.22em] text-[#c7ebff]">{activeCareer.year}</div>
-                  <div className="space-y-2">
-                    <h3 className="font-['Space_Grotesk'] text-4xl font-bold leading-tight text-white">{activeCareer.role}</h3>
-                    <p className="text-2xl text-[#8fd1ff]">{activeCareer.company}</p>
-                    <p className="text-lg text-white/72">{activeCareer.brand}</p>
+              <Reveal key={`${activeCareer.company}-${activeCareer.year}`} className="mx-auto mt-2 max-w-4xl overflow-hidden rounded-[1.9rem] border border-[#dce7f9] bg-[#f8fbff] shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#163243] dark:shadow-none">
+                <div className="flex flex-wrap items-center gap-4 border-b border-[#dce7f9] bg-[linear-gradient(180deg,#dbeafe_0%,#cfe2ff_100%)] px-6 py-6 dark:border-white/10 dark:bg-[linear-gradient(180deg,#17364a_0%,#163243_100%)]">
+                  <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-[1.2rem] bg-white p-2">
+                    <img src={activeCareer.logo} alt={activeCareer.company} className="max-h-full max-w-full object-contain" />
                   </div>
-                  <p className="text-base leading-8 text-white/80">{activeCareer.focus}</p>
-                  <div className="grid gap-3 pt-2">
-                    {activeCareer.meta.map((item) => (
-                      <div key={item} className="rounded-[1.2rem] border border-white/10 bg-white/6 px-4 py-3 text-sm text-white/80">{item}</div>
+                  <div>
+                    <h3 className="font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{activeCareer.role}</h3>
+                    <p className="mt-2 text-2xl text-[#2563eb] dark:text-[#8cc8ff]">{activeCareer.company}</p>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <CareerMetaCard label="Period" value={activeCareer.year} dark={theme === "dark"} />
+                    <CareerMetaCard label="Location" value={activeCareer.location} dark={theme === "dark"} />
+                    <CareerMetaCard label="Team" value={activeCareer.meta[1] ?? ""} dark={theme === "dark"} />
+                    <CareerMetaCard label="Budget" value={activeCareer.meta[0] ?? ""} dark={theme === "dark"} />
+                  </div>
+                  <div className="mt-8 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">Key Responsibilities & Achievements</div>
+                  <div className="mt-5 grid gap-4">
+                    {activeCareer.bullets.map((bullet) => (
+                      <Reveal key={bullet} className="flex gap-4 text-left">
+                        <span className="text-2xl leading-none text-[#2563eb] dark:text-[#8cc8ff]">✓</span>
+                        <p className="text-lg leading-8 text-[#415166] dark:text-white/80">{bullet}</p>
+                      </Reveal>
                     ))}
                   </div>
                 </div>
-                <div className="grid gap-4">
-                  {activeCareer.bullets.map((bullet) => (
-                    <div key={bullet} className="flex gap-4 rounded-[1.4rem] border border-white/10 bg-white/5 p-5">
-                      <span className="mt-2 h-3 w-3 rounded-full bg-[#73c6ff]" />
-                      <p className="text-base leading-8 text-white/86">{bullet}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -762,16 +793,21 @@ export default function Home() {
         </section>
 
         <section id="products" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow={t.productsEyebrow} title={t.productsTitle} dark={theme === "dark"} />
+          <SectionHeading eyebrow={portfolioSection.eyebrow} title={portfolioSection.title} dark={theme === "dark"} />
           <div className="space-y-12">
             <div>
-              <h3 className="mb-4 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.vibeCodingTitle ?? "Vibe Coding"}</h3>
+              <h3 className="mb-4 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.vibeCodingTitle ?? "Vibe Coding"}</h3>
               <Carousel cards={vibeCards} />
             </div>
             <div>
-              <h3 className="mb-2 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.powerAppsTitle ?? "Power Apps"}</h3>
-              <p className="mb-6 max-w-4xl text-lg text-[#5b667b] dark:text-white/68">{t.powerAppsSubtitle ?? ""}</p>
+              <h3 className="mb-2 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.powerAppsTitle ?? "Power Apps"}</h3>
+              <p className="mb-6 max-w-4xl text-[1rem] leading-7 text-[#5b667b] dark:text-white/68">{t.powerAppsSubtitle ?? ""}</p>
               <Carousel cards={powerAppCards} />
+            </div>
+            <div>
+              <h3 className="mb-2 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.videoTitle}</h3>
+              <p className="mb-6 max-w-4xl text-[1rem] leading-7 text-[#5b667b] dark:text-white/68">{t.videoSubtitle}</p>
+              <Carousel cards={videoCards} />
             </div>
           </div>
         </section>
@@ -780,72 +816,71 @@ export default function Home() {
           <div className="mx-auto max-w-7xl space-y-16 px-4 sm:px-6 lg:px-8">
             <SectionHeading eyebrow={t.workEyebrow} title={t.workTitle} dark={theme === "dark"} />
             <div>
-              <h3 className="mb-5 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.awardsTitle ?? "Awards"}</h3>
+              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.awardsTitle ?? "Awards"}</h3>
               <div className="grid gap-4 lg:grid-cols-3">
                 {awards.map((award) => (
-                  <div key={award.title} className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 shadow-[0_16px_30px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
+                  <Reveal key={award.title} className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 shadow-[0_16px_30px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
                     <div className="inline-flex rounded-full bg-[#fff1c9] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#b97300]">{award.level}</div>
                     <h4 className="mt-5 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">{award.title}</h4>
                     <p className="mt-2 text-lg italic text-[#64748b] dark:text-white/56">{award.subtitle}</p>
                     <p className="mt-6 text-sm font-semibold uppercase tracking-[0.18em] text-[#2563eb] dark:text-[#8cc8ff]">{award.org}</p>
-                  </div>
+                  </Reveal>
                 ))}
               </div>
             </div>
             <div>
-              <h3 className="mb-5 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.caseStudiesTitle ?? "Selected Case Studies"}</h3>
+              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.caseStudiesTitle ?? "Selected Case Studies"}</h3>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {caseStudies.map((study) => (
-                  <a key={study.brand} href={study.url} target="_blank" rel="noreferrer" className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 transition hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_16px_30px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none">
-                    <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">Case study</div>
-                    <h3 className="mt-4 font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{study.brand}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[#556273] dark:text-white/72">{study.result}</p>
-                    <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#2563eb] dark:text-[#8cc8ff]">
-                      {t.openCase}
-                      <ExternalLink size={14} />
-                    </div>
-                  </a>
+                  <Reveal key={study.brand}>
+                    <a href={study.url} target="_blank" rel="noreferrer" className="block rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 transition hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_16px_30px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none">
+                      <div className="text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">Case study</div>
+                      <h3 className="mt-4 font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{study.brand}</h3>
+                      <p className="mt-3 text-sm leading-7 text-[#556273] dark:text-white/72">{study.result}</p>
+                      <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#2563eb] dark:text-[#8cc8ff]">
+                        {t.openCase}
+                        <ExternalLink size={14} />
+                      </div>
+                    </a>
+                  </Reveal>
                 ))}
               </div>
             </div>
             <div>
-              <SectionHeading eyebrow={t.videoTitle} title={t.videoSubtitle} dark={theme === "dark"} />
-              <Carousel cards={videoCards} />
-            </div>
-            <div>
-              <h3 className="mb-5 font-['Space_Grotesk'] text-3xl font-bold text-[#0f172a] dark:text-white">{t.speakingTitle}</h3>
+              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.speakingTitle}</h3>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {speaking.map((item) => (
-                  <a key={`${item.title}-${item.org}`} href={item.url} target="_blank" rel="noreferrer" className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 transition hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_16px_30px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none">
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center rounded-[1.25rem] bg-white p-3 dark:bg-white/90">
-                        <img src={item.logo} alt={item.org} className="max-h-full max-w-full object-contain" />
+                  <Reveal key={`${item.title}-${item.org}`}>
+                    <a href={item.url} target="_blank" rel="noreferrer" className="block rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 transition hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_16px_30px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none">
+                      <div className="flex items-start gap-4">
+                        <div className="flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center rounded-[1.25rem] bg-white p-3 dark:bg-white/90">
+                          <img src={item.logo} alt={item.org} className="max-h-full max-w-full object-contain" />
+                        </div>
+                        <div>
+                          <div className="inline-flex rounded-full bg-[#def6e8] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#0d9f4f]">{item.title}</div>
+                          <h4 className="mt-3 font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{item.org}</h4>
+                          <p className="mt-3 text-sm leading-7 text-[#556273] dark:text-white/72">{item.detail}</p>
+                        </div>
                       </div>
-                      <div>
-                        <div className="inline-flex rounded-full bg-[#def6e8] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#0d9f4f]">{item.title}</div>
-                        <h4 className="mt-3 font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{item.org}</h4>
-                        <p className="mt-3 text-sm leading-7 text-[#556273] dark:text-white/72">{item.detail}</p>
-                      </div>
-                    </div>
-                  </a>
+                    </a>
+                  </Reveal>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section id="tools" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow={t.toolsEyebrow} title={t.toolsTitle} dark={theme === "dark"} />
-          <Carousel cards={toolCards} />
-        </section>
-
-        <section id="credentials" className="border-y border-[#dce6f5] bg-white py-20 dark:border-white/10 dark:bg-[#081920]">
+        <section id="tools" className="border-y border-[#dce6f5] bg-white/84 py-20 backdrop-blur-[2px] dark:border-white/10 dark:bg-[#081920]/86">
           <div className="mx-auto max-w-7xl space-y-14 px-4 sm:px-6 lg:px-8">
+            <SectionHeading eyebrow={competenciesSection.eyebrow} title={competenciesSection.title} dark={theme === "dark"} />
             <div>
-              <SectionHeading eyebrow={t.credentialsEyebrow} title={t.credentialsTitle} dark={theme === "dark"} />
+              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{competenciesSection.technologyStack}</h3>
+              <Carousel cards={toolCards} />
+            </div>
+            <div>
+              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{competenciesSection.advancedCertifications}</h3>
               <Carousel cards={certificationCards} />
             </div>
-
           </div>
         </section>
 
@@ -853,8 +888,8 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
             <div className="space-y-5">
               <div className="inline-flex rounded-full border border-[#d8e6ff] bg-[#eef4ff] px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-[#2563eb] dark:border-[#163243] dark:bg-[#0f2530] dark:text-[#8cc8ff]">{t.contactEyebrow}</div>
-              <h2 className="max-w-3xl font-['Space_Grotesk'] text-4xl font-bold text-[#0f172a] dark:text-white sm:text-5xl">{t.contactTitle}</h2>
-              <p className="max-w-2xl text-lg leading-8 text-[#556273] dark:text-white/72">{t.contactBody}</p>
+              <h2 className="max-w-3xl font-['Space_Grotesk'] text-[2.2rem] font-bold text-[#0f172a] dark:text-white sm:text-[2.8rem]">{t.contactTitle}</h2>
+              <p className="max-w-2xl text-[1rem] leading-8 text-[#556273] dark:text-white/72">{t.contactBody}</p>
             </div>
             <div className="grid gap-4">
               <ContactCard icon={<Mail size={18} />} label="Email" value={personalInfo.email} href={`mailto:${personalInfo.email}`} dark={theme === "dark"} />
@@ -897,22 +932,22 @@ export default function Home() {
 
 function SectionHeading({ eyebrow, title, dark }: { eyebrow: string; title: string; dark: boolean }) {
   return (
-    <div className="mb-10 space-y-3">
+    <Reveal className="mb-10 space-y-3">
       {eyebrow ? <p className={`text-xs font-bold uppercase tracking-[0.3em] ${dark ? "text-[#8cc8ff]" : "text-[#2563eb]"}`}>{eyebrow}</p> : null}
-      {title ? <h2 className={`max-w-5xl font-['Space_Grotesk'] text-3xl font-bold sm:text-4xl lg:text-5xl ${dark ? "text-white" : "text-[#0f172a]"}`}>{title}</h2> : null}
-    </div>
+      {title ? <h2 className={`max-w-5xl font-['Space_Grotesk'] text-[2rem] font-bold leading-tight sm:text-[2.45rem] lg:text-[3rem] ${dark ? "text-white" : "text-[#0f172a]"}`}>{title}</h2> : null}
+    </Reveal>
   );
 }
 
 function Panel({ title, icon, children, dark }: { title: string; icon: ReactNode; children: ReactNode; dark: boolean }) {
   return (
-    <div className={`rounded-[1.75rem] border p-6 ${dark ? "border-white/10 bg-[#102230]" : "border-[#dce7f9] bg-white shadow-[0_16px_34px_rgba(15,23,42,0.05)]"}`}>
+    <Reveal className={`rounded-[1.75rem] border p-6 ${dark ? "border-white/10 bg-[#102230]" : "border-[#dce7f9] bg-white shadow-[0_16px_34px_rgba(15,23,42,0.05)]"}`}>
       <div className="mb-5 flex items-center gap-3">
         {icon}
         <h3 className={`font-['Space_Grotesk'] text-xl font-bold ${dark ? "text-white" : "text-[#0f172a]"}`}>{title}</h3>
       </div>
       <div className="grid gap-4">{children}</div>
-    </div>
+    </Reveal>
   );
 }
 
@@ -927,6 +962,46 @@ function ContactCard({ icon, label, value, href, dark }: { icon: ReactNode; labe
     </div>
   );
   return href ? <a href={href} target="_blank" rel="noreferrer">{content}</a> : content;
+}
+
+function CareerMetaCard({ label, value, dark }: { label: string; value: string; dark: boolean }) {
+  return (
+    <Reveal className={`rounded-[1.25rem] border p-4 ${dark ? "border-white/10 bg-white/4" : "border-[#dce7f9] bg-white"}`}>
+      <div className={`text-sm ${dark ? "text-white/56" : "text-[#7a8699]"}`}>{label}</div>
+      <div className={`mt-1 text-xl font-semibold ${dark ? "text-white" : "text-[#0f172a]"}`}>{value}</div>
+    </Reveal>
+  );
+}
+
+function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.16 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`${className} transition-all duration-700 ease-out ${visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
 }
 
 function AnimatedMetric({ value, colorClass }: { value: string; colorClass: string }) {
@@ -1011,25 +1086,49 @@ function preserveAffixes(value: string, numeric: number) {
 
 function ImpactChart({ labels, values, dark }: { labels: readonly string[]; values: readonly number[]; dark: boolean }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
   const colors = ["#3567e5", "#20b888", "#8b5cf6", "#f59e0b", "#ef4444", "#22b0cb"];
 
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="grid grid-cols-6 items-end gap-3 pt-4">
+    <div ref={ref} className="grid grid-cols-6 items-end gap-4 pt-4">
       {labels.map((label, index) => {
         const isActive = activeIndex === index;
         return (
-          <button key={label} type="button" onMouseEnter={() => setActiveIndex(index)} onFocus={() => setActiveIndex(index)} className="group relative flex h-[22rem] flex-col justify-end text-center">
+          <button
+            key={label}
+            type="button"
+            onMouseEnter={() => setActiveIndex(index)}
+            onFocus={() => setActiveIndex(index)}
+            className="group relative flex h-[22rem] flex-col justify-end text-center"
+          >
             {isActive ? (
-              <div className={`absolute left-1/2 top-10 z-10 -translate-x-1/2 rounded-[1.4rem] border px-5 py-4 text-left shadow-xl ${dark ? "border-white/10 bg-[#102230] text-white" : "border-[#e4ecf8] bg-white text-[#0f172a]"}`}>
-                <div className="font-['Space_Grotesk'] text-xl font-bold">{label}</div>
+              <div className={`absolute left-1/2 top-4 z-10 min-w-[10rem] -translate-x-1/2 rounded-[1.4rem] border px-5 py-4 text-left shadow-xl ${dark ? "border-white/10 bg-[#102230] text-white" : "border-[#e4ecf8] bg-white text-[#0f172a]"}`}>
+                <div className="font-['Space_Grotesk'] text-lg font-bold leading-tight">{label}</div>
                 <div className="mt-1 text-2xl font-bold text-[#2563eb]">{`+${values[index]}%`}</div>
               </div>
             ) : null}
-            <div className="relative flex h-[20rem] items-end justify-center rounded-t-[1rem] bg-transparent">
-              <div className={`absolute inset-x-0 bottom-0 rounded-t-[1rem] transition-all duration-300 ${isActive ? "opacity-100" : "opacity-0"} bg-[#d8d8d8]`} style={{ height: "100%" }} />
+            <div className="relative flex h-[18rem] items-end justify-center rounded-t-[1rem] bg-transparent pt-10">
+              <div className="absolute inset-x-0 bottom-0 h-full rounded-t-[1rem] border border-dashed border-[#e2e8f0] dark:border-white/10" />
               <div
-                className="relative z-10 w-full rounded-t-[1rem] transition-all duration-300 group-hover:-translate-y-1"
-                style={{ height: `${values[index]}%`, backgroundColor: colors[index] }}
+                className="relative z-10 w-full rounded-t-[1rem] transition-all duration-700 ease-out group-hover:-translate-y-1"
+                style={{ height: `${visible ? Math.max(values[index], 8) : 0}%`, backgroundColor: colors[index], transitionDelay: `${index * 90}ms` }}
               />
             </div>
             <div className={`mt-4 text-sm leading-5 ${dark ? "text-white/68" : "text-[#66768e]"}`}>{label}</div>
@@ -1125,7 +1224,7 @@ function Carousel({ cards }: { cards: CarouselCard[] }) {
       </div>
       <div className="overflow-hidden">
         <div
-          className="flex transition-transform duration-500 ease-out"
+          className="flex items-stretch transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * (100 / perView)}%)` }}
         >
           {cards.map((card) => (

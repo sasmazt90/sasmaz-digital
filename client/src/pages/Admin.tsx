@@ -19,7 +19,147 @@ interface SectionDescriptor {
   key: string;
   title: string;
   description: string;
+  group?: string;
+  order: number;
 }
+
+const portfolioSectionMeta: Partial<Record<PortfolioKey, { title: string; description: string; order: number }>> = {
+  personalInfo: {
+    title: "Personal Info",
+    description: "Hero iletişim bilgileri, sosyal linkler ve temel kimlik alanları.",
+    order: 10,
+  },
+  heroMetrics: {
+    title: "Legacy Hero Metrics",
+    description: "Eski veri yapisindan kalan hero metric alanlari.",
+    order: 15,
+  },
+  experiences: {
+    title: "Legacy Experience",
+    description: "Eski veri yapısından kalan deneyim alanları.",
+    order: 20,
+  },
+  education: {
+    title: "Legacy Education",
+    description: "Eski veri yapısından kalan eğitim alanları.",
+    order: 30,
+  },
+  skills: {
+    title: "Legacy Skills",
+    description: "Eski veri yapısından kalan yetkinlik alanları.",
+    order: 40,
+  },
+  projects: {
+    title: "Legacy Projects",
+    description: "Eski veri yapısından kalan proje alanları.",
+    order: 50,
+  },
+  certifications: {
+    title: "Legacy Certifications",
+    description: "Eski veri yapisindan kalan sertifika alanlari.",
+    order: 55,
+  },
+  languages: {
+    title: "Legacy Languages",
+    description: "Eski veri yapisindan kalan dil alanlari.",
+    order: 58,
+  },
+  toolsData: {
+    title: "Legacy Tools Data",
+    description: "Eski veri yapisindan kalan tools / platform alanlari.",
+    order: 60,
+  },
+  awards: {
+    title: "Legacy Awards",
+    description: "Eski veri yapisindan kalan odul alanlari.",
+    order: 62,
+  },
+  caseStudies: {
+    title: "Legacy Case Studies",
+    description: "Eski veri yapisindan kalan case study alanlari.",
+    order: 64,
+  },
+  speakingMentoring: {
+    title: "Legacy Speaking & Mentoring",
+    description: "Eski veri yapisindan kalan konusma ve mentorluk alanlari.",
+    order: 66,
+  },
+};
+
+const siteSectionMeta: Partial<Record<SiteKey, { title: string; description: string; group?: string; order: number }>> = {
+  highlightMetrics: {
+    title: "Hero Metrics",
+    description: "Hero görselinin altında çıkan sayaç/metrik kutuları.",
+    group: "Hero",
+    order: 100,
+  },
+  education: {
+    title: "Education",
+    description: "About bölümünün sağındaki eğitim kartları.",
+    group: "About",
+    order: 200,
+  },
+  careerTimeline: {
+    title: "Career Journey",
+    description: "Timeline node’ları ve alttaki detay kartı içeriği.",
+    group: "Career Journey",
+    order: 300,
+  },
+  aiProducts: {
+    title: "AI Innovation & Product Portfolio",
+    description: "Vibe Coding ve Power Apps kartlarının ana içerik listesi.",
+    group: "Products",
+    order: 400,
+  },
+  videoPortfolio: {
+    title: "Digital Video Production",
+    description: "Artık ürün portföyü section’ı altında gösterilen video işleri.",
+    group: "Products",
+    order: 410,
+  },
+  caseStudies: {
+    title: "Selected Case Studies",
+    description: "Industry Impact & Recognition altındaki case study kartları.",
+    group: "Industry Impact & Recognition",
+    order: 500,
+  },
+  speaking: {
+    title: "Speaking & Mentorship",
+    description: "Konuşma, mentorluk ve akademik görünürlük kartları.",
+    group: "Industry Impact & Recognition",
+    order: 510,
+  },
+  toolClusters: {
+    title: "Technology Stack",
+    description: "Core Competencies altında gösterilen teknoloji stack kartları.",
+    group: "Core Competencies",
+    order: 600,
+  },
+  certifications: {
+    title: "Advanced Certifications",
+    description: "Core Competencies altında gösterilen sertifika kartları.",
+    group: "Core Competencies",
+    order: 610,
+  },
+  capabilityPillars: {
+    title: "Capability Pillars",
+    description: "Ek stratejik capability verileri.",
+    group: "Supporting Content",
+    order: 700,
+  },
+  storyHighlights: {
+    title: "Story Highlights",
+    description: "Metinsel highlight blokları ve yardımcı içerikler.",
+    group: "Supporting Content",
+    order: 710,
+  },
+  photoMoments: {
+    title: "Photo Moments",
+    description: "Eski yapıdan kalan fotoğraf verileri. Şu an hero carousel dışında aktif kullanılmıyor.",
+    group: "Supporting Content",
+    order: 720,
+  },
+};
 
 function toDrafts(source: SourceKind, data: Record<string, unknown>) {
   return Object.fromEntries(
@@ -32,22 +172,34 @@ export default function Admin() {
   const site = useSiteContent();
 
   const sections = useMemo<SectionDescriptor[]>(
-    () => [
-      ...Object.keys(portfolio.portfolioData).map((key) => ({
-        draftKey: `portfolio:${key}` as DraftKey,
-        source: "portfolio" as const,
-        key,
-        title: key,
-        description: "Core profile data used across the portfolio.",
-      })),
-      ...Object.keys(site.siteContent).map((key) => ({
-        draftKey: `site:${key}` as DraftKey,
-        source: "site" as const,
-        key,
-        title: key,
-        description: "New homepage content block used by the redesigned landing page.",
-      })),
-    ],
+    () =>
+      [
+        ...Object.keys(portfolio.portfolioData).map((key) => {
+          const typedKey = key as PortfolioKey;
+          const meta = portfolioSectionMeta[typedKey];
+          return {
+            draftKey: `portfolio:${key}` as DraftKey,
+            source: "portfolio" as const,
+            key,
+            title: meta?.title ?? prettifyKey(key),
+            description: meta?.description ?? "Core profile data used across the portfolio.",
+            order: meta?.order ?? 900,
+          };
+        }),
+        ...Object.keys(site.siteContent).map((key) => {
+          const typedKey = key as SiteKey;
+          const meta = siteSectionMeta[typedKey];
+          return {
+            draftKey: `site:${key}` as DraftKey,
+            source: "site" as const,
+            key,
+            title: meta?.title ?? prettifyKey(key),
+            description: meta?.description ?? "Homepage content block used by the redesigned landing page.",
+            group: meta?.group,
+            order: meta?.order ?? 1000,
+          };
+        }),
+      ].sort((a, b) => a.order - b.order),
     [portfolio.portfolioData, site.siteContent],
   );
 
@@ -229,8 +381,15 @@ export default function Admin() {
             <section key={section.draftKey} className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black/10">
               <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <div className="mb-2 inline-flex rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-slate-300">
-                    {section.source}
+                  <div className="mb-2 flex flex-wrap gap-2">
+                    <div className="inline-flex rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-slate-300">
+                      {section.source}
+                    </div>
+                    {section.group ? (
+                      <div className="inline-flex rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-blue-200">
+                        {section.group}
+                      </div>
+                    ) : null}
                   </div>
                   <h2 className="font-['Space_Grotesk'] text-xl font-bold">{section.title}</h2>
                   <p className="mt-1 text-sm text-slate-400">{section.description}</p>
@@ -1067,3 +1226,4 @@ function StringArrayEditor({
 function updateItem<T>(items: T[], index: number, patch: Partial<T>) {
   return items.map((item, itemIndex) => (itemIndex === index ? { ...item, ...patch } : item));
 }
+
