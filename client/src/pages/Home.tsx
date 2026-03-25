@@ -1,8 +1,12 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
+  BadgeCheck,
+  BarChart3,
   BriefcaseBusiness,
   ChevronLeft,
   ChevronRight,
+  Cpu,
+  Database,
   ExternalLink,
   Globe,
   GraduationCap,
@@ -14,6 +18,7 @@ import {
   Sparkles,
   Sun,
   Trophy,
+  Workflow,
   X,
 } from "lucide-react";
 import { usePortfolioData } from "@/contexts/PortfolioDataContext";
@@ -25,6 +30,8 @@ type MediaModal =
   | { type: "youtube"; url: string; title: string }
   | { type: "video"; url: string; title: string }
   | null;
+
+type ExperienceModal = TimelineItem | null;
 
 type TimelineItem = {
   year: string;
@@ -121,6 +128,26 @@ const awards: AwardItem[] = [
     org: "idefix",
   },
 ];
+
+function getToolClusterIcon(title: string) {
+  const normalized = title.toLowerCase();
+  if (normalized.includes("analytics") || normalized.includes("data") || normalized.includes("bi")) {
+    return <BarChart3 size={18} />;
+  }
+  if (normalized.includes("crm") || normalized.includes("customer")) {
+    return <Workflow size={18} />;
+  }
+  if (normalized.includes("performance") || normalized.includes("paid")) {
+    return <Cpu size={18} />;
+  }
+  return <Database size={18} />;
+}
+
+function getAwardIcon(level: string) {
+  if (level.toLowerCase().includes("winner")) return <Trophy size={18} />;
+  if (level.toLowerCase().includes("silver")) return <BadgeCheck size={18} />;
+  return <Trophy size={18} />;
+}
 
 const translations = {
   en: {
@@ -339,7 +366,24 @@ const languageLevels = {
   ],
 } as const;
 
-const compactTimelineDates = ["03/2014", "01/2015", "05/2016", "05/2017", "01/2020", "03/2021", "04/2022", "04/2024"];
+function parseTimelineStartValue(value: string) {
+  const normalized = value.replace(/\u2013|\u2014/g, "-").trim();
+  const firstPart = normalized.split("-")[0]?.trim() ?? normalized;
+  const monthYear = firstPart.match(/^(\d{1,2})\/(\d{4})$/);
+  if (monthYear) {
+    return Number(monthYear[2]) * 100 + Number(monthYear[1]);
+  }
+  const yearOnly = firstPart.match(/^(\d{4})$/);
+  if (yearOnly) {
+    return Number(yearOnly[1]) * 100 + 1;
+  }
+  return Number.MAX_SAFE_INTEGER;
+}
+
+function getTimelineDisplayDate(value: string) {
+  const normalized = value.replace(/\u2013|\u2014/g, "-").trim();
+  return normalized.split("-")[0]?.trim() ?? normalized;
+}
 
 export default function Home() {
   const { portfolioData } = usePortfolioData();
@@ -361,11 +405,17 @@ export default function Home() {
 
   const [language, setLanguage] = useState<Language>("en");
   const [theme, setTheme] = useState<ThemeMode>("light");
-  const [activeExperience, setActiveExperience] = useState(careerTimeline.length - 1);
   const [mediaModal, setMediaModal] = useState<MediaModal>(null);
+  const [experienceModal, setExperienceModal] = useState<ExperienceModal>(null);
   const [heroPhotoIndex, setHeroPhotoIndex] = useState(0);
+  const [journeyProgress, setJourneyProgress] = useState(0);
+  const journeyRef = useRef<HTMLElement | null>(null);
   const t = translations[language] as typeof translations.en;
-  const activeCareer = careerTimeline[activeExperience] as TimelineItem;
+  const orderedCareerTimeline = useMemo(
+    () => [...careerTimeline].sort((a, b) => parseTimelineStartValue(a.year) - parseTimelineStartValue(b.year)),
+    [careerTimeline],
+  );
+  const activeCareer = experienceModal ?? orderedCareerTimeline[orderedCareerTimeline.length - 1];
   const backgroundImage = theme === "dark" ? "/assets/backgrounds/background-dark-theme.jpg" : "/assets/backgrounds/background-light-theme.jpg";
   const portfolioSection = {
     eyebrow:
@@ -406,33 +456,53 @@ export default function Home() {
     return () => window.clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const node = journeyRef.current;
+      if (!node) return;
+      const rect = node.getBoundingClientRect();
+      const viewport = window.innerHeight;
+      const raw = (viewport - rect.top) / (rect.height + viewport * 0.35);
+      const clamped = Math.max(0, Math.min(1, raw));
+      setJourneyProgress(clamped);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, []);
+
   const buildProductCard = (product: (typeof aiProducts)[number], portrait: boolean) => ({
     key: product.title,
     content: (
-      <article className="portfolio-panel-light dark:!border-white/10 dark:!bg-[#102230] dark:shadow-none flex h-full min-h-[450px] flex-col">
+      <article className="portfolio-panel-light flex h-full min-h-[480px] flex-col">
         <div className="flex items-start justify-between gap-3">
-          <div className="min-h-[5.5rem]">
+          <div className="min-h-[6.5rem]">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">{product.category}</p>
             <h3 className="mt-3 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">{product.title}</h3>
           </div>
-          {product.confidential ? <span className="rounded-full border border-amber-300/40 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700">Confidential</span> : null}
+          {product.confidential ? <span className="rounded-full border border-amber-300/40 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700 dark:border-amber-300/25 dark:bg-amber-500/10 dark:text-amber-200">Confidential</span> : null}
         </div>
         {product.image ? (
           <div className={`mt-5 overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "h-[360px]" : "h-[250px]"}`}>
             <img src={product.image} alt={product.title} className={`${portrait ? "aspect-[4/5]" : "aspect-[16/10]"} w-full object-cover object-top`} />
           </div>
         ) : (
-          <div className="mt-5 flex h-[250px] items-center rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/65">
+          <div className="mt-5 flex h-[250px] items-center rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/78">
             Private enterprise project. Public visuals intentionally withheld.
           </div>
         )}
-        <div className="mt-5 min-h-[7.5rem]">
-          <p className="text-sm leading-7 text-[#526073] dark:text-white/76">{product.summary}</p>
-          <p className="mt-3 text-sm leading-7 text-[#6b778c] dark:text-white/58">{product.outcome}</p>
+        <div className="mt-5 min-h-[13.5rem]">
+          <p className="text-[0.98rem] leading-8 text-[#4b5b72] dark:text-white/88">{product.summary}</p>
+          <p className="mt-3 text-[0.98rem] leading-8 text-[#617086] dark:text-white/74">{product.outcome}</p>
         </div>
-        <div className="mt-4 min-h-[4.5rem] flex flex-wrap content-start gap-2">
+        <div className="mt-4 min-h-[5.5rem] flex flex-wrap content-start gap-2">
           {product.tags.map((tag) => (
-            <span key={tag} className="rounded-full border border-[#dce7f9] bg-[#f7faff] px-3 py-1 text-xs font-semibold text-[#43506a] dark:border-white/10 dark:bg-white/6 dark:text-white/74">
+            <span key={tag} className="rounded-full border border-[#dce7f9] bg-[#f7faff] px-3 py-1 text-xs font-semibold text-[#4b5b72] dark:border-white/10 dark:bg-white/8 dark:text-white/88">
               {tag}
             </span>
           ))}
@@ -449,7 +519,7 @@ export default function Home() {
             </button>
           ) : null}
           {product.url && !product.confidential ? (
-            <a href={product.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/6 dark:text-white">
+            <a href={product.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/8 dark:text-white">
               {t.openLive}
             </a>
           ) : null}
@@ -472,8 +542,8 @@ export default function Home() {
             onClick={() => setMediaModal({ type: "youtube", url: video.url, title: video.title })}
             className="group h-full overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white text-left transition hover:border-[#cadcf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none"
           >
-            <div className="relative h-[220px] overflow-hidden">
-              <img src={toYoutubeThumbnail(video.url)} alt={video.title} className="h-full w-full object-cover" />
+            <div className="relative aspect-video w-full overflow-hidden bg-black">
+              <img src={toYoutubeThumbnail(video.url)} alt={video.title} className="h-full w-full object-cover object-center" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent" />
               <div className="absolute bottom-4 left-4 flex items-center gap-3">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#0f172a]">
@@ -482,7 +552,7 @@ export default function Home() {
                 <span className="text-sm font-bold uppercase tracking-[0.2em] text-white/90">{t.watchVideo}</span>
               </div>
             </div>
-            <div className="min-h-[96px] p-5">
+            <div className="min-h-[110px] p-5">
               <h3 className="font-['Space_Grotesk'] text-lg font-bold text-[#0f172a] dark:text-white">{video.title}</h3>
             </div>
           </button>
@@ -497,10 +567,13 @@ export default function Home() {
         key: cluster.title,
         content: (
           <div className="h-full rounded-[1.75rem] border border-[#dce7f9] bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
-            <h3 className="font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{cluster.title}</h3>
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4ff] text-[#2563eb] dark:bg-[#0f2530] dark:text-[#8cc8ff]">
+              {getToolClusterIcon(cluster.title)}
+            </div>
+            <h3 className="mt-4 font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{cluster.title}</h3>
             <div className="mt-5 flex flex-wrap gap-2">
               {cluster.tools.map((tool) => (
-                <span key={tool} className="rounded-full border border-[#dce7f9] bg-[#f8fbff] px-3 py-1.5 text-xs font-semibold text-[#4a576d] dark:border-white/10 dark:bg-white/6 dark:text-white/74">
+                <span key={tool} className="rounded-full border border-[#dce7f9] bg-[#f8fbff] px-3 py-1.5 text-xs font-semibold text-[#4b5b72] dark:border-white/10 dark:bg-white/6 dark:text-white/78">
                   {tool}
                 </span>
               ))}
@@ -661,86 +734,102 @@ export default function Home() {
 
         <section id="about" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <SectionHeading eyebrow={t.aboutEyebrow} title={t.aboutTitle} dark={theme === "dark"} />
-          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="rounded-[2rem] border border-[#dce7f9] bg-white p-8 shadow-[0_20px_55px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
-              <div className="grid gap-6 text-[1.1rem] leading-9 text-[#556273] dark:text-white/74">
+          <div className="grid gap-4 lg:grid-cols-[1.08fr_0.92fr]">
+            <Reveal className="rounded-[2rem] border border-[#314760] bg-[#152a3b] p-8 shadow-[0_20px_55px_rgba(15,23,42,0.18)]">
+              <div className="grid gap-14 text-[1.1rem] leading-9 text-white/84">
                 <p>I am a seasoned digital and business transformation leader with more than twelve years of experience delivering technology-driven growth in regulated healthcare and consumer markets.</p>
                 <p>My expertise spans digital marketing, omnichannel strategy, CRM and e-commerce, data analytics and AI, low-code development, and regulated digital health solutions.</p>
                 <p>Currently leading DACH digital transformation at NAOS Deutschland (BIODERMA) in Munich, I combine strategic vision with hands-on execution to deliver measurable business impact.</p>
-                <div className="pt-3">
-                  <div className="mb-4 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">Core Competencies</div>
-                  <div className="flex flex-wrap gap-3">
-                    {atsTags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-[#bfd3f6] bg-[#f4f8ff] px-4 py-2 text-sm font-semibold text-[#2751a6] dark:border-white/10 dark:bg-white/5 dark:text-white/78">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
               </div>
-            </div>
+            </Reveal>
+
             <div className="grid gap-4">
-              <Panel title={t.educationTitle} icon={<GraduationCap size={18} className="text-[#2563eb] dark:text-[#8cc8ff]" />} dark={theme === "dark"}>
-                {education.map((item) => (
-                  <div key={item.degree} className="flex gap-4 rounded-2xl border border-[#e4ecf8] bg-[#f8fbff] p-4 dark:border-white/10 dark:bg-white/4">
-                    {item.logo ? (
-                      <div className="flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-2xl bg-white p-2 dark:bg-white/92">
-                        <img src={item.logo} alt={item.school} className="max-h-full max-w-full object-contain" />
-                      </div>
-                    ) : (
-                      <div className="flex h-[4.75rem] w-[4.75rem] items-center justify-center rounded-2xl border border-[#bfd3f6] bg-[#eef4ff] font-['Space_Grotesk'] text-2xl font-bold text-[#2563eb] dark:border-white/10 dark:bg-[#163243] dark:text-[#8cc8ff]">IU</div>
-                    )}
-                    <div>
-                      <h4 className="font-['Space_Grotesk'] text-lg font-bold text-[#0f172a] dark:text-white">{item.degree}</h4>
-                      <p className="text-sm text-[#2563eb] dark:text-[#8cc8ff]">{item.school}</p>
-                      <p className="mt-1 text-sm text-[#64748b] dark:text-white/56">{item.period} | {item.location}</p>
-                    </div>
-                  </div>
-                ))}
-              </Panel>
-              <Panel title={t.languagesTitle} icon={<Languages size={18} className="text-[#2563eb] dark:text-[#8cc8ff]" />} dark={theme === "dark"}>
+              <Reveal className="rounded-[2rem] border border-[#314760] bg-[#152a3b] p-5 shadow-[0_20px_55px_rgba(15,23,42,0.18)]">
+                <div className="mb-5 flex items-center gap-3">
+                  <GraduationCap size={18} className="text-[#9fd0ff]" />
+                  <h3 className="font-['Space_Grotesk'] text-xl font-bold text-white">{t.educationTitle}</h3>
+                </div>
                 <div className="grid gap-4">
-                  {languageLevels[language].map((item) => (
-                    <div key={item.name}>
-                      <div className="mb-2 flex items-center justify-between text-sm">
-                        <span className="font-semibold text-[#0f172a] dark:text-white">{item.name}</span>
-                        <span className="text-[#64748b] dark:text-white/58">{item.level}</span>
-                      </div>
-                      <div className="h-2.5 rounded-full bg-[#e7edf7] dark:bg-white/10">
-                        <div className="h-2.5 rounded-full bg-[#2563eb] dark:bg-[#8cc8ff]" style={{ width: item.width }} />
+                  {education.map((item) => (
+                    <div key={item.degree} className="flex gap-4 rounded-[1.35rem] border border-[#314760] bg-[#1a3143] p-4">
+                      {item.logo ? (
+                        <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-[1rem] bg-white p-2">
+                          <img src={item.logo} alt={item.school} className="max-h-full max-w-full object-contain" />
+                        </div>
+                      ) : (
+                        <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-[1rem] bg-white font-['Space_Grotesk'] text-2xl font-bold text-[#2563eb]">IU</div>
+                      )}
+                      <div>
+                        <h4 className="font-['Space_Grotesk'] text-lg font-bold text-white">{item.degree}</h4>
+                        <p className="text-sm font-semibold text-[#7cc0ff]">{item.school}</p>
+                        <p className="mt-1 text-sm text-white/56">{item.period} | {item.location}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-              </Panel>
+              </Reveal>
+
+              <Reveal className="rounded-[2rem] border border-[#314760] bg-[#152a3b] p-5 shadow-[0_20px_55px_rgba(15,23,42,0.18)]">
+                <div className="mb-5 flex items-center gap-3">
+                  <Languages size={18} className="text-[#9fd0ff]" />
+                  <h3 className="font-['Space_Grotesk'] text-xl font-bold text-white">{t.languagesTitle}</h3>
+                </div>
+                <div className="grid gap-4">
+                  {languageLevels[language].map((item) => (
+                    <div key={item.name}>
+                      <div className="mb-2 flex items-center justify-between text-sm">
+                        <span className="font-semibold text-white">{item.name}</span>
+                        <span className="text-white/56">{item.level}</span>
+                      </div>
+                      <div className="h-2 rounded-full bg-white/10">
+                        <div className="h-2 rounded-full bg-[#8cc8ff]" style={{ width: item.width }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
             </div>
           </div>
+
+          <Reveal className="mt-4 rounded-[2rem] border border-[#314760] bg-[#152a3b] p-8 shadow-[0_20px_55px_rgba(15,23,42,0.18)]">
+            <div className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-white">Core Competencies</div>
+            <div className="flex flex-wrap gap-3">
+              {atsTags.map((tag) => (
+                <span key={tag} className="rounded-full border border-[#3c546d] bg-[#22384a] px-4 py-2 text-sm font-semibold text-white/84">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </Reveal>
         </section>
 
-        <section id="journey" className="bg-[#edf3fb] py-20 dark:bg-[#081920]">
+        <section id="journey" ref={journeyRef} className="bg-white py-20 dark:bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionHeading eyebrow={t.journeyEyebrow} title={t.journeyTitle} dark={theme === "dark"} />
-            <div className="rounded-[2rem] border border-[#dce7f9] bg-white p-8 shadow-[0_20px_55px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
-              <div className="hide-scrollbar relative overflow-x-auto pb-8">
-                <div className="relative min-w-[1120px] px-6 pt-4">
-                  <div className="absolute left-8 right-8 top-[7.2rem] h-1 rounded-full bg-[#b9d3ff] dark:bg-[#2f5d7f]" />
-                  <div className="relative grid grid-cols-8 gap-4">
-                    {careerTimeline.map((item, index) => {
-                      const isActive = index === activeExperience;
+            <SectionHeading eyebrow={t.journeyEyebrow} title={t.journeyTitle} dark={false} />
+            <div className="rounded-[2rem] border border-[#dce7f9] bg-white p-8 shadow-[0_20px_55px_rgba(15,23,42,0.06)]">
+              <div className="hide-scrollbar relative overflow-x-auto">
+                <div className="relative min-w-[1280px] px-8 pt-4 pb-3">
+                  <div className="absolute left-12 right-12 top-[7.4rem] h-1 rounded-full bg-[#d8e6ff]" />
+                  <div
+                    className="absolute left-12 top-[7.4rem] h-1 rounded-full bg-[linear-gradient(90deg,#2563eb_0%,#60a5fa_100%)] transition-[width] duration-300 ease-out"
+                    style={{ width: `calc((100% - 6rem) * ${journeyProgress})` }}
+                  />
+                  <div className="relative grid grid-cols-8 gap-10">
+                    {orderedCareerTimeline.map((item, index) => {
+                      const itemProgress = orderedCareerTimeline.length === 1 ? 1 : index / (orderedCareerTimeline.length - 1);
+                      const isHighlighted = Math.abs(journeyProgress - itemProgress) < 0.07 || journeyProgress > itemProgress;
                       return (
                         <button
                           key={`${item.year}-${item.company}`}
                           type="button"
-                          onMouseEnter={() => setActiveExperience(index)}
-                          onFocus={() => setActiveExperience(index)}
-                          onClick={() => setActiveExperience(index)}
+                          onClick={() => setExperienceModal(item)}
                           className="flex flex-col items-center text-center"
                         >
-                          <div className={`min-h-[72px] text-base font-bold leading-tight ${isActive ? "text-[#0f172a] dark:text-white" : "text-[#4b5b72] dark:text-white/62"}`}>{item.role}</div>
-                          <div className={`relative z-10 mt-3 flex h-[76px] w-[76px] items-center justify-center rounded-full border-[7px] bg-white shadow-[0_14px_26px_rgba(15,23,42,0.12)] ${isActive ? "border-[#dce9ff]" : "border-[#eef3fa]"}`}>
-                            <img src={item.logo} alt={item.company} className="max-h-[42px] max-w-[42px] object-contain" />
+                          <div className={`min-h-[88px] text-base font-bold leading-tight ${isHighlighted ? "text-[#0f172a]" : "text-[#4b5b72]"}`}>{item.role}</div>
+                          <div className={`relative z-10 mt-3 flex h-[82px] w-[82px] items-center justify-center rounded-full border-[7px] bg-white shadow-[0_14px_26px_rgba(15,23,42,0.12)] transition-all duration-300 ${isHighlighted ? "scale-[1.08] border-[#cfe1ff]" : "border-[#eef3fa]"}`}>
+                            <img src={item.logo} alt={item.company} className="max-h-[44px] max-w-[44px] object-contain" />
                           </div>
-                          <div className={`mt-4 text-lg ${isActive ? "text-[#0f172a] dark:text-white" : "text-[#66768e] dark:text-white/58"}`}>{compactTimelineDates[index] ?? item.year}</div>
+                          <div className={`mt-4 min-h-[3rem] text-lg font-medium ${isHighlighted ? "text-[#0f172a]" : "text-[#66768e]"}`}>{getTimelineDisplayDate(item.year)}</div>
                         </button>
                       );
                     })}
@@ -748,7 +837,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <Reveal key={`${activeCareer.company}-${activeCareer.year}`} className="mx-auto mt-2 max-w-4xl overflow-hidden rounded-[1.9rem] border border-[#dce7f9] bg-[#f8fbff] shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#163243] dark:shadow-none">
+              <Reveal key={`${activeCareer.company}-${activeCareer.year}`} className="hidden mx-auto mt-2 max-w-4xl overflow-hidden rounded-[1.9rem] border border-[#dce7f9] bg-[#f8fbff] shadow-[0_18px_40px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#163243] dark:shadow-none">
                 <div className="flex flex-wrap items-center gap-4 border-b border-[#dce7f9] bg-[linear-gradient(180deg,#dbeafe_0%,#cfe2ff_100%)] px-6 py-6 dark:border-white/10 dark:bg-[linear-gradient(180deg,#17364a_0%,#163243_100%)]">
                   <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-[1.2rem] bg-white p-2">
                     <img src={activeCareer.logo} alt={activeCareer.company} className="max-h-full max-w-full object-contain" />
@@ -793,7 +882,7 @@ export default function Home() {
         </section>
 
         <section id="products" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <SectionHeading eyebrow={portfolioSection.eyebrow} title={portfolioSection.title} dark={theme === "dark"} />
+          <SectionHeading title={portfolioSection.eyebrow} description={portfolioSection.title} dark={theme === "dark"} />
           <div className="space-y-12">
             <div>
               <h3 className="mb-4 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.vibeCodingTitle ?? "Vibe Coding"}</h3>
@@ -801,12 +890,12 @@ export default function Home() {
             </div>
             <div>
               <h3 className="mb-2 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.powerAppsTitle ?? "Power Apps"}</h3>
-              <p className="mb-6 max-w-4xl text-[1rem] leading-7 text-[#5b667b] dark:text-white/68">{t.powerAppsSubtitle ?? ""}</p>
+              <p className="mb-6 max-w-4xl text-[1rem] leading-7 text-[#5b667b] dark:text-white/80">{t.powerAppsSubtitle ?? ""}</p>
               <Carousel cards={powerAppCards} />
             </div>
             <div>
               <h3 className="mb-2 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.videoTitle}</h3>
-              <p className="mb-6 max-w-4xl text-[1rem] leading-7 text-[#5b667b] dark:text-white/68">{t.videoSubtitle}</p>
+              <p className="mb-6 max-w-4xl text-[1rem] leading-7 text-[#5b667b] dark:text-white/80">{t.videoSubtitle}</p>
               <Carousel cards={videoCards} />
             </div>
           </div>
@@ -814,15 +903,18 @@ export default function Home() {
 
         <section id="work" className="border-y border-[#dce6f5] bg-white py-20 dark:border-white/10 dark:bg-[#081920]">
           <div className="mx-auto max-w-7xl space-y-16 px-4 sm:px-6 lg:px-8">
-            <SectionHeading eyebrow={t.workEyebrow} title={t.workTitle} dark={theme === "dark"} />
+            <SectionHeading title={t.workEyebrow} description={t.workTitle} dark={theme === "dark"} />
             <div>
               <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.awardsTitle ?? "Awards"}</h3>
               <div className="grid gap-4 lg:grid-cols-3">
                 {awards.map((award) => (
                   <Reveal key={award.title} className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 shadow-[0_16px_30px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff4d6] text-[#b97300] dark:bg-[#2b2414] dark:text-[#ffd571]">
+                      {getAwardIcon(award.level)}
+                    </div>
                     <div className="inline-flex rounded-full bg-[#fff1c9] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#b97300]">{award.level}</div>
                     <h4 className="mt-5 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">{award.title}</h4>
-                    <p className="mt-2 text-lg italic text-[#64748b] dark:text-white/56">{award.subtitle}</p>
+                    <p className="mt-2 text-lg italic text-[#5f6d83] dark:text-white/62">{award.subtitle}</p>
                     <p className="mt-6 text-sm font-semibold uppercase tracking-[0.18em] text-[#2563eb] dark:text-[#8cc8ff]">{award.org}</p>
                   </Reveal>
                 ))}
@@ -872,7 +964,7 @@ export default function Home() {
 
         <section id="tools" className="border-y border-[#dce6f5] bg-white/84 py-20 backdrop-blur-[2px] dark:border-white/10 dark:bg-[#081920]/86">
           <div className="mx-auto max-w-7xl space-y-14 px-4 sm:px-6 lg:px-8">
-            <SectionHeading eyebrow={competenciesSection.eyebrow} title={competenciesSection.title} dark={theme === "dark"} />
+            <SectionHeading title={competenciesSection.eyebrow} description={competenciesSection.title} dark={theme === "dark"} />
             <div>
               <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{competenciesSection.technologyStack}</h3>
               <Carousel cards={toolCards} />
@@ -926,15 +1018,66 @@ export default function Home() {
           </div>
         </div>
       ) : null}
+
+      {experienceModal ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#02080b]/72 p-4 backdrop-blur-md">
+          <div className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-[#dce7f9] bg-white shadow-[0_30px_80px_rgba(15,23,42,0.24)]">
+            <button
+              type="button"
+              onClick={() => setExperienceModal(null)}
+              className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[#dce7f9] bg-white text-[#0f172a]"
+            >
+              <X size={18} />
+            </button>
+            <div className="flex flex-wrap items-center gap-4 border-b border-[#dce7f9] bg-[linear-gradient(180deg,#dbeafe_0%,#cfe2ff_100%)] px-6 py-6">
+              <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-[1.2rem] bg-white p-2">
+                <img src={experienceModal.logo} alt={experienceModal.company} className="max-h-full max-w-full object-contain" />
+              </div>
+              <div>
+                <h3 className="font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a]">{experienceModal.role}</h3>
+                <p className="mt-2 text-2xl text-[#2563eb]">{experienceModal.company}</p>
+              </div>
+            </div>
+            <div className="p-6">
+              <div className="grid gap-4 md:grid-cols-2">
+                <CareerMetaCard label="Period" value={experienceModal.year} dark={false} />
+                <CareerMetaCard label="Location" value={experienceModal.location} dark={false} />
+                <CareerMetaCard label="Team" value={experienceModal.meta[1] ?? ""} dark={false} />
+                <CareerMetaCard label="Budget" value={experienceModal.meta[0] ?? ""} dark={false} />
+              </div>
+              <div className="mt-8 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a]">Key Responsibilities & Achievements</div>
+              <div className="mt-5 grid gap-4">
+                {experienceModal.bullets.map((bullet) => (
+                  <div key={bullet} className="flex gap-4 text-left">
+                    <span className="text-2xl leading-none text-[#2563eb]">•</span>
+                    <p className="text-lg leading-8 text-[#415166]">{bullet}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
 
-function SectionHeading({ eyebrow, title, dark }: { eyebrow: string; title: string; dark: boolean }) {
+function SectionHeading({
+  eyebrow,
+  title,
+  description,
+  dark,
+}: {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  dark: boolean;
+}) {
   return (
     <Reveal className="mb-10 space-y-3">
       {eyebrow ? <p className={`text-xs font-bold uppercase tracking-[0.3em] ${dark ? "text-[#8cc8ff]" : "text-[#2563eb]"}`}>{eyebrow}</p> : null}
-      {title ? <h2 className={`max-w-5xl font-['Space_Grotesk'] text-[2rem] font-bold leading-tight sm:text-[2.45rem] lg:text-[3rem] ${dark ? "text-white" : "text-[#0f172a]"}`}>{title}</h2> : null}
+      <h2 className={`max-w-5xl font-['Space_Grotesk'] text-[2.2rem] font-bold leading-tight sm:text-[2.8rem] lg:text-[4rem] ${dark ? "text-white" : "text-[#0f172a]"}`}>{title}</h2>
+      {description ? <p className={`max-w-4xl text-[1.02rem] font-normal leading-8 ${dark ? "text-white/68" : "text-[#5b667b]"}`}>{description}</p> : null}
     </Reveal>
   );
 }
@@ -1124,14 +1267,14 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
                 <div className="mt-1 text-2xl font-bold text-[#2563eb]">{`+${values[index]}%`}</div>
               </div>
             ) : null}
-            <div className="relative flex h-[18rem] items-end justify-center rounded-t-[1rem] bg-transparent pt-10">
-              <div className="absolute inset-x-0 bottom-0 h-full rounded-t-[1rem] border border-dashed border-[#e2e8f0] dark:border-white/10" />
+            <div className="relative flex h-[18rem] items-end justify-center pt-10">
+              <div className="absolute inset-x-2 bottom-0 top-2 rounded-t-[1rem] border-x border-t border-dashed border-[#d5dfef] dark:border-white/10" />
               <div
-                className="relative z-10 w-full rounded-t-[1rem] transition-all duration-700 ease-out group-hover:-translate-y-1"
-                style={{ height: `${visible ? Math.max(values[index], 8) : 0}%`, backgroundColor: colors[index], transitionDelay: `${index * 90}ms` }}
+                className="relative z-10 w-[78%] rounded-t-[1rem] shadow-[0_10px_25px_rgba(37,99,235,0.16)] transition-all duration-700 ease-out group-hover:-translate-y-1"
+                style={{ height: `${visible ? Math.max(values[index], 12) : 0}%`, backgroundColor: colors[index], transitionDelay: `${index * 90}ms` }}
               />
             </div>
-            <div className={`mt-4 text-sm leading-5 ${dark ? "text-white/68" : "text-[#66768e]"}`}>{label}</div>
+            <div className={`mt-4 text-sm leading-5 ${dark ? "text-white/72" : "text-[#5f6d83]"}`}>{label}</div>
           </button>
         );
       })}
@@ -1143,11 +1286,47 @@ function RadarChart({ skills, dark }: { skills: ReadonlyArray<{ readonly label: 
   const size = 340;
   const center = size / 2;
   const radius = 125;
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
   const angles = skills.map((_, index) => (Math.PI * 2 * index) / skills.length - Math.PI / 2);
   const levelFractions = [0.2, 0.4, 0.6, 0.8, 1];
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    let frame = 0;
+    let start: number | null = null;
+    const duration = 900;
+    const tick = (timestamp: number) => {
+      if (start === null) start = timestamp;
+      const raw = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - raw, 3);
+      setProgress(eased);
+      if (raw < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [visible]);
+
   const polygonPoints = skills
     .map((skill, index) => {
-      const r = (skill.value / 100) * radius;
+      const r = (skill.value / 100) * radius * progress;
       const x = center + Math.cos(angles[index]) * r;
       const y = center + Math.sin(angles[index]) * r;
       return `${x},${y}`;
@@ -1155,7 +1334,7 @@ function RadarChart({ skills, dark }: { skills: ReadonlyArray<{ readonly label: 
     .join(" ");
 
   return (
-    <div className="flex items-center justify-center py-2">
+    <div ref={ref} className="flex items-center justify-center py-2">
       <svg viewBox={`0 0 ${size} ${size}`} className="h-[22rem] w-[22rem] overflow-visible">
         {levelFractions.map((fraction) => {
           const points = skills
@@ -1174,6 +1353,12 @@ function RadarChart({ skills, dark }: { skills: ReadonlyArray<{ readonly label: 
           return <line key={index} x1={center} y1={center} x2={x} y2={y} stroke={dark ? "rgba(255,255,255,0.12)" : "#d8e3f2"} strokeWidth="1" />;
         })}
         <polygon points={polygonPoints} fill="rgba(37,99,235,0.18)" stroke="#2563eb" strokeWidth="3" />
+        {skills.map((skill, index) => {
+          const r = (skill.value / 100) * radius * progress;
+          const x = center + Math.cos(angles[index]) * r;
+          const y = center + Math.sin(angles[index]) * r;
+          return <circle key={`${skill.label}-dot`} cx={x} cy={y} r="4.5" fill="#2563eb" opacity={0.65 + progress * 0.35} />;
+        })}
         {skills.map((skill, index) => {
           const labelRadius = radius + 24;
           const x = center + Math.cos(angles[index]) * labelRadius;
