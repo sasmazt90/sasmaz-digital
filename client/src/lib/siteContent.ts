@@ -354,6 +354,7 @@ export const education = [
     school: "Istanbul University",
     period: "2014 - 2016",
     location: "Istanbul, Turkey",
+    logo: "/assets/logos/universities/istanbul-university.png",
   },
   {
     degree: "BSc in Molecular Biology & Genetics",
