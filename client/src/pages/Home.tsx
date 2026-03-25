@@ -462,7 +462,7 @@ export default function Home() {
       if (!node) return;
       const rect = node.getBoundingClientRect();
       const viewport = window.innerHeight;
-      const raw = (viewport - rect.top) / (rect.height + viewport * 0.35);
+      const raw = (viewport * 0.82 - rect.top) / (rect.height * 0.7);
       const clamped = Math.max(0, Math.min(1, raw));
       setJourneyProgress(clamped);
     };
@@ -810,10 +810,12 @@ export default function Home() {
               <div className="hide-scrollbar relative overflow-x-auto">
                 <div className="relative min-w-[1280px] px-8 pt-4 pb-3">
                   <div className="absolute left-12 right-12 top-[7.4rem] h-1 rounded-full bg-[#d8e6ff]" />
-                  <div
-                    className="absolute left-12 top-[7.4rem] h-1 rounded-full bg-[linear-gradient(90deg,#2563eb_0%,#60a5fa_100%)] transition-[width] duration-300 ease-out"
-                    style={{ width: `calc((100% - 6rem) * ${journeyProgress})` }}
-                  />
+                  <div className="absolute left-12 right-12 top-[7.4rem] h-1 overflow-hidden rounded-full">
+                    <div
+                      className="h-full rounded-full bg-[linear-gradient(90deg,#2563eb_0%,#60a5fa_100%)] transition-[width] duration-300 ease-out"
+                      style={{ width: `${journeyProgress * 100}%` }}
+                    />
+                  </div>
                   <div className="relative grid grid-cols-8 gap-10">
                     {orderedCareerTimeline.map((item, index) => {
                       const itemProgress = orderedCareerTimeline.length === 1 ? 1 : index / (orderedCareerTimeline.length - 1);
@@ -1021,7 +1023,7 @@ export default function Home() {
 
       {experienceModal ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#02080b]/72 p-4 backdrop-blur-md">
-          <div className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-[#dce7f9] bg-white shadow-[0_30px_80px_rgba(15,23,42,0.24)]">
+          <div className="relative w-full max-w-4xl overflow-hidden rounded-[2rem] border border-[#dce7f9] bg-white shadow-[0_30px_80px_rgba(15,23,42,0.24)] max-h-[90vh]">
             <button
               type="button"
               onClick={() => setExperienceModal(null)}
@@ -1038,7 +1040,7 @@ export default function Home() {
                 <p className="mt-2 text-2xl text-[#2563eb]">{experienceModal.company}</p>
               </div>
             </div>
-            <div className="p-6">
+            <div className="max-h-[calc(90vh-9rem)] overflow-y-auto p-6">
               <div className="grid gap-4 md:grid-cols-2">
                 <CareerMetaCard label="Period" value={experienceModal.year} dark={false} />
                 <CareerMetaCard label="Location" value={experienceModal.location} dark={false} />

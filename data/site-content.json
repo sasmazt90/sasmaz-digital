@@ -38,109 +38,45 @@
   ],
   "careerTimeline": [
     {
-      "year": "2024 - Now",
-      "company": "NAOS Deutschland",
-      "brand": "BIODERMA",
-      "role": "Head of Digital",
-      "location": "Munich, Germany",
-      "logo": "/assets/logos/companies/naos-logo.jpg",
-      "focus": "Owns the end-to-end digital, analytics and AI agenda for Germany, connecting commercial growth with operating discipline.",
-      "meta": [
-        "8-figure EUR annual digital budget",
-        "Direct: 1 FTE + cross-functional squads",
-        "DACH transformation and executive stakeholder leadership"
-      ],
-      "bullets": [
-        "Delivered +35% e-commerce sell-out growth and +14pp contribution margin uplift through ROI-led planning and optimization.",
-        "Reduced OPEX by ~15-18% by simplifying operating model and partner setup.",
-        "Built executive systems for forecasting, scenario planning, pricing intelligence and performance governance.",
-        "Launched AI-enabled sales visit planning and a PIM-integrated GenAI product intelligence assistant.",
-        "Created privacy-aware, compliant AI workflows with Power Apps, Power Automate and role-based governance."
-      ]
-    },
-    {
-      "year": "2022 - 2024",
-      "company": "NAOS Turkiye",
-      "brand": "BIODERMA / Institut Esthederm / Etat Pur",
-      "role": "Digital Marketing & CRM Manager",
+      "year": "03/2014 - 01/2015",
+      "company": "Lidyana",
+      "brand": "Luxury E-Commerce",
+      "role": "CRM & Email Marketing Specialist",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/naos-logo.jpg",
-      "focus": "Scaled a multi-brand operating model covering digital growth, CRM, lifecycle journeys and data activation.",
+      "logo": "/assets/logos/companies/lidyana-logo.jpg",
+      "focus": "Managed CRM execution, email planning and lifecycle communication flows for a fast-growing fashion marketplace.",
       "meta": [
-        "10-person organization",
-        "9-figure TRY annual budget",
-        "Multi-brand growth and CRM governance"
+        "Email and CRM operations",
+        "Campaign planning and segmentation",
+        "Marketplace growth support"
       ],
       "bullets": [
-        "Scaled the digital marketing and CRM organization to 10 team members with clear governance and KPI rhythm.",
-        "Drove +20% user acquisition growth, +15% online interaction growth and 40% e-commerce sell-out growth.",
-        "Improved LTV by +69% and LTV/CAC by ~+60% through segmentation, prioritization and lifecycle design.",
-        "Launched integrated digital ecosystems across brand sites, D2C and app experiences.",
-        "Turned analytics and CRM signals into full-funnel growth strategies for multiple brands."
+        "Managed email calendar, segmentation and CRM campaign execution for marketplace growth.",
+        "Built retention-focused communication flows across key commercial moments and promotions.",
+        "Supported customer lifecycle performance with hands-on reporting and campaign optimization."
       ]
     },
     {
-      "year": "2021 - 2022",
-      "company": "NAOS Turkiye",
-      "brand": "BIODERMA / Institut Esthederm / Etat Pur",
-      "role": "Digital Marketing Manager",
+      "year": "01/2015 - 05/2016",
+      "company": "Emarsys",
+      "brand": "SAP Marketing Cloud",
+      "role": "Client Manager",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/naos-logo.jpg",
-      "focus": "Built the digital marketing function from scratch and created the execution model for three brands.",
+      "logo": "/assets/logos/companies/emarsys-logo.jpg",
+      "focus": "Led enterprise CRM and marketing automation consulting for lifecycle, segmentation and trigger-based programs.",
       "meta": [
-        "6-person digital team",
-        "9-figure TRY budget",
-        "Performance, SEO/SEM, content and CRO"
+        "Enterprise client retainers",
+        "Email deliverability and automation",
+        "Workshops, reporting and integrations"
       ],
       "bullets": [
-        "Defined roles, responsibilities and reporting standards for a newly formed digital team.",
-        "Led full-funnel performance across paid media, content and conversion optimization.",
-        "Built measurement foundations and optimization loops for sustainable growth.",
-        "Aligned digital investment logic with broader commercial priorities and marketplace execution."
+        "Designed lifecycle journeys, segmentation architecture and trigger-based campaigns for major brands.",
+        "Handled technical and strategic support across CRM, automation and email health.",
+        "Improved adoption by aligning client objectives with platform capabilities and best practices."
       ]
     },
     {
-      "year": "2020 - 2021",
-      "company": "D&R / idefix",
-      "brand": "Retail & Culture Commerce",
-      "role": "Digital Marketing Manager",
-      "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/d&r-logo.jpg",
-      "focus": "Owned the growth and CRM P&L while running experimentation, campaign planning and profitability-focused optimization.",
-      "meta": [
-        "2 direct reports",
-        "8-figure budget governance",
-        "SEO/SEM, paid media, CRM and mobile growth"
-      ],
-      "bullets": [
-        "Ran performance, CRM, SEO/SEM and CRO as one integrated growth program.",
-        "Won Felis Awards 2019, MIXX Awards 2020 and Social Media Awards Turkey 2020.",
-        "Designed LTV-informed targeting models and experimentation roadmaps to improve conversion and revenue.",
-        "Worked across HR, merchandising, IT and category teams to improve efficiency and contribution margin."
-      ]
-    },
-    {
-      "year": "2017 - 2020",
-      "company": "D&R / idefix",
-      "brand": "Retail & Culture Commerce",
-      "role": "Digital Marketing Specialist",
-      "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/idefix-logo.jpg",
-      "focus": "Executed hands-on CRM, onsite growth and retention programs with strong personalization and automation discipline.",
-      "meta": [
-        "Hands-on execution role",
-        "CRM, mobile and retargeting focus",
-        "Segmentation-led retention engine"
-      ],
-      "bullets": [
-        "Built omnichannel campaigns across email, SMS, onsite, in-app and push channels.",
-        "Merged online and offline behavior to create win-back, retention, loyalty and cart-abandonment automations.",
-        "Generated 600% ROI with AI-powered personalized push solutions and 288% ROI with web push.",
-        "Supported online sales growth with strong focus on mobile, landing pages and retargeting."
-      ]
-    },
-    {
-      "year": "2016 - 2017",
+      "year": "05/2016 - 05/2017",
       "company": "8digits",
       "brand": "MarTech SaaS",
       "role": "Account Manager",
@@ -159,22 +95,105 @@
       ]
     },
     {
-      "year": "2014 - 2016",
-      "company": "Emarsys",
-      "brand": "SAP Marketing Cloud",
-      "role": "Client Manager",
+      "year": "05/2017 - 01/2020",
+      "company": "D&R ; idefix",
+      "brand": "Retail & Culture Commerce",
+      "role": "Digital Marketing Specialist",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/emarsys-logo.jpg",
-      "focus": "Led enterprise CRM and marketing automation consulting for lifecycle, segmentation and trigger-based programs.",
+      "logo": "/assets/logos/companies/d&r-logo.jpg",
+      "focus": "Executed hands-on CRM, onsite growth and retention programs with strong personalization and automation discipline.",
       "meta": [
-        "Enterprise client retainers",
-        "Email deliverability and automation",
-        "Workshops, reporting and integrations"
+        "Hands-on execution role",
+        "CRM, mobile and retargeting focus",
+        "Segmentation-led retention engine"
       ],
       "bullets": [
-        "Designed lifecycle journeys, segmentation architecture and trigger-based campaigns for major brands.",
-        "Handled technical and strategic support across CRM, automation and email health.",
-        "Improved adoption by aligning client objectives with platform capabilities and best practices."
+        "Built omnichannel campaigns across email, SMS, onsite, in-app and push channels.",
+        "Merged online and offline behavior to create win-back, retention, loyalty and cart-abandonment automations.",
+        "Generated 600% ROI with AI-powered personalized push solutions and 288% ROI with web push.",
+        "Supported online sales growth with strong focus on mobile, landing pages and retargeting."
+      ]
+    },
+    {
+      "year": "01/2020 - 03/2021",
+      "company": "D&R ; idefix",
+      "brand": "Retail & Culture Commerce",
+      "role": "Digital Marketing Manager",
+      "location": "Istanbul, Turkey",
+      "logo": "/assets/logos/companies/d&r-logo.jpg",
+      "focus": "Owned the growth and CRM P&L while running experimentation, campaign planning and profitability-focused optimization.",
+      "meta": [
+        "2 direct reports",
+        "8-figure budget governance",
+        "SEO/SEM, paid media, CRM and mobile growth"
+      ],
+      "bullets": [
+        "Ran performance, CRM, SEO/SEM and CRO as one integrated growth program.",
+        "Won Felis Awards 2019, MIXX Awards 2020 and Social Media Awards Turkey 2020.",
+        "Designed LTV-informed targeting models and experimentation roadmaps to improve conversion and revenue.",
+        "Worked across HR, merchandising, IT and category teams to improve efficiency and contribution margin."
+      ]
+    },
+    {
+      "year": "03/2021 - 04/2022",
+      "company": "NAOS T?rkiye",
+      "brand": "BIODERMA / Institut Esthederm / Etat Pur",
+      "role": "Digital Marketing Manager ? NAOS",
+      "location": "Istanbul, Turkey",
+      "logo": "/assets/logos/companies/naos-logo.jpg",
+      "focus": "Built the digital marketing function from scratch and created the execution model for three brands.",
+      "meta": [
+        "6-person digital team",
+        "9-figure TRY budget",
+        "Performance, SEO/SEM, content and CRO"
+      ],
+      "bullets": [
+        "Defined roles, responsibilities and reporting standards for a newly formed digital team.",
+        "Led full-funnel performance across paid media, content and conversion optimization.",
+        "Built measurement foundations and optimization loops for sustainable growth.",
+        "Aligned digital investment logic with broader commercial priorities and marketplace execution."
+      ]
+    },
+    {
+      "year": "04/2022 - 04/2024",
+      "company": "NAOS T?rkiye",
+      "brand": "BIODERMA / Institut Esthederm / Etat Pur",
+      "role": "Digital Marketing and CRM Manager ? NAOS",
+      "location": "Istanbul, Turkey",
+      "logo": "/assets/logos/companies/naos-logo.jpg",
+      "focus": "Scaled a multi-brand operating model covering digital growth, CRM, lifecycle journeys and data activation.",
+      "meta": [
+        "10-person organization",
+        "9-figure TRY annual budget",
+        "Multi-brand growth and CRM governance"
+      ],
+      "bullets": [
+        "Scaled the digital marketing and CRM organization to 10 team members with clear governance and KPI rhythm.",
+        "Drove +20% user acquisition growth, +15% online interaction growth and 40% e-commerce sell-out growth.",
+        "Improved LTV by +69% and LTV/CAC by ~+60% through segmentation, prioritization and lifecycle design.",
+        "Launched integrated digital ecosystems across brand sites, D2C and app experiences.",
+        "Turned analytics and CRM signals into full-funnel growth strategies for multiple brands."
+      ]
+    },
+    {
+      "year": "04/2024 - Current",
+      "company": "NAOS Deutschland",
+      "brand": "BIODERMA",
+      "role": "Head of Digital ? NAOS",
+      "location": "Munich, Germany",
+      "logo": "/assets/logos/companies/naos-logo.jpg",
+      "focus": "Owns the end-to-end digital, analytics and AI agenda for Germany, connecting commercial growth with operating discipline.",
+      "meta": [
+        "8-figure EUR annual digital budget",
+        "Direct: 1 FTE + cross-functional squads",
+        "DACH transformation and executive stakeholder leadership"
+      ],
+      "bullets": [
+        "Delivered +35% e-commerce sell-out growth and +14pp contribution margin uplift through ROI-led planning and optimization.",
+        "Reduced OPEX by ~15-18% by simplifying operating model and partner setup.",
+        "Built executive systems for forecasting, scenario planning, pricing intelligence and performance governance.",
+        "Launched AI-enabled sales visit planning and a PIM-integrated GenAI product intelligence assistant.",
+        "Created privacy-aware, compliant AI workflows with Power Apps, Power Automate and role-based governance."
       ]
     }
   ],
