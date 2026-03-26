@@ -213,7 +213,7 @@ function getTimelineLogoSurfaceClass(company: string) {
   const normalized = company.toLowerCase();
   if (normalized.includes("lidyana")) return "bg-black";
   if (normalized.includes("8digits")) return "bg-[#31445f]";
-  if (normalized.includes("naos")) return "bg-[#0d2f4a]";
+  if (normalized.includes("naos")) return "bg-[#103654]";
   return "bg-white";
 }
 
@@ -547,7 +547,7 @@ export default function Home() {
   const buildProductCard = (product: (typeof aiProducts)[number], portrait: boolean) => ({
     key: product.title,
     content: (
-      <article className="portfolio-panel-light flex h-full min-h-[480px] flex-col">
+      <article className="portfolio-panel-light flex h-full min-h-[480px] flex-col transition duration-300 hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:hover:border-white/20 dark:hover:shadow-none">
         <div className="flex items-start justify-between gap-3">
           <div className="min-h-[6.5rem]">
             <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">{product.category}</p>
@@ -634,7 +634,7 @@ export default function Home() {
       toolClusters.map((cluster) => ({
         key: cluster.title,
         content: (
-          <div className="h-full rounded-[1.75rem] border border-[#dce7f9] bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
+          <div className="h-full rounded-[1.75rem] border border-[#dce7f9] bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:border-[#cadcf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none dark:hover:border-white/20 dark:hover:shadow-none">
             {getToolClusterVisual(cluster.title, theme === "dark")}
             <div className="mt-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4ff] text-[#2563eb] dark:bg-[#0f2530] dark:text-[#8cc8ff]">
               {getToolClusterIcon(cluster.title)}
@@ -659,7 +659,7 @@ export default function Home() {
       certifications.map((item) => ({
         key: item.title,
         content: (
-          <div className="h-full overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white shadow-[0_16px_34px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
+          <div className="h-full overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white shadow-[0_16px_34px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:border-[#cadcf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none dark:hover:border-white/20 dark:hover:shadow-none">
             <img src={item.image} alt={item.title} className="aspect-[4/2.2] w-full object-cover" />
             <div className="space-y-3 p-5">
               <h3 className="font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{item.title}</h3>
@@ -1176,7 +1176,7 @@ function Panel({ title, icon, children, dark }: { title: string; icon: ReactNode
 
 function ContactCard({ icon, label, value, href, dark }: { icon: ReactNode; label: string; value: string; href?: string; dark: boolean }) {
   const content = (
-    <div className={`flex min-w-[280px] items-center gap-4 rounded-[1.5rem] border p-5 ${dark ? "border-white/10 bg-[#102230]" : "border-[#dce7f9] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.05)]"}`}>
+    <div className={`flex min-w-[280px] items-center gap-4 rounded-[1.5rem] border p-5 transition hover:-translate-y-1 ${dark ? "border-white/10 bg-[#102230] hover:border-white/20" : "border-[#dce7f9] bg-white shadow-[0_12px_28px_rgba(15,23,42,0.05)] hover:border-[#cadcf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)]"}`}>
       <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${dark ? "bg-[#0f2530] text-[#8cc8ff]" : "bg-[#eef4ff] text-[#2563eb]"}`}>{icon}</div>
       <div>
         <div className={`text-xs font-bold uppercase tracking-[0.22em] ${dark ? "text-white/40" : "text-[#7a8699]"}`}>{label}</div>
@@ -1323,7 +1323,7 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
           observer.disconnect();
         }
       },
-      { threshold: 0.2 },
+      { threshold: 0.05, rootMargin: "0px 0px -10% 0px" },
     );
     observer.observe(node);
     return () => observer.disconnect();
@@ -1353,7 +1353,7 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
             <div className="relative flex h-[21rem] items-end justify-center pb-3">
               <div className="absolute inset-x-3 bottom-0 top-2 rounded-t-[1rem] border-x border-t border-dashed border-[#d5dfef] dark:border-white/10" />
               <div
-                className="relative z-10 w-[76%] self-end rounded-t-[2rem] rounded-b-[2rem] shadow-[0_18px_30px_rgba(15,23,42,0.10)] transition-all duration-1000 ease-out group-hover:-translate-y-1"
+                className="absolute bottom-0 z-10 w-[76%] rounded-t-[2rem] rounded-b-[2rem] shadow-[0_18px_30px_rgba(15,23,42,0.10)] transition-all duration-1000 ease-out group-hover:-translate-y-1"
                 style={{
                   height: visible ? `${normalizedHeight}px` : "0px",
                   backgroundColor: colors[index],
@@ -1465,17 +1465,19 @@ function Carousel({ cards }: { cards: CarouselCard[] }) {
   const [index, setIndex] = useState(0);
   const [perView, setPerView] = useState(1);
   const [visibleCards, setVisibleCards] = useState(1);
+  const dragStartX = useRef<number | null>(null);
+  const dragDeltaX = useRef(0);
 
   useEffect(() => {
     const update = () => {
       if (window.innerWidth >= 1280) {
-        setPerView(3.18);
+        setPerView(3.35);
         setVisibleCards(3);
       } else if (window.innerWidth >= 768) {
-        setPerView(2.18);
+        setPerView(2.32);
         setVisibleCards(2);
       } else {
-        setPerView(1.08);
+        setPerView(1.14);
         setVisibleCards(1);
       }
     };
@@ -1488,6 +1490,28 @@ function Carousel({ cards }: { cards: CarouselCard[] }) {
   const goPrev = () => setIndex((current) => Math.max(0, current - 1));
   const goNext = () => setIndex((current) => Math.min(maxIndex, current + 1));
 
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    dragStartX.current = event.clientX;
+    dragDeltaX.current = 0;
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (dragStartX.current === null) return;
+    dragDeltaX.current = event.clientX - dragStartX.current;
+  };
+
+  const handlePointerEnd = () => {
+    if (dragStartX.current === null) return;
+    const threshold = 50;
+    if (dragDeltaX.current <= -threshold) {
+      goNext();
+    } else if (dragDeltaX.current >= threshold) {
+      goPrev();
+    }
+    dragStartX.current = null;
+    dragDeltaX.current = 0;
+  };
+
   useEffect(() => {
     setIndex((current) => Math.min(current, maxIndex));
   }, [maxIndex]);
@@ -1498,7 +1522,15 @@ function Carousel({ cards }: { cards: CarouselCard[] }) {
         <CarouselArrow direction="left" onClick={goPrev} disabled={index === 0} />
         <CarouselArrow direction="right" onClick={goNext} disabled={index >= maxIndex} />
       </div>
-      <div className="overflow-hidden">
+      <div
+        className="overflow-hidden"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerEnd}
+        onPointerLeave={handlePointerEnd}
+        onPointerCancel={handlePointerEnd}
+        style={{ touchAction: "pan-y" }}
+      >
         <div
           className="flex items-stretch gap-4 transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * (100 / perView)}%)` }}
