@@ -11,6 +11,7 @@ import {
   Globe,
   GraduationCap,
   Languages,
+  Linkedin,
   Mail,
   MapPin,
   Moon,
@@ -147,6 +148,73 @@ function getAwardIcon(level: string) {
   if (level.toLowerCase().includes("winner")) return <Trophy size={18} />;
   if (level.toLowerCase().includes("silver")) return <BadgeCheck size={18} />;
   return <Trophy size={18} />;
+}
+
+function getToolClusterVisual(title: string, dark: boolean) {
+  const normalized = title.toLowerCase();
+  if (normalized.includes("performance")) {
+    return (
+      <div className={`relative h-32 overflow-hidden rounded-[1.3rem] ${dark ? "bg-[#17364a]" : "bg-[linear-gradient(135deg,#eff6ff_0%,#dbeafe_100%)]"}`}>
+        <div className="absolute inset-x-5 bottom-5 flex items-end gap-3">
+          <div className="h-12 w-10 rounded-t-[1rem] bg-[#2563eb]" />
+          <div className="h-20 w-10 rounded-t-[1rem] bg-[#0ea5e9]" />
+          <div className="h-16 w-10 rounded-t-[1rem] bg-[#22c55e]" />
+          <div className="h-24 w-10 rounded-t-[1rem] bg-[#f59e0b]" />
+        </div>
+      </div>
+    );
+  }
+  if (normalized.includes("analytics") || normalized.includes("bi")) {
+    return (
+      <div className={`relative h-32 overflow-hidden rounded-[1.3rem] ${dark ? "bg-[#17364a]" : "bg-[linear-gradient(135deg,#eff6ff_0%,#e0f2fe_100%)]"}`}>
+        <div className="absolute inset-x-3 bottom-5 top-5 rounded-[1rem] border border-dashed border-[#93c5fd]" />
+        <div className="absolute inset-x-8 bottom-9 h-1 rounded-full bg-[#bfdbfe]" />
+        <div className="absolute bottom-9 left-10 h-12 w-10 rounded-t-[1rem] bg-[#2563eb]" />
+        <div className="absolute bottom-9 left-24 h-20 w-10 rounded-t-[1rem] bg-[#38bdf8]" />
+        <div className="absolute bottom-9 left-38 h-16 w-10 rounded-t-[1rem] bg-[#14b8a6]" />
+        <div className="absolute right-10 top-9 h-16 w-16 rounded-full border-4 border-[#2563eb]/25 border-t-[#2563eb]" />
+      </div>
+    );
+  }
+  if (normalized.includes("crm")) {
+    return (
+      <div className={`relative h-32 overflow-hidden rounded-[1.3rem] ${dark ? "bg-[#17364a]" : "bg-[linear-gradient(135deg,#f0fdf4_0%,#dcfce7_100%)]"}`}>
+        <div className="absolute left-6 top-7 h-16 w-16 rounded-2xl bg-white/90 shadow-sm" />
+        <div className="absolute right-6 top-7 h-16 w-16 rounded-2xl bg-white/90 shadow-sm" />
+        <div className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#22c55e]" />
+        <div className="absolute left-[5.5rem] top-[3.9rem] h-1 w-20 bg-[#86efac]" />
+        <div className="absolute right-[5.5rem] top-[3.9rem] h-1 w-20 bg-[#86efac]" />
+      </div>
+    );
+  }
+  if (normalized.includes("market intelligence")) {
+    return (
+      <div className={`relative h-32 overflow-hidden rounded-[1.3rem] ${dark ? "bg-[#17364a]" : "bg-[linear-gradient(135deg,#fff7ed_0%,#ffedd5_100%)]"}`}>
+        <div className="absolute left-8 top-8 h-16 w-16 rounded-full border-[10px] border-[#fb923c]" />
+        <div className="absolute left-[5.5rem] top-[4.8rem] h-10 w-2 rotate-45 rounded-full bg-[#fb923c]" />
+        <div className="absolute right-8 top-8 rounded-[1rem] bg-white/90 px-4 py-3 text-sm font-bold text-[#9a3412]">Retail</div>
+        <div className="absolute right-8 bottom-8 rounded-[1rem] bg-white/90 px-4 py-3 text-sm font-bold text-[#9a3412]">Benchmark</div>
+      </div>
+    );
+  }
+  return (
+    <div className={`relative h-32 overflow-hidden rounded-[1.3rem] ${dark ? "bg-[#17364a]" : "bg-[linear-gradient(135deg,#f8fafc_0%,#e2e8f0_100%)]"}`}>
+      <div className="absolute left-6 top-8 right-6 grid grid-cols-3 gap-3">
+        <div className="h-12 rounded-2xl bg-white/90" />
+        <div className="h-12 rounded-2xl bg-white/90" />
+        <div className="h-12 rounded-2xl bg-white/90" />
+      </div>
+      <div className="absolute left-6 right-6 bottom-7 h-4 rounded-full bg-white/75" />
+    </div>
+  );
+}
+
+function getTimelineLogoSurfaceClass(company: string) {
+  const normalized = company.toLowerCase();
+  if (normalized.includes("lidyana")) return "bg-black";
+  if (normalized.includes("8digits")) return "bg-[#31445f]";
+  if (normalized.includes("naos")) return "bg-[#0d2f4a]";
+  return "bg-white";
 }
 
 const translations = {
@@ -462,7 +530,7 @@ export default function Home() {
       if (!node) return;
       const rect = node.getBoundingClientRect();
       const viewport = window.innerHeight;
-      const raw = (viewport * 0.82 - rect.top) / (rect.height * 0.7);
+      const raw = (viewport * 0.88 - rect.top) / (rect.height * 1.25);
       const clamped = Math.max(0, Math.min(1, raw));
       setJourneyProgress(clamped);
     };
@@ -567,7 +635,8 @@ export default function Home() {
         key: cluster.title,
         content: (
           <div className="h-full rounded-[1.75rem] border border-[#dce7f9] bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4ff] text-[#2563eb] dark:bg-[#0f2530] dark:text-[#8cc8ff]">
+            {getToolClusterVisual(cluster.title, theme === "dark")}
+            <div className="mt-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4ff] text-[#2563eb] dark:bg-[#0f2530] dark:text-[#8cc8ff]">
               {getToolClusterIcon(cluster.title)}
             </div>
             <h3 className="mt-4 font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{cluster.title}</h3>
@@ -582,7 +651,7 @@ export default function Home() {
           </div>
         ),
       })),
-    [toolClusters],
+    [toolClusters, theme],
   );
 
   const certificationCards = useMemo<CarouselCard[]>(
@@ -808,10 +877,10 @@ export default function Home() {
             <SectionHeading eyebrow={t.journeyEyebrow} title={t.journeyTitle} dark={false} />
             <div className="rounded-[2rem] border border-[#dce7f9] bg-white p-5 shadow-[0_20px_55px_rgba(15,23,42,0.06)] sm:p-6 lg:p-8">
               <div className="relative overflow-hidden px-2 pt-4 pb-3 sm:px-4 lg:px-6">
-                <div className="absolute left-6 right-6 top-[7.05rem] h-1 rounded-full bg-[#d8e6ff] sm:left-8 sm:right-8 lg:left-10 lg:right-10" />
-                <div className="absolute left-6 right-6 top-[7.05rem] h-1 overflow-hidden rounded-full sm:left-8 sm:right-8 lg:left-10 lg:right-10">
+                <div className="absolute left-6 right-6 top-[8.9rem] h-1 rounded-full bg-[#d8e6ff] sm:left-8 sm:right-8 lg:left-10 lg:right-10" />
+                <div className="absolute left-6 right-6 top-[8.9rem] h-1 overflow-hidden rounded-full sm:left-8 sm:right-8 lg:left-10 lg:right-10">
                   <div
-                    className="h-full rounded-full bg-[linear-gradient(90deg,#2563eb_0%,#60a5fa_100%)] transition-[width] duration-300 ease-out"
+                    className="h-full rounded-full bg-[linear-gradient(90deg,#2563eb_0%,#60a5fa_100%)] transition-[width] duration-[1400ms] ease-out"
                     style={{ width: `${journeyProgress * 100}%` }}
                   />
                 </div>
@@ -827,13 +896,15 @@ export default function Home() {
                         key={`${item.year}-${item.company}`}
                         type="button"
                         onClick={() => setExperienceModal(item)}
-                        className="flex min-w-0 flex-col items-center text-center"
+                        className="group flex min-w-0 flex-col items-center text-center"
                       >
                         <div className={`min-h-[96px] text-sm font-bold leading-tight sm:min-h-[88px] sm:text-[0.95rem] lg:text-[1.02rem] ${isHighlighted ? "text-[#0f172a]" : "text-[#4b5b72]"}`}>
                           {item.role}
                         </div>
-                        <div className={`relative z-10 mt-3 flex h-[68px] w-[68px] items-center justify-center rounded-full border-[6px] bg-white shadow-[0_14px_26px_rgba(15,23,42,0.12)] transition-all duration-300 sm:h-[74px] sm:w-[74px] lg:h-[82px] lg:w-[82px] ${isHighlighted ? "scale-[1.08] border-[#cfe1ff]" : "border-[#eef3fa]"}`}>
-                          <img src={item.logo} alt={item.company} className="max-h-[36px] max-w-[36px] object-contain sm:max-h-[40px] sm:max-w-[40px] lg:max-h-[44px] lg:max-w-[44px]" />
+                        <div className={`relative z-10 mt-3 flex h-[68px] w-[68px] items-center justify-center rounded-full border-[6px] bg-white shadow-[0_14px_26px_rgba(15,23,42,0.12)] transition-all duration-500 group-hover:scale-[1.12] group-hover:animate-pulse sm:h-[74px] sm:w-[74px] lg:h-[82px] lg:w-[82px] ${isHighlighted ? "scale-[1.08] border-[#cfe1ff]" : "border-[#eef3fa]"}`}>
+                          <div className={`flex h-[44px] w-[44px] items-center justify-center rounded-[0.35rem] sm:h-[48px] sm:w-[48px] lg:h-[52px] lg:w-[52px] ${getTimelineLogoSurfaceClass(item.company)}`}>
+                            <img src={item.logo} alt={item.company} className="max-h-[34px] max-w-[34px] object-contain sm:max-h-[36px] sm:max-w-[36px] lg:max-h-[40px] lg:max-w-[40px]" />
+                          </div>
                         </div>
                         <div className={`mt-4 min-h-[2.5rem] text-base font-medium sm:text-[1.05rem] lg:text-lg ${isHighlighted ? "text-[#0f172a]" : "text-[#66768e]"}`}>
                           {getTimelineDisplayDate(item.year)}
@@ -949,8 +1020,9 @@ export default function Home() {
               <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.speakingTitle}</h3>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {speaking.map((item) => (
-                  <Reveal key={`${item.title}-${item.org}`}>
-                    <a href={item.url} target="_blank" rel="noreferrer" className="block rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 transition hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_16px_30px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none">
+                  <Reveal key={`${item.title}-${item.org}`} className="h-full">
+                    <a href={item.url} target="_blank" rel="noreferrer" className="block h-full rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 transition hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_16px_30px_rgba(15,23,42,0.07)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none">
+                      <div className="flex h-full min-h-[20rem] flex-col">
                       <div className="flex items-start gap-4">
                         <div className="flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center rounded-[1.25rem] bg-white p-3 dark:bg-white/90">
                           <img src={item.logo} alt={item.org} className="max-h-full max-w-full object-contain" />
@@ -960,6 +1032,7 @@ export default function Home() {
                           <h4 className="mt-3 font-['Space_Grotesk'] text-xl font-bold text-[#0f172a] dark:text-white">{item.org}</h4>
                           <p className="mt-3 text-sm leading-7 text-[#556273] dark:text-white/72">{item.detail}</p>
                         </div>
+                      </div>
                       </div>
                     </a>
                   </Reveal>
@@ -987,12 +1060,12 @@ export default function Home() {
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
             <div className="space-y-5">
               <div className="inline-flex rounded-full border border-[#d8e6ff] bg-[#eef4ff] px-3 py-1 text-xs font-bold uppercase tracking-[0.22em] text-[#2563eb] dark:border-[#163243] dark:bg-[#0f2530] dark:text-[#8cc8ff]">{t.contactEyebrow}</div>
-              <h2 className="max-w-3xl font-['Space_Grotesk'] text-[2.2rem] font-bold text-[#0f172a] dark:text-white sm:text-[2.8rem]">{t.contactTitle}</h2>
-              <p className="max-w-2xl text-[1rem] leading-8 text-[#556273] dark:text-white/72">{t.contactBody}</p>
+              <h2 className="max-w-5xl font-['Space_Grotesk'] text-[2.2rem] font-bold leading-tight text-[#0f172a] dark:text-white sm:text-[2.8rem] lg:text-[4rem]">{t.contactTitle}</h2>
+              <p className="max-w-4xl text-[1.02rem] font-normal leading-8 text-[#5b667b] dark:text-white/68">{t.contactBody}</p>
             </div>
             <div className="grid gap-4">
               <ContactCard icon={<Mail size={18} />} label="Email" value={personalInfo.email} href={`mailto:${personalInfo.email}`} dark={theme === "dark"} />
-              <ContactCard icon={<MapPin size={18} />} label="Location" value="Munich, Germany" dark={theme === "dark"} />
+              <ContactCard icon={<Linkedin size={18} />} label="LinkedIn" value="/ibrahim-tolgar-sasmaz" href={personalInfo.linkedin} dark={theme === "dark"} />
               <ContactCard icon={<Globe size={18} />} label="Website" value="sasmaz.digital" href="https://www.sasmaz.digital" dark={theme === "dark"} />
             </div>
           </div>
@@ -1256,31 +1329,31 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
     return () => observer.disconnect();
   }, []);
 
-  const chartHeight = 360;
+  const chartHeight = 280;
 
   return (
     <div ref={ref} className="grid grid-cols-6 items-end gap-3 pt-4 sm:gap-4">
       {labels.map((label, index) => {
         const isActive = activeIndex === index;
-        const normalizedHeight = Math.max((values[index] / 70) * chartHeight, 120);
+        const normalizedHeight = Math.max((values[index] / 70) * chartHeight, 86);
         return (
           <button
             key={label}
             type="button"
             onMouseEnter={() => setActiveIndex(index)}
             onFocus={() => setActiveIndex(index)}
-            className="group relative flex h-[30rem] flex-col justify-end text-center"
+            className="group relative flex h-[26rem] flex-col justify-end text-center"
           >
             {isActive ? (
-              <div className={`absolute left-1/2 top-6 z-10 min-w-[10rem] -translate-x-1/2 rounded-[1.4rem] border px-5 py-4 text-left shadow-xl ${dark ? "border-white/10 bg-[#102230] text-white" : "border-[#e4ecf8] bg-white text-[#0f172a]"}`}>
+              <div className={`absolute left-1/2 top-3 z-10 min-w-[10rem] -translate-x-1/2 rounded-[1.4rem] border px-5 py-4 text-left shadow-xl ${dark ? "border-white/10 bg-[#102230] text-white" : "border-[#e4ecf8] bg-white text-[#0f172a]"}`}>
                 <div className="font-['Space_Grotesk'] text-lg font-bold leading-tight">{label}</div>
                 <div className="mt-1 text-2xl font-bold text-[#2563eb]">{`+${values[index]}%`}</div>
               </div>
             ) : null}
-            <div className="relative flex h-[24rem] items-end justify-center">
-              <div className="absolute inset-x-3 bottom-[3.8rem] top-2 rounded-t-[1rem] border-x border-t border-dashed border-[#d5dfef] dark:border-white/10" />
+            <div className="relative flex h-[21rem] items-end justify-center pb-3">
+              <div className="absolute inset-x-3 bottom-0 top-2 rounded-t-[1rem] border-x border-t border-dashed border-[#d5dfef] dark:border-white/10" />
               <div
-                className="relative z-10 w-[78%] rounded-t-[2rem] rounded-b-[2rem] shadow-[0_18px_30px_rgba(15,23,42,0.10)] transition-all duration-700 ease-out group-hover:-translate-y-1"
+                className="relative z-10 w-[76%] self-end rounded-t-[2rem] rounded-b-[2rem] shadow-[0_18px_30px_rgba(15,23,42,0.10)] transition-all duration-1000 ease-out group-hover:-translate-y-1"
                 style={{
                   height: visible ? `${normalizedHeight}px` : "0px",
                   backgroundColor: colors[index],
@@ -1391,15 +1464,19 @@ function RadarChart({ skills, dark }: { skills: ReadonlyArray<{ readonly label: 
 function Carousel({ cards }: { cards: CarouselCard[] }) {
   const [index, setIndex] = useState(0);
   const [perView, setPerView] = useState(1);
+  const [visibleCards, setVisibleCards] = useState(1);
 
   useEffect(() => {
     const update = () => {
       if (window.innerWidth >= 1280) {
-        setPerView(3);
+        setPerView(3.18);
+        setVisibleCards(3);
       } else if (window.innerWidth >= 768) {
-        setPerView(2);
+        setPerView(2.18);
+        setVisibleCards(2);
       } else {
-        setPerView(1);
+        setPerView(1.08);
+        setVisibleCards(1);
       }
     };
     update();
@@ -1407,7 +1484,7 @@ function Carousel({ cards }: { cards: CarouselCard[] }) {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const maxIndex = Math.max(0, cards.length - perView);
+  const maxIndex = Math.max(0, cards.length - visibleCards);
   const goPrev = () => setIndex((current) => Math.max(0, current - 1));
   const goNext = () => setIndex((current) => Math.min(maxIndex, current + 1));
 
@@ -1423,11 +1500,11 @@ function Carousel({ cards }: { cards: CarouselCard[] }) {
       </div>
       <div className="overflow-hidden">
         <div
-          className="flex items-stretch transition-transform duration-500 ease-out"
+          className="flex items-stretch gap-4 transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * (100 / perView)}%)` }}
         >
           {cards.map((card) => (
-            <div key={card.key} className="w-full shrink-0 px-2" style={{ flexBasis: `${100 / perView}%` }}>
+            <div key={card.key} className="w-full shrink-0" style={{ flexBasis: `${100 / perView}%` }}>
               <div className="h-full">{card.content}</div>
             </div>
           ))}
