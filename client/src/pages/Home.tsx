@@ -217,6 +217,14 @@ function getTimelineLogoSurfaceClass(company: string) {
   return "bg-white";
 }
 
+function getTimelineNodeClass(company: string) {
+  const normalized = company.toLowerCase();
+  if (normalized.includes("lidyana")) return "bg-black";
+  if (normalized.includes("8digits")) return "bg-[#31445f]";
+  if (normalized.includes("naos")) return "bg-[#103654]";
+  return "bg-white";
+}
+
 const translations = {
   en: {
     nav: {
@@ -901,7 +909,7 @@ export default function Home() {
                         <div className={`min-h-[96px] text-sm font-bold leading-tight sm:min-h-[88px] sm:text-[0.95rem] lg:text-[1.02rem] ${isHighlighted ? "text-[#0f172a]" : "text-[#4b5b72]"}`}>
                           {item.role}
                         </div>
-                        <div className={`relative z-10 mt-3 flex h-[68px] w-[68px] items-center justify-center rounded-full border-[6px] bg-white shadow-[0_14px_26px_rgba(15,23,42,0.12)] transition-all duration-500 group-hover:scale-[1.12] group-hover:animate-pulse sm:h-[74px] sm:w-[74px] lg:h-[82px] lg:w-[82px] ${isHighlighted ? "scale-[1.08] border-[#cfe1ff]" : "border-[#eef3fa]"}`}>
+                        <div className={`relative z-10 mt-3 flex h-[68px] w-[68px] items-center justify-center rounded-full border-[6px] shadow-[0_14px_26px_rgba(15,23,42,0.12)] transition-all duration-500 group-hover:scale-[1.12] group-hover:animate-pulse sm:h-[74px] sm:w-[74px] lg:h-[82px] lg:w-[82px] ${getTimelineNodeClass(item.company)} ${isHighlighted ? "scale-[1.08] border-[#cfe1ff]" : "border-[#eef3fa]"}`}>
                           <div className={`flex h-[44px] w-[44px] items-center justify-center rounded-[0.35rem] sm:h-[48px] sm:w-[48px] lg:h-[52px] lg:w-[52px] ${getTimelineLogoSurfaceClass(item.company)}`}>
                             <img src={item.logo} alt={item.company} className="max-h-[34px] max-w-[34px] object-contain sm:max-h-[36px] sm:max-w-[36px] lg:max-h-[40px] lg:max-w-[40px]" />
                           </div>
@@ -963,17 +971,15 @@ export default function Home() {
           <SectionHeading title={portfolioSection.eyebrow} description={portfolioSection.title} dark={theme === "dark"} />
           <div className="space-y-12">
             <div>
-              <h3 className="mb-4 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.vibeCodingTitle ?? "Vibe Coding"}</h3>
+              <SubsectionHeader title={t.vibeCodingTitle ?? "Vibe Coding"} dark={theme === "dark"} />
               <Carousel cards={vibeCards} />
             </div>
             <div>
-              <h3 className="mb-2 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.powerAppsTitle ?? "Power Apps"}</h3>
-              <p className="mb-6 max-w-4xl text-[1rem] leading-7 text-[#5b667b] dark:text-white/80">{t.powerAppsSubtitle ?? ""}</p>
+              <SubsectionHeader title={t.powerAppsTitle ?? "Power Apps"} description={t.powerAppsSubtitle ?? ""} dark={theme === "dark"} />
               <Carousel cards={powerAppCards} />
             </div>
             <div>
-              <h3 className="mb-2 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.videoTitle}</h3>
-              <p className="mb-6 max-w-4xl text-[1rem] leading-7 text-[#5b667b] dark:text-white/80">{t.videoSubtitle}</p>
+              <SubsectionHeader title={t.videoTitle} description={t.videoSubtitle} dark={theme === "dark"} />
               <Carousel cards={videoCards} />
             </div>
           </div>
@@ -983,7 +989,7 @@ export default function Home() {
           <div className="mx-auto max-w-7xl space-y-16 px-4 sm:px-6 lg:px-8">
             <SectionHeading title={t.workEyebrow} description={t.workTitle} dark={theme === "dark"} />
             <div>
-              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.awardsTitle ?? "Awards"}</h3>
+              <SubsectionHeader title={t.awardsTitle ?? "Awards"} dark={theme === "dark"} />
               <div className="grid gap-4 lg:grid-cols-3">
                 {awards.map((award) => (
                   <Reveal key={award.title} className="rounded-[1.75rem] border border-[#dce7f9] bg-[#fbfdff] p-6 shadow-[0_16px_30px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-[#102230] dark:shadow-none">
@@ -999,7 +1005,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.caseStudiesTitle ?? "Selected Case Studies"}</h3>
+              <SubsectionHeader title={t.caseStudiesTitle ?? "Selected Case Studies"} dark={theme === "dark"} />
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {caseStudies.map((study) => (
                   <Reveal key={study.brand}>
@@ -1017,7 +1023,7 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{t.speakingTitle}</h3>
+              <SubsectionHeader title={t.speakingTitle} dark={theme === "dark"} />
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {speaking.map((item) => (
                   <Reveal key={`${item.title}-${item.org}`} className="h-full">
@@ -1046,11 +1052,11 @@ export default function Home() {
           <div className="mx-auto max-w-7xl space-y-14 px-4 sm:px-6 lg:px-8">
             <SectionHeading title={competenciesSection.eyebrow} description={competenciesSection.title} dark={theme === "dark"} />
             <div>
-              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{competenciesSection.technologyStack}</h3>
+              <SubsectionHeader title={competenciesSection.technologyStack} dark={theme === "dark"} />
               <Carousel cards={toolCards} />
             </div>
             <div>
-              <h3 className="mb-5 font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{competenciesSection.advancedCertifications}</h3>
+              <SubsectionHeader title={competenciesSection.advancedCertifications} dark={theme === "dark"} />
               <Carousel cards={certificationCards} />
             </div>
           </div>
@@ -1159,6 +1165,23 @@ function SectionHeading({
       <h2 className={`max-w-5xl font-['Space_Grotesk'] text-[2.2rem] font-bold leading-tight sm:text-[2.8rem] lg:text-[4rem] ${dark ? "text-white" : "text-[#0f172a]"}`}>{title}</h2>
       {description ? <p className={`max-w-4xl text-[1.02rem] font-normal leading-8 ${dark ? "text-white/68" : "text-[#5b667b]"}`}>{description}</p> : null}
     </Reveal>
+  );
+}
+
+function SubsectionHeader({
+  title,
+  description,
+  dark,
+}: {
+  title: string;
+  description?: string;
+  dark: boolean;
+}) {
+  return (
+    <div className="mb-6 space-y-2">
+      <h3 className={`font-['Space_Grotesk'] text-[2rem] font-bold leading-tight ${dark ? "text-white" : "text-[#0f172a]"}`}>{title}</h3>
+      {description ? <p className={`max-w-4xl text-[1.02rem] font-normal leading-8 ${dark ? "text-white/68" : "text-[#5b667b]"}`}>{description}</p> : null}
+    </div>
   );
 }
 
@@ -1329,20 +1352,20 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
     return () => observer.disconnect();
   }, []);
 
-  const chartHeight = 280;
+  const chartHeight = 290;
 
   return (
     <div ref={ref} className="grid grid-cols-6 items-end gap-3 pt-4 sm:gap-4">
       {labels.map((label, index) => {
         const isActive = activeIndex === index;
-        const normalizedHeight = Math.max((values[index] / 70) * chartHeight, 86);
+        const normalizedHeight = Math.max((values[index] / 70) * chartHeight, 92);
         return (
-          <button
+          <div
             key={label}
-            type="button"
             onMouseEnter={() => setActiveIndex(index)}
             onFocus={() => setActiveIndex(index)}
-            className="group relative flex h-[26rem] flex-col justify-end text-center"
+            className="group relative flex h-[27rem] flex-col justify-end text-center"
+            tabIndex={0}
           >
             {isActive ? (
               <div className={`absolute left-1/2 top-3 z-10 min-w-[10rem] -translate-x-1/2 rounded-[1.4rem] border px-5 py-4 text-left shadow-xl ${dark ? "border-white/10 bg-[#102230] text-white" : "border-[#e4ecf8] bg-white text-[#0f172a]"}`}>
@@ -1350,10 +1373,10 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
                 <div className="mt-1 text-2xl font-bold text-[#2563eb]">{`+${values[index]}%`}</div>
               </div>
             ) : null}
-            <div className="relative flex h-[21rem] items-end justify-center pb-3">
+            <div className="relative flex h-[22rem] items-end justify-center">
               <div className="absolute inset-x-3 bottom-0 top-2 rounded-t-[1rem] border-x border-t border-dashed border-[#d5dfef] dark:border-white/10" />
               <div
-                className="absolute bottom-0 z-10 w-[76%] rounded-t-[2rem] rounded-b-[2rem] shadow-[0_18px_30px_rgba(15,23,42,0.10)] transition-all duration-1000 ease-out group-hover:-translate-y-1"
+                className="relative z-10 mt-auto w-[76%] rounded-t-[2rem] shadow-[0_18px_30px_rgba(15,23,42,0.10)] transition-all duration-1000 ease-out group-hover:-translate-y-1"
                 style={{
                   height: visible ? `${normalizedHeight}px` : "0px",
                   backgroundColor: colors[index],
@@ -1362,7 +1385,7 @@ function ImpactChart({ labels, values, dark }: { labels: readonly string[]; valu
               />
             </div>
             <div className={`mt-4 text-sm leading-5 sm:text-[0.95rem] ${dark ? "text-white/72" : "text-[#5f6d83]"}`}>{label}</div>
-          </button>
+          </div>
         );
       })}
     </div>
