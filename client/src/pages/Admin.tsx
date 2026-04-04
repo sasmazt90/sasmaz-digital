@@ -12,6 +12,7 @@ type PortfolioKey = keyof PortfolioData;
 type SiteKey = keyof SiteContent;
 type DraftKey = `${SourceKind}:${string}`;
 type ViewMode = "form" | "json";
+const ADMIN_SESSION_KEY = "portfolio-admin-authenticated";
 
 interface SectionDescriptor {
   draftKey: DraftKey;
@@ -208,10 +209,17 @@ export default function Admin() {
     ...toDrafts("site", site.siteContent as Record<string, unknown>),
   });
   const [password, setPassword] = useState("");
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [savingKey, setSavingKey] = useState<DraftKey | "all" | null>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [viewModes, setViewModes] = useState<Record<DraftKey, ViewMode>>({} as Record<DraftKey, ViewMode>);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setIsUnlocked(window.sessionStorage.getItem(ADMIN_SESSION_KEY) === "true");
+  }, []);
 
   useEffect(() => {
     setDrafts({
@@ -252,6 +260,93 @@ export default function Admin() {
       throw new Error(body?.error || `Save failed (${response.status})`);
     }
   };
+
+  const handleUnlock = async () => {
+    setIsAuthenticating(true);
+    setSaveError(null);
+    setStatus(null);
+
+    try {
+      const response = await fetch("/api/admin/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (!response.ok) {
+        const body = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(body?.error || `Authentication failed (${response.status})`);
+      }
+
+      if (typeof window !== "undefined") {
+        window.sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
+      }
+
+      setIsUnlocked(true);
+      setStatus("Admin access granted.");
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : "Failed to verify admin password.");
+    } finally {
+      setIsAuthenticating(false);
+    }
+  };
+
+  if (!isUnlocked) {
+    return (
+      <div className="min-h-screen bg-slate-950 text-slate-100">
+        <div className="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+          <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-black/20 backdrop-blur">
+            <div className="mb-6 space-y-3 text-center">
+              <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-semibold text-amber-200">
+                <Shield size={14} />
+                Protected Admin Area
+              </div>
+              <div>
+                <h1 className="font-['Space_Grotesk'] text-3xl font-bold">Admin Login</h1>
+                <p className="mt-2 text-sm text-slate-300">
+                  Bu sayfayi acmadan once admin sifresi girilmelidir.
+                </p>
+              </div>
+            </div>
+
+            <form
+              className="space-y-4"
+              onSubmit={(event) => {
+                event.preventDefault();
+                void handleUnlock();
+              }}
+            >
+              <label className="block space-y-2">
+                <span className="text-sm font-medium text-slate-200">Sifre</span>
+                <Input
+                  type="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  placeholder="Admin password"
+                  className="bg-slate-950/70"
+                />
+              </label>
+
+              {saveError ? <p className="text-sm text-rose-300">{saveError}</p> : null}
+
+              <Button type="submit" className="w-full" disabled={!password || isAuthenticating}>
+                <Shield size={16} />
+                {isAuthenticating ? "Kontrol ediliyor..." : "Giris yap"}
+              </Button>
+
+              <div className="text-center">
+                <Link href="/" className="text-sm text-slate-400 transition hover:text-white">
+                  Siteye don
+                </Link>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const saveSection = async (section: SectionDescriptor) => {
     setSaveError(null);

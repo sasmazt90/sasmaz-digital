@@ -12,7 +12,7 @@ async function startServer() {
   const server = createServer(app);
   const dataPath = path.resolve(__dirname, "..", "data", "portfolio.json");
   const siteContentPath = path.resolve(__dirname, "..", "data", "site-content.json");
-  const adminPassword = process.env.ADMIN_PASSWORD;
+  const adminPassword = process.env.ADMIN_PASSWORD ?? "7@yEwapu";
 
   const productionStaticPath = path.resolve(__dirname, "public");
   const developmentStaticPath = path.resolve(__dirname, "..", "dist", "public");
@@ -47,6 +47,18 @@ async function startServer() {
   app.use(express.static(staticPath));
 
   app.get("/healthz", (_req, res) => {
+    res.json({ ok: true });
+  });
+
+  app.post("/api/admin/auth", (req, res) => {
+    const providedPassword =
+      typeof req.body?.password === "string" ? req.body.password : req.header("x-admin-password");
+
+    if (providedPassword !== adminPassword) {
+      res.status(401).json({ error: "Unauthorized. Provide a valid admin password." });
+      return;
+    }
+
     res.json({ ok: true });
   });
 

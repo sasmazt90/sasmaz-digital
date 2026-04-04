@@ -7,7 +7,7 @@ export const personalInfo = {
   title: 'Head of Digital | AI Transformation Leader',
   location: 'Munich, Germany',
   email: 'tolgar@sasmaz.digital',
-  phone: '+49 151 24107365',
+  phone: '+4915511486576',
   website: 'https://sasmaz.digital',
   linkedin: 'https://linkedin.com/in/ibrahim-tolgar-sasmaz',
   profilePhoto: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/profile-picture_55e611b5.jpeg',
