@@ -566,7 +566,11 @@ export default function Home() {
         </div>
         {product.image ? (
           <div className={`mt-5 overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "h-[360px]" : "h-[250px]"}`}>
-            <img src={product.image} alt={product.title} className={`${portrait ? "aspect-[4/5]" : "aspect-[16/10]"} w-full object-cover object-top`} />
+            <img
+              src={product.image}
+              alt={product.title}
+              className={`${portrait ? "aspect-[4/5]" : "aspect-[16/10]"} w-full object-cover ${product.title === "DIGITAL GROWTH ENGINE" ? "object-left-top" : "object-top"}`}
+            />
           </div>
         ) : (
           <div className="mt-5 flex h-[250px] items-center rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/78">
