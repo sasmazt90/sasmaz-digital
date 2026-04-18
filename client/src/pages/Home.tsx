@@ -30,6 +30,7 @@ type ThemeMode = "light" | "dark";
 type MediaModal =
   | { type: "youtube"; url: string; title: string }
   | { type: "video"; url: string; title: string }
+  | { type: "detail"; title: string; image?: string; body: string[] }
   | null;
 
 type ExperienceModal = TimelineItem | null;
@@ -587,14 +588,35 @@ export default function Home() {
           {product.video ? (
             <button
               type="button"
-              onClick={() => setMediaModal({ type: "video", url: product.video!, title: product.title })}
+              onClick={() =>
+                setMediaModal({
+                  type: product.videoType === "youtube" ? "youtube" : "video",
+                  url: product.video!,
+                  title: product.title,
+                })
+              }
               className="inline-flex items-center gap-2 rounded-full bg-[#2563eb] px-4 py-2.5 text-sm font-bold text-white"
             >
               <Play size={15} />
               {t.watchWalkthrough}
             </button>
           ) : null}
-          {product.url && !product.confidential ? (
+          {product.detailBody?.length ? (
+            <button
+              type="button"
+              onClick={() =>
+                setMediaModal({
+                  type: "detail",
+                  title: product.title,
+                  image: product.image,
+                  body: product.detailBody,
+                })
+              }
+              className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/8 dark:text-white"
+            >
+              {product.detailLabel ?? t.openLive}
+            </button>
+          ) : product.url && !product.confidential ? (
             <a href={product.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/8 dark:text-white">
               {t.openLive}
             </a>
@@ -604,9 +626,15 @@ export default function Home() {
     ),
   });
 
-  const vibeCards = useMemo<CarouselCard[]>(() => aiProducts.slice(0, 4).map((product) => buildProductCard(product, true)), [aiProducts, t.openLive, t.watchWalkthrough]);
+  const vibeCards = useMemo<CarouselCard[]>(
+    () => aiProducts.filter((product) => !product.confidential).map((product) => buildProductCard(product, true)),
+    [aiProducts, t.openLive, t.watchWalkthrough],
+  );
 
-  const powerAppCards = useMemo<CarouselCard[]>(() => aiProducts.slice(4).map((product) => buildProductCard(product, false)), [aiProducts, t.openLive, t.watchWalkthrough]);
+  const powerAppCards = useMemo<CarouselCard[]>(
+    () => aiProducts.filter((product) => product.confidential).map((product) => buildProductCard(product, false)),
+    [aiProducts, t.openLive, t.watchWalkthrough],
+  );
 
   const videoCards = useMemo<CarouselCard[]>(
     () =>
@@ -1094,9 +1122,24 @@ export default function Home() {
             <div className="border-b border-white/8 px-6 py-5 pr-16">
               <h3 className="font-['Space_Grotesk'] text-2xl font-bold text-white">{mediaModal.title}</h3>
             </div>
-            <div className="aspect-video w-full bg-black">
+            <div className={mediaModal.type === "detail" ? "max-h-[calc(90vh-6rem)] overflow-y-auto bg-[#041118]" : "aspect-video w-full bg-black"}>
               {mediaModal.type === "youtube" ? (
                 <iframe src={toYoutubeEmbed(mediaModal.url)} title={mediaModal.title} className="h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              ) : mediaModal.type === "detail" ? (
+                <div className="p-6 sm:p-8">
+                  {mediaModal.image ? (
+                    <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5">
+                      <img src={mediaModal.image} alt={mediaModal.title} className="max-h-[26rem] w-full object-cover object-top" />
+                    </div>
+                  ) : null}
+                  <div className="mt-6 space-y-5">
+                    {mediaModal.body.map((paragraph) => (
+                      <p key={paragraph} className="text-[1.02rem] leading-8 text-white/84">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
               ) : (
                 <video src={mediaModal.url} controls autoPlay className="h-full w-full" />
               )}

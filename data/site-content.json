@@ -199,6 +199,28 @@
   ],
   "aiProducts": [
     {
+      "title": "DIGITAL GROWTH ENGINE",
+      "category": "AI-Powered Growth Operating System",
+      "image": "/assets/apps/images/digital-growth-engine.png",
+      "video": "https://youtu.be/RGmPXIKsp8k",
+      "videoType": "youtube",
+      "detailLabel": "Open Detail",
+      "summary": "Internal SaaS platform built for growth leaders to manage campaign performance, unit economics, forecasting, experimentation, and budget allocation in one decision-ready workspace.",
+      "outcome": "Brings campaign management, financial discipline and experimentation workflows into one executive-ready operating layer for faster growth decisions.",
+      "detailBody": [
+        "DIGITAL GROWTH ENGINE is an AI-assisted internal SaaS product designed to help growth and performance teams operate with more clarity, speed, and financial discipline. Built with Codex, the platform combines campaign management, product economics, audience tracking, incrementality testing, forecasting, OPEX/CAPEX planning, and budget allocation into a single operating environment.",
+        "Instead of relying on disconnected spreadsheets, dashboards, and ad platform exports, growth leaders can use DIGITAL GROWTH ENGINE to evaluate what is actually driving profitable growth. The platform supports key commercial metrics such as CAC, ROAS, LTV, LTV:CAC, contribution margin, allowable CAC, estimated net profit, and incremental contribution, helping teams move from passive reporting to active decision-making.",
+        "It is especially valuable for operators who need to answer high-stakes questions quickly: which campaigns should scale, which should pause, which tests truly delivered incrementality, and how budget should be reallocated across channels and initiatives. The result is a more structured, executive-ready growth workflow that turns performance data into action."
+      ],
+      "tags": [
+        "Growth analytics",
+        "Performance marketing",
+        "Forecasting",
+        "Experimentation",
+        "Budget allocation"
+      ]
+    },
+    {
       "title": "Gamebook AI",
       "category": "Vibe coding / Generative storytelling",
       "image": "/assets/apps/images/gamebook-ai.jpg",
