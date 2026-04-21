@@ -44,6 +44,7 @@ type TimelineItem = {
   logo: string;
   focus: string;
   meta: string[];
+  detailCards?: { label: string; value: string }[];
   keySystems?: { title: string; body: string }[];
   coreResponsibilities?: string[];
   bullets: string[];
@@ -472,6 +473,44 @@ function getExperienceCompanyLabel(item: TimelineItem) {
   return item.company;
 }
 
+function getCareerModalIndex(items: TimelineItem[], item: TimelineItem) {
+  return items.findIndex((candidate) => candidate.year === item.year && candidate.company === item.company && candidate.role === item.role);
+}
+
+function getRelativeCareer(items: TimelineItem[], item: TimelineItem, direction: -1 | 1) {
+  const index = getCareerModalIndex(items, item);
+  if (index < 0) return item;
+  return items[(index + direction + items.length) % items.length];
+}
+
+function getCareerMetaLabel(value: string, index: number) {
+  const normalized = value.toLowerCase();
+
+  if (normalized.includes("budget") || normalized.includes("figure") || normalized.includes("try") || normalized.includes("eur")) {
+    return "Budget";
+  }
+
+  if (
+    normalized.includes("team") ||
+    normalized.includes("fte") ||
+    normalized.includes("person") ||
+    normalized.includes("reports") ||
+    normalized.includes("organization")
+  ) {
+    return "Team";
+  }
+
+  if (normalized.includes("client") || normalized.includes("portfolio") || normalized.includes("retainers")) {
+    return "Client Portfolio";
+  }
+
+  if (normalized.includes("crm") || normalized.includes("seo") || normalized.includes("cro") || normalized.includes("growth")) {
+    return "Functional Scope";
+  }
+
+  return index === 0 ? "Scope" : "Operating Focus";
+}
+
 export default function Home() {
   const { portfolioData } = usePortfolioData();
   const { siteContent } = useSiteContent();
@@ -498,11 +537,33 @@ export default function Home() {
   const [journeyProgress, setJourneyProgress] = useState(0);
   const journeyRef = useRef<HTMLElement | null>(null);
   const t = translations[language] as typeof translations.en;
-  const orderedCareerTimeline = useMemo(
+  const orderedCareerTimeline = useMemo<TimelineItem[]>(
     () => [...careerTimeline].sort((a, b) => parseTimelineStartValue(a.year) - parseTimelineStartValue(b.year)),
     [careerTimeline],
   );
   const activeCareer = experienceModal ?? orderedCareerTimeline[orderedCareerTimeline.length - 1];
+  const activeCareerDetailCards = activeCareer
+    ? [
+        { label: "Period", value: activeCareer.year },
+        { label: "Location", value: activeCareer.location },
+        ...(activeCareer.detailCards ??
+          activeCareer.meta.map((value, index) => ({
+            label: getCareerMetaLabel(value, index),
+            value,
+          }))),
+      ].filter((item) => item.value)
+    : [];
+  const experienceDetailCards = experienceModal
+    ? [
+        { label: "Period", value: experienceModal.year },
+        { label: "Location", value: experienceModal.location },
+        ...(experienceModal.detailCards ??
+          experienceModal.meta.map((value, index) => ({
+            label: getCareerMetaLabel(value, index),
+            value,
+          }))),
+      ].filter((item) => item.value)
+    : [];
   const backgroundImage = theme === "dark" ? "/assets/backgrounds/background-dark-theme.jpg" : "/assets/backgrounds/background-light-theme.jpg";
   const portfolioSection = {
     eyebrow:
@@ -977,10 +1038,9 @@ export default function Home() {
                 </div>
                 <div className="p-6">
                   <div className="grid gap-4 md:grid-cols-2">
-                    <CareerMetaCard label="Period" value={activeCareer.year} dark={theme === "dark"} />
-                    <CareerMetaCard label="Location" value={activeCareer.location} dark={theme === "dark"} />
-                    <CareerMetaCard label="Team" value={activeCareer.meta[1] ?? ""} dark={theme === "dark"} />
-                    <CareerMetaCard label="Budget" value={activeCareer.meta[0] ?? ""} dark={theme === "dark"} />
+                    {activeCareerDetailCards.map((card) => (
+                      <CareerMetaCard key={`${card.label}-${card.value}`} label={card.label} value={card.value} dark={theme === "dark"} />
+                    ))}
                   </div>
                   <div className="mt-8 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">Key Responsibilities & Achievements</div>
                   <div className="mt-5 grid gap-4">
@@ -1169,8 +1229,25 @@ export default function Home() {
               type="button"
               onClick={() => setExperienceModal(null)}
               className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[#dce7f9] bg-white text-[#0f172a]"
+              aria-label="Close career detail"
             >
               <X size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setExperienceModal(getRelativeCareer(orderedCareerTimeline, experienceModal, -1))}
+              className="absolute left-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dce7f9] bg-white/95 text-[#0f172a] shadow-[0_12px_28px_rgba(15,23,42,0.12)] transition hover:border-[#2563eb] hover:text-[#2563eb]"
+              aria-label="Previous career detail"
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setExperienceModal(getRelativeCareer(orderedCareerTimeline, experienceModal, 1))}
+              className="absolute right-3 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#dce7f9] bg-white/95 text-[#0f172a] shadow-[0_12px_28px_rgba(15,23,42,0.12)] transition hover:border-[#2563eb] hover:text-[#2563eb]"
+              aria-label="Next career detail"
+            >
+              <ChevronRight size={22} />
             </button>
             <div className="flex flex-wrap items-center gap-4 border-b border-[#dce7f9] bg-[linear-gradient(180deg,#dbeafe_0%,#cfe2ff_100%)] px-6 py-6">
               <div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-[1.2rem] bg-white p-2">
@@ -1183,10 +1260,9 @@ export default function Home() {
             </div>
             <div className="max-h-[calc(90vh-9rem)] overflow-y-auto p-6">
               <div className="grid gap-4 md:grid-cols-2">
-                <CareerMetaCard label="Period" value={experienceModal.year} dark={false} />
-                <CareerMetaCard label="Location" value={experienceModal.location} dark={false} />
-                <CareerMetaCard label="Team" value={experienceModal.meta[1] ?? ""} dark={false} />
-                <CareerMetaCard label="Budget" value={experienceModal.meta[0] ?? ""} dark={false} />
+                {experienceDetailCards.map((card) => (
+                  <CareerMetaCard key={`${card.label}-${card.value}`} label={card.label} value={card.value} dark={false} />
+                ))}
               </div>
               <p className="mt-8 text-lg leading-8 text-[#415166]">{experienceModal.focus}</p>
 
