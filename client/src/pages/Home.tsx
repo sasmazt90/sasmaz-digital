@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+﻿import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   BadgeCheck,
   BarChart3,
@@ -44,6 +44,8 @@ type TimelineItem = {
   logo: string;
   focus: string;
   meta: string[];
+  keySystems?: { title: string; body: string }[];
+  coreResponsibilities?: string[];
   bullets: string[];
 };
 
@@ -297,7 +299,7 @@ const translations = {
   },
   de: {
     nav: {
-      about: "Überblick",
+      about: "Ãœberblick",
       journey: "Werdegang",
       impact: "Impact",
       products: "Produkte",
@@ -308,37 +310,37 @@ const translations = {
     badge: "Head of Digital & AI Transformation Leader",
     title: "Head of Digital & CRM | E-Commerce & Growth | AI, Analytics & Transformation",
     summary:
-      "Führungskraft für digitale Transformation mit über 12 Jahren Erfahrung in technologiegetriebenem Wachstum, operativer Exzellenz und skalierbaren Modellen in regulierten Healthcare-, Retail- und Consumer-Umfeldern.",
+      "FÃ¼hrungskraft fÃ¼r digitale Transformation mit Ã¼ber 12 Jahren Erfahrung in technologiegetriebenem Wachstum, operativer Exzellenz und skalierbaren Modellen in regulierten Healthcare-, Retail- und Consumer-Umfeldern.",
     cta: "Kontakt",
     heroLabel: "Head of Digital",
-    aboutEyebrow: "Überblick",
-    aboutTitle: "Ein Führungsprofil mit klarem Fokus auf messbare Geschäftsergebnisse.",
+    aboutEyebrow: "Ãœberblick",
+    aboutTitle: "Ein FÃ¼hrungsprofil mit klarem Fokus auf messbare GeschÃ¤ftsergebnisse.",
     aboutBody1:
-      "Verbindet Wachstumsstrategie, CRM, Analytics, Marketplace Execution und KI-gestützte Operations zu einer integrierten Management-Disziplin.",
+      "Verbindet Wachstumsstrategie, CRM, Analytics, Marketplace Execution und KI-gestÃ¼tzte Operations zu einer integrierten Management-Disziplin.",
     aboutBody2:
-      "Vereint strategische Klarheit mit operativer Umsetzung und verfügt über eine belastbare Erfolgsbilanz beim Aufbau von Teams, Performance-Systemen und skalierbaren digitalen Strukturen.",
+      "Vereint strategische Klarheit mit operativer Umsetzung und verfÃ¼gt Ã¼ber eine belastbare Erfolgsbilanz beim Aufbau von Teams, Performance-Systemen und skalierbaren digitalen Strukturen.",
     journeyEyebrow: "Karriereweg",
-    journeyTitle: "Ein Jahrzehnt Aufbau digitaler Fähigkeiten und kommerzieller Wirkung.",
+    journeyTitle: "Ein Jahrzehnt Aufbau digitaler FÃ¤higkeiten und kommerzieller Wirkung.",
     impactEyebrow: "Messbarer Impact",
-    impactTitle: "Konkrete Geschäftsergebnisse über verschiedene Märkte und Wachstumsphasen hinweg.",
+    impactTitle: "Konkrete GeschÃ¤ftsergebnisse Ã¼ber verschiedene MÃ¤rkte und Wachstumsphasen hinweg.",
     impactSubtitle: "Wesentliche Leistungsverbesserungen (%)",
     competencyTitle: "Kompetenzprofil",
     productsEyebrow: "Vibe Coding & KI-Produkte",
-    productsTitle: "Persönlich entwickelte Anwendungen mit KI, Low-Code und No-Code.",
-    workEyebrow: "Ausgewählte Arbeiten",
+    productsTitle: "PersÃ¶nlich entwickelte Anwendungen mit KI, Low-Code und No-Code.",
+    workEyebrow: "AusgewÃ¤hlte Arbeiten",
     workTitle: "Relevante Case Studies und Arbeiten im Bereich Digital Video Production.",
     videoTitle: "Digital Video Production",
-    videoSubtitle: "Ausgewählte Videoarbeiten aus Markenkommunikation, Kampagnenaktivierung und kommerziellem Storytelling.",
+    videoSubtitle: "AusgewÃ¤hlte Videoarbeiten aus Markenkommunikation, Kampagnenaktivierung und kommerziellem Storytelling.",
     toolsEyebrow: "AI-Driven Marketing Technology Stack",
-    toolsTitle: "Plattformen und Tools für skalierbare Growth-Systeme in CRM, Analytics, Performance und BI.",
+    toolsTitle: "Plattformen und Tools fÃ¼r skalierbare Growth-Systeme in CRM, Analytics, Performance und BI.",
     credentialsEyebrow: "Profil",
     credentialsTitle: "Ausbildung, Speaking und Zertifizierungen als Fundament der Arbeit.",
     stageEyebrow: "Leadership Moments",
-    stageTitle: "Ausgewählte Momente aus Annual Meetings, Business Storytelling und Executive Presentations.",
+    stageTitle: "AusgewÃ¤hlte Momente aus Annual Meetings, Business Storytelling und Executive Presentations.",
     contactEyebrow: "Kontakt",
-    contactTitle: "Offen für strategische Gespräche zu Digital, E-Commerce und KI-Transformation.",
+    contactTitle: "Offen fÃ¼r strategische GesprÃ¤che zu Digital, E-Commerce und KI-Transformation.",
     contactBody:
-      "Verfügbar für Führungsrollen, Advisory-Mandate und strategische Gespräche rund um Growth, CRM, Analytics und AI-enabled Transformation.",
+      "VerfÃ¼gbar fÃ¼r FÃ¼hrungsrollen, Advisory-Mandate und strategische GesprÃ¤che rund um Growth, CRM, Analytics und AI-enabled Transformation.",
     measurableLabels: ["OPEX-Reduktion", "Akquisitionswachstum", "LTV-Steigerung", "Sell-out-Wachstum", "Margenplus", "Conversion Rate"],
     competencies: [
       { label: "AI / GenAI", value: 92 },
@@ -352,57 +354,57 @@ const translations = {
     speakingTitle: "Speaking & Mentorship",
     educationTitle: "Ausbildung",
     certificationsTitle: "Zertifizierungen",
-    openLive: "Produkt öffnen",
+    openLive: "Produkt Ã¶ffnen",
     watchWalkthrough: "Demo ansehen",
-    openCase: "Case Study öffnen",
+    openCase: "Case Study Ã¶ffnen",
     watchVideo: "Ansehen",
     footer: "Digital Growth, AI Systems und Transformation Leadership.",
   },
   tr: {
     nav: {
-      about: "Hakkımda",
+      about: "HakkÄ±mda",
       journey: "Kariyer",
       impact: "Etki",
-      products: "Ürünler",
+      products: "ÃœrÃ¼nler",
       work: "Projeler",
       tools: "Yetkinlikler",
-      contact: "İletişim",
+      contact: "Ä°letiÅŸim",
     },
     badge: "Head of Digital & AI Transformation Leader",
     title: "Head of Digital & CRM | E-Commerce & Growth | AI, Analytics & Transformation",
     summary:
-      "Regüle sağlık, perakende ve tüketici odaklı sektörlerde teknoloji destekli büyüme, ticari disiplin ve ölçeklenebilir operasyon modelleri geliştiren 12+ yıllık deneyime sahip dijital dönüşüm lideri.",
+      "RegÃ¼le saÄŸlÄ±k, perakende ve tÃ¼ketici odaklÄ± sektÃ¶rlerde teknoloji destekli bÃ¼yÃ¼me, ticari disiplin ve Ã¶lÃ§eklenebilir operasyon modelleri geliÅŸtiren 12+ yÄ±llÄ±k deneyime sahip dijital dÃ¶nÃ¼ÅŸÃ¼m lideri.",
     cta: "Contact",
     heroLabel: "Head of Digital",
-    aboutEyebrow: "Hakkımda",
-    aboutTitle: "Ölçülebilir ticari sonuçlara odaklanan bir liderlik profili.",
+    aboutEyebrow: "HakkÄ±mda",
+    aboutTitle: "Ã–lÃ§Ã¼lebilir ticari sonuÃ§lara odaklanan bir liderlik profili.",
     aboutBody1:
-      "Büyüme stratejisi, CRM, analitik, marketplace yönetimi ve yapay zeka destekli operasyonları tek bir entegre yönetim disiplini altında birleştirir.",
+      "BÃ¼yÃ¼me stratejisi, CRM, analitik, marketplace yÃ¶netimi ve yapay zeka destekli operasyonlarÄ± tek bir entegre yÃ¶netim disiplini altÄ±nda birleÅŸtirir.",
     aboutBody2:
-      "Stratejik bakış açısını uygulama gücüyle bir araya getirir; ekip ölçekleme, karmaşıklığı sadeleştirme ve güvenilir performans sistemleri kurma konusunda güçlü bir geçmişe sahiptir.",
-    journeyEyebrow: "Kariyer Yolculuğu",
-    journeyTitle: "Dijital yetkinlik ve ticari etki inşa edilen on yıllık bir kariyer yolculuğu.",
-    impactEyebrow: "Ölçülebilir Etki",
-    impactTitle: "Farklı pazarlar ve büyüme aşamalarında üretilen somut iş sonuçları.",
-    impactSubtitle: "Temel performans gelişimleri (%)",
+      "Stratejik bakÄ±ÅŸ aÃ§Ä±sÄ±nÄ± uygulama gÃ¼cÃ¼yle bir araya getirir; ekip Ã¶lÃ§ekleme, karmaÅŸÄ±klÄ±ÄŸÄ± sadeleÅŸtirme ve gÃ¼venilir performans sistemleri kurma konusunda gÃ¼Ã§lÃ¼ bir geÃ§miÅŸe sahiptir.",
+    journeyEyebrow: "Kariyer YolculuÄŸu",
+    journeyTitle: "Dijital yetkinlik ve ticari etki inÅŸa edilen on yÄ±llÄ±k bir kariyer yolculuÄŸu.",
+    impactEyebrow: "Ã–lÃ§Ã¼lebilir Etki",
+    impactTitle: "FarklÄ± pazarlar ve bÃ¼yÃ¼me aÅŸamalarÄ±nda Ã¼retilen somut iÅŸ sonuÃ§larÄ±.",
+    impactSubtitle: "Temel performans geliÅŸimleri (%)",
     competencyTitle: "Yetkinlik profili",
-    productsEyebrow: "Vibe Coding & AI Ürünleri",
-    productsTitle: "AI, low-code ve no-code ile bizzat geliştirilen uygulamalar.",
-    workEyebrow: "Seçili İşler",
-    workTitle: "Öne çıkan case study'ler ve dijital video prodüksiyon çalışmaları.",
-    videoTitle: "Dijital Video Prodüksiyon",
-    videoSubtitle: "Marka iletişimi, kampanya aktivasyonu ve ticari hikaye anlatımı odağında geliştirilen seçili video prodüksiyon işleri.",
+    productsEyebrow: "Vibe Coding & AI ÃœrÃ¼nleri",
+    productsTitle: "AI, low-code ve no-code ile bizzat geliÅŸtirilen uygulamalar.",
+    workEyebrow: "SeÃ§ili Ä°ÅŸler",
+    workTitle: "Ã–ne Ã§Ä±kan case study'ler ve dijital video prodÃ¼ksiyon Ã§alÄ±ÅŸmalarÄ±.",
+    videoTitle: "Dijital Video ProdÃ¼ksiyon",
+    videoSubtitle: "Marka iletiÅŸimi, kampanya aktivasyonu ve ticari hikaye anlatÄ±mÄ± odaÄŸÄ±nda geliÅŸtirilen seÃ§ili video prodÃ¼ksiyon iÅŸleri.",
     toolsEyebrow: "AI-Driven Marketing Technology Stack",
-    toolsTitle: "CRM, analitik, performans ve iş zekası ekseninde ölçeklenebilir büyüme sistemleri için kullandığım platformlar ve araçlar.",
+    toolsTitle: "CRM, analitik, performans ve iÅŸ zekasÄ± ekseninde Ã¶lÃ§eklenebilir bÃ¼yÃ¼me sistemleri iÃ§in kullandÄ±ÄŸÄ±m platformlar ve araÃ§lar.",
     credentialsEyebrow: "Profil",
-    credentialsTitle: "Eğitim, konuşmalar ve sertifikalarla desteklenen profesyonel arka plan.",
+    credentialsTitle: "EÄŸitim, konuÅŸmalar ve sertifikalarla desteklenen profesyonel arka plan.",
     stageEyebrow: "Leadership Moments",
-    stageTitle: "Yıllık toplantılar, iş hikayeciliği ve yönetici sunumlarından seçili anlar.",
-    contactEyebrow: "İletişim",
-    contactTitle: "Dijital, e-ticaret ve AI dönüşümü odağında stratejik görüşmelere açığım.",
+    stageTitle: "YÄ±llÄ±k toplantÄ±lar, iÅŸ hikayeciliÄŸi ve yÃ¶netici sunumlarÄ±ndan seÃ§ili anlar.",
+    contactEyebrow: "Ä°letiÅŸim",
+    contactTitle: "Dijital, e-ticaret ve AI dÃ¶nÃ¼ÅŸÃ¼mÃ¼ odaÄŸÄ±nda stratejik gÃ¶rÃ¼ÅŸmelere aÃ§Ä±ÄŸÄ±m.",
     contactBody:
-      "Liderlik rolleri, danışmanlık fırsatları ve growth, CRM, analitik ile AI destekli dönüşüm başlıklarında üst düzey görüşmeler için ulaşabilirsiniz.",
-    measurableLabels: ["OPEX Azalışı", "Kullanıcı Kazanımı", "LTV Artışı", "Sell-out Büyümesi", "Marj Artışı", "Dönüşüm Oranı"],
+      "Liderlik rolleri, danÄ±ÅŸmanlÄ±k fÄ±rsatlarÄ± ve growth, CRM, analitik ile AI destekli dÃ¶nÃ¼ÅŸÃ¼m baÅŸlÄ±klarÄ±nda Ã¼st dÃ¼zey gÃ¶rÃ¼ÅŸmeler iÃ§in ulaÅŸabilirsiniz.",
+    measurableLabels: ["OPEX AzalÄ±ÅŸÄ±", "KullanÄ±cÄ± KazanÄ±mÄ±", "LTV ArtÄ±ÅŸÄ±", "Sell-out BÃ¼yÃ¼mesi", "Marj ArtÄ±ÅŸÄ±", "DÃ¶nÃ¼ÅŸÃ¼m OranÄ±"],
     competencies: [
       { label: "AI / GenAI", value: 92 },
       { label: "Performance Marketing", value: 90 },
@@ -412,13 +414,13 @@ const translations = {
       { label: "Strategy", value: 94 },
     ],
     languagesTitle: "Diller",
-    speakingTitle: "Konuşmalar & Mentorluk",
-    educationTitle: "Eğitim",
+    speakingTitle: "KonuÅŸmalar & Mentorluk",
+    educationTitle: "EÄŸitim",
     certificationsTitle: "Sertifikalar",
-    openLive: "Ürünü Aç",
-    watchWalkthrough: "Demoyu İzle",
-    openCase: "Case Study Aç",
-    watchVideo: "İzle",
+    openLive: "ÃœrÃ¼nÃ¼ AÃ§",
+    watchWalkthrough: "Demoyu Ä°zle",
+    openCase: "Case Study AÃ§",
+    watchVideo: "Ä°zle",
     footer: "Digital growth, AI systems and transformation leadership.",
   },
 } as const;
@@ -432,13 +434,13 @@ const languageLevels = {
     { name: "German", level: "Elementary (A2)", width: "30%" },
   ],
   de: [
-    { name: "Türkisch", level: "Muttersprache", width: "100%" },
+    { name: "TÃ¼rkisch", level: "Muttersprache", width: "100%" },
     { name: "Englisch", level: "Experte (C2)", width: "96%" },
     { name: "Deutsch", level: "Grundlagen (A2)", width: "30%" },
   ],
   tr: [
-    { name: "Türkçe", level: "Ana dil", width: "100%" },
-    { name: "İngilizce", level: "İleri (C2)", width: "96%" },
+    { name: "TÃ¼rkÃ§e", level: "Ana dil", width: "100%" },
+    { name: "Ä°ngilizce", level: "Ä°leri (C2)", width: "96%" },
     { name: "Almanca", level: "Temel (A2)", width: "30%" },
   ],
 } as const;
@@ -460,6 +462,14 @@ function parseTimelineStartValue(value: string) {
 function getTimelineDisplayDate(value: string) {
   const normalized = value.replace(/\u2013|\u2014/g, "-").trim();
   return normalized.split("-")[0]?.trim() ?? normalized;
+}
+
+function getExperienceCompanyLabel(item: TimelineItem) {
+  if (item.company === "NAOS Deutschland" || item.company === "Emarsys" || item.company === "NAOS Türkiye") {
+    return `${item.company} (${item.brand})`;
+  }
+
+  return item.company;
 }
 
 export default function Home() {
@@ -505,7 +515,7 @@ export default function Home() {
       language === "de"
         ? "KI-gestuetzte Anwendungen, digitale Videoproduktion und operative Produktsysteme aus experimentellen Konzepten und skalierbaren Workflow-Designs."
         : language === "tr"
-          ? "Deneysel urun fikirlerinden kurumsal workflow tasarimlarina uzanan AI uygulamalari, dijital video prodüksiyonlari ve operasyonel urun sistemleri."
+          ? "Deneysel urun fikirlerinden kurumsal workflow tasarimlarina uzanan AI uygulamalari, dijital video prodÃ¼ksiyonlari ve operasyonel urun sistemleri."
           : "AI-powered applications, digital video production and operating solutions built across experimental product concepts and enterprise-grade workflow design.",
   };
   const competenciesSection = {
@@ -938,7 +948,7 @@ export default function Home() {
                         onClick={() => setExperienceModal(item)}
                         className="group flex min-w-0 flex-col items-center text-center"
                       >
-                        <div className={`min-h-[96px] text-sm font-bold leading-tight sm:min-h-[88px] sm:text-[0.95rem] lg:text-[1.02rem] ${isHighlighted ? "text-[#0f172a]" : "text-[#4b5b72]"}`}>
+                        <div className={`min-h-[96px] whitespace-pre-line text-sm font-bold leading-tight sm:min-h-[88px] sm:text-[0.95rem] lg:text-[1.02rem] ${isHighlighted ? "text-[#0f172a]" : "text-[#4b5b72]"}`}>
                           {item.role}
                         </div>
                         <div className={`relative z-10 mt-3 flex h-[68px] w-[68px] items-center justify-center rounded-full border-[6px] shadow-[0_14px_26px_rgba(15,23,42,0.12)] transition-all duration-500 group-hover:scale-[1.12] group-hover:animate-pulse sm:h-[74px] sm:w-[74px] lg:h-[82px] lg:w-[82px] ${getTimelineNodeClass(item.company)} ${isHighlighted ? "scale-[1.08] border-[#cfe1ff]" : "border-[#eef3fa]"}`}>
@@ -961,8 +971,8 @@ export default function Home() {
                     <img src={activeCareer.logo} alt={activeCareer.company} className="max-h-full max-w-full object-contain" />
                   </div>
                   <div>
-                    <h3 className="font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{activeCareer.role}</h3>
-                    <p className="mt-2 text-2xl text-[#2563eb] dark:text-[#8cc8ff]">{activeCareer.company}</p>
+                    <h3 className="whitespace-pre-line font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a] dark:text-white">{activeCareer.role}</h3>
+                    <p className="mt-2 text-2xl text-[#2563eb] dark:text-[#8cc8ff]">{getExperienceCompanyLabel(activeCareer)}</p>
                   </div>
                 </div>
                 <div className="p-6">
@@ -976,7 +986,7 @@ export default function Home() {
                   <div className="mt-5 grid gap-4">
                     {activeCareer.bullets.map((bullet) => (
                       <Reveal key={bullet} className="flex gap-4 text-left">
-                        <span className="text-2xl leading-none text-[#2563eb] dark:text-[#8cc8ff]">✓</span>
+                        <span className="text-2xl leading-none text-[#2563eb] dark:text-[#8cc8ff]">âœ“</span>
                         <p className="text-lg leading-8 text-[#415166] dark:text-white/80">{bullet}</p>
                       </Reveal>
                     ))}
@@ -1167,8 +1177,8 @@ export default function Home() {
                 <img src={experienceModal.logo} alt={experienceModal.company} className="max-h-full max-w-full object-contain" />
               </div>
               <div>
-                <h3 className="font-['Space_Grotesk'] text-[2rem] font-bold text-[#0f172a]">{experienceModal.role}</h3>
-                <p className="mt-2 text-2xl text-[#2563eb]">{experienceModal.company}</p>
+                <h3 className="whitespace-pre-line font-['Space_Grotesk'] text-[2rem] font-bold leading-tight text-[#0f172a]">{experienceModal.role}</h3>
+                <p className="mt-2 text-2xl text-[#2563eb]">{getExperienceCompanyLabel(experienceModal)}</p>
               </div>
             </div>
             <div className="max-h-[calc(90vh-9rem)] overflow-y-auto p-6">
@@ -1178,15 +1188,52 @@ export default function Home() {
                 <CareerMetaCard label="Team" value={experienceModal.meta[1] ?? ""} dark={false} />
                 <CareerMetaCard label="Budget" value={experienceModal.meta[0] ?? ""} dark={false} />
               </div>
-              <div className="mt-8 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a]">Key Responsibilities & Achievements</div>
-              <div className="mt-5 grid gap-4">
-                {experienceModal.bullets.map((bullet) => (
-                  <div key={bullet} className="flex gap-4 text-left">
-                    <span className="text-2xl leading-none text-[#2563eb]">•</span>
-                    <p className="text-lg leading-8 text-[#415166]">{bullet}</p>
+              <p className="mt-8 text-lg leading-8 text-[#415166]">{experienceModal.focus}</p>
+
+              {experienceModal.keySystems?.length ? (
+                <div className="mt-8">
+                  <div className="font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a]">Key Systems & Achievements</div>
+                  <div className="mt-5 grid gap-4">
+                    {experienceModal.keySystems.map((item) => (
+                      <div key={item.title} className="flex gap-4 text-left">
+                        <span className="mt-3 h-2.5 w-2.5 flex-shrink-0 rotate-45 bg-[#2563eb]" />
+                        <p className="text-lg leading-8 text-[#415166]">
+                          <span className="font-bold text-[#0f172a]">{item.title}: </span>
+                          {item.body}
+                        </p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ) : null}
+
+              {experienceModal.coreResponsibilities?.length ? (
+                <div className="mt-8">
+                  <div className="font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a]">Core Responsibilities</div>
+                  <div className="mt-5 grid gap-3">
+                    {experienceModal.coreResponsibilities.map((responsibility) => (
+                      <div key={responsibility} className="flex gap-4 text-left">
+                        <span className="mt-1 text-xl font-bold leading-8 text-[#2563eb]">&gt;</span>
+                        <p className="text-lg leading-8 text-[#415166]">{responsibility}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              {!experienceModal.keySystems?.length ? (
+                <>
+                  <div className="mt-8 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a]">Key Responsibilities & Achievements</div>
+                  <div className="mt-5 grid gap-4">
+                    {experienceModal.bullets.map((bullet) => (
+                      <div key={bullet} className="flex gap-4 text-left">
+                        <span className="mt-3 h-2.5 w-2.5 flex-shrink-0 rotate-45 bg-[#2563eb]" />
+                        <p className="text-lg leading-8 text-[#415166]">{bullet}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : null}
             </div>
           </div>
         </div>
