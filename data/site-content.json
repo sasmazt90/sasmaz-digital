@@ -221,6 +221,22 @@
       ]
     },
     {
+      "title": "Bluff Room",
+      "category": "Mobile social deduction game",
+      "image": "/assets/apps/images/bluff-room.png",
+      "video": "https://youtube.com/shorts/-QAAGFrhw0o",
+      "videoType": "youtube",
+      "url": "https://apps.apple.com/tr/app/bluff-room/id6760310629?l=tr",
+      "summary": "Multiplayer social deduction party game for friends and groups, built around secret roles, clue rounds and group voting.",
+      "outcome": "Players create or join rooms, receive Insider, Outsider or Chaos roles, give clues across rounds and score through bluffing, deduction and survival.",
+      "tags": [
+        "iOS",
+        "Multiplayer",
+        "Social deduction",
+        "Party game"
+      ]
+    },
+    {
       "title": "Gamebook AI",
       "category": "Vibe coding / Generative storytelling",
       "image": "/assets/apps/images/gamebook-ai.jpg",

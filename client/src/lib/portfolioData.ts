@@ -458,6 +458,29 @@ export const projects = [
   },
   {
     category: 'vibe',
+    title: 'Bluff Room iOS Mobile Game',
+    description: {
+      en: 'Multiplayer social deduction party game: join a room, get secret roles, give clues, vote out the Outsider, and score across rounds.',
+      tr: 'Arkadaslar icin sosyal cikarim parti oyunu: odaya katil, gizli rolunu al, ipucu ver, Outsideri oyla ve puan topla.',
+      de: 'Multiplayer-Social-Deduction-Partyspiel: Raum beitreten, geheime Rollen erhalten, Hinweise geben, Outsider waehlen und punkten.',
+    },
+    url: 'https://apps.apple.com/tr/app/bluff-room/id6760310629?l=tr',
+    image: '/assets/apps/images/bluff-room.png',
+    videoUrl: 'https://youtube.com/shorts/-QAAGFrhw0o',
+    ctaButtons: [
+      { label: { en: 'Watch Demo', tr: 'Watch Demo', de: 'Watch Demo' }, type: 'video' },
+      { label: { en: 'Open Product', tr: 'Open Product', de: 'Open Product' }, type: 'link', url: 'https://apps.apple.com/tr/app/bluff-room/id6760310629?l=tr' },
+    ],
+    tags: [
+      { name: 'iOS App', category: 'Platform', color: 'bg-orange-100 text-orange-700' },
+      { name: 'Multiplayer', category: 'Technology', color: 'bg-purple-100 text-purple-700' },
+      { name: 'Social Deduction', category: 'Capability', color: 'bg-blue-100 text-blue-700' },
+      { name: 'Party Game', category: 'Domain', color: 'bg-green-100 text-green-700' },
+    ],
+    confidential: false,
+  },
+  {
+    category: 'vibe',
     title: 'CO2 Score iOS Mobile Application',
     description: { en: 'Carbon footprint tracking mobile application for iOS, helping users measure and reduce their environmental impact with real-time analytics', tr: 'iOS için gerçek zamanlı analitik ile kullanıcıların çevresel etkisini ölçmesine ve azaltmasına yardımcı olan karbon ayak izi takip uygulaması', de: 'iOS-App zur Verfolgung des Kohlenstoff-Fußabdrucks mit Echtzeit-Analysen zur Messung und Verringerung der Umweltauswirkungen' },
     url: 'https://apps.apple.com/de/app/co-score/id6755812154',

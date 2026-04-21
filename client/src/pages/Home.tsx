@@ -70,12 +70,12 @@ const navItems = [
 ] as const;
 
 const toYoutubeEmbed = (url: string) => {
-  const match = url.match(/(?:youtu\.be\/|v=)([^?&]+)/);
-  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+  const match = url.match(/(?:youtu\.be\/|v=|shorts\/)([^?&/]+)/);
+  return match ? `https://www.youtube-nocookie.com/embed/${match[1]}?autoplay=1&rel=0` : url;
 };
 
 const toYoutubeThumbnail = (url: string) => {
-  const match = url.match(/(?:youtu\.be\/|v=)([^?&]+)/);
+  const match = url.match(/(?:youtu\.be\/|v=|shorts\/)([^?&/]+)/);
   return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : "";
 };
 
