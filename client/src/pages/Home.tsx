@@ -1032,14 +1032,14 @@ export default function Home() {
                 title: video.title,
               })
             }
-            className="group h-full overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white text-left transition hover:border-[#cadcf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none"
-          >
-            <div className="relative aspect-video w-full overflow-hidden bg-black">
-              <img
-                src={toYoutubeThumbnail(video.url)}
-                alt={video.title}
-                className="h-full w-full object-cover object-center"
-              />
+                className="group h-full overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white text-left transition hover:border-[#cadcf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-[#102230] dark:hover:border-white/20 dark:hover:shadow-none"
+            >
+              <div className="relative aspect-video w-full overflow-hidden bg-black">
+                <img
+                  src={video.image ?? toYoutubeThumbnail(video.url)}
+                  alt={video.title}
+                  className="h-full w-full object-cover object-center"
+                />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent" />
               <div className="absolute bottom-4 left-4 flex items-center gap-3">
                 <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#0f172a]">

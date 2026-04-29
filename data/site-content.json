@@ -644,8 +644,9 @@
   ],
   "videoPortfolio": [
     {
-      "title": "BIODERMA Sensibio H2O x Seyda Erdogan",
-      "url": "https://youtu.be/D56eDn7YeJw?si=_oCHg1A8NGvxi0_F"
+      "title": "SENSIBIO H2O 30. GEBURTSTAG",
+      "url": "https://youtu.be/AUyBGBKxwPM?si=VF_kKQj0M53aeaAq",
+      "image": "/assets/videos/sensibio-de.png"
     },
     {
       "title": "BIODERMA x TVF",
@@ -658,6 +659,10 @@
     {
       "title": "BIODERMA Interactive Skin Stories",
       "url": "https://youtu.be/FAPKz5FOyFg?si=OI3ykckcDN0fD_wE"
+    },
+    {
+      "title": "BIODERMA Sensibio H2O x Seyda Erdogan",
+      "url": "https://youtu.be/D56eDn7YeJw?si=_oCHg1A8NGvxi0_F"
     },
     {
       "title": "BIODERMA x Ayca Aysin Turan",
