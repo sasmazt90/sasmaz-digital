@@ -899,24 +899,24 @@ export default function Home() {
     product: (typeof aiProducts)[number],
     portrait: boolean
   ) => ({
-    key: product.title,
-    content: (
-      <article className="portfolio-panel-light flex h-full min-h-[480px] flex-col transition duration-300 hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:hover:border-white/20 dark:hover:shadow-none">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-h-[6.5rem]">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">
-              {product.category}
-            </p>
-            <h3 className="mt-3 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">
-              {product.title}
-            </h3>
+      key: product.title,
+      content: (
+        <article className="portfolio-panel-light flex h-full min-h-[480px] flex-col transition duration-300 hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:hover:border-white/20 dark:hover:shadow-none">
+          <div className="flex min-h-[12rem] items-start justify-between gap-3">
+            <div className="flex min-h-[12rem] flex-1 flex-col">
+              <p className="min-h-[3.5rem] text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">
+                {product.category}
+              </p>
+              <h3 className="mt-3 min-h-[8.5rem] font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">
+                {product.title}
+              </h3>
+            </div>
+            {product.confidential ? (
+              <span className="shrink-0 rounded-full border border-amber-300/40 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700 dark:border-amber-300/25 dark:bg-amber-500/10 dark:text-amber-200">
+                {t.confidential}
+              </span>
+            ) : null}
           </div>
-          {product.confidential ? (
-            <span className="rounded-full border border-amber-300/40 bg-amber-50 px-3 py-1 text-xs font-bold text-amber-700 dark:border-amber-300/25 dark:bg-amber-500/10 dark:text-amber-200">
-              {t.confidential}
-            </span>
-          ) : null}
-        </div>
         {product.image ? (
             <div
             className={`mt-5 mx-auto overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "h-[360px] w-[288px]" : "h-[250px] w-[312px]"}`}
@@ -937,18 +937,18 @@ export default function Home() {
             {t.privateProject}
           </div>
         )}
-        <div className="mt-5 min-h-[13.5rem]">
-          <p className="text-[0.98rem] leading-8 text-[#4b5b72] dark:text-white/88">
-            {product.summary}
-          </p>
-          <p className="mt-3 text-[0.98rem] leading-8 text-[#617086] dark:text-white/74">
-            {product.outcome}
-          </p>
-        </div>
-        <div className="mt-4 min-h-[5.5rem] flex flex-wrap content-start gap-2">
-          {product.tags.map(tag => (
-            <span
-              key={tag}
+          <div className="mt-5 min-h-[16rem]">
+            <p className="text-[0.98rem] leading-8 text-[#4b5b72] dark:text-white/88">
+              {product.summary}
+            </p>
+            <p className="mt-3 text-[0.98rem] leading-8 text-[#617086] dark:text-white/74">
+              {product.outcome}
+            </p>
+          </div>
+          <div className="mt-4 min-h-[6.5rem] flex flex-wrap content-start gap-2">
+            {product.tags.map(tag => (
+              <span
+                key={tag}
               className="rounded-full border border-[#dce7f9] bg-[#f7faff] px-3 py-1 text-xs font-semibold text-[#4b5b72] dark:border-white/10 dark:bg-white/8 dark:text-white/88"
             >
               {tag}
