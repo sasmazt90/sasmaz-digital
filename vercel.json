@@ -1,0 +1,15 @@
+{
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist/public",
+  "functions": {
+    "api/[...route].ts": {
+      "includeFiles": "data/**"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/((?!api/|assets/|favicon.ico|ads.txt|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
