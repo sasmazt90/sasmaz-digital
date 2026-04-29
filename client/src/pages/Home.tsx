@@ -917,26 +917,26 @@ export default function Home() {
               </span>
             ) : null}
           </div>
-        {product.image ? (
+          {product.image ? (
             <div
-            className={`mt-5 mx-auto overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "h-[360px] w-[288px]" : "h-[250px] w-[312px]"}`}
+              className={`mt-5 w-full overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "aspect-[4/5]" : "aspect-[312/250]"}`}
             >
-              <img
-                src={product.image}
-                alt={product.title}
-                className={`${portrait ? "aspect-[4/5]" : "aspect-[312/250]"} h-full w-full ${product.imageFit === "contain" ? "object-contain p-3" : "object-cover"} ${product.imageClassName ?? ""}`}
-                style={{
-                  objectPosition:
-                    product.imagePosition ??
+                <img
+                  src={product.image}
+                  alt={product.title}
+                className={`h-full w-full ${portrait ? "aspect-[4/5]" : "aspect-[312/250]"} object-cover ${product.imageClassName ?? ""}`}
+                  style={{
+                    objectPosition:
+                      product.imagePosition ??
                     (product.title === "DIGITAL GROWTH ENGINE" ? "left top" : "center"),
-                }}
-              />
-          </div>
-        ) : (
-          <div className="mt-5 flex h-[250px] items-center rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/78">
-            {t.privateProject}
-          </div>
-        )}
+                  }}
+                />
+            </div>
+          ) : (
+            <div className="mt-5 flex aspect-[312/250] w-full items-center rounded-[1.5rem] border border-dashed border-[#d8e6ff] bg-[#f8fbff] px-5 py-12 text-sm text-[#64748b] dark:border-white/12 dark:bg-white/4 dark:text-white/78">
+              {t.privateProject}
+            </div>
+          )}
           <div className="mt-5 min-h-[16rem]">
             <p className="text-[0.98rem] leading-8 text-[#4b5b72] dark:text-white/88">
               {product.summary}
