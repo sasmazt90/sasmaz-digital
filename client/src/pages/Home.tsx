@@ -902,12 +902,12 @@ export default function Home() {
       key: product.title,
       content: (
         <article className="portfolio-panel-light flex h-full min-h-[480px] flex-col transition duration-300 hover:-translate-y-1 hover:border-[#c9daf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)] dark:hover:border-white/20 dark:hover:shadow-none">
-          <div className="flex min-h-[12rem] items-start justify-between gap-3">
-            <div className="flex min-h-[12rem] flex-1 flex-col">
-              <p className="min-h-[3.5rem] text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]">
+          <div className={`flex items-start justify-between gap-3 ${product.confidential ? "min-h-[12rem]" : "min-h-[8.5rem]"}`}>
+            <div className={`flex flex-1 flex-col ${product.confidential ? "min-h-[12rem]" : "min-h-[8.5rem]"}`}>
+              <p className={`${product.confidential ? "min-h-[3.5rem]" : "min-h-[2.5rem]"} text-xs font-bold uppercase tracking-[0.24em] text-[#2563eb] dark:text-[#8cc8ff]`}>
                 {product.category}
               </p>
-              <h3 className="mt-3 min-h-[8.5rem] font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white">
+              <h3 className={`mt-3 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a] dark:text-white ${product.confidential ? "min-h-[8.5rem]" : "min-h-[4.5rem]"}`}>
                 {product.title}
               </h3>
             </div>
