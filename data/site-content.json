@@ -414,6 +414,21 @@
   ],
   "aiProducts": [
     {
+      "title": "Adaptif.AI",
+      "category": "Content Localization & Resizing",
+      "image": "/assets/apps/images/adaptif-ai.png",
+      "imageFit": "contain",
+      "url": "https://adaptifai.sasmaz.digital/",
+      "summary": "OCR and GenAI-powered localization workflow built to adapt marketing assets across languages, channels and campaign formats at scale.",
+      "outcome": "Streamlined creative adaptation, reduced manual production load and supported materially stronger CTR and conversion performance in localization scenarios.",
+      "tags": [
+        "OCR",
+        "Creative localization",
+        "Automation"
+      ],
+      "confidential": false
+    },
+    {
       "title": "DIGITAL GROWTH ENGINE",
       "category": "AI-Powered Growth Operating System",
       "image": "/assets/apps/images/digital-growth-engine.png",
@@ -533,22 +548,10 @@
       ]
     },
     {
-      "title": "TranslASSET AI",
-      "category": "Confidential AI workflow",
-      "image": "/assets/apps/images/translasset-ai.svg",
-      "summary": "OCR and GenAI-powered localization workflow built to adapt marketing assets across languages, channels and campaign formats at scale.",
-      "outcome": "Streamlined creative adaptation, reduced manual production load and supported materially stronger CTR and conversion performance in localization scenarios.",
-      "tags": [
-        "OCR",
-        "Creative localization",
-        "Automation"
-      ],
-      "confidential": true
-    },
-    {
       "title": "Pricing Validation & Intelligence",
-      "category": "Confidential enterprise AI",
-      "image": "/assets/apps/images/pricing-validation-intelligence.svg",
+      "category": "Enterprise AI",
+      "image": "/assets/apps/images/pricing-validation-intelligence.png",
+      "imageFit": "contain",
       "summary": "AI-assisted pricing validation platform connecting PIM data, retailer price feeds and competitor normalization into one decision-support layer.",
       "outcome": "Enabled pricing compliance checks, competitive benchmarking and margin-aware decision-making with a cleaner, faster review workflow.",
       "tags": [
@@ -561,7 +564,8 @@
     {
       "title": "BIODERMA 360 e-Prescription System",
       "category": "Connected patient journey platform",
-      "image": "/assets/apps/images/bioderma-360-e-prescription.svg",
+      "image": "/assets/apps/images/bioderma-360-e-prescription.png",
+      "imageFit": "contain",
       "summary": "Built a GDPR-compliant e-prescription journey that generates dynamic product recommendations for patients and delivers them instantly to mobile via NFC-triggered prescription links.",
       "outcome": "Connected prescription intent to discounted e-commerce and pharmacy conversion flows, enabling 360-degree journey mapping and prescription-to-purchase tracking through anonymized data capture.",
       "tags": [
@@ -574,7 +578,8 @@
     {
       "title": "BIODERMA AI-Driven Visit Planning Mobile Application",
       "category": "Field force planning intelligence",
-      "image": "/assets/apps/images/bioderma-visit-planning.svg",
+      "image": "/assets/apps/images/bioderma-visit-planning.png",
+      "imageFit": "contain",
       "summary": "Developed a mobile planning tool for HCP field teams using CLV-based AI prioritization, engagement scoring and real-time traffic insight to optimize visit routing and daily calendars.",
       "outcome": "Helped field teams focus on the highest-value accounts, improve route efficiency and build more intelligent calendars around lifetime value and engagement potential.",
       "tags": [
@@ -587,7 +592,8 @@
     {
       "title": "BIODERMA Tasky AI Web Application",
       "category": "Internal workflow orchestration",
-      "image": "/assets/apps/images/bioderma-tasky-ai.svg",
+      "image": "/assets/apps/images/bioderma-tasky-ai.png",
+      "imageFit": "contain",
       "summary": "Designed an internal task and workflow management application for cross-functional and intra-department collaboration, inspired by structured operating models used in tools like Wrike and Asana.",
       "outcome": "Reduced coordination friction, improved task visibility and created a more disciplined system for tracking ownership, deadlines and inter-team execution.",
       "tags": [
@@ -600,7 +606,8 @@
     {
       "title": "360° Real-Time Executive Dashboard and Forecast",
       "category": "Executive analytics and forecasting",
-      "image": "/assets/apps/images/executive-dashboard-forecast.svg",
+      "image": "/assets/apps/images/executive-dashboard-forecast.png",
+      "imageFit": "contain",
       "summary": "Developed predictive analytics dashboards combining sell-out signals, seasonality patterns and sales trends to support executive decision-making in forecasting and stock management.",
       "outcome": "Created a real-time management layer that improved visibility into demand shifts and supported more proactive planning across inventory and commercial operations.",
       "tags": [
@@ -613,7 +620,8 @@
     {
       "title": "BIODERMA Invoice Automation System",
       "category": "Finance process automation",
-      "image": "/assets/apps/images/bioderma-invoice-automation.svg",
+      "image": "/assets/apps/images/bioderma-invoice-automation.png",
+      "imageFit": "contain",
       "summary": "Built a Power Automate workflow that extracts invoice information from inbound email attachments using OCR and consolidates the validated data into a single operational document.",
       "outcome": "Removed repetitive manual handling, reduced operational workload and created a more reliable, searchable finance intake process.",
       "tags": [
@@ -626,7 +634,8 @@
     {
       "title": "BIODERMA PTA Challenge Web Application",
       "category": "Pharmacy sales activation",
-      "image": "/assets/apps/images/bioderma-pta-challenge.svg",
+      "image": "/assets/apps/images/bioderma-pta-challenge.png",
+      "imageFit": "contain",
       "summary": "Created a pharmacy challenge application where cash receipts are scanned, BIODERMA products are extracted via OCR and sales quantities and prices are submitted against participant accounts.",
       "outcome": "Enabled transparent leaderboard-based incentive programs for pharmacy teams and simplified campaign tracking for reward-based sales activations.",
       "tags": [
@@ -706,6 +715,7 @@
   "toolClusters": [
     {
       "title": "Performance & retail media",
+      "image": "/assets/technology-stack/performance-retail-media.png",
       "tools": [
         "Google Ads",
         "Meta Ads",
@@ -717,6 +727,7 @@
     },
     {
       "title": "Analytics & BI",
+      "image": "/assets/technology-stack/analytics-bi.png",
       "tools": [
         "GA4",
         "GTM",
@@ -728,6 +739,7 @@
     },
     {
       "title": "CRM & lifecycle",
+      "image": "/assets/technology-stack/crm-lifecycle.png",
       "tools": [
         "Emarsys",
         "Euromsg",
@@ -737,6 +749,7 @@
     },
     {
       "title": "AI & automation",
+      "image": "/assets/technology-stack/ai-automation.png",
       "tools": [
         "OpenAI API",
         "Google AI Studio",
@@ -748,6 +761,7 @@
     },
     {
       "title": "Market intelligence",
+      "image": "/assets/technology-stack/market-intelligence.png",
       "tools": [
         "Profitero",
         "Helium 10",
@@ -758,6 +772,7 @@
     },
     {
       "title": "Delivery stack",
+      "image": "/assets/technology-stack/delivery-stack.png",
       "tools": [
         "Jira",
         "Asana",

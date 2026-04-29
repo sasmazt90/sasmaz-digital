@@ -1,5 +1,12 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import * as fallbackSiteContent from "@/lib/siteContent";
+import { repairTextEncodingDeep } from "@/lib/repairTextEncoding";
 
 export type SiteContent = typeof fallbackSiteContent;
 
@@ -10,12 +17,15 @@ interface SiteContentContextValue {
   refresh: () => Promise<void>;
 }
 
-const defaultSiteContent = fallbackSiteContent as SiteContent;
+const defaultSiteContent = repairTextEncodingDeep(
+  fallbackSiteContent as SiteContent
+);
 
 const SiteContentContext = createContext<SiteContentContextValue | null>(null);
 
 export function SiteContentProvider({ children }: { children: ReactNode }) {
-  const [siteContent, setSiteContent] = useState<SiteContent>(defaultSiteContent);
+  const [siteContent, setSiteContent] =
+    useState<SiteContent>(defaultSiteContent);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,10 +37,16 @@ export function SiteContentProvider({ children }: { children: ReactNode }) {
         throw new Error(`Failed to load site content (${response.status})`);
       }
 
-      const nextData = (await response.json()) as SiteContent;
+      const nextData = repairTextEncodingDeep(
+        (await response.json()) as SiteContent
+      );
       setSiteContent(nextData);
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : "Failed to load site content.");
+      setError(
+        nextError instanceof Error
+          ? nextError.message
+          : "Failed to load site content."
+      );
     } finally {
       setIsLoading(false);
     }

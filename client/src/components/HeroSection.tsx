@@ -1,16 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { usePortfolioData } from '@/contexts/PortfolioDataContext';
-import { MapPin, Mail, Linkedin, ExternalLink, Download } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { usePortfolioData } from "@/contexts/PortfolioDataContext";
+import { MapPin, Mail, Linkedin, ExternalLink, Download } from "lucide-react";
 
-function AnimatedCounter({ target, suffix, duration = 2000 }: { target: number; suffix: string; duration?: number }) {
+function AnimatedCounter({
+  target,
+  suffix,
+  duration = 2000,
+}: {
+  target: number;
+  suffix: string;
+  duration?: number;
+}) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
+      ([entry]) => {
+        if (entry.isIntersecting && !started) setStarted(true);
+      },
       { threshold: 0.5 }
     );
     if (ref.current) observer.observe(ref.current);
@@ -30,7 +40,12 @@ function AnimatedCounter({ target, suffix, duration = 2000 }: { target: number; 
     requestAnimationFrame(animate);
   }, [started, target, duration]);
 
-  return <span ref={ref}>{count}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
 }
 
 export default function HeroSection() {
@@ -44,8 +59,8 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{
         backgroundImage: `url(https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/hero-bg_c5228078.png)`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center right',
+        backgroundSize: "cover",
+        backgroundPosition: "center right",
       }}
     >
       {/* Overlay */}
@@ -59,51 +74,62 @@ export default function HeroSection() {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               <span className="text-sm font-semibold text-blue-700 font-['Space_Grotesk']">
-                Munich, Germany
+                {t("hero.badge")}
               </span>
             </div>
 
             {/* Name */}
             <div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight font-['Space_Grotesk']">
-                {language === 'tr' ? personalInfo.nameTr : personalInfo.name}
+                {language === "tr" ? personalInfo.nameTr : personalInfo.name}
               </h1>
               <p className="mt-3 text-xl sm:text-2xl font-semibold text-blue-600 font-['Space_Grotesk']">
-                {t('hero.subtitle')}
+                {t("hero.subtitle")}
               </p>
             </div>
 
             {/* Description */}
             <p className="text-lg text-gray-600 leading-relaxed max-w-xl font-['Nunito_Sans']">
-              {t('hero.description')}
+              {t("hero.description")}
             </p>
 
             {/* Contact Info */}
             <div className="flex flex-wrap gap-4 text-sm text-gray-500">
-              <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="flex items-center gap-1.5 hover:text-blue-600 transition-colors"
+              >
                 <Mail size={14} />
                 <span>{personalInfo.email}</span>
               </a>
-              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-blue-600 transition-colors">
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-blue-600 transition-colors"
+              >
                 <Linkedin size={14} />
-                <span>LinkedIn</span>
+                <span>{t("contact.linkedin")}</span>
               </a>
               <span className="flex items-center gap-1.5">
                 <MapPin size={14} />
-                <span>{t('hero.location')}</span>
+                <span>{t("hero.location")}</span>
               </span>
             </div>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4">
               <button
-                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .querySelector("#contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
                 className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-all duration-200 hover:shadow-lg hover:shadow-blue-200 font-['Space_Grotesk'] flex items-center gap-2"
               >
                 <Mail size={16} />
-                {t('hero.cta.contact')}
+                {t("hero.cta.contact")}
               </button>
-
             </div>
           </div>
 
@@ -120,7 +146,9 @@ export default function HeroSection() {
               </div>
               {/* Floating badge */}
               <div className="absolute -bottom-4 -right-4 bg-blue-600 text-white px-4 py-2 rounded-xl shadow-lg">
-                <p className="text-xs font-semibold font-['Space_Grotesk']">Head of Digital</p>
+                <p className="text-xs font-semibold font-['Space_Grotesk']">
+                  {t("hero.floatingRole")}
+                </p>
               </div>
             </div>
 
@@ -132,10 +160,14 @@ export default function HeroSection() {
                   className="bg-white rounded-2xl p-4 shadow-md border border-gray-100 text-center hover:shadow-lg transition-shadow"
                 >
                   <div className="text-3xl font-bold text-blue-600 font-['JetBrains_Mono'] leading-none">
-                    <AnimatedCounter target={metric.value} suffix={metric.suffix} />
+                    <AnimatedCounter
+                      target={metric.value}
+                      suffix={metric.suffix}
+                    />
                   </div>
                   <div className="text-xs text-gray-500 mt-1 font-['Nunito_Sans'] font-semibold">
-                    {metric.label[language as keyof typeof metric.label] || metric.label.en}
+                    {metric.label[language as keyof typeof metric.label] ||
+                      metric.label.en}
                   </div>
                 </div>
               ))}
