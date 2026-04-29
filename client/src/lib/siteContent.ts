@@ -464,6 +464,9 @@ export const aiProducts = [
     title: "Gamebook AI",
     category: "Vibe coding / Generative storytelling",
     image: "/assets/apps/images/gamebook-ai.jpg",
+    imageFit: "cover",
+    imagePosition: "left top",
+    imageClassName: "scale-[1.14] origin-top-left",
     video: "/assets/apps/videos/Gamebook AI.mp4",
     url: "https://ai-gamebook.store/",
     summary:
@@ -476,8 +479,8 @@ export const aiProducts = [
     title: "DIGITAL CARBON FOOTPRINT SCORE",
     category: "Mobile sustainability product",
     image: "/assets/apps/images/digital-carbon-footprint-score.jpeg",
-    imageFit: "contain",
-    imagePosition: "center",
+    imageFit: "cover",
+    imagePosition: "center top",
     video: "/assets/apps/videos/CO2 Score Mobile App Walkthrough.mp4",
     url: "https://apps.apple.com/au/app/digital-carbon-footprint-score/id6762527333",
     summary:
