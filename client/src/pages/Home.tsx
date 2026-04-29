@@ -918,13 +918,13 @@ export default function Home() {
           ) : null}
         </div>
         {product.image ? (
-          <div
-            className={`mt-5 overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "h-[360px]" : "h-[250px]"}`}
-          >
+            <div
+            className={`mt-5 mx-auto overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "h-[360px] w-[288px]" : "h-[250px] w-[312px]"}`}
+            >
               <img
                 src={product.image}
                 alt={product.title}
-                className={`${portrait ? "aspect-[4/5]" : "aspect-[312/250]"} w-full ${product.imageFit === "contain" ? "object-contain p-3" : "object-cover"} ${product.imageClassName ?? ""}`}
+                className={`${portrait ? "aspect-[4/5]" : "aspect-[312/250]"} h-full w-full ${product.imageFit === "contain" ? "object-contain p-3" : "object-cover"} ${product.imageClassName ?? ""}`}
                 style={{
                   objectPosition:
                     product.imagePosition ??
@@ -1003,10 +1003,10 @@ export default function Home() {
   });
 
   const vibeCards = useMemo<CarouselCard[]>(
-    () =>
-      aiProducts
-        .filter(product => !product.confidential)
-        .map(product => buildProductCard(product, true)),
+      () =>
+        aiProducts
+          .filter(product => !product.confidential)
+          .map(product => buildProductCard(product, false)),
     [aiProducts, t.openLive, t.watchWalkthrough]
   );
 
