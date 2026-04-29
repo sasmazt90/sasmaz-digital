@@ -436,6 +436,26 @@
       ]
     },
     {
+      "title": "AI Verdict",
+      "category": "AI-Powered Multi-Model Video Generation Engine",
+      "image": "/assets/apps/images/ai-verdict.png",
+      "imageFit": "contain",
+      "imagePosition": "center",
+      "video": "https://youtu.be/8ra4_p_i7hk",
+      "videoType": "youtube",
+      "url": "https://www.youtube.com/@AI-Verdict",
+      "linkLabel": "Go To Channel",
+      "summary": "Automated AI video content system that orchestrates multiple AI models to generate dynamic debate-style videos.",
+      "outcome": "Users input a single question, then the system routes it across AI agents, generates visuals and voiceovers, and renders complete vertical and horizontal video outputs for social distribution.",
+      "tags": [
+        "AI video generation",
+        "Multi-agent systems",
+        "Content automation",
+        "Voice synthesis",
+        "Social media content"
+      ]
+    },
+    {
       "title": "Bluff Room",
       "category": "Mobile social deduction game",
       "image": "/assets/apps/images/bluff-room.png",
@@ -466,11 +486,13 @@
       ]
     },
     {
-      "title": "CO2 Score",
+      "title": "DIGITAL CARBON FOOTPRINT SCORE",
       "category": "Mobile sustainability product",
-      "image": "/assets/apps/images/co2-score.jpg",
+      "image": "/assets/apps/images/digital-carbon-footprint-score.jpeg",
+      "imageFit": "contain",
+      "imagePosition": "center",
       "video": "/assets/apps/videos/CO2 Score Mobile App Walkthrough.mp4",
-      "url": "https://apps.apple.com/de/app/co-score/id6755812154",
+      "url": "https://apps.apple.com/au/app/digital-carbon-footprint-score/id6762527333",
       "summary": "iOS application that helps consumers understand carbon footprint signals and sustainability trade-offs.",
       "outcome": "Turned sustainability scoring into a lightweight, consumer-friendly mobile experience powered by intelligent analysis.",
       "tags": [

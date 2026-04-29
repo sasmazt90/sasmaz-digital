@@ -640,7 +640,8 @@ export default function Home() {
             <img
               src={product.image}
               alt={product.title}
-              className={`${portrait ? "aspect-[4/5]" : "aspect-[16/10]"} w-full object-cover ${product.title === "DIGITAL GROWTH ENGINE" ? "object-left-top" : "object-top"}`}
+              className={`${portrait ? "aspect-[4/5]" : "aspect-[16/10]"} w-full ${product.imageFit === "contain" ? "object-contain p-3" : "object-cover"} ${product.imageClassName ?? ""}`}
+              style={{ objectPosition: product.imagePosition ?? (product.title === "DIGITAL GROWTH ENGINE" ? "left top" : "top") }}
             />
           </div>
         ) : (
@@ -693,7 +694,7 @@ export default function Home() {
             </button>
           ) : product.url && !product.confidential ? (
             <a href={product.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/8 dark:text-white">
-              {t.openLive}
+              {product.linkLabel ?? t.openLive}
             </a>
           ) : null}
         </div>
