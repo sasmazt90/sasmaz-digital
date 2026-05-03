@@ -1843,11 +1843,11 @@ export default function Home() {
               ) : mediaModal.type === "detail" ? (
                 <div className="p-6 sm:p-8">
                   {mediaModal.image ? (
-                    <div className="flex justify-center overflow-hidden rounded-[1.5rem] border border-white/10 bg-white">
+                    <div className="aspect-[16/9] max-h-[32rem] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#06151b]">
                       <img
                         src={mediaModal.image}
                         alt={mediaModal.title}
-                        className="max-h-[30rem] w-auto max-w-full object-contain"
+                        className="h-full w-full object-cover object-center"
                       />
                     </div>
                   ) : null}

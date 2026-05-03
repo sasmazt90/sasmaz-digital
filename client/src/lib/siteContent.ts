@@ -476,7 +476,7 @@ export const aiProducts = [
   {
     title: "Gamebook AI",
     category: "Vibe coding / Generative storytelling",
-    image: "/assets/apps/images/gamebook-ai.jpg",
+    image: "/assets/apps/images/gamebook-ai.png",
     imageFit: "cover",
     imagePosition: "left top",
     imageClassName: "scale-[1.14] origin-top-left",
@@ -491,7 +491,7 @@ export const aiProducts = [
   {
     title: "DIGITAL CARBON FOOTPRINT SCORE",
     category: "Mobile sustainability product",
-    image: "/assets/apps/images/digital-carbon-footprint-score.jpeg",
+    image: "/assets/apps/images/digital-carbon-footprint-score.png",
     imageFit: "cover",
     imagePosition: "center top",
     video: "/assets/apps/videos/CO2 Score Mobile App Walkthrough.mp4",
@@ -505,7 +505,7 @@ export const aiProducts = [
   {
     title: "360 Real Estate Suite",
     category: "AI-powered PropTech SaaS",
-    image: "/assets/apps/images/360-estate-suite.jpg",
+    image: "/assets/apps/images/360-estate-suite.png",
     video: "/assets/apps/videos/360-estate-suite.mp4",
     url: "https://www.360estatesuite.com/",
     summary:
@@ -529,7 +529,8 @@ export const aiProducts = [
   {
     title: "Pricing Validation & Intelligence",
     category: "Confidential enterprise AI",
-    image: "/assets/apps/images/pricing-validation-intelligence.svg",
+    image: "/assets/apps/images/powerapps-pricing-validation-intelligence.png",
+    imageFit: "cover",
     summary:
       "AI-assisted pricing validation platform connecting PIM data, retailer price feeds and competitor normalization into one decision-support layer.",
     outcome:
@@ -540,7 +541,8 @@ export const aiProducts = [
   {
     title: "BIODERMA 360 e-Prescription System",
     category: "Connected patient journey platform",
-    image: "/assets/apps/images/bioderma-360-e-prescription.svg",
+    image: "/assets/apps/images/powerapps-360-e-prescription-system.png",
+    imageFit: "cover",
     summary:
       "Built a GDPR-compliant e-prescription journey that generates dynamic product recommendations for patients and delivers them instantly to mobile via NFC-triggered prescription links.",
     outcome:
@@ -551,7 +553,8 @@ export const aiProducts = [
   {
     title: "BIODERMA AI-Driven Visit Planning Mobile Application",
     category: "Field force planning intelligence",
-    image: "/assets/apps/images/bioderma-visit-planning.svg",
+    image: "/assets/apps/images/powerapps-ai-driven-visit-planning.png",
+    imageFit: "cover",
     summary:
       "Developed a mobile planning tool for HCP field teams using CLV-based AI prioritization, engagement scoring and real-time traffic insight to optimize visit routing and daily calendars.",
     outcome:
@@ -562,7 +565,8 @@ export const aiProducts = [
   {
     title: "BIODERMA Tasky AI Web Application",
     category: "Internal workflow orchestration",
-    image: "/assets/apps/images/bioderma-tasky-ai.svg",
+    image: "/assets/apps/images/powerapps-tasky-ai-web-application.png",
+    imageFit: "cover",
     summary:
       "Designed an internal task and workflow management application for cross-functional and intra-department collaboration, inspired by structured operating models used in tools like Wrike and Asana.",
     outcome:
@@ -573,7 +577,8 @@ export const aiProducts = [
   {
     title: "360° Real-Time Executive Dashboard and Forecast",
     category: "Executive analytics and forecasting",
-    image: "/assets/apps/images/executive-dashboard-forecast.svg",
+    image: "/assets/apps/images/powerapps-executive-dashboard-forecast.png",
+    imageFit: "cover",
     summary:
       "Developed predictive analytics dashboards combining sell-out signals, seasonality patterns and sales trends to support executive decision-making in forecasting and stock management.",
     outcome:
@@ -584,7 +589,8 @@ export const aiProducts = [
   {
     title: "BIODERMA Invoice Automation System",
     category: "Finance process automation",
-    image: "/assets/apps/images/bioderma-invoice-automation.svg",
+    image: "/assets/apps/images/powerapps-invoice-automation-system.png",
+    imageFit: "cover",
     summary:
       "Built a Power Automate workflow that extracts invoice information from inbound email attachments using OCR and consolidates the validated data into a single operational document.",
     outcome:
@@ -595,7 +601,8 @@ export const aiProducts = [
   {
     title: "BIODERMA PTA Challenge Web Application",
     category: "Pharmacy sales activation",
-    image: "/assets/apps/images/bioderma-pta-challenge.svg",
+    image: "/assets/apps/images/powerapps-pta-enhanced.png",
+    imageFit: "cover",
     summary:
       "Created a pharmacy challenge application where cash receipts are scanned, BIODERMA products are extracted via OCR and sales quantities and prices are submitted against participant accounts.",
     outcome:

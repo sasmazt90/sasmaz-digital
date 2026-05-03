@@ -546,8 +546,8 @@
     {
       "title": "Pricing Validation & Intelligence",
       "category": "Enterprise AI",
-      "image": "/assets/apps/images/pricing-validation-intelligence.png",
-      "imageFit": "contain",
+      "image": "/assets/apps/images/powerapps-pricing-validation-intelligence.png",
+      "imageFit": "cover",
       "summary": "AI-assisted pricing validation platform connecting PIM data, retailer price feeds and competitor normalization into one decision-support layer.",
       "outcome": "Enabled pricing compliance checks, competitive benchmarking and margin-aware decision-making with a cleaner, faster review workflow.",
       "tags": [
@@ -560,8 +560,8 @@
     {
       "title": "BIODERMA 360 e-Prescription System",
       "category": "Connected patient journey platform",
-      "image": "/assets/apps/images/bioderma-360-e-prescription.png",
-      "imageFit": "contain",
+      "image": "/assets/apps/images/powerapps-360-e-prescription-system.png",
+      "imageFit": "cover",
       "summary": "Built a GDPR-compliant e-prescription journey that generates dynamic product recommendations for patients and delivers them instantly to mobile via NFC-triggered prescription links.",
       "outcome": "Connected prescription intent to discounted e-commerce and pharmacy conversion flows, enabling 360-degree journey mapping and prescription-to-purchase tracking through anonymized data capture.",
       "tags": [
@@ -574,8 +574,8 @@
     {
       "title": "BIODERMA AI-Driven Visit Planning Mobile Application",
       "category": "Field force planning intelligence",
-      "image": "/assets/apps/images/bioderma-visit-planning.png",
-      "imageFit": "contain",
+      "image": "/assets/apps/images/powerapps-ai-driven-visit-planning.png",
+      "imageFit": "cover",
       "summary": "Developed a mobile planning tool for HCP field teams using CLV-based AI prioritization, engagement scoring and real-time traffic insight to optimize visit routing and daily calendars.",
       "outcome": "Helped field teams focus on the highest-value accounts, improve route efficiency and build more intelligent calendars around lifetime value and engagement potential.",
       "tags": [
@@ -588,8 +588,8 @@
     {
       "title": "BIODERMA Tasky AI Web Application",
       "category": "Internal workflow orchestration",
-      "image": "/assets/apps/images/bioderma-tasky-ai.png",
-      "imageFit": "contain",
+      "image": "/assets/apps/images/powerapps-tasky-ai-web-application.png",
+      "imageFit": "cover",
       "summary": "Designed an internal task and workflow management application for cross-functional and intra-department collaboration, inspired by structured operating models used in tools like Wrike and Asana.",
       "outcome": "Reduced coordination friction, improved task visibility and created a more disciplined system for tracking ownership, deadlines and inter-team execution.",
       "tags": [
@@ -602,8 +602,8 @@
     {
       "title": "360° Real-Time Executive Dashboard and Forecast",
       "category": "Executive analytics and forecasting",
-      "image": "/assets/apps/images/executive-dashboard-forecast.png",
-      "imageFit": "contain",
+      "image": "/assets/apps/images/powerapps-executive-dashboard-forecast.png",
+      "imageFit": "cover",
       "summary": "Developed predictive analytics dashboards combining sell-out signals, seasonality patterns and sales trends to support executive decision-making in forecasting and stock management.",
       "outcome": "Created a real-time management layer that improved visibility into demand shifts and supported more proactive planning across inventory and commercial operations.",
       "tags": [
@@ -616,8 +616,8 @@
     {
       "title": "BIODERMA Invoice Automation System",
       "category": "Finance process automation",
-      "image": "/assets/apps/images/bioderma-invoice-automation.png",
-      "imageFit": "contain",
+      "image": "/assets/apps/images/powerapps-invoice-automation-system.png",
+      "imageFit": "cover",
       "summary": "Built a Power Automate workflow that extracts invoice information from inbound email attachments using OCR and consolidates the validated data into a single operational document.",
       "outcome": "Removed repetitive manual handling, reduced operational workload and created a more reliable, searchable finance intake process.",
       "tags": [
@@ -630,8 +630,8 @@
     {
       "title": "BIODERMA PTA Challenge Web Application",
       "category": "Pharmacy sales activation",
-      "image": "/assets/apps/images/bioderma-pta-challenge.png",
-      "imageFit": "contain",
+      "image": "/assets/apps/images/powerapps-pta-enhanced.png",
+      "imageFit": "cover",
       "summary": "Created a pharmacy challenge application where cash receipts are scanned, BIODERMA products are extracted via OCR and sales quantities and prices are submitted against participant accounts.",
       "outcome": "Enabled transparent leaderboard-based incentive programs for pharmacy teams and simplified campaign tracking for reward-based sales activations.",
       "tags": [
