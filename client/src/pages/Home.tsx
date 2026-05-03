@@ -116,6 +116,9 @@ const detailSectionHeadings = new Set([
 const isDetailSectionHeading = (value: string) =>
   detailSectionHeadings.has(value.trim().toLocaleUpperCase("tr-TR"));
 
+const secondaryCtaClass =
+  "inline-flex items-center gap-2 rounded-full border border-[#f4d68a] bg-[#fffbeb] px-4 py-2.5 text-sm font-bold text-[#bb4d00] shadow-[0_8px_18px_rgba(187,77,0,0.10)] transition hover:border-[#e7b84f] hover:bg-[#fff4d6] hover:text-[#963d00] dark:border-[#f4d68a]/45 dark:bg-[#fffbeb] dark:text-[#bb4d00]";
+
 const heroPhotos = [
   "/assets/profile/profile-picture.jpeg",
   "/assets/photos/naos-annual-meeting-2023.png",
@@ -995,7 +998,8 @@ export default function Home() {
               {t.watchWalkthrough}
             </button>
           ) : null}
-          {product.detailBody?.length || product.summary || product.outcome ? (
+          {product.confidential &&
+          (product.detailBody?.length || product.summary || product.outcome) ? (
             <button
               type="button"
               onClick={() =>
@@ -1008,7 +1012,7 @@ export default function Home() {
                     : [product.summary, product.outcome].filter(Boolean),
                 })
               }
-              className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/8 dark:text-white"
+              className={secondaryCtaClass}
             >
               {t.seeDetails}
             </button>
@@ -1018,7 +1022,7 @@ export default function Home() {
               href={product.url}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/8 dark:text-white"
+              className={secondaryCtaClass}
             >
               {product.linkLabel ?? t.openLive}
             </a>
@@ -1839,33 +1843,31 @@ export default function Home() {
               ) : mediaModal.type === "detail" ? (
                 <div className="p-6 sm:p-8">
                   {mediaModal.image ? (
-                    <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5">
+                    <div className="flex justify-center overflow-hidden rounded-[1.5rem] border border-white/10 bg-white">
                       <img
                         src={mediaModal.image}
                         alt={mediaModal.title}
-                        className="max-h-[26rem] w-full object-cover object-top"
+                        className="max-h-[30rem] w-auto max-w-full object-contain"
                       />
                     </div>
                   ) : null}
-                  <div className="mt-6 text-xs font-bold uppercase tracking-[0.24em] text-[#8cc8ff]">
-                    {t.longDescription}
-                  </div>
-                  <div className="mt-4 space-y-5">
+                  <div className="mt-6 space-y-5">
                     {mediaModal.body.map((paragraph, index) =>
                       isDetailSectionHeading(paragraph) ? (
                         <h4
                           key={`${paragraph}-${index}`}
-                          className="pt-2 font-['Space_Grotesk'] text-xl font-bold text-white"
+                          className="pt-3 font-['Space_Grotesk'] text-xl font-bold text-white"
                         >
                           {paragraph}
                         </h4>
                       ) : (
-                        <p
+                        <div
                           key={`${paragraph}-${index}`}
-                          className="text-[1.02rem] leading-8 text-white/84"
+                          className="flex gap-3 text-[1.02rem] leading-8 text-white/84"
                         >
-                          {paragraph}
-                        </p>
+                          <span className="mt-3 h-2 w-2 flex-shrink-0 rounded-full bg-[#8cc8ff]" />
+                          <p>{paragraph}</p>
+                        </div>
                       )
                     )}
                   </div>
