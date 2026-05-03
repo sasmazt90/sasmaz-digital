@@ -99,6 +99,23 @@ const toYoutubeThumbnail = (url: string) => {
   return match ? `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg` : "";
 };
 
+const detailSectionHeadings = new Set([
+  "PROBLEM",
+  "SOLUTION",
+  "ACTION",
+  "RESULT",
+  "SORUN",
+  "ÇÖZÜM",
+  "AKSİYON",
+  "SONUÇ",
+  "LÖSUNG",
+  "AKTION",
+  "ERGEBNIS",
+]);
+
+const isDetailSectionHeading = (value: string) =>
+  detailSectionHeadings.has(value.trim().toLocaleUpperCase("tr-TR"));
+
 const heroPhotos = [
   "/assets/profile/profile-picture.jpeg",
   "/assets/photos/naos-annual-meeting-2023.png",
@@ -380,6 +397,8 @@ const translations = {
     certificationsTitle: "Certifications",
     openLive: "Open Product",
     watchWalkthrough: "Watch Demo",
+    seeDetails: "See Details",
+    longDescription: "Long Description",
     openCase: "View Case Study",
     watchVideo: "Watch",
     emailLabel: "Email",
@@ -484,6 +503,8 @@ const translations = {
     certificationsTitle: "Zertifizierungen",
     openLive: "Produkt öffnen",
     watchWalkthrough: "Demo ansehen",
+    seeDetails: "Details ansehen",
+    longDescription: "Ausführliche Beschreibung",
     openCase: "Fallstudie öffnen",
     watchVideo: "Ansehen",
     emailLabel: "E-Mail",
@@ -587,6 +608,8 @@ const translations = {
     certificationsTitle: "Sertifikalar",
     openLive: "Ürünü Aç",
     watchWalkthrough: "Demoyu İzle",
+    seeDetails: "Detayları Gör",
+    longDescription: "Uzun Açıklama",
     openCase: "Vaka Analizini Aç",
     watchVideo: "İzle",
     emailLabel: "E-posta",
@@ -972,7 +995,7 @@ export default function Home() {
               {t.watchWalkthrough}
             </button>
           ) : null}
-          {product.detailBody?.length ? (
+          {product.detailBody?.length || product.summary || product.outcome ? (
             <button
               type="button"
               onClick={() =>
@@ -980,14 +1003,17 @@ export default function Home() {
                   type: "detail",
                   title: product.title,
                   image: product.image,
-                  body: product.detailBody,
+                  body: product.detailBody?.length
+                    ? product.detailBody
+                    : [product.summary, product.outcome].filter(Boolean),
                 })
               }
               className="inline-flex items-center gap-2 rounded-full border border-[#dce7f9] bg-white px-4 py-2.5 text-sm font-bold text-[#0f172a] dark:border-white/10 dark:bg-white/8 dark:text-white"
             >
-              {product.detailLabel ?? t.openLive}
+              {t.seeDetails}
             </button>
-          ) : product.url && !product.confidential ? (
+          ) : null}
+          {product.url && !product.confidential ? (
             <a
               href={product.url}
               target="_blank"
@@ -1007,7 +1033,7 @@ export default function Home() {
         aiProducts
           .filter(product => !product.confidential)
           .map(product => buildProductCard(product, false)),
-    [aiProducts, t.openLive, t.watchWalkthrough]
+    [aiProducts, t.openLive, t.seeDetails, t.watchWalkthrough]
   );
 
   const powerAppCards = useMemo<CarouselCard[]>(
@@ -1015,7 +1041,7 @@ export default function Home() {
       aiProducts
         .filter(product => product.confidential)
         .map(product => buildProductCard(product, false)),
-    [aiProducts, t.openLive, t.watchWalkthrough]
+    [aiProducts, t.openLive, t.seeDetails, t.watchWalkthrough]
   );
 
   const videoCards = useMemo<CarouselCard[]>(
@@ -1821,15 +1847,27 @@ export default function Home() {
                       />
                     </div>
                   ) : null}
-                  <div className="mt-6 space-y-5">
-                    {mediaModal.body.map(paragraph => (
-                      <p
-                        key={paragraph}
-                        className="text-[1.02rem] leading-8 text-white/84"
-                      >
-                        {paragraph}
-                      </p>
-                    ))}
+                  <div className="mt-6 text-xs font-bold uppercase tracking-[0.24em] text-[#8cc8ff]">
+                    {t.longDescription}
+                  </div>
+                  <div className="mt-4 space-y-5">
+                    {mediaModal.body.map((paragraph, index) =>
+                      isDetailSectionHeading(paragraph) ? (
+                        <h4
+                          key={`${paragraph}-${index}`}
+                          className="pt-2 font-['Space_Grotesk'] text-xl font-bold text-white"
+                        >
+                          {paragraph}
+                        </h4>
+                      ) : (
+                        <p
+                          key={`${paragraph}-${index}`}
+                          className="text-[1.02rem] leading-8 text-white/84"
+                        >
+                          {paragraph}
+                        </p>
+                      )
+                    )}
                   </div>
                 </div>
               ) : (

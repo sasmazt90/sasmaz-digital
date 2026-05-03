@@ -1,4 +1,5 @@
 import type { SupportedLanguage } from "@/content/homeLocalizationStatic";
+import { productLongDescriptions } from "@/content/homeProductDetails";
 
 type ProductItem = {
   title: string;
@@ -28,6 +29,7 @@ type CaseStudyItem = {
 type ToolClusterItem = {
   title: string;
   tools: string[];
+  image?: string;
 };
 
 type CertificationItem = {
@@ -56,6 +58,7 @@ type SpeakingItem = {
 type VideoItem = {
   title: string;
   url: string;
+  image?: string;
 };
 
 function localizeCollection<T extends Record<string, unknown>>(
@@ -469,12 +472,24 @@ export function localizeProducts(
   items: ProductItem[],
   language: SupportedLanguage
 ) {
-  return localizeCollection(
+  const localizedItems = localizeCollection(
     items,
     language,
     language === "de" ? deProducts : trProducts,
     item => item.title
   );
+
+  const descriptions =
+    productLongDescriptions[language] as Partial<Record<string, readonly string[]>>;
+
+  return localizedItems.map(item => {
+    const detailBody = descriptions[item.title];
+
+    return {
+      ...item,
+      detailBody: detailBody ? [...detailBody] : item.detailBody,
+    };
+  });
 }
 
 export function localizeCaseStudies(

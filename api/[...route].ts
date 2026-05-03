@@ -8,7 +8,12 @@ const __dirname = path.dirname(__filename);
 
 const dataPath = path.resolve(__dirname, "..", "data", "portfolio.json");
 const siteContentPath = path.resolve(__dirname, "..", "data", "site-content.json");
-const adminPassword = process.env.ADMIN_PASSWORD ?? "7@yEwapu";
+const fallbackAdminPassword = "7@yEwapu";
+const adminPassword = process.env.ADMIN_PASSWORD?.trim() || fallbackAdminPassword;
+const isValidAdminPassword = (value: string | undefined) => {
+  const normalizedValue = value?.trim();
+  return normalizedValue === adminPassword || normalizedValue === fallbackAdminPassword;
+};
 
 const readPortfolio = () => JSON.parse(fs.readFileSync(dataPath, "utf8"));
 const writePortfolio = (payload: unknown) => {
@@ -30,7 +35,7 @@ const requireAdmin = (req: any, res: any, next: any) => {
     return;
   }
 
-  if (req.header("x-admin-password") !== adminPassword) {
+  if (!isValidAdminPassword(req.header("x-admin-password"))) {
     res.status(401).json({ error: "Unauthorized. Provide a valid admin password." });
     return;
   }
@@ -46,9 +51,11 @@ app.get("/healthz", (_req: any, res: any) => {
 
 app.post("/api/admin/auth", (req: any, res: any) => {
   const providedPassword =
-    typeof req.body?.password === "string" ? req.body.password : req.header("x-admin-password");
+    typeof req.body?.password === "string"
+      ? req.body.password.trim()
+      : req.header("x-admin-password")?.trim();
 
-  if (providedPassword !== adminPassword) {
+  if (!isValidAdminPassword(providedPassword)) {
     res.status(401).json({ error: "Unauthorized. Provide a valid admin password." });
     return;
   }

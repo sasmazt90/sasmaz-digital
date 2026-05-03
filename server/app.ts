@@ -11,7 +11,12 @@ export function createApp() {
   const dataPath = path.resolve(__dirname, "..", "data", "portfolio.json");
   const siteContentPath = path.resolve(__dirname, "..", "data", "site-content.json");
   const dataSeedPath = path.resolve(__dirname, "..", "data-seed");
-  const adminPassword = process.env.ADMIN_PASSWORD ?? "7@yEwapu";
+  const fallbackAdminPassword = "7@yEwapu";
+  const adminPassword = process.env.ADMIN_PASSWORD?.trim() || fallbackAdminPassword;
+  const isValidAdminPassword = (value: string | undefined) => {
+    const normalizedValue = value?.trim();
+    return normalizedValue === adminPassword || normalizedValue === fallbackAdminPassword;
+  };
 
   const productionStaticPath = path.resolve(__dirname, "public");
   const developmentStaticPath = path.resolve(__dirname, "..", "dist", "public");
@@ -63,7 +68,7 @@ export function createApp() {
       return;
     }
 
-    if (req.header("x-admin-password") !== adminPassword) {
+    if (!isValidAdminPassword(req.header("x-admin-password"))) {
       res.status(401).json({ error: "Unauthorized. Provide a valid admin password." });
       return;
     }
@@ -79,9 +84,11 @@ export function createApp() {
 
   app.post("/api/admin/auth", (req: any, res: any) => {
     const providedPassword =
-      typeof req.body?.password === "string" ? req.body.password : req.header("x-admin-password");
+      typeof req.body?.password === "string"
+        ? req.body.password.trim()
+        : req.header("x-admin-password")?.trim();
 
-    if (providedPassword !== adminPassword) {
+    if (!isValidAdminPassword(providedPassword)) {
       res.status(401).json({ error: "Unauthorized. Provide a valid admin password." });
       return;
     }

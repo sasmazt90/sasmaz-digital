@@ -408,6 +408,19 @@ export const careerTimeline = [
 
 export const aiProducts = [
   {
+    title: "Adaptif.AI",
+    category: "Content Localization & Resizing",
+    image: "/assets/apps/images/adaptif-ai.png",
+    imageFit: "contain",
+    url: "https://adaptifai.sasmaz.digital/",
+    summary:
+      "OCR and GenAI-powered localization workflow built to adapt marketing assets across languages, channels and campaign formats at scale.",
+    outcome:
+      "Streamlined creative adaptation, reduced manual production load and supported materially stronger CTR and conversion performance in localization scenarios.",
+    tags: ["OCR", "Creative localization", "Automation"],
+    confidential: false,
+  },
+  {
     title: "DIGITAL GROWTH ENGINE",
     category: "AI-Powered Growth Operating System",
     image: "/assets/apps/images/digital-growth-engine.png",
@@ -514,17 +527,6 @@ export const aiProducts = [
     tags: ["ESG", "Consumer product", "Scoring engine"],
   },
   {
-    title: "TranslASSET AI",
-    category: "Confidential AI workflow",
-    image: "/assets/apps/images/translasset-ai.svg",
-    summary:
-      "OCR and GenAI-powered localization workflow built to adapt marketing assets across languages, channels and campaign formats at scale.",
-    outcome:
-      "Streamlined creative adaptation, reduced manual production load and supported materially stronger CTR and conversion performance in localization scenarios.",
-    tags: ["OCR", "Creative localization", "Automation"],
-    confidential: true,
-  },
-  {
     title: "Pricing Validation & Intelligence",
     category: "Confidential enterprise AI",
     image: "/assets/apps/images/pricing-validation-intelligence.svg",
@@ -604,10 +606,11 @@ export const aiProducts = [
 ];
 
 export const videoPortfolio = [
-  { title: "BIODERMA Sensibio H2O x Seyda Erdogan", url: "https://youtu.be/D56eDn7YeJw?si=_oCHg1A8NGvxi0_F" },
+  { title: "Sensibio H2O - 30 Jahre Jubiläumskampagne", url: "https://youtu.be/AUyBGBKxwPM?si=A-UlUpqWSPrpykCb", image: "/assets/videos/sensibio-de.png" },
   { title: "BIODERMA x TVF", url: "https://youtu.be/dykDZW_29ws?si=osQ7vQnssu0bgdcs" },
   { title: "BIODERMA x Eda Ece", url: "https://youtu.be/YtaaNzuXPdQ?si=C5WNpFRtLIn5Rc5h" },
   { title: "BIODERMA Interactive Skin Stories", url: "https://youtu.be/FAPKz5FOyFg?si=OI3ykckcDN0fD_wE" },
+  { title: "BIODERMA Sensibio H2O x Seyda Erdogan", url: "https://youtu.be/D56eDn7YeJw?si=_oCHg1A8NGvxi0_F" },
   { title: "BIODERMA x Ayca Aysin Turan", url: "https://youtu.be/9W87foQHZZ4?si=9SFDgu56OAwCvJZb" },
   { title: "Institut Esthederm x Beren Saat", url: "https://youtu.be/xLLIuDlfnDY?si=flATr_d00AGq14_S" },
   { title: "Etat Pur x Seyda Erdogan Pure Actives", url: "https://youtu.be/7q7p3bNe9a8?si=ZtVkHncvWZ4l4D25" },
