@@ -208,17 +208,51 @@ export function createApp() {
     fs.mkdirSync(path.dirname(siteContentPath), { recursive: true });
     fs.writeFileSync(siteContentPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   };
+  const readBlogSeedCollection = (): BlogCollection => {
+    const seedCandidates = [
+      path.resolve(dataSeedPath, "blog-posts.json"),
+      path.resolve(__dirname, "..", "data", "blog-posts.json"),
+    ];
+    const seedPath = seedCandidates.find((candidate) => fs.existsSync(candidate));
+    if (!seedPath) return { posts: [] };
+    const parsed = JSON.parse(fs.readFileSync(seedPath, "utf8")) as Partial<BlogCollection>;
+    return { posts: Array.isArray(parsed.posts) ? parsed.posts : [] };
+  };
+
   const readBlogCollection = (): BlogCollection => {
     if (!fs.existsSync(blogContentPath)) {
       fs.mkdirSync(path.dirname(blogContentPath), { recursive: true });
-      fs.writeFileSync(blogContentPath, `${JSON.stringify({ posts: [] }, null, 2)}\n`, "utf8");
+      const seed = readBlogSeedCollection();
+      fs.writeFileSync(
+        blogContentPath,
+        `${JSON.stringify({ posts: seed.posts, seededInitialBlogPosts: true }, null, 2)}\n`,
+        "utf8",
+      );
     }
-    const parsed = JSON.parse(fs.readFileSync(blogContentPath, "utf8")) as Partial<BlogCollection>;
-    return { posts: Array.isArray(parsed.posts) ? parsed.posts : [] };
+    const parsed = JSON.parse(fs.readFileSync(blogContentPath, "utf8")) as Partial<BlogCollection> & {
+      seededInitialBlogPosts?: boolean;
+    };
+    const posts = Array.isArray(parsed.posts) ? parsed.posts : [];
+    if (!parsed.seededInitialBlogPosts && posts.length === 0) {
+      const seed = readBlogSeedCollection();
+      if (seed.posts.length) {
+        fs.writeFileSync(
+          blogContentPath,
+          `${JSON.stringify({ posts: seed.posts, seededInitialBlogPosts: true }, null, 2)}\n`,
+          "utf8",
+        );
+        return { posts: seed.posts };
+      }
+    }
+    return { posts };
   };
   const writeBlogCollection = (payload: BlogCollection) => {
     fs.mkdirSync(path.dirname(blogContentPath), { recursive: true });
-    fs.writeFileSync(blogContentPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+    fs.writeFileSync(
+      blogContentPath,
+      `${JSON.stringify({ ...payload, seededInitialBlogPosts: true }, null, 2)}\n`,
+      "utf8",
+    );
   };
   const saveBlogPost = (post: BlogPost) => {
     const collection = readBlogCollection();
