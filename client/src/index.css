@@ -370,6 +370,111 @@
     background: rgba(15, 23, 42, 0.4);
   }
 
+  .blog-article-body {
+    color: #24324a;
+    font-size: 1.06rem;
+    line-height: 1.9;
+  }
+
+  .blog-article-body h1,
+  .blog-article-body h2,
+  .blog-article-body h3 {
+    color: #0f172a;
+    font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0;
+    line-height: 1.16;
+  }
+
+  .blog-article-body h1 {
+    margin: 0 0 1.35rem;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .blog-article-body h2 {
+    margin: 3rem 0 1rem;
+    font-size: clamp(1.65rem, 2.7vw, 2.35rem);
+  }
+
+  .blog-article-body h3 {
+    margin: 2rem 0 0.65rem;
+    font-size: 1.35rem;
+  }
+
+  .blog-article-body p {
+    margin: 0 0 1.15rem;
+  }
+
+  .blog-article-body strong {
+    color: #0f172a;
+    font-weight: 800;
+  }
+
+  .blog-article-body ol,
+  .blog-article-body ul {
+    margin: 1rem 0 1.5rem;
+    padding-left: 1.45rem;
+  }
+
+  .blog-article-body li {
+    margin: 0.55rem 0;
+    padding-left: 0.25rem;
+  }
+
+  .blog-article-body figure {
+    margin: 2.25rem 0;
+    overflow: hidden;
+    border: 1px solid #dce7f9;
+    border-radius: 1.5rem;
+    background: #ffffff;
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.06);
+  }
+
+  .blog-article-body figure img {
+    display: block;
+    width: 100%;
+    max-height: 28rem;
+    object-fit: cover;
+  }
+
+  .blog-article-body figcaption {
+    padding: 0.95rem 1.2rem;
+    color: #5b667b;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .blog-article-body [data-video-url] {
+    cursor: pointer;
+    position: relative;
+  }
+
+  .blog-article-body [data-video-url]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.18);
+  }
+
+  .blog-article-body [data-video-url]::before {
+    content: "▶";
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 5rem;
+    height: 5rem;
+    transform: translate(-50%, -50%);
+    place-items: center;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: #2563eb;
+    font-size: 2.1rem;
+    line-height: 1;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.22);
+  }
+
   @media (min-width: 1024px) {
     .portfolio-horizontal-grid {
       grid-auto-columns: minmax(360px, 1fr);

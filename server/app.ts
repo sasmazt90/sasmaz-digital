@@ -232,7 +232,7 @@ export function createApp() {
     const parsed = JSON.parse(fs.readFileSync(blogContentPath, "utf8")) as Partial<BlogCollection> & {
       seededInitialBlogPosts?: boolean;
     };
-    const posts = Array.isArray(parsed.posts) ? parsed.posts : [];
+    let posts = Array.isArray(parsed.posts) ? parsed.posts : [];
     if (!parsed.seededInitialBlogPosts && posts.length === 0) {
       const seed = readBlogSeedCollection();
       if (seed.posts.length) {
@@ -242,6 +242,26 @@ export function createApp() {
           "utf8",
         );
         return { posts: seed.posts };
+      }
+    }
+    const seed = readBlogSeedCollection();
+    if (seed.posts.length) {
+      let changed = false;
+      const byId = new Map(posts.map((post) => [post.id, post]));
+      for (const seedPost of seed.posts) {
+        const existing = byId.get(seedPost.id) as (BlogPost & { seededContentVersion?: number }) | undefined;
+        const nextSeedVersion = (seedPost as BlogPost & { seededContentVersion?: number }).seededContentVersion || 0;
+        const currentSeedVersion = existing?.seededContentVersion || 0;
+        if (!existing) {
+          posts = [seedPost, ...posts];
+          changed = true;
+        } else if (nextSeedVersion > currentSeedVersion) {
+          posts = posts.map((post) => (post.id === seedPost.id ? seedPost : post));
+          changed = true;
+        }
+      }
+      if (changed) {
+        writeBlogCollection({ posts });
       }
     }
     return { posts };

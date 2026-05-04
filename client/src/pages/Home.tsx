@@ -1205,13 +1205,13 @@ export default function Home() {
                   <h3 className={`font-['Space_Grotesk'] text-2xl font-bold leading-tight ${theme === "dark" ? "text-white" : "text-[#0f172a]"}`}>
                     {title}
                   </h3>
-                  <div className="mt-5 flex flex-wrap gap-2">
+                  <div className="mt-5 flex flex-wrap gap-1.5">
                     {tags.slice(0, 4).map(tag => (
                       <span
                         key={tag}
-                        className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] ${
+                        className={`rounded-full px-2 py-0.5 text-[0.62rem] font-bold uppercase leading-4 tracking-[0.1em] ${
                           theme === "dark"
-                            ? "bg-white/8 text-[#8cc8ff]"
+                            ? "bg-white/8 text-[#a9d4ff]"
                             : "bg-[#eef4ff] text-[#2563eb]"
                         }`}
                       >

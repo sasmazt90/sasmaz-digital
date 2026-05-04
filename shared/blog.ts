@@ -29,6 +29,7 @@ export interface BlogVisual {
   id: string;
   fileName: string;
   url?: string;
+  videoUrl?: string;
   alt: Record<BlogLanguage, string>;
   caption: Record<BlogLanguage, string>;
   prompt: string;
@@ -427,6 +428,7 @@ function normalizeVisual(visual: BlogVisual, index: number): BlogVisual {
     id: visual.id || `visual_${index + 1}`,
     fileName: uniqueBaseSlug(visual.fileName || `blog-visual-${index + 1}`) + (/\.(png|jpe?g|webp|svg)$/i.test(visual.fileName || "") ? "" : ".png"),
     url: visual.url,
+    videoUrl: visual.videoUrl,
     alt: {
       en: visual.alt?.en || "",
       de: visual.alt?.de || "",
