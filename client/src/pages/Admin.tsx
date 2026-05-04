@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link } from "wouter";
-import { Globe, Plus, RefreshCcw, Save, Shield, Trash2 } from "lucide-react";
+import { BriefcaseBusiness, FileText, Globe, Plus, RefreshCcw, Save, Shield, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { BlogAdmin } from "@/components/admin/BlogAdmin";
 import { usePortfolioData, type PortfolioData } from "@/contexts/PortfolioDataContext";
 import { useSiteContent, type SiteContent } from "@/contexts/SiteContentContext";
 
@@ -13,6 +14,7 @@ type SiteKey = keyof SiteContent;
 type DraftKey = `${SourceKind}:${string}`;
 type ViewMode = "form" | "json";
 const ADMIN_SESSION_KEY = "portfolio-admin-authenticated";
+const ADMIN_PASSWORD_SESSION_KEY = "portfolio-admin-password";
 
 interface SectionDescriptor {
   draftKey: DraftKey;
@@ -215,10 +217,12 @@ export default function Admin() {
   const [status, setStatus] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [viewModes, setViewModes] = useState<Record<DraftKey, ViewMode>>({} as Record<DraftKey, ViewMode>);
+  const [activeTab, setActiveTab] = useState<"career" | "blog">("career");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     setIsUnlocked(window.sessionStorage.getItem(ADMIN_SESSION_KEY) === "true");
+    setPassword(window.sessionStorage.getItem(ADMIN_PASSWORD_SESSION_KEY) || "");
   }, []);
 
   useEffect(() => {
@@ -282,6 +286,7 @@ export default function Admin() {
 
       if (typeof window !== "undefined") {
         window.sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
+        window.sessionStorage.setItem(ADMIN_PASSWORD_SESSION_KEY, password);
       }
 
       setIsUnlocked(true);
@@ -420,10 +425,10 @@ export default function Admin() {
                 Web uzerinden duzenlenebilir portfolyo
               </div>
               <div>
-                <h1 className="font-['Space_Grotesk'] text-3xl font-bold sm:text-4xl">Portfolio Admin</h1>
+                <h1 className="font-['Space_Grotesk'] text-3xl font-bold sm:text-4xl">Admin Backoffice</h1>
                 <p className="mt-2 max-w-3xl text-sm text-slate-300 sm:text-base">
-                  Bu panel artik hem temel profil verisini hem de yeni ana sayfada kullandigimiz landing page
-                  bloklarini duzenliyor. `ADMIN_PASSWORD` tanimliysa asagidaki alanla kayit yetkisi acilir.
+                  Career tab keeps the existing portfolio admin workflow. Blog tab adds draft generation, editing,
+                  preview, publishing, image handling, SEO, and deletion for sasmaz.digital/blog.
                 </p>
               </div>
             </div>
@@ -469,9 +474,32 @@ export default function Admin() {
             {status && <span className="text-emerald-300">{status}</span>}
             {saveError && <span className="text-rose-300">{saveError}</span>}
           </div>
+
+          <div className="flex flex-wrap gap-2 rounded-2xl border border-white/10 bg-slate-950/45 p-1">
+            <button
+              type="button"
+              onClick={() => setActiveTab("career")}
+              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition ${
+                activeTab === "career" ? "bg-blue-500 text-white" : "text-slate-300 hover:bg-white/10"
+              }`}
+            >
+              <BriefcaseBusiness size={16} />
+              Career
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("blog")}
+              className={`inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition ${
+                activeTab === "blog" ? "bg-blue-500 text-white" : "text-slate-300 hover:bg-white/10"
+              }`}
+            >
+              <FileText size={16} />
+              Blog
+            </button>
+          </div>
         </div>
 
-        <div className="mt-8 grid gap-6">
+        {activeTab === "career" ? <div className="mt-8 grid gap-6">
           {sections.map((section) => (
             <section key={section.draftKey} className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black/10">
               <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -541,7 +569,7 @@ export default function Admin() {
               />
             </section>
           ))}
-        </div>
+        </div> : <div className="mt-8"><BlogAdmin password={password} /></div>}
       </div>
     </div>
   );

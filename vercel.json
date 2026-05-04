@@ -6,6 +6,17 @@
       "includeFiles": "data/**"
     }
   },
+  "headers": [
+    {
+      "source": "/((?!assets/|favicon.ico|ads.txt|.*\\..*).*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/|assets/|favicon.ico|ads.txt|.*\\..*).*)",

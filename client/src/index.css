@@ -334,6 +334,42 @@
     display: none;
   }
 
+  .blog-cta-block,
+  .blog-kpi-callout,
+  .blog-framework-placeholder {
+    margin: 2rem 0;
+    border: 1px solid #dce7f9;
+    border-radius: 1.25rem;
+    background: #f8fbff;
+    padding: 1.25rem;
+  }
+
+  .blog-kpi-callout {
+    border-left: 5px solid #2563eb;
+  }
+
+  .blog-framework-placeholder {
+    text-align: center;
+  }
+
+  .blog-framework-placeholder > div {
+    display: flex;
+    min-height: 12rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #b8c8df;
+    border-radius: 1rem;
+    color: #5b667b;
+    font-weight: 700;
+  }
+
+  .dark .blog-cta-block,
+  .dark .blog-kpi-callout,
+  .dark .blog-framework-placeholder {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(15, 23, 42, 0.4);
+  }
+
   @media (min-width: 1024px) {
     .portfolio-horizontal-grid {
       grid-auto-columns: minmax(360px, 1fr);

@@ -2,14 +2,161 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import {
+  buildBlogGenerationPrompt,
+  buildDocReadyContent,
+  createBlankBlogPost,
+  createFallbackGeneratedPost,
+  normalizeGeneratedBlogPost,
+  sanitizeHtml,
+  uniqueSlug,
+  validateBlogPost,
+  type BlogCollection,
+  type BlogGenerationInput,
+  type BlogPost,
+} from "../shared/blog";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+function loadLocalEnv() {
+  const envPath = path.resolve(__dirname, "..", ".env");
+  if (!fs.existsSync(envPath)) return;
+  const lines = fs.readFileSync(envPath, "utf8").split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const separatorIndex = trimmed.indexOf("=");
+    if (separatorIndex <= 0) continue;
+    const key = trimmed.slice(0, separatorIndex).trim();
+    const value = trimmed.slice(separatorIndex + 1).trim().replace(/^["']|["']$/g, "");
+    if (!process.env[key]) process.env[key] = value;
+  }
+}
+
+loadLocalEnv();
+
+function normalizeBlogInput(body: unknown): BlogGenerationInput {
+  if (!body || typeof body !== "object") throw new Error("Blog input must be a JSON object.");
+  const value = body as Partial<BlogGenerationInput>;
+  if (!value.topic?.trim()) throw new Error("Topic is required.");
+  return {
+    topic: value.topic.trim(),
+    angle: value.angle?.trim() || "",
+    targetKeyword: value.targetKeyword?.trim() || "",
+    notes: value.notes?.trim() || "",
+  };
+}
+
+function buildSasmazSourceContext(dataPath: string, siteContentPath: string) {
+  const readJson = (targetPath: string) => {
+    if (!fs.existsSync(targetPath)) return null;
+    return JSON.parse(fs.readFileSync(targetPath, "utf8")) as Record<string, unknown>;
+  };
+  const portfolio = readJson(dataPath);
+  const siteContent = readJson(siteContentPath);
+  const context = {
+    sourceNote:
+      "Extracted from the local portfolio/CV-derived data used by sasmaz.digital admin. This is the concrete context the blog generator must use before relying on generic marketing knowledge.",
+    mandatorySourceLinks: {
+      cvFolder: "https://drive.google.com/drive/folders/1apKuJFhCAfwZwD8Re3zleIKEpZ5EBAWt?usp=sharing",
+      website: "https://www.sasmaz.digital",
+      linkedin: "https://www.linkedin.com/in/ibrahim-tolgar.sasmaz",
+    },
+    profile: portfolio?.personalInfo,
+    heroMetrics: portfolio?.heroMetrics || siteContent?.highlightMetrics,
+    currentPositioning: siteContent?.storyHighlights,
+    capabilityPillars: siteContent?.capabilityPillars,
+    careerTimeline: siteContent?.careerTimeline || portfolio?.experiences,
+    legacyExperiences: portfolio?.experiences,
+    aiProductsAndSystems: siteContent?.aiProducts,
+    skills: portfolio?.skills,
+    tools: portfolio?.toolsData || siteContent?.toolClusters,
+    caseStudies: {
+      portfolio: portfolio?.caseStudies,
+      website: siteContent?.caseStudies,
+    },
+    awards: portfolio?.awards,
+    speakingAndMentoring: portfolio?.speakingMentoring || siteContent?.speaking,
+    education: portfolio?.education || siteContent?.education,
+    certifications: portfolio?.certifications || siteContent?.certifications,
+    usageRules: [
+      "Write from first-hand operator perspective only when the article topic fits these actual roles/systems.",
+      "Use KPIs only where the related project/system context matches.",
+      "If a number is not in this context or in the verified KPI list, do not invent it.",
+      "German and Turkish versions must be as detailed as English, localized naturally rather than summarized.",
+      "Prefer concrete systems such as TranslAsset AI, pricing validation, SEO/PDP frameworks, CRM lifecycle/LTV-CAC, Tasky AI, Power Apps workflows, executive dashboards, and marketplace growth engines when relevant.",
+    ],
+  };
+  return JSON.stringify(context, null, 2).slice(0, 36000);
+}
+
+async function generateWithOpenAI(input: BlogGenerationInput, existingSlugs: string[], sourceContext: string) {
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  if (!apiKey) throw new Error("AI generation is not configured. Please add OPENAI_API_KEY.");
+  const model = process.env.BLOG_GENERATION_MODEL?.trim() || "gpt-5.5";
+  const response = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model,
+      input: buildBlogGenerationPrompt(input, sourceContext),
+      text: { format: { type: "json_object" } },
+    }),
+  });
+  const body = (await response.json().catch(() => null)) as any;
+  if (!response.ok) {
+    throw new Error(body?.error?.message || `OpenAI generation failed (${response.status}).`);
+  }
+  const outputText =
+    body?.output_text ||
+    body?.output?.flatMap((item: any) => item.content || []).find((item: any) => item.type === "output_text")?.text;
+  if (typeof outputText !== "string") throw new Error("AI output was empty or malformed.");
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(outputText);
+  } catch (error) {
+    if (process.env.NODE_ENV !== "production") console.error("Invalid blog AI response:", outputText);
+    throw new Error("AI returned invalid JSON. Please retry.");
+  }
+  return normalizeGeneratedBlogPost(parsed, input, existingSlugs);
+}
+
+async function generateImageWithOpenAI(prompt: string) {
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  if (!apiKey) throw new Error("Image generation is not configured. Please add OPENAI_API_KEY.");
+  const model = process.env.IMAGE_GENERATION_MODEL?.trim() || "gpt-image-1";
+  const response = await fetch("https://api.openai.com/v1/images/generations", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model,
+      prompt,
+      size: "1536x1024",
+      n: 1,
+    }),
+  });
+  const body = (await response.json().catch(() => null)) as any;
+  if (!response.ok) {
+    throw new Error(body?.error?.message || `OpenAI image generation failed (${response.status}).`);
+  }
+  const base64 = body?.data?.[0]?.b64_json;
+  if (typeof base64 !== "string") throw new Error("Image generation returned no image data.");
+  return Buffer.from(base64, "base64");
+}
 
 export function createApp() {
   const app = express();
   const dataPath = path.resolve(__dirname, "..", "data", "portfolio.json");
   const siteContentPath = path.resolve(__dirname, "..", "data", "site-content.json");
+  const blogContentPath = path.resolve(__dirname, "..", "data", "blog-posts.json");
+  const blogImagePath = path.resolve(__dirname, "..", "client", "public", "images", "blog");
   const dataSeedPath = path.resolve(__dirname, "..", "data-seed");
   const fallbackAdminPassword = "7@yEwapu";
   const adminPassword = process.env.ADMIN_PASSWORD?.trim() || fallbackAdminPassword;
@@ -61,6 +208,40 @@ export function createApp() {
     fs.mkdirSync(path.dirname(siteContentPath), { recursive: true });
     fs.writeFileSync(siteContentPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
   };
+  const readBlogCollection = (): BlogCollection => {
+    if (!fs.existsSync(blogContentPath)) {
+      fs.mkdirSync(path.dirname(blogContentPath), { recursive: true });
+      fs.writeFileSync(blogContentPath, `${JSON.stringify({ posts: [] }, null, 2)}\n`, "utf8");
+    }
+    const parsed = JSON.parse(fs.readFileSync(blogContentPath, "utf8")) as Partial<BlogCollection>;
+    return { posts: Array.isArray(parsed.posts) ? parsed.posts : [] };
+  };
+  const writeBlogCollection = (payload: BlogCollection) => {
+    fs.mkdirSync(path.dirname(blogContentPath), { recursive: true });
+    fs.writeFileSync(blogContentPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
+  };
+  const saveBlogPost = (post: BlogPost) => {
+    const collection = readBlogCollection();
+    const existingIndex = collection.posts.findIndex((item) => item.id === post.id);
+    const nextPost = {
+      ...post,
+      content: {
+        en: sanitizeHtml(post.content.en || ""),
+        de: sanitizeHtml(post.content.de || ""),
+        tr: sanitizeHtml(post.content.tr || ""),
+      },
+      updatedAt: new Date().toISOString(),
+    };
+    nextPost.docReadyContent = buildDocReadyContent(nextPost);
+    nextPost.validationWarnings = validateBlogPost(nextPost).warnings;
+    if (existingIndex >= 0) {
+      collection.posts[existingIndex] = nextPost;
+    } else {
+      collection.posts.unshift(nextPost);
+    }
+    writeBlogCollection(collection);
+    return nextPost;
+  };
 
   const requireAdmin = (req: any, res: any, next: any) => {
     if (!adminPassword) {
@@ -76,7 +257,7 @@ export function createApp() {
     next();
   };
 
-  app.use(express.json({ limit: "5mb" }));
+  app.use(express.json({ limit: "8mb" }));
 
   app.get("/healthz", (_req: any, res: any) => {
     res.json({ ok: true });
@@ -94,6 +275,33 @@ export function createApp() {
     }
 
     res.json({ ok: true });
+  });
+
+  app.get("/api/admin/ai-status", requireAdmin, (_req: any, res: any) => {
+    const hasApiKey = Boolean(process.env.OPENAI_API_KEY?.trim());
+    const blogModel = process.env.BLOG_GENERATION_MODEL?.trim() || "gpt-5.5";
+    const imageModel = process.env.IMAGE_GENERATION_MODEL?.trim() || "gpt-image-1";
+    const sourceContext = buildSasmazSourceContext(dataPath, siteContentPath);
+    res.json({
+      textGeneration: {
+        configured: hasApiKey,
+        model: blogModel,
+        requiredEnv: ["OPENAI_API_KEY", "BLOG_GENERATION_MODEL"],
+      },
+      imageGeneration: {
+        configured: hasApiKey,
+        model: imageModel,
+        requiredEnv: ["OPENAI_API_KEY", "IMAGE_GENERATION_MODEL"],
+      },
+      messages: hasApiKey
+        ? []
+        : ["AI generation is not configured. Please add OPENAI_API_KEY."],
+      sourceContext: {
+        configured: sourceContext.length > 1000,
+        characterCount: sourceContext.length,
+        sources: ["data/portfolio.json", "data/site-content.json", "CV folder link", "sasmaz.digital", "LinkedIn profile"],
+      },
+    });
   });
 
   app.get("/api/portfolio", (_req: any, res: any) => {
@@ -148,6 +356,231 @@ export function createApp() {
     }
   });
 
+  app.get("/api/blog-posts/public", (_req: any, res: any) => {
+    try {
+      const posts = readBlogCollection().posts
+        .filter((post) => post.status === "published")
+        .sort((a, b) => (b.publishedAt || b.updatedAt).localeCompare(a.publishedAt || a.updatedAt));
+      res.json({ posts });
+    } catch (error) {
+      res.status(500).json({ error: error instanceof Error ? error.message : "Failed to read public blog posts." });
+    }
+  });
+
+  app.get("/api/blog-posts/public/:slug", (req: any, res: any) => {
+    try {
+      const post = readBlogCollection().posts.find(
+        (item) =>
+          item.status === "published" &&
+          [item.slug.canonical, item.slug.en, item.slug.de, item.slug.tr].includes(req.params.slug),
+      );
+      if (!post) {
+        res.status(404).json({ error: "Published blog post not found." });
+        return;
+      }
+      res.json(post);
+    } catch (error) {
+      res.status(500).json({ error: error instanceof Error ? error.message : "Failed to read blog post." });
+    }
+  });
+
+  app.get("/api/admin/blog-posts", requireAdmin, (_req: any, res: any) => {
+    try {
+      res.json(readBlogCollection());
+    } catch (error) {
+      res.status(500).json({ error: error instanceof Error ? error.message : "Failed to read blog posts." });
+    }
+  });
+
+  app.post("/api/admin/blog-posts/manual", requireAdmin, (req: any, res: any) => {
+    try {
+      const input = normalizeBlogInput(req.body);
+      const existingSlugs = readBlogCollection().posts.map((post) => post.slug.canonical);
+      const post = createBlankBlogPost(input);
+      post.slug.canonical = uniqueSlug(input.topic, existingSlugs);
+      post.slug.en = post.slug.canonical;
+      post.slug.de = post.slug.canonical;
+      post.slug.tr = post.slug.canonical;
+      res.status(201).json(saveBlogPost(post));
+    } catch (error) {
+      res.status(400).json({ error: error instanceof Error ? error.message : "Failed to create manual blog draft." });
+    }
+  });
+
+  app.post("/api/admin/blog-posts/generate", requireAdmin, async (req: any, res: any) => {
+    try {
+      const input = normalizeBlogInput(req.body);
+      const collection = readBlogCollection();
+      const existingSlugs = collection.posts.map((post) => post.slug.canonical);
+      const sourceContext = buildSasmazSourceContext(dataPath, siteContentPath);
+      const generated = await generateWithOpenAI(input, existingSlugs, sourceContext);
+      res.status(201).json(saveBlogPost(generated));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Failed to generate blog post.";
+      if (message.includes("OPENAI_API_KEY")) {
+        try {
+          const fallback = createFallbackGeneratedPost(normalizeBlogInput(req.body));
+          fallback.validationWarnings = [
+            "AI generation is not configured. Please add OPENAI_API_KEY.",
+            ...(fallback.validationWarnings || []),
+          ];
+          res.status(201).json(saveBlogPost(fallback));
+          return;
+        } catch {
+          res.status(400).json({ error: message });
+          return;
+        }
+      }
+      res.status(400).json({ error: message });
+    }
+  });
+
+  app.put("/api/admin/blog-posts/:id", requireAdmin, (req: any, res: any) => {
+    try {
+      const collection = readBlogCollection();
+      const existing = collection.posts.find((post) => post.id === req.params.id);
+      if (!existing) {
+        res.status(404).json({ error: "Blog post not found." });
+        return;
+      }
+      const duplicateSlug = collection.posts.find(
+        (post) => post.id !== existing.id && post.slug.canonical === req.body?.slug?.canonical,
+      );
+      if (duplicateSlug) {
+        res.status(409).json({ error: `Slug already exists. Try ${req.body.slug.canonical}-2.` });
+        return;
+      }
+      const nextPost = { ...existing, ...req.body, id: existing.id, createdAt: existing.createdAt } as BlogPost;
+      res.json(saveBlogPost(nextPost));
+    } catch (error) {
+      res.status(400).json({ error: error instanceof Error ? error.message : "Failed to save blog post." });
+    }
+  });
+
+  app.post("/api/admin/blog-posts/:id/publish", requireAdmin, (req: any, res: any) => {
+    try {
+      const collection = readBlogCollection();
+      const existing = collection.posts.find((post) => post.id === req.params.id);
+      if (!existing) {
+        res.status(404).json({ error: "Blog post not found." });
+        return;
+      }
+      const validation = validateBlogPost(existing);
+      if (validation.errors.length) {
+        res.status(400).json({ error: validation.errors.join(" "), warnings: validation.warnings });
+        return;
+      }
+      const publishedAt = existing.publishedAt || new Date().toISOString();
+      res.json(saveBlogPost({ ...existing, status: "published", publishedAt, validationWarnings: validation.warnings }));
+    } catch (error) {
+      res.status(400).json({ error: error instanceof Error ? error.message : "Failed to publish blog post." });
+    }
+  });
+
+  app.delete("/api/admin/blog-posts/:id", requireAdmin, (req: any, res: any) => {
+    try {
+      const collection = readBlogCollection();
+      const existing = collection.posts.find((post) => post.id === req.params.id);
+      if (!existing) {
+        res.status(404).json({ error: "Blog post not found." });
+        return;
+      }
+      for (const visual of existing.visuals || []) {
+        if (visual.url?.startsWith("/images/blog/")) {
+          const target = path.resolve(blogImagePath, path.basename(visual.url));
+          if (target.startsWith(blogImagePath) && fs.existsSync(target)) fs.unlinkSync(target);
+        }
+      }
+      writeBlogCollection({ posts: collection.posts.filter((post) => post.id !== req.params.id) });
+      res.json({ ok: true });
+    } catch (error) {
+      res.status(400).json({ error: error instanceof Error ? error.message : "Failed to delete blog post." });
+    }
+  });
+
+  app.post("/api/admin/blog-posts/:id/visuals/:visualId/upload", requireAdmin, (req: any, res: any) => {
+    try {
+      const { fileName, dataUrl } = req.body || {};
+      if (typeof fileName !== "string" || typeof dataUrl !== "string") {
+        res.status(400).json({ error: "Upload requires fileName and dataUrl." });
+        return;
+      }
+      const extension = path.extname(fileName).toLowerCase();
+      if (![".png", ".jpg", ".jpeg", ".webp", ".svg"].includes(extension)) {
+        res.status(400).json({ error: "Unsupported image format. Use PNG, JPG, WEBP, or SVG." });
+        return;
+      }
+      const base64 = dataUrl.replace(/^data:[^;]+;base64,/, "");
+      const buffer = Buffer.from(base64, "base64");
+      if (buffer.length > 5 * 1024 * 1024) {
+        res.status(400).json({ error: "Image upload exceeds 5MB." });
+        return;
+      }
+      fs.mkdirSync(blogImagePath, { recursive: true });
+      const safeName = `${Date.now()}-${path.basename(fileName).replace(/[^a-zA-Z0-9._-]/g, "-")}`;
+      const target = path.resolve(blogImagePath, safeName);
+      if (!target.startsWith(blogImagePath)) {
+        res.status(400).json({ error: "Invalid upload path." });
+        return;
+      }
+      fs.writeFileSync(target, buffer);
+      const collection = readBlogCollection();
+      const existing = collection.posts.find((post) => post.id === req.params.id);
+      if (!existing) {
+        res.status(404).json({ error: "Blog post not found." });
+        return;
+      }
+      const visuals = existing.visuals.map((visual) =>
+        visual.id === req.params.visualId
+          ? { ...visual, fileName: safeName, url: `/images/blog/${safeName}`, status: "uploaded" as const }
+          : visual,
+      );
+      res.json(saveBlogPost({ ...existing, visuals }));
+    } catch (error) {
+      res.status(400).json({ error: error instanceof Error ? error.message : "Failed to upload visual." });
+    }
+  });
+
+  app.post("/api/admin/blog-posts/:id/visuals/:visualId/generate", requireAdmin, async (req: any, res: any) => {
+    try {
+      const collection = readBlogCollection();
+      const existing = collection.posts.find((post) => post.id === req.params.id);
+      if (!existing) {
+        res.status(404).json({ error: "Blog post not found." });
+        return;
+      }
+      const visual = existing.visuals.find((item) => item.id === req.params.visualId);
+      if (!visual) {
+        res.status(404).json({ error: "Visual not found." });
+        return;
+      }
+      const prompt = String(req.body?.prompt || visual.prompt || "").trim();
+      if (!prompt) {
+        res.status(400).json({ error: "Visual prompt is required." });
+        return;
+      }
+      const buffer = await generateImageWithOpenAI(prompt);
+      fs.mkdirSync(blogImagePath, { recursive: true });
+      const safeBase = path.basename(visual.fileName || `${existing.slug.canonical}-${visual.id}.png`).replace(/[^a-zA-Z0-9._-]/g, "-");
+      const fileName = `${Date.now()}-${safeBase.replace(/\.(png|jpe?g|webp|svg)$/i, "")}.png`;
+      const target = path.resolve(blogImagePath, fileName);
+      if (!target.startsWith(blogImagePath)) {
+        res.status(400).json({ error: "Invalid generated image path." });
+        return;
+      }
+      fs.writeFileSync(target, buffer);
+      const visuals = existing.visuals.map((item) =>
+        item.id === visual.id
+          ? { ...item, fileName, url: `/images/blog/${fileName}`, prompt, status: "generated" as const }
+          : item,
+      );
+      res.json(saveBlogPost({ ...existing, visuals }));
+    } catch (error) {
+      res.status(400).json({ error: error instanceof Error ? error.message : "Failed to generate visual." });
+    }
+  });
+
+  app.use("/images/blog", express.static(blogImagePath));
   app.use(express.static(staticPath));
 
   app.get("*", (_req: any, res: any) => {

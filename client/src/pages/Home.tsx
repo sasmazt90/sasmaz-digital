@@ -22,6 +22,7 @@ import {
   Workflow,
   X,
 } from "lucide-react";
+import type { BlogPost } from "@shared/blog";
 import {
   localizeCaseStudies,
   localizeCertifications,
@@ -39,6 +40,7 @@ import {
 } from "@/content/homeLocalizationStatic";
 import { usePortfolioData } from "@/contexts/PortfolioDataContext";
 import { useSiteContent } from "@/contexts/SiteContentContext";
+import { fetchPublicBlogPosts } from "@/lib/blogApi";
 
 type Language = "en" | "de" | "tr";
 type ThemeMode = "light" | "dark";
@@ -85,6 +87,7 @@ const navItems = [
   { key: "work", href: "#work" },
   { key: "tools", href: "#tools" },
   { key: "contact", href: "#contact" },
+  { key: "blog", href: "#blog" },
 ] as const;
 
 const toYoutubeEmbed = (url: string) => {
@@ -326,6 +329,7 @@ const translations = {
       work: "Authority",
       tools: "Capabilities & Credentials",
       contact: "Contact",
+      blog: "BLOG",
     },
     badge: "Head of Digital & AI Transformation Leader",
     title:
@@ -435,6 +439,7 @@ const translations = {
       work: "Autorität",
       tools: "Fähigkeiten & Nachweise",
       contact: "Kontakt",
+      blog: "BLOG",
     },
     badge: "Head of Digital & KI-Transformationsleiter",
     title:
@@ -541,6 +546,7 @@ const translations = {
       work: "Otorite",
       tools: "Yetkinlikler & Belgeler",
       contact: "İletişim",
+      blog: "BLOG",
     },
     badge: "Head of Digital & Yapay Zeka Dönüşüm Lideri",
     title:
@@ -772,6 +778,7 @@ export default function Home() {
   const [experienceModal, setExperienceModal] = useState<ExperienceModal>(null);
   const [heroPhotoIndex, setHeroPhotoIndex] = useState(0);
   const [journeyProgress, setJourneyProgress] = useState(0);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const journeyRef = useRef<HTMLElement | null>(null);
   const t = translations[language] as typeof translations.en;
   const localizedContent = useMemo(
@@ -893,6 +900,20 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchPublicBlogPosts()
+      .then(collection => {
+        if (!cancelled) setBlogPosts(collection.posts);
+      })
+      .catch(() => {
+        if (!cancelled) setBlogPosts([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -1150,6 +1171,70 @@ export default function Home() {
       })),
     [certifications]
   );
+  const blogCards = useMemo<CarouselCard[]>(
+    () =>
+      blogPosts.map(post => {
+        const hero = post.visuals[0];
+        const title = post.seo[language]?.title || post.topic;
+        const tags = post.categories?.length ? post.categories : ["Digital Growth Systems"];
+        return {
+          key: post.id,
+          content: (
+            <Reveal className="h-full">
+              <article
+                className={`flex h-full min-h-[31rem] flex-col overflow-hidden rounded-[1.75rem] border transition hover:-translate-y-1 ${
+                  theme === "dark"
+                    ? "border-white/10 bg-[#102230] hover:border-white/20"
+                    : "border-[#dce7f9] bg-white shadow-[0_16px_34px_rgba(15,23,42,0.05)] hover:border-[#cadcf6] hover:shadow-[0_18px_36px_rgba(15,23,42,0.08)]"
+                }`}
+              >
+                <div className="h-52 overflow-hidden bg-[#eef4ff] dark:bg-[#0f2530]">
+                  {hero?.url ? (
+                    <img
+                      src={hero.url}
+                      alt={hero.alt[language] || title}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center px-6 text-center text-sm font-semibold text-[#5b667b] dark:text-white/64">
+                      {hero?.prompt || "SASMAZ blog visual"}
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className={`font-['Space_Grotesk'] text-2xl font-bold leading-tight ${theme === "dark" ? "text-white" : "text-[#0f172a]"}`}>
+                    {title}
+                  </h3>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {tags.slice(0, 4).map(tag => (
+                      <span
+                        key={tag}
+                        className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] ${
+                          theme === "dark"
+                            ? "bg-white/8 text-[#8cc8ff]"
+                            : "bg-[#eef4ff] text-[#2563eb]"
+                        }`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-auto pt-7">
+                    <a
+                      href={`/blog/${post.slug.canonical}/${language}`}
+                      className="inline-flex items-center justify-center rounded-[1.1rem] bg-[#2563eb] px-5 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white shadow-[0_14px_28px_rgba(37,99,235,0.20)] transition hover:bg-[#1d4ed8]"
+                    >
+                      Read Now
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
+          ),
+        };
+      }),
+    [blogPosts, language, theme]
+  );
 
   return (
     <div
@@ -1170,7 +1255,11 @@ export default function Home() {
               <a
                 key={item.key}
                 href={item.href}
-                className="min-w-fit rounded-full px-3 py-2 transition hover:bg-[#eff5ff] hover:text-[#0f172a] dark:hover:bg-white/8 dark:hover:text-white"
+                className={`min-w-fit rounded-full px-3 py-2 transition hover:bg-[#eff5ff] hover:text-[#0f172a] dark:hover:bg-white/8 dark:hover:text-white ${
+                  item.key === "blog"
+                    ? "font-extrabold uppercase tracking-[0.18em] text-[#0f172a] dark:text-white"
+                    : ""
+                }`}
               >
                 {t.nav[item.key]}
               </a>
@@ -1755,6 +1844,38 @@ export default function Home() {
               />
               <Carousel cards={certificationCards} />
             </div>
+          </div>
+        </section>
+
+        <section
+          id="blog"
+          className="border-b border-[#dce6f5] bg-[#f8fbff]/88 py-20 backdrop-blur-[2px] dark:border-white/10 dark:bg-[#0b1f29]/88"
+        >
+          <div className="mx-auto max-w-7xl space-y-10 px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              title="BLOG"
+              description={
+                language === "de"
+                  ? "Operator-Notizen zu KI-Marketing, E-Commerce-Wachstum, Performance-Systemen und echter Umsetzung."
+                  : language === "tr"
+                    ? "Yapay zeka pazarlaması, e-ticaret büyümesi, performans sistemleri ve gerçek uygulama mantığı üzerine operator notları."
+                    : "Operator notes on AI marketing, e-commerce growth, performance systems and real execution logic."
+              }
+              dark={theme === "dark"}
+            />
+            {blogCards.length ? (
+              <Carousel cards={blogCards} />
+            ) : (
+              <Reveal
+                className={`rounded-[1.75rem] border p-8 text-center ${
+                  theme === "dark"
+                    ? "border-white/10 bg-[#102230] text-white/68"
+                    : "border-[#dce7f9] bg-white text-[#5b667b]"
+                }`}
+              >
+                Blog content is being prepared.
+              </Reveal>
+            )}
           </div>
         </section>
 

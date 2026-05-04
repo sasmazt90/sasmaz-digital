@@ -9,12 +9,17 @@ import { PortfolioDataProvider } from "./contexts/PortfolioDataContext";
 import { SiteContentProvider } from "./contexts/SiteContentContext";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
+import BlogList from "./pages/BlogList";
+import BlogArticle from "./pages/BlogArticle";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/admin"} component={Admin} />
+      <Route path={"/blog"} component={BlogList} />
+      <Route path={"/blog/:slug"} component={BlogArticle} />
+      <Route path={"/blog/:slug/:lang"} component={BlogArticle} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
