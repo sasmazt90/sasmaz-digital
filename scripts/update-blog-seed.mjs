@@ -6,7 +6,7 @@ const imageDir = path.join(root, "client", "public", "images", "blog");
 fs.mkdirSync(imageDir, { recursive: true });
 
 const now = "2026-05-04T12:00:00.000Z";
-const version = 3;
+const version = 4;
 
 const topics = [
   {
@@ -133,35 +133,15 @@ function escapeXml(value) {
 }
 
 function svg(fileName, title, subtitle, kind, accent = "#2563eb", video = false) {
-  const cards = kind === "framework"
-    ? ["Demand", "Decision", "Execution", "Learning"]
-    : kind === "kpi"
-      ? ["CTR", "CVR", "ROAS", "LTV"]
-      : ["Source", "Model", "Workflow", "Output"];
-  const play = video ? `<circle cx="600" cy="210" r="58" fill="white" opacity="0.94"/><path d="M585 178 L585 242 L635 210 Z" fill="${accent}"/>` : "";
-  const content = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
-  <defs>
-    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#06131a"/><stop offset="1" stop-color="#eff6ff"/></linearGradient>
-    <linearGradient id="line" x1="0" x2="1"><stop stop-color="${accent}"/><stop offset="1" stop-color="#14b8a6"/></linearGradient>
-    <filter id="shadow"><feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#0f172a" flood-opacity="0.22"/></filter>
-  </defs>
-  <rect width="1200" height="675" rx="42" fill="url(#bg)"/>
-  <circle cx="1030" cy="95" r="170" fill="${accent}" opacity="0.14"/>
-  <circle cx="150" cy="560" r="180" fill="#14b8a6" opacity="0.12"/>
-  <g filter="url(#shadow)">
-    <rect x="82" y="82" width="1036" height="511" rx="34" fill="white" opacity="0.94"/>
-    <text x="126" y="154" font-family="Inter, Arial" font-size="42" font-weight="800" fill="#0f172a">${escapeXml(title)}</text>
-    <text x="126" y="198" font-family="Inter, Arial" font-size="22" fill="#526179">${escapeXml(subtitle)}</text>
-    <path d="M126 410 C250 310 340 360 430 300 S630 250 736 318 S918 402 1070 286" fill="none" stroke="url(#line)" stroke-width="12" stroke-linecap="round"/>
-    ${cards.map((card, index) => {
-      const x = 126 + index * 246;
-      return `<rect x="${x}" y="455" width="202" height="88" rx="20" fill="#f8fbff" stroke="#dce7f9"/><text x="${x + 24}" y="508" font-family="Inter, Arial" font-size="24" font-weight="800" fill="#0f172a">${escapeXml(card)}</text>`;
-    }).join("")}
-    <rect x="126" y="235" width="260" height="122" rx="24" fill="#0f2530"/><text x="154" y="286" font-family="Inter, Arial" font-size="22" font-weight="800" fill="white">${kind.toUpperCase()}</text><text x="154" y="322" font-family="Inter, Arial" font-size="18" fill="#a9d4ff">SASMAZ operator system</text>
-    <rect x="860" y="232" width="210" height="130" rx="24" fill="#eef4ff"/><text x="890" y="283" font-family="Inter, Arial" font-size="44" font-weight="900" fill="${accent}">AI</text><text x="890" y="322" font-family="Inter, Arial" font-size="18" fill="#526179">decision layer</text>
-  </g>
-  ${play}
-</svg>`;
+  const shortTitle = escapeXml(title.length > 54 ? `${title.slice(0, 51)}...` : title);
+  const shortSubtitle = escapeXml(subtitle.length > 92 ? `${subtitle.slice(0, 89)}...` : subtitle);
+  const play = video ? `<circle cx="600" cy="338" r="70" fill="#ffffff" opacity="0.95"/><path d="M580 295 L580 381 L650 338 Z" fill="${accent}"/>` : "";
+  const common = `<defs><filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#0f172a" flood-opacity="0.16"/></filter></defs><rect width="1200" height="675" rx="40" fill="#f7f0e8"/><circle cx="1040" cy="120" r="190" fill="${accent}" opacity="0.10"/><circle cx="120" cy="590" r="210" fill="#14b8a6" opacity="0.09"/>`;
+  const hero = `${common}<g filter="url(#shadow)"><rect x="88" y="78" width="1024" height="520" rx="34" fill="#fffdf8"/><rect x="126" y="126" width="370" height="270" rx="22" fill="#efe4d7"/><rect x="164" y="170" width="96" height="68" rx="12" fill="#ffffff"/><rect x="282" y="170" width="136" height="68" rx="12" fill="#ffffff"/><rect x="164" y="262" width="254" height="76" rx="12" fill="#ffffff"/><path d="M556 410 C650 342 725 370 798 312 C868 257 935 278 1030 218" fill="none" stroke="${accent}" stroke-width="10" stroke-linecap="round"/><rect x="556" y="162" width="458" height="52" rx="26" fill="#eef4ff"/><text x="590" y="196" font-family="Inter, Arial" font-size="22" font-weight="800" fill="${accent}">strategy room operating model</text><text x="126" y="472" font-family="Inter, Arial" font-size="42" font-weight="900" fill="#0f172a">${shortTitle}</text><text x="126" y="518" font-family="Inter, Arial" font-size="22" fill="#5b667b">${shortSubtitle}</text></g>`;
+  const framework = `${common}<g filter="url(#shadow)"><rect x="96" y="82" width="1008" height="510" rx="32" fill="#ffffff"/><text x="132" y="152" font-family="Inter, Arial" font-size="40" font-weight="900" fill="#0f172a">${shortTitle}</text><text x="132" y="190" font-family="Inter, Arial" font-size="21" fill="#5b667b">${shortSubtitle}</text>${["Signals","Guardrails","Decision","Action","Learning"].map((label, i) => { const x = 134 + i * 195; return `<rect x="${x}" y="292" width="156" height="116" rx="22" fill="${i === 2 ? accent : "#f8fbff"}" stroke="#dce7f9"/><text x="${x + 22}" y="356" font-family="Inter, Arial" font-size="22" font-weight="800" fill="${i === 2 ? "#ffffff" : "#0f172a"}">${label}</text>${i < 4 ? `<path d="M${x + 164} 350 L${x + 188} 350" stroke="#94a3b8" stroke-width="4" stroke-linecap="round"/>` : ""}`; }).join("")}<text x="132" y="500" font-family="Inter, Arial" font-size="24" font-weight="800" fill="${accent}">simple decision logic, not a black-box dashboard</text></g>`;
+  const kpi = `${common}<g filter="url(#shadow)"><rect x="92" y="78" width="1016" height="520" rx="34" fill="#ffffff"/><text x="132" y="150" font-family="Inter, Arial" font-size="40" font-weight="900" fill="#0f172a">${shortTitle}</text><text x="132" y="188" font-family="Inter, Arial" font-size="21" fill="#5b667b">${shortSubtitle}</text>${["+12pp","ROAS","AOV","Margin"].map((label, i) => { const x = 132 + i * 240; return `<rect x="${x}" y="260" width="200" height="150" rx="24" fill="#f8fbff" stroke="#dce7f9"/><text x="${x + 28}" y="326" font-family="Inter, Arial" font-size="38" font-weight="900" fill="${accent}">${label}</text><rect x="${x + 28}" y="360" width="${96 + i * 18}" height="12" rx="6" fill="${accent}" opacity="0.38"/><rect x="${x + 28}" y="386" width="${126 - i * 10}" height="12" rx="6" fill="#14b8a6" opacity="0.34"/>`; }).join("")}<path d="M145 500 L1050 500" stroke="#e2e8f0" stroke-width="4"/><path d="M145 500 C325 460 445 480 585 420 S850 360 1050 315" fill="none" stroke="${accent}" stroke-width="8" stroke-linecap="round"/></g>`;
+  const workflow = `${common}<g filter="url(#shadow)"><rect x="100" y="76" width="1000" height="520" rx="34" fill="#fffdf8"/><rect x="150" y="136" width="900" height="390" rx="20" fill="#ffffff" stroke="#e7d8c5"/><text x="180" y="190" font-family="Inter, Arial" font-size="40" font-weight="900" fill="#0f172a">${shortTitle}</text><text x="180" y="230" font-family="Inter, Arial" font-size="21" fill="#5b667b">${shortSubtitle}</text>${["brief","model","review","publish"].map((label, i) => `<rect x="${190 + i * 205}" y="${305 + (i % 2) * 34}" width="150" height="108" rx="16" fill="${["#fef3c7","#dbeafe","#dcfce7","#fce7f3"][i]}"/><text x="${220 + i * 205}" y="${365 + (i % 2) * 34}" font-family="Inter, Arial" font-size="24" font-weight="800" fill="#0f172a">${label}</text>`).join("")}</g>${play}`;
+  const content = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">${kind === "hero" ? hero : kind === "framework" ? framework : kind === "kpi" ? kpi : workflow}</svg>`;
   fs.writeFileSync(path.join(imageDir, fileName), content, "utf8");
 }
 
@@ -178,10 +158,10 @@ function visualSet(item, accent) {
   svg(files.kpi, `${item.title.en} KPI Model`, item.metric, "kpi", accent);
   if (item.video) svg(files.video, `${item.title.en} Video`, "Related execution video from the SASMAZ portfolio", "workflow", accent, true);
   return [
-    visual(item, "hero", files.hero, "Hero", "Hero visual showing the operating system context."),
-    visual(item, "framework", files.framework, "Framework section", "Framework diagram placed after the operating model."),
-    visual(item, "kpi", files.kpi, "Data / KPI section", "KPI dashboard visual placed after the data section."),
-    ...(item.video ? [visual(item, "video", files.video, "Real example video", "Video thumbnail with play overlay.", item.video)] : []),
+    visual(item, "hero", files.hero, "Hero", "Editorial strategy-room hero visual for the commercial operating context."),
+    visual(item, "framework", files.framework, "Framework section", "Clean framework visual showing the decision layers and operating flow."),
+    visual(item, "kpi", files.kpi, "Data / KPI section", "Minimal KPI card visual showing the measurable business signals."),
+    ...(item.video ? [visual(item, "video", files.video, "Real example video", "Warm workflow-style video thumbnail with play overlay.", item.video)] : []),
   ];
 }
 
@@ -201,7 +181,7 @@ function visual(item, id, fileName, placement, caption, videoUrl) {
       de: caption,
       tr: caption,
     },
-    prompt: `Custom SASMAZ-style ${id} visual for ${item.title.en}. Data product aesthetic, dashboards, diagrams, no stock imagery.`,
+    prompt: `Create a premium, modern, warm, business-realistic ${id} visual for ${item.title.en}. Use editorial strategy-room, simple framework, minimal KPI card, or whiteboard workflow style as appropriate. Avoid neon, holograms, dark futuristic dashboards, real brand logos, and stock-image clichés.`,
     placement,
     status: "generated",
   };
@@ -239,21 +219,121 @@ function paragraphSet(item, lang) {
   };
 }
 
+function sectionDetail(item, lang, section) {
+  const buyBox = item.slug.canonical.includes("buy-box");
+  const ctr = item.slug.canonical.includes("ctr");
+  const ltv = item.slug.canonical.includes("ltv-cac");
+  const perf = item.slug.canonical.includes("performance");
+  const seo = item.slug.canonical.includes("seo-pdp");
+  const commerce = item.slug.canonical.includes("e-commerce-growth");
+  const topic = item.title[lang];
+  if (lang === "de") {
+    const specific = buyBox
+      ? "In der Praxis bedeutet das: Buy Box Ownership darf nicht isoliert gegen Preis gewonnen werden. Preis, Verfuegbarkeit, Seller-Qualitaet, Fulfillment, Content, Promotion-Kalender und Deckungsbeitrag muessen gemeinsam bewertet werden."
+      : ctr
+        ? "Bei CTR geht es nicht nur um bessere Headlines. Entscheidend ist, ob Asset-Struktur, Lokalisierung, Hook, Format, Produktversprechen und Landing-Kontext zusammenpassen."
+        : ltv
+          ? "LTV/CAC wird erst operativ nutzbar, wenn CRM, Paid Media und Commercial Planning dieselben Kundenkohorten betrachten."
+          : perf
+            ? "Performance Marketing wird schwach, wenn Plattformsignale schneller optimieren als das Unternehmen lernen kann."
+            : seo
+              ? "SEO und PDP duerfen nicht getrennt geplant werden: Sichtbarkeit ohne Conversion ist nur teurer Traffic."
+              : "Eine Growth Engine ist nur dann nuetzlich, wenn sie Entscheidungen schneller und besser wiederholbar macht.";
+    const map = {
+      context: `${specific} Der Artikel ist deshalb als Operating Blueprint aufgebaut: erst Business-Kontext, dann Fehlermuster, dann Systemarchitektur, danach Beispiel, KPI-Interpretation und konkrete Umsetzung.`,
+      problem: "Das Kernproblem ist selten ein einzelner Kanal. Es ist fehlende Verbindung zwischen Signalen und Entscheidungen. Teams sehen viele Daten, aber die Regeln fehlen: Welche Abweichung ist relevant? Wer entscheidet? Welche Aktion folgt? Was wird nicht getan, um Marge, Channel-Konflikte oder falsche Lernsignale zu vermeiden?",
+      framework: "Die wichtigste Designentscheidung ist die Trennung von Signal und Entscheidung. Ein Signal sagt, was passiert. Eine Decision Rule sagt, was wir tun. Jede Regel braucht Schwellenwert, Owner, Datenquelle, Frequenz, Eskalationslogik und eine klare Gegenmetrik. Ohne Gegenmetrik optimiert das System zu aggressiv.",
+      example: `Fuer ${topic} wuerde ich das Setup als woechentlichen Growth Council betreiben: Commercial, Media, Marketplace, CRM und Analytics sehen dieselbe KPI-Map. AI wird dort eingesetzt, wo manuelle Pruefung langsam ist: Asset-Lokalisierung, Preisvalidierung, PDP-Checks, Segmentlogik oder Reporting-Kommentierung.`,
+      kpi: "Die KPI-Frage ist nicht nur, ob ein Wert steigt. Wichtig ist, ob der Wert erklaerbar ist. Eine bessere CTR ist schwach, wenn CVR oder Marge fallen. Buy Box Share ist gefaehrlich, wenn er nur durch Verlustpreise entsteht. LTV/CAC ist wertlos, wenn Kohorten falsch definiert sind.",
+      steps: "Der Startpunkt ist ein Minimum Viable Operating Model: eine KPI-Map, ein Entscheidungsboard, ein Backlog, eine woechentliche Review und drei Automationskandidaten. Erst danach lohnt sich ein komplexeres AI-System.",
+    };
+    return map[section];
+  }
+  if (lang === "tr") {
+    const specific = buyBox
+      ? "Pratikte bu su demek: Buy Box sadece fiyat kirarak kazanilamaz. Fiyat, stok, seller kalitesi, fulfillment, content, promosyon takvimi ve contribution margin birlikte degerlendirilmelidir."
+      : ctr
+        ? "CTR sadece daha iyi headline yazmak degildir. Asset yapisi, lokalizasyon, hook, format, product promise ve landing context birlikte calismalidir."
+        : ltv
+          ? "LTV/CAC ancak CRM, paid media ve commercial planning ayni kohort mantigina baktiginda operasyonel hale gelir."
+          : perf
+            ? "Performance marketing, platform sinyalleri sirketin ogrenme hizindan daha hizli optimize ettiginde zayiflar."
+            : seo
+              ? "SEO ve PDP ayri planlanamaz: conversion yaratmayan visibility sadece daha pahali trafiktir."
+              : "Growth engine ancak karar kalitesini ve tekrar edilebilirligi artirdiginda degerlidir.";
+    const map = {
+      context: `${specific} Bu nedenle yazi bir operating blueprint gibi kurgulandi: once business context, sonra kirilma noktasi, sonra sistem mimarisi, gercek ornek, KPI yorumu ve uygulanabilir adimlar.`,
+      problem: "Ana problem genellikle tek bir kanal degildir. Problem, sinyal ile karar arasindaki kopukluktur. Ekiplerin elinde cok veri vardir ama karar kurali yoktur: Hangi sapma onemli? Kim karar verir? Hangi aksiyon tetiklenir? Marj, kanal catismasi veya yanlis ogrenme sinyali yaratmamak icin ne yapilmaz?",
+      framework: "En onemli tasarim karari sinyal ile karari ayirmaktir. Sinyal ne oldugunu soyler. Decision rule ne yapilacagini soyler. Her kuralin threshold'u, owner'i, data source'u, frekansi, escalation mantigi ve guardrail metrig'i olmalidir.",
+      example: `${topic} icin setup'i haftalik Growth Council gibi calistirirdim: Commercial, Media, Marketplace, CRM ve Analytics ayni KPI map'e bakar. AI manuel kontrolun yavas oldugu yerlerde kullanilir: asset localization, pricing validation, PDP check, segment logic veya reporting commentary.`,
+      kpi: "KPI sorusu sadece bir degerin artip artmadigi degildir. Degerin neden arttigi okunabilmelidir. CVR veya marj dusuyorsa CTR artisi zayiftir. Buy Box share sadece zararli fiyatla geliyorsa tehlikelidir. Kohort yanlissa LTV/CAC anlamsizdir.",
+      steps: "Baslangic noktasi minimum viable operating model'dir: KPI map, karar board'u, backlog, haftalik review ve uc otomasyon adayi. Daha kompleks AI sistemi bundan sonra anlamli olur.",
+    };
+    return map[section];
+  }
+  const specific = buyBox
+    ? "In practice, this means Buy Box ownership cannot be won through price cutting alone. Price, availability, seller quality, fulfillment, PDP content, promotion calendars and contribution margin have to be evaluated together."
+    : ctr
+      ? "For CTR, the work is not just writing better headlines. Asset structure, localization, hook, format, product promise and landing context have to work as one system."
+      : ltv
+        ? "LTV/CAC becomes operational only when CRM, paid media and commercial planning look at the same customer cohorts and the same payback logic."
+        : perf
+          ? "Performance marketing becomes fragile when platform optimization moves faster than the organization can learn from it."
+          : seo
+            ? "SEO and PDP planning should not be separated: visibility without conversion is just more expensive traffic."
+            : "A growth engine is valuable only when it improves decision quality and makes execution repeatable.";
+  const map = {
+    context: `${specific} This is why the article is built as an operating blueprint: business context first, then failure modes, system architecture, real example, KPI interpretation and implementation steps.`,
+    problem: "The core problem is rarely one channel. It is the missing connection between signals and decisions. Teams see a lot of data, but the rules are unclear: Which variance matters? Who decides? What action follows? What should not be done because it would damage margin, channel discipline or learning quality?",
+    framework: "The most important design choice is separating signal from decision. A signal tells the team what is happening. A decision rule tells the team what to do. Every rule needs a threshold, owner, data source, review frequency, escalation logic and a guardrail metric. Without a guardrail, the system optimizes too aggressively.",
+    example: `For ${topic}, I would run the setup as a weekly Growth Council. Commercial, media, marketplace, CRM and analytics look at the same KPI map. AI is used where manual review is slow: asset localization, pricing validation, PDP checks, segment logic or reporting commentary.`,
+    kpi: "The KPI question is not only whether a number improved. The number has to be explainable. Higher CTR is weak if CVR or margin falls. Buy Box share is dangerous if it comes only from loss-making pricing. LTV/CAC is useless if cohorts are defined incorrectly.",
+    steps: "The starting point is a minimum viable operating model: one KPI map, one decision board, one backlog, one weekly review and three automation candidates. More complex AI should come after that operating discipline exists.",
+  };
+  return map[section];
+}
+
 function content(item, lang, visuals) {
   const p = paragraphSet(item, lang);
   const framework = visuals.find((v) => v.id.startsWith("visual_framework_"));
   const kpi = visuals.find((v) => v.id.startsWith("visual_kpi_"));
   const video = visuals.find((v) => v.videoUrl);
   return `<h1>${item.title[lang]}</h1>
-<h2>0. Context / Hook</h2><p>${p.hook}</p>
-<h2>1. Problem</h2><p>${p.problem}</p>
-<h2>2. Framework</h2><p>${p.framework}</p>
+<h2>0. Context</h2><p>${p.hook}</p><p>${sectionDetail(item, lang, "context")}</p>
+<h2>1. Problem</h2><p>${p.problem}</p><p>${sectionDetail(item, lang, "problem")}</p>
+<h2>2. Framework</h2><p>${p.framework}</p><p>${sectionDetail(item, lang, "framework")}</p>${operatorDepth(item, lang)}
 ${figure(framework, lang)}
-<h2>3. Real Example</h2><p>${p.example}</p>
+<h2>3. Real Example</h2><p>${p.example}</p><p>${sectionDetail(item, lang, "example")}</p>
 ${video ? videoFigure(video, lang) : ""}
-<h2>4. Data / KPI</h2><p>${p.kpi}</p>
+<h2>4. Data / KPI</h2><p>${p.kpi}</p><p>${sectionDetail(item, lang, "kpi")}</p>
 ${figure(kpi, lang)}
-<h2>5. Actionable Steps</h2><ol>${p.steps.map((step) => `<li><strong>${step}</strong></li>`).join("")}</ol>`;
+<h2>5. Actionable Steps</h2><p>${sectionDetail(item, lang, "steps")}</p><ol>${p.steps.map((step) => `<li><strong>${step}</strong> ${actionDetail(item, lang, step)}</li>`).join("")}</ol>${implementationChecklist(item, lang)}`;
+}
+
+function actionDetail(item, lang) {
+  if (lang === "de") return "Dokumentiere Datenquelle, Owner, Entscheidungskriterium und Gegenmetrik, damit das Team nicht nur misst, sondern handelt.";
+  if (lang === "tr") return "Data source, owner, karar kriteri ve guardrail metric yazilmali; ekip sadece olcmemeli, aksiyona gecmeli.";
+  return "Document the data source, owner, decision criterion and guardrail metric so the team does not only measure, but acts.";
+}
+
+function operatorDepth(item, lang) {
+  if (lang === "de") {
+    return `<h3>Decision Rules</h3><p>Eine Decision Rule sollte als Wenn-Dann-Logik dokumentiert werden. Beispiel: Wenn ein Wettbewerberpreis unter den erlaubten Preisboden faellt, wird nicht automatisch rabattiert. Zuerst werden Seller-Quelle, Bestand, Marge, Promo-Kalender und Channel-Konflikt geprueft. Erst danach entscheidet das Team zwischen Preisaktion, Enforcement, Content-Fix, Media-Pause oder CRM-Aktivierung.</p><h3>Governance Rhythm</h3><p>Der operative Rhythmus ist wichtiger als das Tool. Daily Monitoring erkennt Abweichungen, die woechentliche Growth-Runde entscheidet Prioritaeten, und ein monatlicher Business Review prueft, ob die Regeln noch stimmen. So wird das System nicht zu einem Reporting-Layer, sondern zu einer Entscheidungsmaschine.</p><h3>Trade-offs</h3><p>Jede Optimierung hat Kosten. Mehr Sichtbarkeit kann Marge kosten. Hoehere CTR kann schlechtere Conversion kaschieren. Mehr Automatisierung kann falsche Aktionen schneller skalieren. Deshalb braucht jede Wachstumsentscheidung mindestens eine Gegenmetrik und eine klare Stop-Regel.</p>`;
+  }
+  if (lang === "tr") {
+    return `<h3>Decision Rules</h3><p>Decision rule mutlaka if-then mantigi ile yazilmalidir. Ornek: Rakip fiyat izin verilen fiyat tabaninin altina inerse otomatik indirim yapilmaz. Once seller kaynagi, stok, marj, promosyon takvimi ve kanal catismasi kontrol edilir. Sonra ekip fiyat aksiyonu, enforcement, content fix, media pause veya CRM activation arasinda karar verir.</p><h3>Governance Rhythm</h3><p>Operasyon ritmi tool'dan daha onemlidir. Daily monitoring sapmalari yakalar, haftalik Growth Council oncelikleri belirler, aylik business review ise kurallarin hala gecerli olup olmadigini test eder. Boylece sistem sadece reporting layer olmaz; karar ureten bir mekanizmaya donusur.</p><h3>Trade-offs</h3><p>Her optimizasyonun maliyeti vardir. Daha fazla visibility marji dusurebilir. Daha yuksek CTR dusuk conversion'i gizleyebilir. Daha fazla otomasyon yanlis aksiyonu daha hizli scale edebilir. Bu nedenle her buyume kararinin bir guardrail metrigi ve net stop rule'u olmalidir.</p>`;
+  }
+  return `<h3>Decision Rules</h3><p>A decision rule should be written as if-then logic. For example, if a competitor price drops below the allowed commercial floor, the system should not automatically discount. First it checks seller source, stock, margin, promotion calendar and channel conflict. Only then does the team choose between price action, enforcement, content fix, media pause or CRM activation.</p><h3>Governance Rhythm</h3><p>The operating rhythm matters more than the tool. Daily monitoring catches variance, the weekly Growth Council decides priorities, and a monthly business review checks whether the rules are still valid. This prevents the system from becoming another reporting layer and turns it into a decision engine.</p><h3>Trade-offs</h3><p>Every optimization has a cost. More visibility can damage margin. Higher CTR can hide weaker conversion. More automation can scale the wrong action faster. That is why every growth decision needs at least one guardrail metric and one clear stop rule.</p>`;
+}
+
+function implementationChecklist(item, lang) {
+  if (lang === "de") {
+    return `<h3>Implementation Checklist</h3><p>Die Umsetzung beginnt mit einem klaren Dateninventar. Welche Daten kommen aus Media-Plattformen, Marketplace-Systemen, PIM, CRM, Analytics, Finance und Retailer-Reports? Danach wird jede Datenquelle einer Entscheidung zugeordnet. Daten ohne Entscheidung werden nicht priorisiert, weil sie das System nur schwerer machen.</p><p>Als zweites wird ein Entscheidungsboard aufgebaut. Dieses Board sollte nicht zwanzig Metriken nebeneinander zeigen, sondern Ursache, Entscheidung und naechste Aktion verbinden. Eine gute Zeile lautet nicht nur "Buy Box Share ist gefallen", sondern "Buy Box Share ist gefallen, weil Seller X unter Preisboden liegt; Owner Commercial; Aktion: Enforcement pruefen; Guardrail: Contribution Margin".</p><p>Als drittes wird AI nur dort eingesetzt, wo das Team bereits eine wiederholbare Regel hat. Wenn die Regel unklar ist, automatisiert AI nur Unsicherheit. Wenn die Regel klar ist, kann AI Monitoring, Klassifikation, Lokalisierung, Priorisierung oder Reporting beschleunigen.</p>`;
+  }
+  if (lang === "tr") {
+    return `<h3>Implementation Checklist</h3><p>Uygulama net bir data inventory ile baslar. Hangi veri media platformlarindan, marketplace sistemlerinden, PIM, CRM, analytics, finance ve retailer raporlarindan geliyor? Sonra her data source bir karara baglanir. Karara baglanmayan data onceliklendirilmez; cunku sistemi sadece agirlastirir.</p><p>Ikinci adim decision board kurmaktir. Bu board yirmi metrigi yan yana gostermemeli; neden, karar ve sonraki aksiyonu baglamalidir. Iyi bir satir sadece "Buy Box Share dustu" demez; "Buy Box Share dustu, cunku Seller X fiyat tabaninin altinda; owner Commercial; aksiyon enforcement kontrolu; guardrail contribution margin" der.</p><p>Ucuncu adim AI'i sadece tekrar edilebilir kural olan yerde kullanmaktir. Kural belirsizse AI sadece belirsizligi otomatiklestirir. Kural netse AI monitoring, classification, localization, prioritization veya reporting'i hizlandirir.</p>`;
+  }
+  return `<h3>Implementation Checklist</h3><p>Implementation starts with a clear data inventory. Which signals come from media platforms, marketplace systems, PIM, CRM, analytics, finance and retailer reports? Then each data source is mapped to a decision. Data that does not support a decision should not be prioritized because it only makes the system heavier.</p><p>The second step is a decision board. This board should not show twenty metrics next to each other. It should connect cause, decision and next action. A useful row does not say only "Buy Box share dropped." It says "Buy Box share dropped because Seller X is below the commercial floor; owner Commercial; action: check enforcement; guardrail: contribution margin."</p><p>The third step is using AI only where the team already has a repeatable rule. If the rule is unclear, AI only automates uncertainty. If the rule is clear, AI can accelerate monitoring, classification, localization, prioritization or reporting commentary.</p>`;
 }
 
 function figure(visual, lang) {

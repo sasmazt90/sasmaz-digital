@@ -226,13 +226,25 @@ You must create a complete authority blog article in EN, DE, and TR. Follow thes
 9. Include FAQ for each language.
 10. Include internal link suggestions.
 11. Return valid JSON only.
+12. Depth requirement: each language must read like a complete expert article, not an outline. Include concrete operating logic, formulas, decision thresholds, examples, trade-offs, governance rhythm, and implementation details. Target 1000-1500+ words per language where appropriate.
+13. Do not include FAQ inside the main content HTML. Store FAQ only in the separate faq object.
 
 Use and enrich from these mandatory context sources without copying directly: Resume/CV folder https://drive.google.com/drive/folders/1apKuJFhCAfwZwD8Re3zleIKEpZ5EBAWt?usp=sharing, personal website https://www.sasmaz.digital, LinkedIn profile https://www.linkedin.com/in/ibrahim-tolgar.sasmaz, and especially the extracted SASMAZ source context included above. If you cannot verify a KPI from the extracted context, label it as an example/benchmark or omit it.
 
 Known context you may use when relevant: AI-driven marketing operating system builder; Head of Digital at NAOS Deutschland; DACH digital commerce, analytics, AI and e-commerce growth systems; AI localization / creative adaptation systems; TranslAsset AI OCR + LLM + image reconstruction/inpainting; pricing validation and competitor benchmarking; SEO + PDP optimization; CRM lifecycle and LTV/CAC systems; workflow automation and Tasky AI-style internal operating systems; executive dashboards and forecasting. Verified KPI examples: +35% e-commerce sell-out growth, +14pp contribution margin improvement, +36% blended ROAS improvement, +11% AOV, +12pp Buy Box share, +48% first-page visibility, +9pp add-to-cart rate, +69% LTV, ~60% LTV/CAC, 15-18% OPEX optimization, TranslAsset AI -5% OPEX, +60% CTR, +25% CVR. Use only when contextually relevant.
 
+Visual style rule:
+Not every visual should be a futuristic dashboard. Use a balanced visual mix:
+- Hero image can be lifestyle, editorial, workplace, product-planning, or strategy-room style.
+- Framework visuals should be simple, clean, and easy to understand.
+- KPI visuals should be minimal metric cards or simple charts.
+- Workflow visuals can use whiteboard, sticky-note, tabletop, or operating-model style.
+Avoid overusing neon, dark SaaS dashboards, futuristic AI UI, holograms, and overly complex technical visuals.
+Prefer premium, modern, warm, editorial, business-realistic visuals.
+Never use real brand logos unless explicitly allowed.
+
 Use this article structure in each language:
-0. Context / Hook; 1. Problem; 2. Framework; 3. Real Example; 4. Data / KPI; 5. Actionable Steps; 6. FAQ.
+0. Context; 1. Problem; 2. Framework; 3. Real Example; 4. Data / KPI; 5. Actionable Steps.
 
 Return JSON matching this TypeScript shape exactly:
 {
@@ -455,7 +467,7 @@ function defaultInternalLinks(): BlogInternalLink[] {
 
 function buildFallbackArticle(language: BlogLanguage, title: string) {
   const copy = {
-    en: ["Context / Hook", "Problem", "Framework", "Real Example", "Data / KPI", "Actionable Steps"],
+    en: ["Context", "Problem", "Framework", "Real Example", "Data / KPI", "Actionable Steps"],
     de: ["Kontext / Einstieg", "Problem", "Framework", "Praxisbeispiel", "Daten / KPI", "Umsetzungsschritte"],
     tr: ["Baglam / Giris", "Problem", "Framework", "Gercek Ornek", "Veri / KPI", "Uygulanabilir Adimlar"],
   }[language];
