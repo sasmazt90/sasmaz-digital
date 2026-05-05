@@ -12,19 +12,19 @@ import {
 
 const companyLogos: Record<string, string> = {
   "NAOS Deutschland (BIODERMA)":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/naos-logo_d5e85a1d.jpg",
+    "/assets/logos/companies/naos-logo.webp",
   "NAOS TÃ¼rkiye (BIODERMA / Institut Esthederm / Etat Pur)":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/naos-logo_d5e85a1d.jpg",
+    "/assets/logos/companies/naos-logo.webp",
   "NAOS TÃ¼rkiye":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/naos-logo_d5e85a1d.jpg",
+    "/assets/logos/companies/naos-logo.webp",
   "D&R / idefix":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/d&r-logo_4684eef6.jpg",
+    "/assets/logos/companies/d&r-logo.webp",
   "8digits (SaaS Analytics & CRO Startup)":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/8digits-logo_03816d0a.jpg",
+    "/assets/logos/companies/8digits-logo.webp",
   "Emarsys (SAP Marketing Cloud)":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/emarsys-logo_944b641f.jpg",
+    "/assets/logos/companies/emarsys-logo.webp",
   "Lidyana.com":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/lidyana-logo_31bdf4c6.jpg",
+    "/assets/logos/companies/lidyana-logo.webp",
 };
 
 export default function ExperienceSection() {

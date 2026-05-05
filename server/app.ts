@@ -634,8 +634,16 @@ export function createApp() {
     }
   });
 
-  app.use("/images/blog", express.static(blogImagePath));
-  app.use(express.static(staticPath));
+  const longLivedStaticOptions = {
+    immutable: true,
+    maxAge: "30d",
+  };
+
+  app.use("/images/blog", express.static(blogImagePath, longLivedStaticOptions));
+  app.use("/assets", express.static(path.join(staticPath, "assets"), longLivedStaticOptions));
+  app.use("/images", express.static(path.join(staticPath, "images"), longLivedStaticOptions));
+  app.use("/data", express.static(path.join(staticPath, "data"), { maxAge: "5m" }));
+  app.use(express.static(staticPath, { index: false }));
 
   app.get("*", (_req: any, res: any) => {
     res.sendFile(path.join(staticPath, "index.html"));

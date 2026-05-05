@@ -43,7 +43,7 @@
       "brand": "Luxury E-Commerce",
       "role": "CRM & Email Marketing Specialist",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/lidyana-logo.jpg",
+      "logo": "/assets/logos/companies/lidyana-logo.webp",
       "focus": "Execution-focused role centered on lifecycle communication and personalization at scale.",
       "meta": [
         "Email and CRM operations",
@@ -82,7 +82,7 @@
       "brand": "SAP Marketing Cloud",
       "role": "Client\nManager",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/emarsys-logo.jpg",
+      "logo": "/assets/logos/companies/emarsys-logo.webp",
       "focus": "Enterprise-level consulting for global brands on marketing automation, retention, and lifecycle economics.",
       "meta": [
         "Enterprise client retainers",
@@ -121,7 +121,7 @@
       "brand": "MarTech SaaS",
       "role": "Account Manager",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/8digits-logo.jpg",
+      "logo": "/assets/logos/companies/8digits-logo.webp",
       "focus": "Consultative role providing behavioral diagnostics and CRO roadmaps for high-growth D2C and Shopify-based businesses.",
       "meta": [
         "Multi-vertical client portfolio",
@@ -160,7 +160,7 @@
       "brand": "Retail & Culture Commerce",
       "role": "Digital Marketing Specialist",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/d&r-logo.jpg",
+      "logo": "/assets/logos/companies/d&r-logo.webp",
       "focus": "Individual contributor role focused on hands-on optimization of the digital funnel and retention systems.",
       "meta": [
         "Hands-on execution role",
@@ -199,7 +199,7 @@
       "brand": "Retail & Culture Commerce",
       "role": "Digital Marketing Manager",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/d&r-logo.jpg",
+      "logo": "/assets/logos/companies/d&r-logo.webp",
       "focus": "Managed performance and CRM for one of Turkey's largest culture and entertainment retail ecosystems, overseeing 2 FTEs and integrated agency partners.",
       "meta": [
         "2 direct reports",
@@ -243,7 +243,7 @@
       "brand": "BIODERMA / Institut Esthederm / Etat Pur",
       "role": "Digital Marketing Manager",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/naos-logo.jpg",
+      "logo": "/assets/logos/companies/naos-logo.webp",
       "focus": "Established the digital marketing function from scratch, building a 6-person team and creating the performance, attribution, and execution foundations for scalable cross-brand growth.",
       "meta": [
         "6-person digital team",
@@ -297,7 +297,7 @@
       "brand": "BIODERMA / Institut Esthederm / Etat Pur",
       "role": "Digital Marketing & CRM Manager",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/companies/naos-logo.jpg",
+      "logo": "/assets/logos/companies/naos-logo.webp",
       "focus": "Led a 10-person cross-functional team across Digital, CRM, and Analytics, building an integrated growth model spanning acquisition, lifecycle management, e-commerce, and channel profitability.",
       "meta": [
         "10-person organization",
@@ -356,7 +356,7 @@
       "brand": "BIODERMA",
       "role": "Head of\nDigital",
       "location": "Munich, Germany",
-      "logo": "/assets/logos/companies/naos-logo.jpg",
+      "logo": "/assets/logos/companies/naos-logo.webp",
       "focus": "Leading the digital commerce, data, analytics, and AI agenda for NAOS Deutschland across DACH, with cross-functional ownership spanning Marketing, Sales, Medical, and Commercial teams, as well as global partners and agencies.",
       "meta": [
         "8-figure EUR annual digital budget",
@@ -416,7 +416,7 @@
     {
       "title": "Adaptif.AI",
       "category": "Content Localization & Resizing",
-      "image": "/assets/apps/images/adaptif-ai.png",
+      "image": "/assets/apps/images/adaptif-ai.webp",
       "imageFit": "contain",
       "url": "https://adaptifai.sasmaz.digital/",
       "summary": "OCR and GenAI-powered localization workflow built to adapt marketing assets across languages, channels and campaign formats at scale.",
@@ -431,7 +431,7 @@
     {
       "title": "DIGITAL GROWTH ENGINE",
       "category": "AI-Powered Growth Operating System",
-      "image": "/assets/apps/images/digital-growth-engine.png",
+      "image": "/assets/apps/images/digital-growth-engine.webp",
       "video": "https://youtu.be/RGmPXIKsp8k",
       "videoType": "youtube",
       "detailLabel": "Open Detail",
@@ -453,7 +453,7 @@
     {
       "title": "AI Verdict",
       "category": "AI-Powered Multi-Model Video Generation Engine",
-      "image": "/assets/apps/images/ai-verdict.png",
+      "image": "/assets/apps/images/ai-verdict.webp",
       "imageFit": "cover",
       "video": "https://youtu.be/8ra4_p_i7hk",
       "videoType": "youtube",
@@ -472,7 +472,7 @@
     {
       "title": "Recycle Lens",
       "category": "AI-Powered Recycling Assistant",
-      "image": "/assets/apps/images/recycle-lens.png",
+      "image": "/assets/apps/images/recycle-lens.webp",
       "imageFit": "cover",
       "imagePosition": "center center",
       "video": "https://youtube.com/shorts/_Fm3j-4yzkA?feature=share",
@@ -494,7 +494,7 @@
     {
       "title": "Bluff Room",
       "category": "Mobile social deduction game",
-      "image": "/assets/apps/images/bluff-room.png",
+      "image": "/assets/apps/images/bluff-room.webp",
       "video": "https://youtube.com/shorts/-QAAGFrhw0o",
       "videoType": "youtube",
       "url": "https://apps.apple.com/tr/app/bluff-room/id6760310629?l=tr",
@@ -510,7 +510,7 @@
     {
       "title": "Gamebook AI",
       "category": "Vibe coding / Generative storytelling",
-      "image": "/assets/apps/images/gamebook-ai.png",
+      "image": "/assets/apps/images/gamebook-ai.webp",
       "imageFit": "cover",
       "video": "/assets/apps/videos/Gamebook AI.mp4",
       "url": "https://ai-gamebook.store/",
@@ -525,7 +525,7 @@
     {
       "title": "DIGITAL CARBON FOOTPRINT SCORE",
       "category": "Mobile sustainability product",
-      "image": "/assets/apps/images/digital-carbon-footprint-score.png",
+      "image": "/assets/apps/images/digital-carbon-footprint-score.webp",
       "imageFit": "cover",
       "video": "/assets/apps/videos/CO2 Score Mobile App Walkthrough.mp4",
       "url": "https://apps.apple.com/au/app/digital-carbon-footprint-score/id6762527333",
@@ -540,7 +540,7 @@
     {
       "title": "360 Real Estate Suite",
       "category": "AI-powered PropTech SaaS",
-      "image": "/assets/apps/images/360-estate-suite.png",
+      "image": "/assets/apps/images/360-estate-suite.webp",
       "video": "/assets/apps/videos/360-estate-suite.mp4",
       "url": "https://www.360estatesuite.com/",
       "summary": "Property intelligence platform for virtual staging, listing workflows, operational management and immersive showcasing.",
@@ -554,7 +554,7 @@
     {
       "title": "See The Impact",
       "category": "ESG data platform",
-      "image": "/assets/apps/images/see-the-impact.jpg",
+      "image": "/assets/apps/images/see-the-impact.webp",
       "video": "/assets/apps/videos/SeeItheImpactMobile.mp4",
       "url": "https://www.seetheimpact.info/",
       "summary": "Sustainability intelligence platform that helps users evaluate brands and products through environmental insight layers.",
@@ -568,7 +568,7 @@
     {
       "title": "Pricing Validation & Intelligence",
       "category": "Enterprise AI",
-      "image": "/assets/apps/images/powerapps-pricing-validation-intelligence.png",
+      "image": "/assets/apps/images/powerapps-pricing-validation-intelligence.webp",
       "imageFit": "cover",
       "summary": "AI-assisted pricing validation platform connecting PIM data, retailer price feeds and competitor normalization into one decision-support layer.",
       "outcome": "Enabled pricing compliance checks, competitive benchmarking and margin-aware decision-making with a cleaner, faster review workflow.",
@@ -582,7 +582,7 @@
     {
       "title": "BIODERMA 360 e-Prescription System",
       "category": "Connected patient journey platform",
-      "image": "/assets/apps/images/powerapps-360-e-prescription-system.png",
+      "image": "/assets/apps/images/powerapps-360-e-prescription-system.webp",
       "imageFit": "cover",
       "summary": "Built a GDPR-compliant e-prescription journey that generates dynamic product recommendations for patients and delivers them instantly to mobile via NFC-triggered prescription links.",
       "outcome": "Connected prescription intent to discounted e-commerce and pharmacy conversion flows, enabling 360-degree journey mapping and prescription-to-purchase tracking through anonymized data capture.",
@@ -596,7 +596,7 @@
     {
       "title": "BIODERMA AI-Driven Visit Planning Mobile Application",
       "category": "Field force planning intelligence",
-      "image": "/assets/apps/images/powerapps-ai-driven-visit-planning.png",
+      "image": "/assets/apps/images/powerapps-ai-driven-visit-planning.webp",
       "imageFit": "cover",
       "summary": "Developed a mobile planning tool for HCP field teams using CLV-based AI prioritization, engagement scoring and real-time traffic insight to optimize visit routing and daily calendars.",
       "outcome": "Helped field teams focus on the highest-value accounts, improve route efficiency and build more intelligent calendars around lifetime value and engagement potential.",
@@ -610,7 +610,7 @@
     {
       "title": "BIODERMA Tasky AI Web Application",
       "category": "Internal workflow orchestration",
-      "image": "/assets/apps/images/powerapps-tasky-ai-web-application.png",
+      "image": "/assets/apps/images/powerapps-tasky-ai-web-application.webp",
       "imageFit": "cover",
       "summary": "Designed an internal task and workflow management application for cross-functional and intra-department collaboration, inspired by structured operating models used in tools like Wrike and Asana.",
       "outcome": "Reduced coordination friction, improved task visibility and created a more disciplined system for tracking ownership, deadlines and inter-team execution.",
@@ -624,7 +624,7 @@
     {
       "title": "360° Real-Time Executive Dashboard and Forecast",
       "category": "Executive analytics and forecasting",
-      "image": "/assets/apps/images/powerapps-executive-dashboard-forecast.png",
+      "image": "/assets/apps/images/powerapps-executive-dashboard-forecast.webp",
       "imageFit": "cover",
       "summary": "Developed predictive analytics dashboards combining sell-out signals, seasonality patterns and sales trends to support executive decision-making in forecasting and stock management.",
       "outcome": "Created a real-time management layer that improved visibility into demand shifts and supported more proactive planning across inventory and commercial operations.",
@@ -638,7 +638,7 @@
     {
       "title": "BIODERMA Invoice Automation System",
       "category": "Finance process automation",
-      "image": "/assets/apps/images/powerapps-invoice-automation-system.png",
+      "image": "/assets/apps/images/powerapps-invoice-automation-system.webp",
       "imageFit": "cover",
       "summary": "Built a Power Automate workflow that extracts invoice information from inbound email attachments using OCR and consolidates the validated data into a single operational document.",
       "outcome": "Removed repetitive manual handling, reduced operational workload and created a more reliable, searchable finance intake process.",
@@ -652,7 +652,7 @@
     {
       "title": "BIODERMA PTA Challenge Web Application",
       "category": "Pharmacy sales activation",
-      "image": "/assets/apps/images/powerapps-pta-enhanced.png",
+      "image": "/assets/apps/images/powerapps-pta-enhanced.webp",
       "imageFit": "cover",
       "summary": "Created a pharmacy challenge application where cash receipts are scanned, BIODERMA products are extracted via OCR and sales quantities and prices are submitted against participant accounts.",
       "outcome": "Enabled transparent leaderboard-based incentive programs for pharmacy teams and simplified campaign tracking for reward-based sales activations.",
@@ -668,7 +668,7 @@
     {
       "title": "Sensibio H2O - 30 Jahre Jubiläumskampagne",
       "url": "https://youtu.be/AUyBGBKxwPM?si=A-UlUpqWSPrpykCb",
-      "image": "/assets/videos/sensibio-de.png"
+      "image": "/assets/videos/sensibio-de.webp"
     },
     {
       "title": "BIODERMA x TVF",
@@ -738,7 +738,7 @@
   "toolClusters": [
     {
       "title": "Performance & retail media",
-      "image": "/assets/technology-stack/performance-retail-media.png",
+      "image": "/assets/technology-stack/performance-retail-media.webp",
       "tools": [
         "Google Ads",
         "Meta Ads",
@@ -750,7 +750,7 @@
     },
     {
       "title": "Analytics & BI",
-      "image": "/assets/technology-stack/analytics-bi.png",
+      "image": "/assets/technology-stack/analytics-bi.webp",
       "tools": [
         "GA4",
         "GTM",
@@ -762,7 +762,7 @@
     },
     {
       "title": "CRM & lifecycle",
-      "image": "/assets/technology-stack/crm-lifecycle.png",
+      "image": "/assets/technology-stack/crm-lifecycle.webp",
       "tools": [
         "Emarsys",
         "Euromsg",
@@ -772,7 +772,7 @@
     },
     {
       "title": "AI & automation",
-      "image": "/assets/technology-stack/ai-automation.png",
+      "image": "/assets/technology-stack/ai-automation.webp",
       "tools": [
         "OpenAI API",
         "Google AI Studio",
@@ -784,7 +784,7 @@
     },
     {
       "title": "Market intelligence",
-      "image": "/assets/technology-stack/market-intelligence.png",
+      "image": "/assets/technology-stack/market-intelligence.webp",
       "tools": [
         "Profitero",
         "Helium 10",
@@ -795,7 +795,7 @@
     },
     {
       "title": "Delivery stack",
-      "image": "/assets/technology-stack/delivery-stack.png",
+      "image": "/assets/technology-stack/delivery-stack.webp",
       "tools": [
         "Jira",
         "Asana",
@@ -811,25 +811,25 @@
       "title": "Prompt Design in Vertex AI",
       "issuer": "Google Cloud",
       "date": "2024",
-      "image": "/assets/certificates/Prompt Design in Vertex AI.jpg"
+      "image": "/assets/certificates/Prompt Design in Vertex AI.webp"
     },
     {
       "title": "Applied Marketing Analytics",
       "issuer": "Kellogg Executive Education",
       "date": "2023",
-      "image": "/assets/certificates/Applied-Marketing-Analytics.jpg"
+      "image": "/assets/certificates/Applied-Marketing-Analytics.webp"
     },
     {
       "title": "Leading Growth Strategy",
       "issuer": "Kellogg Executive Education",
       "date": "2023",
-      "image": "/assets/certificates/Leading-Growth-Strategy.jpg"
+      "image": "/assets/certificates/Leading-Growth-Strategy.webp"
     },
     {
       "title": "Digital Marketing: Customer Engagement, Social Media & Analytics",
       "issuer": "Emeritus",
       "date": "2022",
-      "image": "/assets/certificates/Digital Marketing-Emeritus.jpg"
+      "image": "/assets/certificates/Digital Marketing-Emeritus.webp"
     }
   ],
   "education": [
@@ -838,14 +838,14 @@
       "school": "Istanbul University",
       "period": "2014 - 2016",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/universities/istanbul-university.png"
+      "logo": "/assets/logos/universities/istanbul-university.webp"
     },
     {
       "degree": "BSc in Molecular Biology & Genetics",
       "school": "Istanbul Technical University",
       "period": "2008 - 2013",
       "location": "Istanbul, Turkey",
-      "logo": "/assets/logos/universities/Istanbul-Technical-University.jpg"
+      "logo": "/assets/logos/universities/Istanbul-Technical-University.webp"
     }
   ],
   "speaking": [
@@ -853,36 +853,36 @@
       "title": "Guest Speaker",
       "org": "Anadolu University",
       "detail": "AI, innovation and digital transformation at SAM'25.",
-      "logo": "/assets/logos/universities/Anadolu-University.jpg",
+      "logo": "/assets/logos/universities/Anadolu-University.webp",
       "url": "https://www.instagram.com/p/C61EFAPtbdF/"
     },
     {
       "title": "Guest Speaker",
       "org": "18 Mart University",
       "detail": "E-commerce, digital marketing, international career management and personal branding sessions.",
-      "logo": "/assets/logos/universities/18-Mart-University.jpg",
+      "logo": "/assets/logos/universities/18-Mart-University.webp",
       "url": "https://utl.bigaubf.comu.edu.tr/arsiv/etkinlikler/e-ticaret-ve-dijital-pazarlama-egitimi-r45.html"
     },
     {
       "title": "Mentor",
       "org": "Istanbul Technical University",
       "detail": "Annual career mentorship and leadership guidance within the ITU mentorship program.",
-      "logo": "/assets/logos/universities/Istanbul-Technical-University.jpg",
+      "logo": "/assets/logos/universities/Istanbul-Technical-University.webp",
       "url": "https://drive.google.com/file/d/1YZNB2IrMmGRpK-D4Thdsg7mRkoQVKpD7/view?usp=sharing"
     }
   ],
   "photoMoments": [
     {
       "title": "NAOS annual meeting 2023",
-      "image": "/assets/photos/naos-annual-meeting-2023.png"
+      "image": "/assets/photos/naos-annual-meeting-2023.webp"
     },
     {
       "title": "NAOS annual meeting 2022",
-      "image": "/assets/photos/naos-annual-meeting-2022.png"
+      "image": "/assets/photos/naos-annual-meeting-2022.webp"
     },
     {
       "title": "NAOS annual meeting 2021",
-      "image": "/assets/photos/naos-annual-meeting-2021.png"
+      "image": "/assets/photos/naos-annual-meeting-2021.webp"
     }
   ]
 }

@@ -58,7 +58,7 @@ export default function HeroSection() {
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden"
       style={{
-        backgroundImage: `url(https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/hero-bg_c5228078.png)`,
+        backgroundImage: `url(/assets/backgrounds/background-light-theme.webp)`,
         backgroundSize: "cover",
         backgroundPosition: "center right",
       }}

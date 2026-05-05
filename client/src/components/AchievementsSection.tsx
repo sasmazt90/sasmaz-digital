@@ -152,11 +152,11 @@ export default function AchievementsSection() {
                   item.topic.en;
                 const logoMap: Record<string, string> = {
                   "Anadolu University":
-                    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/Anadolu-University_4fbbfd97.jpg",
+                    "/assets/logos/universities/Anadolu-University.webp",
                   "Istanbul Technical University":
-                    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/Istanbul-Technical-University_a2f32e24.jpg",
+                    "/assets/logos/universities/Istanbul-Technical-University.webp",
                   "18 Mart University":
-                    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/18-Mart-University_44b5d0e4.jpg",
+                    "/assets/logos/universities/18-Mart-University.webp",
                 };
                 const logoUrl = logoMap[item.institution] || "";
 

@@ -10,7 +10,7 @@ export const personalInfo = {
   phone: '+4915511486576',
   website: 'https://sasmaz.digital',
   linkedin: 'https://linkedin.com/in/ibrahim-tolgar-sasmaz',
-  profilePhoto: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/profile-picture_55e611b5.jpeg',
+  profilePhoto: '/assets/profile/profile-picture.webp',
 };
 
 export const heroMetrics = [
@@ -300,7 +300,7 @@ export const certifications = [
     date: '2024',
     color: '#4285F4',
     icon: '🤖',
-    image: 'https://images.credly.com/size/680x680/images/cef82b2e-970a-4318-8e59-c3e26b7f5c19/image.png',
+    image: '/assets/certificates/Prompt Design in Vertex AI.webp',
     verificationUrl: 'https://www.credly.com/badges/391cb992-5ff5-42df-896e-1de840988ffd/linked_in_profile',
   },
   {
@@ -327,7 +327,7 @@ export const certifications = [
     date: 'May 2022',
     color: '#003087',
     icon: '🎯',
-    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/Digital%20Marketing-Emeritus_f2c8d3a1.jpg',
+    image: '/assets/certificates/Digital Marketing-Emeritus.webp',
     verificationUrl: 'https://certificates.emeritus.org/5421f7d9-20ce-4d07-a124-07cc02fd9fa8#acc.Ap0Pu3ST',
   },
   {
@@ -442,7 +442,7 @@ export const projects = [
     title: 'Gamebook AI Web Application',
     description: { en: 'AI-powered interactive gamebook creation platform with vibe coding, enabling users to design branching narratives and interactive stories', tr: 'Vibe kodlama ile yapay zeka destekli interaktif oyun kitabı oluşturma platformu, kullanıcıların dallanmış hikayeleri tasarlamasını sağlar', de: 'KI-gestützte interaktive Gamebook-Erstellungsplattform mit Vibe-Coding für Benutzer zum Entwerfen von Verzweigungsnarrativen' },
     url: 'https://gamebooks-ai.sasmaz.digital/',
-    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/gamebook-ai_cda8491e.jpg',
+    image: '/assets/apps/images/gamebook-ai.webp',
     videoUrl: 'https://youtu.be/bH4_P2bp7C4',
     ctaButtons: [
       { label: { en: 'See Demo', tr: 'Demoyu Gör', de: 'Demo ansehen' }, type: 'video' },
@@ -465,7 +465,7 @@ export const projects = [
       de: 'Multiplayer-Social-Deduction-Partyspiel: Raum beitreten, geheime Rollen erhalten, Hinweise geben, Outsider waehlen und punkten.',
     },
     url: 'https://apps.apple.com/tr/app/bluff-room/id6760310629?l=tr',
-    image: '/assets/apps/images/bluff-room.png',
+    image: '/assets/apps/images/bluff-room.webp',
     videoUrl: 'https://youtube.com/shorts/-QAAGFrhw0o',
     ctaButtons: [
       { label: { en: 'Watch Demo', tr: 'Watch Demo', de: 'Watch Demo' }, type: 'video' },
@@ -484,7 +484,7 @@ export const projects = [
     title: 'CO2 Score iOS Mobile Application',
     description: { en: 'Carbon footprint tracking mobile application for iOS, helping users measure and reduce their environmental impact with real-time analytics', tr: 'iOS için gerçek zamanlı analitik ile kullanıcıların çevresel etkisini ölçmesine ve azaltmasına yardımcı olan karbon ayak izi takip uygulaması', de: 'iOS-App zur Verfolgung des Kohlenstoff-Fußabdrucks mit Echtzeit-Analysen zur Messung und Verringerung der Umweltauswirkungen' },
     url: 'https://apps.apple.com/de/app/co-score/id6755812154',
-    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/co2-score_bdc78059.jpg',
+    image: '/assets/apps/images/co2-score.webp',
     videoUrl: 'https://youtube.com/shorts/b4fXNgPNyJo?feature=share',
     ctaButtons: [
       { label: { en: 'See How It Works', tr: 'Nasıl Çalıştığını Gör', de: 'So funktioniert es' }, type: 'video' },
@@ -503,7 +503,7 @@ export const projects = [
     title: '360 Real Estate Suite',
     description: { en: 'Comprehensive real estate management web application with CRM, property listing, tenant management, and financial reporting capabilities', tr: 'CRM, gayrimenkul listeleme, kiracı yönetimi ve finansal raporlama yetenekleri ile kapsamlı gayrimenkul yönetim web uygulaması', de: 'Umfassende Immobilienverwaltungs-Webanwendung mit CRM, Immobilienauflistung und Finanzberichterstattung' },
     url: 'https://www.360estatesuite.com/',
-    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/360-estate-suite_55c0d9dd.jpg',
+    image: '/assets/apps/images/360-estate-suite.webp',
     videoUrl: 'https://youtube.com/shorts/4g_5AYje-8o?feature=share',
     ctaButtons: [
       { label: { en: 'See Demo', tr: 'Demoyu Gör', de: 'Demo ansehen' }, type: 'video' },
@@ -522,7 +522,7 @@ export const projects = [
     title: 'See The Impact',
     description: { en: 'Social impact measurement and visualization platform enabling NGOs and social enterprises to track, measure, and communicate their societal contributions', tr: 'Sosyal etkileri olcmek ve gorsellestirilmek icin STKlar ve sosyal isletmelerin katkilarini izlemesine olanak taniyarak sosyal etki platformu', de: 'Plattform zur Messung und Visualisierung sozialer Wirkung fuer NGOs und Sozialunternehmen' },
     url: 'https://www.seetheimpact.info/',
-    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/see-the-impact_c877e5af.jpg',
+    image: '/assets/apps/images/see-the-impact.webp',
     videoUrl: 'https://youtube.com/shorts/qZj16uAWSas?feature=share',
     ctaButtons: [
       { label: { en: 'See Demo', tr: 'Demoyu Gör', de: 'Demo ansehen' }, type: 'video' },

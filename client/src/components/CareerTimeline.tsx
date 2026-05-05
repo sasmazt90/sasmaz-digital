@@ -30,13 +30,13 @@ export default function CareerTimeline() {
 
   const getCompanyLogo = (company: string) => {
     const logos: Record<string, string> = {
-      'NAOS Deutschland (BIODERMA)': 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/naos-logo_d5e85a1d.jpg',
-      'NAOS Türkiye (BIODERMA / Institut Esthederm / Etat Pur)': 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/naos-logo_d5e85a1d.jpg',
-      'NAOS Türkiye': 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/naos-logo_d5e85a1d.jpg',
-      'D&R / idefix': 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/d&r-logo_4684eef6.jpg',
-      '8digits (SaaS Analytics & CRO Startup)': 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/8digits-logo_03816d0a.jpg',
-      'Emarsys (SAP Marketing Cloud)': 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/emarsys-logo_944b641f.jpg',
-      'Lidyana.com': 'https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/lidyana-logo_31bdf4c6.jpg',
+      'NAOS Deutschland (BIODERMA)': '/assets/logos/companies/naos-logo.webp',
+      'NAOS Türkiye (BIODERMA / Institut Esthederm / Etat Pur)': '/assets/logos/companies/naos-logo.webp',
+      'NAOS Türkiye': '/assets/logos/companies/naos-logo.webp',
+      'D&R / idefix': '/assets/logos/companies/d&r-logo.webp',
+      '8digits (SaaS Analytics & CRO Startup)': '/assets/logos/companies/8digits-logo.webp',
+      'Emarsys (SAP Marketing Cloud)': '/assets/logos/companies/emarsys-logo.webp',
+      'Lidyana.com': '/assets/logos/companies/lidyana-logo.webp',
     };
     return logos[company] || null;
   };

@@ -123,10 +123,10 @@ const secondaryCtaClass =
   "inline-flex items-center gap-2 rounded-full border border-[#f4d68a] bg-[#fffbeb] px-4 py-2.5 text-sm font-bold text-[#bb4d00] shadow-[0_8px_18px_rgba(187,77,0,0.10)] transition hover:border-[#e7b84f] hover:bg-[#fff4d6] hover:text-[#963d00] dark:border-[#f4d68a]/45 dark:bg-[#fffbeb] dark:text-[#bb4d00]";
 
 const heroPhotos = [
-  "/assets/profile/profile-picture.jpeg",
-  "/assets/photos/naos-annual-meeting-2023.png",
-  "/assets/photos/naos-annual-meeting-2022.png",
-  "/assets/photos/naos-annual-meeting-2021.png",
+  "/assets/profile/profile-picture.webp",
+  "/assets/photos/naos-annual-meeting-2023.webp",
+  "/assets/photos/naos-annual-meeting-2022.webp",
+  "/assets/photos/naos-annual-meeting-2021.webp",
 ];
 
 const atsTags = [
@@ -854,8 +854,8 @@ export default function Home() {
     : [];
   const backgroundImage =
     theme === "dark"
-      ? "/assets/backgrounds/background-dark-theme.jpg"
-      : "/assets/backgrounds/background-light-theme.jpg";
+      ? "/assets/backgrounds/background-dark-theme.webp"
+      : "/assets/backgrounds/background-light-theme.webp";
   const portfolioSection = {
     eyebrow:
       language === "de"

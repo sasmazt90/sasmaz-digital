@@ -71,7 +71,7 @@ export default function AIShowcaseSection() {
     <section
       className="py-24 relative overflow-hidden"
       style={{
-        backgroundImage: `url(https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/ai-section-bg_8d95ff4d.png)`,
+        backgroundImage: `url(/assets/backgrounds/background-dark-theme.webp)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

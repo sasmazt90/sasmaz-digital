@@ -6,19 +6,19 @@ import HorizontalSlider from "./HorizontalSlider";
 
 const certImages: Record<string, string> = {
   "Prompt Design in Vertex AI":
-    "https://images.credly.com/size/680x680/images/cef82b2e-970a-4318-8e59-c3e26b7f5c19/image.png",
+    "/assets/certificates/Prompt Design in Vertex AI.webp",
   "Applied Marketing Analytics":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/Applied-Marketing-Analytics_4396d163.jpg",
+    "/assets/certificates/Applied-Marketing-Analytics.webp",
   "Leading Growth Strategy":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/Leading-Growth-Strategy_b63db115.jpg",
+    "/assets/certificates/Leading-Growth-Strategy.webp",
   "Digital Marketing: Customer Engagement, Planning & Analytics":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/Digital Marketing-Emeritus_0633bb35.jpg",
+    "/assets/certificates/Digital Marketing-Emeritus.webp",
   "Advanced Marketing Analytics":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/cert-002_0d478681.png",
+    "/assets/certificates/Applied-Marketing-Analytics.webp",
   "Digital Marketing Fundamentals":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/Digital Marketing-Emeritus_35a64df0.jpg",
+    "/assets/certificates/Digital Marketing-Emeritus.webp",
   "Marketing Analytics Specialization":
-    "https://d2xsxph8kpxj0f.cloudfront.net/310519663417992656/7RbFAYqZTA5W5SHxRNj5WZ/cert-004_b7a06e1e.png",
+    "/assets/certificates/Leading-Growth-Strategy.webp",
 };
 
 export default function CertificationsSection() {
