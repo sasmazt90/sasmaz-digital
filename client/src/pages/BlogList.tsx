@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
 import { Search } from "lucide-react";
 import type { BlogLanguage, BlogPost } from "@shared/blog";
@@ -6,6 +6,14 @@ import { blogLanguages } from "@shared/blog";
 import { fetchPublicBlogPosts } from "@/lib/blogApi";
 
 const languageLabels: Record<BlogLanguage, string> = { en: "EN", de: "DE", tr: "TR" };
+const adsenseClient = "ca-pub-4185131193797685";
+const adsenseBlogSlot = import.meta.env.VITE_ADSENSE_BLOG_SLOT || "";
+
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[];
+  }
+}
 
 function getBlogThumbnail(post: BlogPost) {
   return post.visuals.find((visual) => visual.visualType === "thumbnail") || post.visuals.find((visual) => visual.visualType === "hero") || post.visuals[0];
@@ -65,34 +73,71 @@ export default function BlogList() {
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         {error ? <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700">{error}</div> : null}
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {filteredPosts.map((post) => {
+          {filteredPosts.map((post, index) => {
             const thumbnail = getBlogThumbnail(post);
             return (
-              <article key={post.id} className="overflow-hidden rounded-[1.25rem] border border-[#dce7f9] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:border-[#cadcf6] hover:shadow-[0_22px_46px_rgba(15,23,42,0.09)]">
-                {thumbnail?.url ? (
-                  <img src={thumbnail.url} alt={thumbnail.alt[language]} className="aspect-video w-full object-cover" />
-                ) : (
-                  <div className="flex aspect-video w-full items-center justify-center bg-[#eef4ff] px-6 text-center text-sm text-[#5b667b]">{thumbnail?.prompt || "Blog visual"}</div>
-                )}
-                <div className="p-6 pt-5">
-                  <div className="mb-3 flex flex-wrap gap-2">
-                    {(post.categories || []).slice(0, 2).map((category) => (
-                      <span key={category} className="rounded-full bg-[#eef4ff] px-3 py-1 text-xs font-bold text-[#2563eb]">{category}</span>
-                    ))}
+              <Fragment key={post.id}>
+                <article className="overflow-hidden rounded-[1.25rem] border border-[#dce7f9] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:border-[#cadcf6] hover:shadow-[0_22px_46px_rgba(15,23,42,0.09)]">
+                  {thumbnail?.url ? (
+                    <img src={thumbnail.url} alt={thumbnail.alt[language]} className="aspect-video w-full bg-white object-cover" />
+                  ) : (
+                    <div className="flex aspect-video w-full items-center justify-center bg-[#eef4ff] px-6 text-center text-sm text-[#5b667b]">{thumbnail?.prompt || "Blog visual"}</div>
+                  )}
+                  <div className="p-6 pt-5">
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      {(post.categories || []).slice(0, 2).map((category) => (
+                        <span key={category} className="rounded-full bg-[#eef4ff] px-3 py-1 text-xs font-bold text-[#2563eb]">{category}</span>
+                      ))}
+                    </div>
+                    <h2 className="font-['Space_Grotesk'] text-2xl font-bold leading-tight">{post.seo[language].title || post.topic}</h2>
+                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#5b667b]">{post.seo[language].metaDescription}</p>
+                    <div className="mt-5 flex items-center justify-between gap-4 text-sm">
+                      <span className="text-[#7a8699]">{post.publishedAt ? new Intl.DateTimeFormat(language).format(new Date(post.publishedAt)) : ""}</span>
+                      <Link href={`/blog/${post.slug.canonical}/${language}`} className="font-bold text-[#2563eb]">Read more</Link>
+                    </div>
                   </div>
-                  <h2 className="font-['Space_Grotesk'] text-2xl font-bold leading-tight">{post.seo[language].title || post.topic}</h2>
-                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#5b667b]">{post.seo[language].metaDescription}</p>
-                  <div className="mt-5 flex items-center justify-between gap-4 text-sm">
-                    <span className="text-[#7a8699]">{post.publishedAt ? new Intl.DateTimeFormat(language).format(new Date(post.publishedAt)) : ""}</span>
-                    <Link href={`/blog/${post.slug.canonical}/${language}`} className="font-bold text-[#2563eb]">Read more</Link>
-                  </div>
-                </div>
-              </article>
+                </article>
+                {(index + 1) % 6 === 0 && index + 1 < filteredPosts.length ? <BlogListAd /> : null}
+              </Fragment>
             );
           })}
         </div>
         {!filteredPosts.length ? <div className="rounded-3xl border border-dashed border-[#dce7f9] bg-white p-10 text-center text-[#5b667b]">No published articles yet.</div> : null}
       </section>
     </main>
+  );
+}
+
+function BlogListAd() {
+  useEffect(() => {
+    if (!adsenseBlogSlot) return;
+    try {
+      if (!document.querySelector(`script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]`)) {
+        const script = document.createElement("script");
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`;
+        document.head.appendChild(script);
+      }
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adsbygoogle.push({});
+    } catch {
+      // AdSense can be blocked by local browser settings or extensions.
+    }
+  }, []);
+
+  if (!adsenseBlogSlot) return null;
+
+  return (
+    <aside className="md:col-span-2 xl:col-span-3">
+      <ins
+        className="adsbygoogle block min-h-[120px] overflow-hidden rounded-[1.25rem] border border-[#dce7f9] bg-white"
+        style={{ display: "block" }}
+        data-ad-client={adsenseClient}
+        data-ad-slot={adsenseBlogSlot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+    </aside>
   );
 }

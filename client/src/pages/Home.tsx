@@ -966,12 +966,12 @@ export default function Home() {
           </div>
           {product.image ? (
             <div
-              className={`mt-5 w-full overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-black/5 dark:border-white/10 dark:bg-black/20 ${portrait ? "aspect-[4/5]" : "aspect-[312/250]"}`}
+              className={`mt-5 w-full overflow-hidden rounded-[1.5rem] border border-[#e4ecf8] bg-white dark:border-white/10 dark:bg-black/20 ${portrait ? "aspect-[4/5]" : "aspect-[312/250]"}`}
             >
                 <img
                   src={product.image}
                   alt={product.title}
-                className={`h-full w-full ${portrait ? "aspect-[4/5]" : "aspect-[312/250]"} object-cover ${product.imageClassName ?? ""}`}
+                className={`h-full w-full ${portrait ? "aspect-[4/5]" : "aspect-[312/250]"} ${product.imageFit === "contain" ? "object-contain p-4" : "object-cover"} ${product.imageClassName ?? ""}`}
                   style={{
                     objectPosition:
                       product.imagePosition ??

@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useRoute } from "wouter";
-import { PlayCircle, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, PlayCircle, X } from "lucide-react";
 import { sanitizeHtml, type BlogLanguage, type BlogPost } from "@shared/blog";
 import { blogLanguages } from "@shared/blog";
-import { fetchPublicBlogPost } from "@/lib/blogApi";
+import { fetchPublicBlogPost, fetchPublicBlogPosts } from "@/lib/blogApi";
 
 const languageLabels: Record<BlogLanguage, string> = { en: "EN", de: "DE", tr: "TR" };
 const adsenseClient = "ca-pub-4185131193797685";
@@ -18,6 +18,10 @@ declare global {
 
 function getHeroVisual(post: BlogPost) {
   return post.visuals.find((visual) => visual.visualType === "hero") || post.visuals[0];
+}
+
+function getThumbnailVisual(post: BlogPost) {
+  return post.visuals.find((visual) => visual.visualType === "thumbnail") || post.visuals.find((visual) => visual.visualType === "hero") || post.visuals[0];
 }
 
 function upsertHeadLink(id: string, attrs: Record<string, string>) {
@@ -35,6 +39,7 @@ export default function BlogArticle() {
   const slug = params?.slug || "";
   const routeLanguage = blogLanguages.includes((params as { lang?: string } | null)?.lang as BlogLanguage) ? ((params as { lang?: string }).lang as BlogLanguage) : "en";
   const [post, setPost] = useState<BlogPost | null>(null);
+  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
   const [language, setLanguage] = useState<BlogLanguage>(routeLanguage);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,6 +49,12 @@ export default function BlogArticle() {
       .then((nextPost) => setPost(nextPost))
       .catch((loadError) => setError(loadError instanceof Error ? loadError.message : "Blog article not found."));
   }, [slug]);
+
+  useEffect(() => {
+    fetchPublicBlogPosts()
+      .then((collection) => setRelatedPosts(collection.posts))
+      .catch(() => setRelatedPosts([]));
+  }, []);
 
   useEffect(() => {
     if (!post) return;
@@ -140,8 +151,8 @@ export default function BlogArticle() {
 
           {hero ? (
             <figure className="mb-10 overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.06)]">
-              {hero.url ? <img src={hero.url} alt={hero.alt[language]} className="h-[26rem] w-full object-cover" /> : <div className="flex min-h-72 items-center justify-center bg-[#eef4ff] px-8 text-center text-[#5b667b]">{hero.prompt}</div>}
-              <figcaption className="px-5 py-4 text-sm text-[#5b667b]"><strong>Figure:</strong> {hero.caption[language]}</figcaption>
+              {hero.url ? <img src={hero.url} alt={hero.alt[language]} className="max-h-[34rem] w-full bg-white object-contain" /> : <div className="flex min-h-72 items-center justify-center bg-[#eef4ff] px-8 text-center text-[#5b667b]">{hero.prompt}</div>}
+              {hero.caption[language] ? <figcaption className="px-5 py-4 text-sm text-[#5b667b]">{hero.caption[language]}</figcaption> : null}
             </figure>
           ) : null}
 
@@ -152,7 +163,7 @@ export default function BlogArticle() {
               {bodyVisuals.map((visual) => (
                 <figure key={visual.id} className="overflow-hidden rounded-[1.5rem] border border-[#dce7f9] bg-white">
                   <VisualMedia visual={visual} language={language} onVideo={setActiveVideo} />
-                  <figcaption className="px-5 py-4 text-sm text-[#5b667b]"><strong>Figure:</strong> {visual.caption[language]}</figcaption>
+                  {visual.caption[language] ? <figcaption className="px-5 py-4 text-sm text-[#5b667b]">{visual.caption[language]}</figcaption> : null}
                 </figure>
               ))}
             </section>
@@ -173,7 +184,7 @@ export default function BlogArticle() {
           ) : null}
 
           <BlogAd placement="before-read-more" />
-          <ReadMoreSection post={post} language={language} />
+          <ReadMoreSection post={post} posts={relatedPosts} language={language} />
 
           {post.internalLinks.length ? (
             <section className="mt-10 rounded-[1.75rem] border border-[#dce7f9] bg-white p-6">
@@ -235,20 +246,78 @@ export default function BlogArticle() {
   );
 }
 
-function ReadMoreSection({ post, language }: { post: BlogPost; language: BlogLanguage }) {
-  const links = post.internalLinks.filter((link) => !link.language || link.language === "all" || link.language === language).slice(0, 3);
-  if (!links.length) return null;
+function ReadMoreSection({ post, posts, language }: { post: BlogPost; posts: BlogPost[]; language: BlogLanguage }) {
+  const [index, setIndex] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(3);
+  const candidates = posts.filter((item) => item.id !== post.id).slice(0, 9);
+  const fallbackLinks = post.internalLinks.filter((link) => !link.language || link.language === "all" || link.language === language).slice(0, 6);
+  const maxIndex = Math.max(0, candidates.length - visibleCards);
+
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth >= 1024) setVisibleCards(3);
+      else if (window.innerWidth >= 640) setVisibleCards(2);
+      else setVisibleCards(1);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  useEffect(() => {
+    setIndex((current) => Math.min(current, maxIndex));
+  }, [maxIndex]);
+
+  if (!candidates.length && !fallbackLinks.length) return null;
+
   return (
-    <section className="mt-12 rounded-[1.75rem] border border-[#dce7f9] bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.04)]">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#2563eb]">Read More</p>
-      <h2 className="mt-2 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a]">Related operating systems and case context</h2>
-      <div className="mt-5 grid gap-3">
-        {links.map((link) => (
-          <a key={`${link.label}-${link.url}-read-more`} href={link.url} className="rounded-2xl border border-[#dce7f9] px-4 py-3 font-bold text-[#2563eb] hover:bg-[#f8fbff]">
-            {link.label}
-          </a>
-        ))}
+    <section className="mt-12">
+      <div className="mb-5 flex items-end justify-between gap-4">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#2563eb]">Read More</p>
+          <h2 className="mt-2 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a]">Related articles</h2>
+        </div>
+        {candidates.length > visibleCards ? (
+          <div className="flex gap-2">
+            <button type="button" onClick={() => setIndex((current) => Math.max(0, current - 1))} disabled={index === 0} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2563eb] text-white disabled:opacity-35" aria-label="Previous articles">
+              <ChevronLeft size={18} />
+            </button>
+            <button type="button" onClick={() => setIndex((current) => Math.min(maxIndex, current + 1))} disabled={index >= maxIndex} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2563eb] text-white disabled:opacity-35" aria-label="Next articles">
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        ) : null}
       </div>
+      {candidates.length ? (
+        <div className="overflow-hidden">
+          <div className="flex gap-4 transition-transform duration-500 ease-out" style={{ transform: `translateX(-${index * (100 / visibleCards)}%)` }}>
+            {candidates.map((item) => {
+              const thumbnail = getThumbnailVisual(item);
+              return (
+                <Link key={item.id} href={`/blog/${item.slug.canonical}/${language}`} className="shrink-0 overflow-hidden rounded-[1.25rem] border border-[#dce7f9] bg-white shadow-[0_16px_34px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:border-[#cadcf6]" style={{ flexBasis: `calc(${100 / visibleCards}% - ${(16 * (visibleCards - 1)) / visibleCards}px)` }}>
+                  {thumbnail?.url ? <img src={thumbnail.url} alt={thumbnail.alt[language] || item.topic} className="aspect-video w-full bg-white object-cover" /> : null}
+                  <div className="p-4">
+                    <div className="mb-2 flex flex-wrap gap-1.5">
+                      {(item.categories || []).slice(0, 2).map((category) => (
+                        <span key={category} className="rounded-full bg-[#eef4ff] px-2 py-0.5 text-[0.62rem] font-bold uppercase tracking-[0.08em] text-[#2563eb]">{category}</span>
+                      ))}
+                    </div>
+                    <h3 className="font-['Space_Grotesk'] text-lg font-bold leading-tight text-[#0f172a]">{item.seo[language]?.title || item.topic}</h3>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2">
+          {fallbackLinks.map((link) => (
+            <a key={`${link.label}-${link.url}-read-more`} href={link.url} className="rounded-2xl border border-[#dce7f9] bg-white px-4 py-3 font-bold text-[#2563eb] hover:bg-[#f8fbff]">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
@@ -297,7 +366,7 @@ function VisualMedia({
   onVideo: (url: string) => void;
 }) {
   const image = visual.url ? (
-    <img src={visual.url} alt={visual.alt[language]} className="h-80 w-full object-cover" />
+    <img src={visual.url} alt={visual.alt[language]} className="max-h-[34rem] w-full bg-white object-contain" />
   ) : (
     <div className="flex min-h-56 items-center justify-center bg-[#eef4ff] px-8 text-center text-sm text-[#5b667b]">{visual.prompt}</div>
   );

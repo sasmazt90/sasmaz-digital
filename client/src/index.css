@@ -393,7 +393,7 @@
 
   .blog-article-body h2 {
     margin: 3rem 0 1rem;
-    font-size: clamp(1.65rem, 2.7vw, 2.35rem);
+    font-size: clamp(1.45rem, 2.1vw, 2rem);
   }
 
   .blog-article-body h3 {
@@ -407,7 +407,14 @@
 
   .blog-article-body strong {
     color: #0f172a;
-    font-weight: 800;
+    font-weight: 700;
+  }
+
+  .blog-article-body p > strong:only-child {
+    display: block;
+    font-size: 1.02rem;
+    line-height: 1.5;
+    font-weight: 700;
   }
 
   .blog-article-body ol,
@@ -419,6 +426,37 @@
   .blog-article-body li {
     margin: 0.55rem 0;
     padding-left: 0.25rem;
+  }
+
+  .blog-article-body table {
+    display: block;
+    width: 100%;
+    margin: 1.75rem 0;
+    overflow-x: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #dce7f9;
+    border-radius: 1rem;
+    background: #ffffff;
+  }
+
+  .blog-article-body th,
+  .blog-article-body td {
+    min-width: 12rem;
+    border-bottom: 1px solid #e7eef9;
+    padding: 0.9rem 1rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .blog-article-body th {
+    color: #0f172a;
+    font-weight: 800;
+    background: #f8fbff;
+  }
+
+  .blog-article-body tr:last-child td {
+    border-bottom: 0;
   }
 
   .blog-article-body figure {
@@ -433,8 +471,10 @@
   .blog-article-body figure img {
     display: block;
     width: 100%;
-    max-height: 28rem;
-    object-fit: cover;
+    height: auto;
+    max-height: 34rem;
+    object-fit: contain;
+    background: #ffffff;
   }
 
   .blog-article-body figcaption {
