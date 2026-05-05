@@ -151,7 +151,7 @@ export default function BlogArticle() {
 
           {hero ? (
             <figure className="mb-10 overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.06)]">
-              {hero.url ? <img src={hero.url} alt={hero.alt[language]} className="max-h-[34rem] w-full bg-white object-contain" /> : <div className="flex min-h-72 items-center justify-center bg-[#eef4ff] px-8 text-center text-[#5b667b]">{hero.prompt}</div>}
+              {hero.url ? <img src={hero.url} alt={hero.alt[language]} decoding="async" className="max-h-[34rem] w-full bg-white object-contain" /> : <div className="flex min-h-72 items-center justify-center bg-[#eef4ff] px-8 text-center text-[#5b667b]">{hero.prompt}</div>}
               {hero.caption[language] ? <figcaption className="px-5 py-4 text-sm text-[#5b667b]">{hero.caption[language]}</figcaption> : null}
             </figure>
           ) : null}
@@ -295,7 +295,7 @@ function ReadMoreSection({ post, posts, language }: { post: BlogPost; posts: Blo
               const thumbnail = getThumbnailVisual(item);
               return (
                 <Link key={item.id} href={`/blog/${item.slug.canonical}/${language}`} className="shrink-0 overflow-hidden rounded-[1.25rem] border border-[#dce7f9] bg-white shadow-[0_16px_34px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:border-[#cadcf6]" style={{ flexBasis: `calc(${100 / visibleCards}% - ${(16 * (visibleCards - 1)) / visibleCards}px)` }}>
-                  {thumbnail?.url ? <img src={thumbnail.url} alt={thumbnail.alt[language] || item.topic} className="aspect-video w-full bg-white object-cover" /> : null}
+                  {thumbnail?.url ? <img src={thumbnail.url} alt={thumbnail.alt[language] || item.topic} loading="lazy" decoding="async" className="aspect-video w-full bg-white object-cover" /> : null}
                   <div className="p-4">
                     <div className="mb-2 flex flex-wrap gap-1.5">
                       {(item.categories || []).slice(0, 2).map((category) => (
@@ -366,7 +366,7 @@ function VisualMedia({
   onVideo: (url: string) => void;
 }) {
   const image = visual.url ? (
-    <img src={visual.url} alt={visual.alt[language]} className="max-h-[34rem] w-full bg-white object-contain" />
+    <img src={visual.url} alt={visual.alt[language]} loading="lazy" decoding="async" className="max-h-[34rem] w-full bg-white object-contain" />
   ) : (
     <div className="flex min-h-56 items-center justify-center bg-[#eef4ff] px-8 text-center text-sm text-[#5b667b]">{visual.prompt}</div>
   );

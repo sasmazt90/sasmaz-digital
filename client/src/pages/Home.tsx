@@ -341,11 +341,11 @@ const translations = {
     aboutEyebrow: "About",
     aboutTitle: "A leadership profile built on measurable commercial outcomes.",
     aboutBody1:
-      "Combines growth strategy, CRM, analytics, marketplace execution and AI-enabled operations into one integrated management discipline.",
+      "Builds commercial growth systems across digital marketing, performance marketing, e-commerce, CRM, growth marketing and AI.",
     aboutBody2:
-      "Brings together strategic clarity and hands-on execution, with a track record of scaling teams, simplifying complexity and building performance systems executives can trust.",
+      "Frames Digital transformation as a business growth engine, turning complex channel, customer and operational challenges into clear priorities and measurable outcomes.",
     aboutBody3:
-      "Currently leading DACH digital transformation at NAOS Deutschland (BIODERMA) in Munich, combining strategic vision with hands-on execution to deliver measurable business impact.",
+      "Combines strategic leadership with hands-on execution to scale teams, improve decision-making and create performance systems executives can trust.",
     journeyEyebrow: "Career Journey",
     journeyTitle:
       "A decade-long record of building digital capability and commercial impact.",
@@ -971,6 +971,8 @@ export default function Home() {
                 <img
                   src={product.image}
                   alt={product.title}
+                  loading="lazy"
+                  decoding="async"
                 className={`h-full w-full ${portrait ? "aspect-[4/5]" : "aspect-[312/250]"} ${product.imageFit === "contain" ? "object-contain p-4" : "object-cover"} ${product.imageClassName ?? ""}`}
                   style={{
                     objectPosition:
@@ -1193,9 +1195,11 @@ export default function Home() {
               >
                 <div className="h-52 overflow-hidden bg-[#eef4ff] dark:bg-[#0f2530]">
                   {thumbnail?.url ? (
-                    <img
-                      src={thumbnail.url}
-                      alt={thumbnail.alt[language] || title}
+                <img
+                  src={thumbnail.url}
+                  alt={thumbnail.alt[language] || title}
+                  loading="lazy"
+                  decoding="async"
                       className="h-full w-full object-cover"
                     />
                   ) : (

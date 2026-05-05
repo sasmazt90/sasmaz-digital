@@ -79,7 +79,7 @@ export default function BlogList() {
               <Fragment key={post.id}>
                 <article className="overflow-hidden rounded-[1.25rem] border border-[#dce7f9] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:border-[#cadcf6] hover:shadow-[0_22px_46px_rgba(15,23,42,0.09)]">
                   {thumbnail?.url ? (
-                    <img src={thumbnail.url} alt={thumbnail.alt[language]} className="aspect-video w-full bg-white object-cover" />
+                    <img src={thumbnail.url} alt={thumbnail.alt[language]} loading="lazy" decoding="async" className="aspect-video w-full bg-white object-cover" />
                   ) : (
                     <div className="flex aspect-video w-full items-center justify-center bg-[#eef4ff] px-6 text-center text-sm text-[#5b667b]">{thumbnail?.prompt || "Blog visual"}</div>
                   )}

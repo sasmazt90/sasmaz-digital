@@ -280,10 +280,10 @@
     },
     {
       "id": "blog_ecommerce_growth_engine_20260504",
-      "seededContentVersion": 4,
+      "seededContentVersion": 5,
       "status": "published",
       "createdAt": "2026-05-04T12:00:00.000Z",
-      "updatedAt": "2026-05-05T02:34:03.413Z",
+      "updatedAt": "2026-05-05T19:35:00.000Z",
       "publishedAt": "2026-05-04T12:00:00.000Z",
       "topic": "E-commerce Growth Engine Nasil Kurulur?",
       "angle": "DACH e-commerce operating system connecting demand, marketplace execution, PDP quality, pricing, CRM and executive dashboards.",
@@ -433,8 +433,8 @@
         {
           "id": "visual_thumbnail_e-commerce-growth-engine-nasil-kurulur",
           "visualType": "thumbnail",
-          "fileName": "e-commerce-growth-engine-nasil-kurulur-thumbnail.png",
-          "url": "/images/blog/e-commerce-growth-engine-nasil-kurulur-thumbnail.png",
+          "fileName": "e-commerce-growth-engine-nasil-kurulur-hero.webp",
+          "url": "/images/blog/e-commerce-growth-engine-nasil-kurulur-hero.webp",
           "alt": {
             "en": "E-commerce Growth Engine thumbnail visual",
             "de": "E-commerce Growth Engine thumbnail Visual",
@@ -446,7 +446,7 @@
             "tr": ""
           },
           "prompt": "Premium editorial business photo for E-commerce Growth Engine: modern desk, laptop, printed planning papers, growth map, product plan, channel notes, laptop, warm natural light, realistic composition, 16:9 crop-safe framing. No article title, no subtitle, no category tags, no brand logos, and no generated text overlay.",
-          "placement": "Blog listing thumbnail",
+          "placement": "Blog listing thumbnail, optimized from the uploaded hero visual",
           "stylePreset": "editorial-lifestyle",
           "status": "uploaded"
         },
@@ -489,26 +489,6 @@
           "status": "uploaded",
           "visualType": "kpi",
           "stylePreset": "kpi-cards"
-        },
-        {
-          "id": "visual_workflow_e-commerce-growth-engine-nasil-kurulur",
-          "visualType": "workflow",
-          "fileName": "e-commerce-growth-engine-nasil-kurulur-workflow.svg",
-          "url": "/images/blog/e-commerce-growth-engine-nasil-kurulur-workflow.svg",
-          "alt": {
-            "en": "E-commerce Growth Engine workflow visual",
-            "de": "E-commerce Growth Engine workflow Visual",
-            "tr": "E-commerce Growth Engine workflow gorseli"
-          },
-          "caption": {
-            "en": "A weekly workflow for observing signals, prioritizing bottlenecks, executing tests and scaling what works.",
-            "de": "Woechentlicher Workflow fuer Signale, Bottlenecks, Tests und Skalierung.",
-            "tr": "Sinyal izleme, darbo?az onceliklendirme, test ve scale icin haftalik workflow."
-          },
-          "prompt": "Sticky-note tabletop workflow visual for E-commerce Growth Engine: clean desk or whiteboard decision flow with short labels only, warm business editorial style. No article title, no subtitle, no category tags, no brand logos, no random labels, no neon, no futuristic holograms, no crowded dashboard UI, no unreadable text.",
-          "placement": "Workflow section",
-          "stylePreset": "sticky-note-workflow",
-          "status": "generated"
         }
       ],
       "internalLinks": [
@@ -542,10 +522,10 @@
     },
     {
       "id": "blog_ai_ctr_60_20260504",
-      "seededContentVersion": 4,
+      "seededContentVersion": 5,
       "status": "published",
       "createdAt": "2026-05-04T12:00:00.000Z",
-      "updatedAt": "2026-05-05T02:34:03.414Z",
+      "updatedAt": "2026-05-05T19:35:00.000Z",
       "publishedAt": "2026-05-04T12:00:00.000Z",
       "topic": "AI ile CTR %60 Nasil Artirilir?",
       "angle": "TranslAsset AI: OCR, LLM localization, creative adaptation and image reconstruction for faster market-ready assets.",
@@ -691,8 +671,8 @@
         {
           "id": "visual_thumbnail_ai-ile-ctr-60-nasil-artirilir",
           "visualType": "thumbnail",
-          "fileName": "ai-ile-ctr-60-nasil-artirilir-thumbnail.png",
-          "url": "/images/blog/ai-ile-ctr-60-nasil-artirilir-thumbnail.png",
+          "fileName": "ai-ile-ctr-60-nasil-artirilir-hero.webp",
+          "url": "/images/blog/ai-ile-ctr-60-nasil-artirilir-hero.webp",
           "alt": {
             "en": "AI CTR Improvement thumbnail visual",
             "de": "AI CTR Improvement thumbnail Visual",
@@ -704,7 +684,7 @@
             "tr": ""
           },
           "prompt": "Premium editorial business photo for AI CTR Improvement: modern desk, laptop, printed planning papers, creative notes, variant board, campaign plan, laptop, warm natural light, realistic composition, 16:9 crop-safe framing. No article title, no subtitle, no category tags, no brand logos, and no generated text overlay.",
-          "placement": "Blog listing thumbnail",
+          "placement": "Blog listing thumbnail, optimized from the uploaded hero visual",
           "stylePreset": "editorial-lifestyle",
           "status": "uploaded"
         },
@@ -747,26 +727,6 @@
           "status": "uploaded",
           "visualType": "kpi",
           "stylePreset": "kpi-cards"
-        },
-        {
-          "id": "visual_workflow_ai-ile-ctr-60-nasil-artirilir",
-          "visualType": "workflow",
-          "fileName": "ai-ile-ctr-60-nasil-artirilir-workflow.svg",
-          "url": "/images/blog/ai-ile-ctr-60-nasil-artirilir-workflow.svg",
-          "alt": {
-            "en": "AI CTR Improvement workflow visual",
-            "de": "AI CTR Improvement workflow Visual",
-            "tr": "AI CTR Improvement workflow gorseli"
-          },
-          "caption": {
-            "en": "Decision flow for briefing, generating, QA-checking, testing and localizing creative variants.",
-            "de": "Entscheidungsfluss fuer Briefing, Generierung, QA, Testing und Lokalisierung von Creative-Varianten.",
-            "tr": "Creative varyantlari icin brief, uretim, QA, test ve lokalizasyon karar akisi."
-          },
-          "prompt": "Sticky-note tabletop workflow visual for AI CTR Improvement: clean desk or whiteboard decision flow with short labels only, warm business editorial style. No article title, no subtitle, no category tags, no brand logos, no random labels, no neon, no futuristic holograms, no crowded dashboard UI, no unreadable text.",
-          "placement": "Workflow section",
-          "stylePreset": "sticky-note-workflow",
-          "status": "generated"
         }
       ],
       "internalLinks": [
@@ -806,10 +766,10 @@
     },
     {
       "id": "blog_ltv_cac_framework_20260504",
-      "seededContentVersion": 4,
+      "seededContentVersion": 5,
       "status": "published",
       "createdAt": "2026-05-04T12:00:00.000Z",
-      "updatedAt": "2026-05-05T02:34:03.414Z",
+      "updatedAt": "2026-05-05T19:35:00.000Z",
       "publishedAt": "2026-05-04T12:00:00.000Z",
       "topic": "LTV / CAC Framework (Real System)",
       "angle": "CRM lifecycle model connecting segmentation, replenishment, onboarding, win-back and allowable CAC.",
@@ -955,8 +915,8 @@
         {
           "id": "visual_thumbnail_ltv-cac-framework-real-system",
           "visualType": "thumbnail",
-          "fileName": "ltv-cac-framework-real-system-thumbnail.png",
-          "url": "/images/blog/ltv-cac-framework-real-system-thumbnail.png",
+          "fileName": "ltv-cac-framework-real-system-hero.webp",
+          "url": "/images/blog/ltv-cac-framework-real-system-hero.webp",
           "alt": {
             "en": "LTV / CAC Framework thumbnail visual",
             "de": "LTV / CAC Framework thumbnail Visual",
@@ -968,7 +928,7 @@
             "tr": ""
           },
           "prompt": "Premium editorial business photo for LTV / CAC Framework: modern desk, laptop, printed planning papers, cohort notes, finance sheet, retention plan, laptop, warm natural light, realistic composition, 16:9 crop-safe framing. No article title, no subtitle, no category tags, no brand logos, and no generated text overlay.",
-          "placement": "Blog listing thumbnail",
+          "placement": "Blog listing thumbnail, optimized from the uploaded hero visual",
           "stylePreset": "editorial-lifestyle",
           "status": "uploaded"
         },
@@ -1011,26 +971,6 @@
           "placement": "data-kpi",
           "stylePreset": "kpi-cards",
           "status": "uploaded"
-        },
-        {
-          "id": "visual_workflow_ltv-cac-framework-real-system",
-          "visualType": "workflow",
-          "fileName": "ltv-cac-framework-real-system-workflow.svg",
-          "url": "/images/blog/ltv-cac-framework-real-system-workflow.svg",
-          "alt": {
-            "en": "LTV / CAC Framework workflow visual",
-            "de": "LTV / CAC Framework workflow Visual",
-            "tr": "LTV / CAC Framework workflow gorseli"
-          },
-          "caption": {
-            "en": "The workflow connects segment quality, spend level, retention movement and reallocation decisions.",
-            "de": "Der Workflow verbindet Segmentqualitaet, Spend-Level, Retention und Reallokation.",
-            "tr": "Workflow segment kalitesi, spend seviyesi, retention hareketi ve yeniden dagitim kararlarini baglar."
-          },
-          "prompt": "Sticky-note tabletop workflow visual for LTV / CAC Framework: clean desk or whiteboard decision flow with short labels only, warm business editorial style. No article title, no subtitle, no category tags, no brand logos, no random labels, no neon, no futuristic holograms, no crowded dashboard UI, no unreadable text.",
-          "placement": "Workflow section",
-          "stylePreset": "sticky-note-workflow",
-          "status": "generated"
         }
       ],
       "internalLinks": [
@@ -1064,10 +1004,10 @@
     },
     {
       "id": "blog_ai_performance_marketing_system_20260504",
-      "seededContentVersion": 4,
+      "seededContentVersion": 5,
       "status": "published",
       "createdAt": "2026-05-04T12:00:00.000Z",
-      "updatedAt": "2026-05-05T02:34:03.414Z",
+      "updatedAt": "2026-05-05T19:35:00.000Z",
       "publishedAt": "2026-05-04T12:00:00.000Z",
       "topic": "AI ile Performance Marketing Sistemi",
       "angle": "Performance system connecting creative testing, platform signals, retail media, attribution, margin and executive decision cadence.",
@@ -1213,8 +1153,8 @@
         {
           "id": "visual_thumbnail_ai-ile-performance-marketing-sistemi",
           "visualType": "thumbnail",
-          "fileName": "ai-ile-performance-marketing-sistemi-thumbnail.png",
-          "url": "/images/blog/ai-ile-performance-marketing-sistemi-thumbnail.png",
+          "fileName": "ai-ile-performance-marketing-sistemi-hero.webp",
+          "url": "/images/blog/ai-ile-performance-marketing-sistemi-hero.webp",
           "alt": {
             "en": "Building an AI Performance Marketing System thumbnail visual",
             "de": "Building an AI Performance Marketing System thumbnail Visual",
@@ -1226,7 +1166,7 @@
             "tr": ""
           },
           "prompt": "Premium editorial business photo for Building an AI Performance Marketing System: modern desk, laptop, printed planning papers, media plan, budget notes, experiment map, laptop, warm natural light, realistic composition, 16:9 crop-safe framing. No article title, no subtitle, no category tags, no brand logos, and no generated text overlay.",
-          "placement": "Blog listing thumbnail",
+          "placement": "Blog listing thumbnail, optimized from the uploaded hero visual",
           "stylePreset": "editorial-lifestyle",
           "status": "uploaded"
         },
@@ -1269,26 +1209,6 @@
           "status": "uploaded",
           "visualType": "kpi",
           "stylePreset": "kpi-cards"
-        },
-        {
-          "id": "visual_workflow_ai-ile-performance-marketing-sistemi",
-          "visualType": "workflow",
-          "fileName": "ai-ile-performance-marketing-sistemi-workflow.svg",
-          "url": "/images/blog/ai-ile-performance-marketing-sistemi-workflow.svg",
-          "alt": {
-            "en": "Building an AI Performance Marketing System workflow visual",
-            "de": "Building an AI Performance Marketing System workflow Visual",
-            "tr": "Building an AI Performance Marketing System workflow gorseli"
-          },
-          "caption": {
-            "en": "A weekly flow for turning media signals into rule-based tests, budget moves and learning notes.",
-            "de": "Woechentlicher Flow von Media-Signalen zu regelbasierten Tests, Budgetmoves und Learnings.",
-            "tr": "Media sinyallerini kural bazli testlere, butce hamlelerine ve learning notlarina ceviren haftalik akis."
-          },
-          "prompt": "Sticky-note tabletop workflow visual for Building an AI Performance Marketing System: clean desk or whiteboard decision flow with short labels only, warm business editorial style. No article title, no subtitle, no category tags, no brand logos, no random labels, no neon, no futuristic holograms, no crowded dashboard UI, no unreadable text.",
-          "placement": "Workflow section",
-          "stylePreset": "sticky-note-workflow",
-          "status": "generated"
         }
       ],
       "internalLinks": [
@@ -1328,10 +1248,10 @@
     },
     {
       "id": "blog_amazon_buy_box_strategy_20260504",
-      "seededContentVersion": 4,
+      "seededContentVersion": 5,
       "status": "published",
       "createdAt": "2026-05-04T12:00:00.000Z",
-      "updatedAt": "2026-05-05T02:34:03.414Z",
+      "updatedAt": "2026-05-05T19:35:00.000Z",
       "publishedAt": "2026-05-04T12:00:00.000Z",
       "topic": "Amazon Buy Box Kazanma Stratejisi",
       "angle": "Marketplace command center combining competitor pricing, stock, retailer conditions, PDP quality and retail media activation.",
@@ -1477,8 +1397,8 @@
         {
           "id": "visual_thumbnail_amazon-buy-box-kazanma-stratejisi",
           "visualType": "thumbnail",
-          "fileName": "amazon-buy-box-kazanma-stratejisi-thumbnail.png",
-          "url": "/images/blog/amazon-buy-box-kazanma-stratejisi-thumbnail.png",
+          "fileName": "amazon-buy-box-kazanma-stratejisi-hero.webp",
+          "url": "/images/blog/amazon-buy-box-kazanma-stratejisi-hero.webp",
           "alt": {
             "en": "Amazon Buy Box Winning Strategy thumbnail visual",
             "de": "Amazon Buy Box Winning Strategy thumbnail Visual",
@@ -1490,7 +1410,7 @@
             "tr": ""
           },
           "prompt": "Premium editorial business photo for Amazon Buy Box Winning Strategy: modern desk, laptop, printed planning papers, pricing notes, marketplace planning sheet, margin notebook, laptop, warm natural light, realistic composition, 16:9 crop-safe framing. No article title, no subtitle, no category tags, no brand logos, and no generated text overlay.",
-          "placement": "Blog listing thumbnail",
+          "placement": "Blog listing thumbnail, optimized from the uploaded hero visual",
           "stylePreset": "editorial-lifestyle",
           "status": "uploaded"
         },
@@ -1533,26 +1453,6 @@
           "status": "uploaded",
           "visualType": "kpi",
           "stylePreset": "kpi-cards"
-        },
-        {
-          "id": "visual_workflow_amazon-buy-box-kazanma-stratejisi",
-          "visualType": "workflow",
-          "fileName": "amazon-buy-box-kazanma-stratejisi-workflow.svg",
-          "url": "/images/blog/amazon-buy-box-kazanma-stratejisi-workflow.svg",
-          "alt": {
-            "en": "Amazon Buy Box Winning Strategy workflow visual",
-            "de": "Amazon Buy Box Winning Strategy workflow Visual",
-            "tr": "Amazon Buy Box Winning Strategy workflow gorseli"
-          },
-          "caption": {
-            "en": "When Buy Box is lost, the team checks price, stock, seller, PDP and margin before deciding to act.",
-            "de": "Bei Buy-Box-Verlust prueft das Team Preis, Bestand, Seller, PDP und Marge vor der Aktion.",
-            "tr": "Buy Box kaybedilince ekip aksiyon oncesi fiyat, stok, seller, PDP ve marji kontrol eder."
-          },
-          "prompt": "Sticky-note tabletop workflow visual for Amazon Buy Box Winning Strategy: clean desk or whiteboard decision flow with short labels only, warm business editorial style. No article title, no subtitle, no category tags, no brand logos, no random labels, no neon, no futuristic holograms, no crowded dashboard UI, no unreadable text.",
-          "placement": "Workflow section",
-          "stylePreset": "sticky-note-workflow",
-          "status": "generated"
         }
       ],
       "internalLinks": [
@@ -1586,10 +1486,10 @@
     },
     {
       "id": "blog_seo_pdp_optimization_framework_20260504",
-      "seededContentVersion": 4,
+      "seededContentVersion": 5,
       "status": "published",
       "createdAt": "2026-05-04T12:00:00.000Z",
-      "updatedAt": "2026-05-05T02:34:03.414Z",
+      "updatedAt": "2026-05-05T19:35:00.000Z",
       "publishedAt": "2026-05-04T12:00:00.000Z",
       "topic": "SEO + PDP Optimization Framework",
       "angle": "SEO and PDP backlog model connecting search demand, product naming, claims, content, visual hierarchy and conversion behavior.",
@@ -1735,8 +1635,8 @@
         {
           "id": "visual_thumbnail_seo-pdp-optimization-framework",
           "visualType": "thumbnail",
-          "fileName": "seo-pdp-optimization-framework-thumbnail.png",
-          "url": "/images/blog/seo-pdp-optimization-framework-thumbnail.png",
+          "fileName": "seo-pdp-optimization-framework-hero.webp",
+          "url": "/images/blog/seo-pdp-optimization-framework-hero.webp",
           "alt": {
             "en": "SEO + PDP Optimization Framework thumbnail visual",
             "de": "SEO + PDP Optimization Framework thumbnail Visual",
@@ -1748,7 +1648,7 @@
             "tr": ""
           },
           "prompt": "Premium editorial business photo for SEO + PDP Optimization Framework: modern desk, laptop, printed planning papers, content brief, product sheet, search notes, laptop, warm natural light, realistic composition, 16:9 crop-safe framing. No article title, no subtitle, no category tags, no brand logos, and no generated text overlay.",
-          "placement": "Blog listing thumbnail",
+          "placement": "Blog listing thumbnail, optimized from the uploaded hero visual",
           "stylePreset": "editorial-lifestyle",
           "status": "uploaded"
         },
@@ -1791,26 +1691,6 @@
           "placement": "data-kpi",
           "stylePreset": "kpi-cards",
           "status": "uploaded"
-        },
-        {
-          "id": "visual_workflow_seo-pdp-optimization-framework",
-          "visualType": "workflow",
-          "fileName": "seo-pdp-optimization-framework-workflow.svg",
-          "url": "/images/blog/seo-pdp-optimization-framework-workflow.svg",
-          "alt": {
-            "en": "SEO + PDP Optimization Framework workflow visual",
-            "de": "SEO + PDP Optimization Framework workflow Visual",
-            "tr": "SEO + PDP Optimization Framework workflow gorseli"
-          },
-          "caption": {
-            "en": "The workflow turns search intent into content changes, PDP QA and measurable ranking experiments.",
-            "de": "Der Workflow uebersetzt Suchintention in Content-Aenderungen, PDP-QA und Ranking-Experimente.",
-            "tr": "Workflow search intenti content degisikligine, PDP QA surecine ve ranking deneylerine cevirir."
-          },
-          "prompt": "Sticky-note tabletop workflow visual for SEO + PDP Optimization Framework: clean desk or whiteboard decision flow with short labels only, warm business editorial style. No article title, no subtitle, no category tags, no brand logos, no random labels, no neon, no futuristic holograms, no crowded dashboard UI, no unreadable text.",
-          "placement": "Workflow section",
-          "stylePreset": "sticky-note-workflow",
-          "status": "generated"
         }
       ],
       "internalLinks": [
