@@ -1,6 +1,14 @@
 export type BlogLanguage = "en" | "de" | "tr";
 export type BlogStatus = "draft" | "published";
 export type VisualStatus = "placeholder" | "uploaded" | "generated";
+export type BlogVisualType = "hero" | "thumbnail" | "framework" | "kpi" | "workflow";
+export type BlogVisualStylePreset =
+  | "editorial-lifestyle"
+  | "clean-framework"
+  | "kpi-cards"
+  | "sticky-note-workflow"
+  | "minimal-chart"
+  | "strategy-desk";
 
 export const blogLanguages: BlogLanguage[] = ["en", "de", "tr"];
 
@@ -27,6 +35,7 @@ export interface LocalizedSeo {
 
 export interface BlogVisual {
   id: string;
+  visualType: BlogVisualType;
   fileName: string;
   url?: string;
   videoUrl?: string;
@@ -34,6 +43,7 @@ export interface BlogVisual {
   caption: Record<BlogLanguage, string>;
   prompt: string;
   placement: string;
+  stylePreset: BlogVisualStylePreset;
   status: VisualStatus;
 }
 
@@ -181,8 +191,9 @@ export function createFallbackGeneratedPost(input: BlogGenerationInput): BlogPos
       { question: "Hangi KPI'lar kullanilabilir?", answer: "Sadece dogrulanmis SASMAZ KPI ornekleri kullanilmali veya sayilar benchmark olarak etiketlenmeli." },
     ],
   };
-  post.visuals = ["hero", "framework", "kpi"].map((kind, index) => ({
+  post.visuals = (["hero", "thumbnail", "framework", "kpi", "workflow"] as BlogVisualType[]).map((kind, index) => ({
     id: `visual_${index + 1}`,
+    visualType: kind,
     fileName: `${post.slug.canonical}-${kind}.png`,
     alt: {
       en: `${title} ${kind} visual`,
@@ -194,8 +205,14 @@ export function createFallbackGeneratedPost(input: BlogGenerationInput): BlogPos
       de: `${kind} Visual fuer das ${title} Betriebsmodell.`,
       tr: `${title} operasyon modeli icin ${kind} gorseli.`,
     },
-    prompt: `Create a custom SASMAZ-style ${kind} visual for an article about ${title}. Use clean data-product aesthetics, diagrams, dashboards, and no stock photography.`,
-    placement: index === 0 ? "Hero" : index === 1 ? "Framework section" : "Data / KPI section",
+    prompt: buildVisualPrompt(kind, title),
+    placement:
+      kind === "hero" ? "Hero"
+      : kind === "thumbnail" ? "Blog listing thumbnail"
+      : kind === "framework" ? "Framework section"
+      : kind === "kpi" ? "Data / KPI section"
+      : "Workflow section",
+    stylePreset: defaultStylePresetForVisualType(kind),
     status: "placeholder",
   }));
   post.docReadyContent = buildDocReadyContent(post);
@@ -233,15 +250,25 @@ Use and enrich from these mandatory context sources without copying directly: Re
 
 Known context you may use when relevant: AI-driven marketing operating system builder; Head of Digital at NAOS Deutschland; DACH digital commerce, analytics, AI and e-commerce growth systems; AI localization / creative adaptation systems; TranslAsset AI OCR + LLM + image reconstruction/inpainting; pricing validation and competitor benchmarking; SEO + PDP optimization; CRM lifecycle and LTV/CAC systems; workflow automation and Tasky AI-style internal operating systems; executive dashboards and forecasting. Verified KPI examples: +35% e-commerce sell-out growth, +14pp contribution margin improvement, +36% blended ROAS improvement, +11% AOV, +12pp Buy Box share, +48% first-page visibility, +9pp add-to-cart rate, +69% LTV, ~60% LTV/CAC, 15-18% OPEX optimization, TranslAsset AI -5% OPEX, +60% CTR, +25% CVR. Use only when contextually relevant.
 
-Visual style rule:
-Not every visual should be a futuristic dashboard. Use a balanced visual mix:
-- Hero image can be lifestyle, editorial, workplace, product-planning, or strategy-room style.
-- Framework visuals should be simple, clean, and easy to understand.
-- KPI visuals should be minimal metric cards or simple charts.
-- Workflow visuals can use whiteboard, sticky-note, tabletop, or operating-model style.
-Avoid overusing neon, dark SaaS dashboards, futuristic AI UI, holograms, and overly complex technical visuals.
-Prefer premium, modern, warm, editorial, business-realistic visuals.
-Never use real brand logos unless explicitly allowed.
+Visual system rules:
+Every visual object must include visualType, fileName, alt, caption, prompt, placement, stylePreset, and status.
+Allowed visualType values: hero, thumbnail, framework, kpi, workflow.
+Allowed stylePreset values: editorial-lifestyle, clean-framework, kpi-cards, sticky-note-workflow, minimal-chart, strategy-desk.
+Default mapping: hero -> editorial-lifestyle, thumbnail -> editorial-lifestyle, framework -> clean-framework, kpi -> kpi-cards, workflow -> sticky-note-workflow.
+
+Critical image rules:
+- Never write the article title, subtitle, category tags, or SEO keyword inside the image.
+- Never add random labels such as "strategy room operating model" or pseudo-dashboard filler text.
+- Hero and thumbnail visuals must be premium editorial/lifestyle/business-realistic scenes: modern desk, laptop, printed notes, product planning papers, strategy room, warm or neutral natural light.
+- Hero and thumbnail visuals must not be dashboards, SaaS UI cards, neon/futuristic AI scenes, abstract card templates, or repeated curve/box templates.
+- Framework visuals may be diagrams, but keep them simple: 4-6 nodes, light background, consulting-style, short readable labels only, no dense dashboard.
+- KPI visuals may use 4-5 metric cards or a minimal chart on an off-white/light background; no crowded tables, no tiny unreadable labels.
+- Workflow visuals may use tabletop cards, sticky notes, or whiteboard decision flow; no icon spam, no dashboard.
+- Keep in-image text minimal and only where the visual type needs short labels. If there is any risk of overflow, remove or shorten the label.
+- Blog card titles, descriptions, and tags must be HTML/CSS text, not embedded in the image.
+
+Before saving each visual prompt, self-check and simplify it if it violates any guardrail:
+Does it ask for the article title/subtitle/tags in the image? Does it include random labels? Does it make a hero/thumbnail look like a dashboard? Is a framework too crowded? Is a KPI visual becoming a dashboard? Is there text overflow risk?
 
 Use this article structure in each language:
 0. Context; 1. Problem; 2. Framework; 3. Real Example; 4. Data / KPI; 5. Actionable Steps.
@@ -257,7 +284,7 @@ Return JSON matching this TypeScript shape exactly:
   "seo": { "en": { "title": string, "metaDescription": string, "keywords": string[], "focusKeyword": string }, "de": {...}, "tr": {...} },
   "content": { "en": sanitizedHtmlString, "de": sanitizedHtmlString, "tr": sanitizedHtmlString },
   "faq": { "en": [{ "question": string, "answer": string }], "de": [...], "tr": [...] },
-  "visuals": [{ "id": string, "fileName": string, "alt": { "en": string, "de": string, "tr": string }, "caption": { "en": string, "de": string, "tr": string }, "prompt": string, "placement": string, "status": "placeholder" }],
+  "visuals": [{ "id": string, "visualType": "hero" | "thumbnail" | "framework" | "kpi" | "workflow", "fileName": string, "alt": { "en": string, "de": string, "tr": string }, "caption": { "en": string, "de": string, "tr": string }, "prompt": string, "placement": string, "stylePreset": "editorial-lifestyle" | "clean-framework" | "kpi-cards" | "sticky-note-workflow" | "minimal-chart" | "strategy-desk", "status": "placeholder" }],
   "internalLinks": [{ "label": string, "url": string, "language": "all", "context": string }],
   "docReadyContent": string
 }`;
@@ -344,7 +371,7 @@ export function validateBlogPost(post: BlogPost): BlogValidationResult {
 
 export function buildDocReadyContent(post: BlogPost) {
   const visualList = post.visuals
-    .map((visual) => `- ${visual.fileName}\n  Alt EN: ${visual.alt.en}\n  Caption EN: ${visual.caption.en}\n  Prompt: ${visual.prompt}\n  Placement: ${visual.placement}`)
+    .map((visual) => `- ${visual.fileName}\n  Visual type: ${visual.visualType}\n  Style preset: ${visual.stylePreset}\n  Alt EN: ${visual.alt.en}\n  Caption EN: ${visual.caption.en}\n  Prompt: ${visual.prompt}\n  Placement: ${visual.placement}`)
     .join("\n");
   const links = post.internalLinks.map((link) => `- ${link.label}: ${link.url} (${link.language || "all"}) ${link.context || ""}`).join("\n");
   return `# ${post.topic}
@@ -436,8 +463,10 @@ function mergeFaq(value: Partial<BlogPost>["faq"]) {
 }
 
 function normalizeVisual(visual: BlogVisual, index: number): BlogVisual {
+  const visualType = normalizeVisualType(visual.visualType, visual.placement, index);
   return {
     id: visual.id || `visual_${index + 1}`,
+    visualType,
     fileName: uniqueBaseSlug(visual.fileName || `blog-visual-${index + 1}`) + (/\.(png|jpe?g|webp|svg)$/i.test(visual.fileName || "") ? "" : ".png"),
     url: visual.url,
     videoUrl: visual.videoUrl,
@@ -451,10 +480,65 @@ function normalizeVisual(visual: BlogVisual, index: number): BlogVisual {
       de: visual.caption?.de || "",
       tr: visual.caption?.tr || "",
     },
-    prompt: visual.prompt || "",
+    prompt: sanitizeVisualPrompt(visual.prompt || buildVisualPrompt(visualType, visual.alt?.en || "SASMAZ authority article"), visualType),
     placement: visual.placement || "",
+    stylePreset: normalizeStylePreset(visual.stylePreset, visualType),
     status: visual.status || "placeholder",
   };
+}
+
+export function defaultStylePresetForVisualType(visualType: BlogVisualType): BlogVisualStylePreset {
+  if (visualType === "framework") return "clean-framework";
+  if (visualType === "kpi") return "kpi-cards";
+  if (visualType === "workflow") return "sticky-note-workflow";
+  return "editorial-lifestyle";
+}
+
+export function buildVisualPrompt(visualType: BlogVisualType, topic: string) {
+  const common = "No article title, no subtitle, no category tags, no brand logos, no random labels, no neon, no futuristic holograms, no crowded dashboard UI, no unreadable text.";
+  if (visualType === "hero" || visualType === "thumbnail") {
+    return `Premium editorial business photography for ${topic}: modern workspace, laptop, printed planning notes, subtle e-commerce or growth strategy context, warm natural light, realistic composition, clean desk, 16:9 crop-safe framing. ${common}`;
+  }
+  if (visualType === "framework") {
+    return `Clean consulting-style framework diagram for ${topic}: light background, 4-6 simple nodes, generous spacing, short labels only if needed, balanced hierarchy, premium presentation feel. ${common}`;
+  }
+  if (visualType === "kpi") {
+    return `Minimal KPI visual for ${topic}: off-white background, 4 or 5 metric cards, soft shadow, restrained business chart, premium typography, clear spacing. ${common}`;
+  }
+  return `Sticky-note tabletop workflow visual for ${topic}: decision cards on a clean desk or whiteboard, simple left-to-right operating flow, short labels only if needed, warm business editorial style. ${common}`;
+}
+
+function normalizeVisualType(value: unknown, placement = "", index = 0): BlogVisualType {
+  if (value === "hero" || value === "thumbnail" || value === "framework" || value === "kpi" || value === "workflow") return value;
+  const source = `${placement}`.toLowerCase();
+  if (source.includes("thumbnail")) return "thumbnail";
+  if (source.includes("framework")) return "framework";
+  if (source.includes("kpi") || source.includes("data")) return "kpi";
+  if (source.includes("workflow") || source.includes("action")) return "workflow";
+  return index === 0 ? "hero" : index === 1 ? "framework" : "kpi";
+}
+
+function normalizeStylePreset(value: unknown, visualType: BlogVisualType): BlogVisualStylePreset {
+  if (
+    value === "editorial-lifestyle" ||
+    value === "clean-framework" ||
+    value === "kpi-cards" ||
+    value === "sticky-note-workflow" ||
+    value === "minimal-chart" ||
+    value === "strategy-desk"
+  ) {
+    return value;
+  }
+  return defaultStylePresetForVisualType(visualType);
+}
+
+function sanitizeVisualPrompt(prompt: string, visualType: BlogVisualType) {
+  const guardrail = "Do not place the article title, subtitle, tags, SEO keywords, random labels, brand logos, or large text inside the image.";
+  const dashboardBan =
+    visualType === "hero" || visualType === "thumbnail"
+      ? " This must feel like editorial business photography, not a dashboard, SaaS UI card, abstract template, neon AI scene, or fake app screenshot."
+      : "";
+  return `${prompt.replace(/\b(write|display|include|add)\s+(the\s+)?(article\s+)?(title|subtitle|headline|tags?)\b/gi, "avoid embedded text").trim()} ${guardrail}${dashboardBan}`.replace(/\s+/g, " ");
 }
 
 function defaultInternalLinks(): BlogInternalLink[] {

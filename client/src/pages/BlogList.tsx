@@ -7,6 +7,10 @@ import { fetchPublicBlogPosts } from "@/lib/blogApi";
 
 const languageLabels: Record<BlogLanguage, string> = { en: "EN", de: "DE", tr: "TR" };
 
+function getBlogThumbnail(post: BlogPost) {
+  return post.visuals.find((visual) => visual.visualType === "thumbnail") || post.visuals.find((visual) => visual.visualType === "hero") || post.visuals[0];
+}
+
 export default function BlogList() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [language, setLanguage] = useState<BlogLanguage>("en");
@@ -62,15 +66,15 @@ export default function BlogList() {
         {error ? <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700">{error}</div> : null}
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filteredPosts.map((post) => {
-            const hero = post.visuals[0];
+            const thumbnail = getBlogThumbnail(post);
             return (
-              <article key={post.id} className="overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.06)]">
-                {hero?.url ? (
-                  <img src={hero.url} alt={hero.alt[language]} className="h-56 w-full object-cover" />
+              <article key={post.id} className="overflow-hidden rounded-[1.25rem] border border-[#dce7f9] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.06)] transition hover:-translate-y-1 hover:border-[#cadcf6] hover:shadow-[0_22px_46px_rgba(15,23,42,0.09)]">
+                {thumbnail?.url ? (
+                  <img src={thumbnail.url} alt={thumbnail.alt[language]} className="aspect-video w-full object-cover" />
                 ) : (
-                  <div className="flex h-56 items-center justify-center bg-[#eef4ff] px-6 text-center text-sm text-[#5b667b]">{hero?.prompt || "Blog visual"}</div>
+                  <div className="flex aspect-video w-full items-center justify-center bg-[#eef4ff] px-6 text-center text-sm text-[#5b667b]">{thumbnail?.prompt || "Blog visual"}</div>
                 )}
-                <div className="p-6">
+                <div className="p-6 pt-5">
                   <div className="mb-3 flex flex-wrap gap-2">
                     {(post.categories || []).slice(0, 2).map((category) => (
                       <span key={category} className="rounded-full bg-[#eef4ff] px-3 py-1 text-xs font-bold text-[#2563eb]">{category}</span>

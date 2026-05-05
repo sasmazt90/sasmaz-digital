@@ -6,6 +6,27 @@ import { blogLanguages } from "@shared/blog";
 import { fetchPublicBlogPost } from "@/lib/blogApi";
 
 const languageLabels: Record<BlogLanguage, string> = { en: "EN", de: "DE", tr: "TR" };
+const adsenseClient = "ca-pub-4185131193797685";
+const adsenseBlogSlot = import.meta.env.VITE_ADSENSE_BLOG_SLOT || "";
+const siteUrl = "https://www.sasmaz.digital";
+
+declare global {
+  interface Window {
+    adsbygoogle?: unknown[];
+  }
+}
+
+function getHeroVisual(post: BlogPost) {
+  return post.visuals.find((visual) => visual.visualType === "hero") || post.visuals[0];
+}
+
+function upsertHeadLink(id: string, attrs: Record<string, string>) {
+  const existing = document.head.querySelector<HTMLLinkElement>(`link[data-blog-head="${id}"]`);
+  const link = existing || document.createElement("link");
+  link.dataset.blogHead = id;
+  Object.entries(attrs).forEach(([key, value]) => link.setAttribute(key, value));
+  if (!existing) document.head.appendChild(link);
+}
 
 export default function BlogArticle() {
   const [, paramsWithLanguage] = useRoute("/blog/:slug/:lang");
@@ -31,6 +52,11 @@ export default function BlogArticle() {
     description.setAttribute("name", "description");
     description.setAttribute("content", post.seo[language].metaDescription || "");
     document.head.appendChild(description);
+    upsertHeadLink("canonical", { rel: "canonical", href: `${siteUrl}/blog/${post.slug.canonical}/${language}` });
+    blogLanguages.forEach((item) => {
+      upsertHeadLink(`alternate-${item}`, { rel: "alternate", hreflang: item, href: `${siteUrl}/blog/${post.slug.canonical}/${item}` });
+    });
+    upsertHeadLink("alternate-x-default", { rel: "alternate", hreflang: "x-default", href: `${siteUrl}/blog/${post.slug.canonical}/en` });
   }, [post, language]);
 
   useEffect(() => {
@@ -46,7 +72,7 @@ export default function BlogArticle() {
     return () => document.removeEventListener("click", handleClick);
   }, []);
 
-  const hero = post?.visuals[0];
+  const hero = post ? getHeroVisual(post) : undefined;
   const inlineVisualIds = useMemo(() => {
     if (!post) return new Set<string>();
     const ids = new Set<string>();
@@ -60,7 +86,7 @@ export default function BlogArticle() {
     return ids;
   }, [post, language]);
   const bodyVisuals = useMemo(
-    () => post?.visuals.slice(1).filter((visual) => !inlineVisualIds.has(visual.id)) || [],
+    () => post?.visuals.filter((visual) => visual.visualType !== "hero" && visual.visualType !== "thumbnail" && !inlineVisualIds.has(visual.id)) || [],
     [post, inlineVisualIds],
   );
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
@@ -110,6 +136,8 @@ export default function BlogArticle() {
         </header>
 
         <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+          <BlogAd placement="after-article-header" />
+
           {hero ? (
             <figure className="mb-10 overflow-hidden rounded-[1.75rem] border border-[#dce7f9] bg-white shadow-[0_18px_42px_rgba(15,23,42,0.06)]">
               {hero.url ? <img src={hero.url} alt={hero.alt[language]} className="h-[26rem] w-full object-cover" /> : <div className="flex min-h-72 items-center justify-center bg-[#eef4ff] px-8 text-center text-[#5b667b]">{hero.prompt}</div>}
@@ -143,6 +171,9 @@ export default function BlogArticle() {
               </div>
             </section>
           ) : null}
+
+          <BlogAd placement="before-read-more" />
+          <ReadMoreSection post={post} language={language} />
 
           {post.internalLinks.length ? (
             <section className="mt-10 rounded-[1.75rem] border border-[#dce7f9] bg-white p-6">
@@ -182,9 +213,77 @@ export default function BlogArticle() {
         headline: post.seo[language].title || post.topic,
         description: post.seo[language].metaDescription,
         datePublished: post.publishedAt,
+        dateModified: post.updatedAt,
+        mainEntityOfPage: `${siteUrl}/blog/${post.slug.canonical}/${language}`,
         author: { "@type": "Person", name: "Ibrahim Tolgar Sasmaz" },
       }) }} />
+      {post.faq[language]?.length ? (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faq[language].map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        }) }} />
+      ) : null}
     </main>
+  );
+}
+
+function ReadMoreSection({ post, language }: { post: BlogPost; language: BlogLanguage }) {
+  const links = post.internalLinks.filter((link) => !link.language || link.language === "all" || link.language === language).slice(0, 3);
+  if (!links.length) return null;
+  return (
+    <section className="mt-12 rounded-[1.75rem] border border-[#dce7f9] bg-white p-6 shadow-[0_16px_34px_rgba(15,23,42,0.04)]">
+      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#2563eb]">Read More</p>
+      <h2 className="mt-2 font-['Space_Grotesk'] text-2xl font-bold text-[#0f172a]">Related operating systems and case context</h2>
+      <div className="mt-5 grid gap-3">
+        {links.map((link) => (
+          <a key={`${link.label}-${link.url}-read-more`} href={link.url} className="rounded-2xl border border-[#dce7f9] px-4 py-3 font-bold text-[#2563eb] hover:bg-[#f8fbff]">
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BlogAd({ placement }: { placement: "after-article-header" | "before-read-more" }) {
+  useEffect(() => {
+    if (!adsenseBlogSlot) return;
+    try {
+      if (!document.querySelector(`script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]`)) {
+        const script = document.createElement("script");
+        script.async = true;
+        script.crossOrigin = "anonymous";
+        script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`;
+        document.head.appendChild(script);
+      }
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adsbygoogle.push({});
+    } catch {
+      // AdSense may be blocked by browser extensions or unavailable in local dev.
+    }
+  }, []);
+
+  if (!adsenseBlogSlot) return null;
+
+  return (
+    <aside className={placement === "after-article-header" ? "mb-10" : "mt-12"}>
+      <ins
+        className="adsbygoogle block min-h-[120px] overflow-hidden rounded-[1.25rem] border border-[#dce7f9] bg-white"
+        style={{ display: "block" }}
+        data-ad-client={adsenseClient}
+        data-ad-slot={adsenseBlogSlot}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+    </aside>
   );
 }
 

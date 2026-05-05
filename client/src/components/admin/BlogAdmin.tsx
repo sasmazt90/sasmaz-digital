@@ -464,7 +464,7 @@ function VisualManager({ post, language, password, onChange }: { post: BlogPost;
     <section className="rounded-3xl border border-white/10 bg-white/5 p-5">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="font-['Space_Grotesk'] text-lg font-bold">Visual Manager</h3>
-        <Button type="button" variant="outline" onClick={() => onChange({ ...post, visuals: [...post.visuals, { id: `visual_${Date.now()}`, fileName: `${post.slug.canonical}-visual.png`, alt: { en: "", de: "", tr: "" }, caption: { en: "", de: "", tr: "" }, prompt: "", placement: "", status: "placeholder" }] })}><ImagePlus size={15} />Add visual</Button>
+        <Button type="button" variant="outline" onClick={() => onChange({ ...post, visuals: [...post.visuals, { id: `visual_${Date.now()}`, visualType: "hero", fileName: `${post.slug.canonical}-visual.png`, alt: { en: "", de: "", tr: "" }, caption: { en: "", de: "", tr: "" }, prompt: "", placement: "", stylePreset: "editorial-lifestyle", status: "placeholder" }] })}><ImagePlus size={15} />Add visual</Button>
       </div>
       <div className="grid gap-4">
         {post.visuals.map((visual, index) => (
@@ -474,6 +474,21 @@ function VisualManager({ post, language, password, onChange }: { post: BlogPost;
                 {visual.url ? <img src={visual.url} alt={visual.alt[language]} className="h-full w-full object-cover" /> : <span className="text-xs text-slate-500">Placeholder</span>}
               </div>
               <div className="grid flex-1 gap-3 md:grid-cols-2">
+                <select value={visual.visualType} onChange={(event) => updateVisual(index, { visualType: event.target.value as BlogVisual["visualType"] })} className="rounded-md border border-input bg-slate-950/70 px-3 py-2 text-sm">
+                  <option value="hero">hero</option>
+                  <option value="thumbnail">thumbnail</option>
+                  <option value="framework">framework</option>
+                  <option value="kpi">kpi</option>
+                  <option value="workflow">workflow</option>
+                </select>
+                <select value={visual.stylePreset} onChange={(event) => updateVisual(index, { stylePreset: event.target.value as BlogVisual["stylePreset"] })} className="rounded-md border border-input bg-slate-950/70 px-3 py-2 text-sm">
+                  <option value="editorial-lifestyle">editorial-lifestyle</option>
+                  <option value="clean-framework">clean-framework</option>
+                  <option value="kpi-cards">kpi-cards</option>
+                  <option value="sticky-note-workflow">sticky-note-workflow</option>
+                  <option value="minimal-chart">minimal-chart</option>
+                  <option value="strategy-desk">strategy-desk</option>
+                </select>
                 <Input value={visual.fileName} onChange={(event) => updateVisual(index, { fileName: event.target.value })} className="bg-slate-950/70" placeholder="File name" />
                 <Input value={visual.placement} onChange={(event) => updateVisual(index, { placement: event.target.value })} className="bg-slate-950/70" placeholder="Placement" />
                 <Input value={visual.alt[language]} onChange={(event) => updateVisual(index, { alt: { ...visual.alt, [language]: event.target.value } })} className="bg-slate-950/70" placeholder={`${languageLabels[language]} alt text`} />

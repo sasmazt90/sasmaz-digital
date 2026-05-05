@@ -5,12 +5,33 @@ const jsonHeaders = (password?: string) => ({
   ...(password ? { "x-admin-password": password } : {}),
 });
 
+async function fetchWithTimeout(input: RequestInfo | URL, init?: RequestInit, timeoutMs = 2500) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
 async function parseResponse<T>(response: Response): Promise<T> {
   const body = (await response.json().catch(() => null)) as { error?: string } | T | null;
   if (!response.ok) {
     throw new Error((body as { error?: string } | null)?.error || `Request failed (${response.status})`);
   }
+  if (!body) throw new Error("Response did not contain JSON data.");
   return body as T;
+}
+
+async function fetchStaticBlogPosts(): Promise<BlogCollection> {
+  const response = await fetch("/data/blog-posts.json");
+  const collection = await parseResponse<BlogCollection>(response);
+  return {
+    posts: (collection.posts || [])
+      .filter((post) => post.status === "published")
+      .sort((a, b) => (b.publishedAt || b.updatedAt).localeCompare(a.publishedAt || a.updatedAt)),
+  };
 }
 
 export async function fetchAdminBlogPosts(password: string) {
@@ -29,13 +50,25 @@ export async function fetchAiStatus(password: string) {
 }
 
 export async function fetchPublicBlogPosts() {
-  const response = await fetch("/api/blog-posts/public");
-  return parseResponse<BlogCollection>(response);
+  try {
+    const response = await fetchWithTimeout("/api/blog-posts/public");
+    const collection = await parseResponse<BlogCollection>(response);
+    return { posts: collection.posts || [] };
+  } catch {
+    return fetchStaticBlogPosts();
+  }
 }
 
 export async function fetchPublicBlogPost(slug: string) {
-  const response = await fetch(`/api/blog-posts/public/${encodeURIComponent(slug)}`);
-  return parseResponse<BlogPost>(response);
+  try {
+    const response = await fetchWithTimeout(`/api/blog-posts/public/${encodeURIComponent(slug)}`);
+    return await parseResponse<BlogPost>(response);
+  } catch {
+    const collection = await fetchStaticBlogPosts();
+    const post = collection.posts.find((item) => [item.slug.canonical, item.slug.en, item.slug.de, item.slug.tr].includes(slug));
+    if (!post) throw new Error("Published blog post not found.");
+    return post;
+  }
 }
 
 export async function createManualBlogPost(input: BlogGenerationInput, password: string) {

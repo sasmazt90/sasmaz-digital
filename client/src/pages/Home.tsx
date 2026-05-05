@@ -1174,7 +1174,10 @@ export default function Home() {
   const blogCards = useMemo<CarouselCard[]>(
     () =>
       blogPosts.map(post => {
-        const hero = post.visuals[0];
+        const thumbnail =
+          post.visuals.find(visual => visual.visualType === "thumbnail") ||
+          post.visuals.find(visual => visual.visualType === "hero") ||
+          post.visuals[0];
         const title = post.seo[language]?.title || post.topic;
         const tags = post.categories?.length ? post.categories : ["Digital Growth Systems"];
         return {
@@ -1189,15 +1192,15 @@ export default function Home() {
                 }`}
               >
                 <div className="h-52 overflow-hidden bg-[#eef4ff] dark:bg-[#0f2530]">
-                  {hero?.url ? (
+                  {thumbnail?.url ? (
                     <img
-                      src={hero.url}
-                      alt={hero.alt[language] || title}
+                      src={thumbnail.url}
+                      alt={thumbnail.alt[language] || title}
                       className="h-full w-full object-cover"
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center px-6 text-center text-sm font-semibold text-[#5b667b] dark:text-white/64">
-                      {hero?.prompt || "SASMAZ blog visual"}
+                      {thumbnail?.prompt || "SASMAZ blog visual"}
                     </div>
                   )}
                 </div>

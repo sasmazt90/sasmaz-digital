@@ -1,5 +1,18 @@
 # Deploy Guide
 
+## Production source of truth
+
+**Use Railway for production deploys. Do not deploy sasmaz.digital from Vercel.**
+
+Current live routing verified on 2026-05-05:
+
+- `www.sasmaz.digital` resolves to `gimca84z.up.railway.app`.
+- Live responses include `server: railway-edge` and `x-powered-by: Express`.
+- `/healthz` returns `{"ok":true}` on `https://www.sasmaz.digital/healthz`.
+- The app requires a persistent writable `data/` directory for `/admin`, which is why Railway is the correct production target.
+
+There is an old/local Vercel project link in `.vercel`, but it is not the production deploy path for this site. Treat it as legacy unless the hosting strategy is intentionally changed.
+
 ## Runtime model
 
 This project is a Vite frontend plus a small Express server.

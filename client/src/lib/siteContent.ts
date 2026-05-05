@@ -461,6 +461,21 @@ export const aiProducts = [
     tags: ["AI video generation", "Multi-agent systems", "Content automation", "Voice synthesis", "Social media content"],
   },
   {
+    title: "Recycle Lens",
+    category: "AI-Powered Recycling Assistant",
+    image: "/assets/apps/images/recycle-lens.png",
+    imageFit: "cover",
+    imagePosition: "center center",
+    video: "https://youtube.com/shorts/_Fm3j-4yzkA?feature=share",
+    videoType: "youtube",
+    url: "https://apps.apple.com/us/app/recycle-lens/id6765975426",
+    summary:
+      "AI-powered mobile application that identifies waste items from photos and determines the correct disposal category based on material and condition.",
+    outcome:
+      "Delivers location-aware recycling guidance, surfaces official municipality sources when available, and helps users find nearby drop-off points via map-based navigation. Designed to reduce sorting errors by combining computer vision, rule-based decisioning, and real-world recycling system constraints.",
+    tags: ["Computer Vision", "Mobile App", "Sustainability", "Location Intelligence", "Decision Engine", "Rule-based AI", "Image Recognition"],
+  },
+  {
     title: "Bluff Room",
     category: "Mobile social deduction game",
     image: "/assets/apps/images/bluff-room.png",
