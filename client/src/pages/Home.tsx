@@ -14,15 +14,15 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Moon,
   Play,
   Sparkles,
-  Sun,
   Trophy,
   Workflow,
   X,
   Youtube,
 } from "lucide-react";
+import DetailImageCarousel from "@/components/DetailImageCarousel";
+import PortfolioHeader from "@/components/PortfolioHeader";
 import type { BlogPost } from "@shared/blog";
 import {
   localizeCaseStudies,
@@ -93,17 +93,6 @@ type AwardItem = {
   level: string;
   org: string;
 };
-
-const navItems = [
-  { key: "about", href: "#about" },
-  { key: "journey", href: "#journey" },
-  { key: "impact", href: "#impact" },
-  { key: "products", href: "#products" },
-  { key: "work", href: "#work" },
-  { key: "tools", href: "#tools" },
-  { key: "contact", href: "#contact" },
-  { key: "blog", href: "#blog" },
-] as const;
 
 const toYoutubeEmbed = (url: string) => {
   const match = url.match(/(?:youtu\.be\/|v=|shorts\/)([^?&/]+)/);
@@ -1356,51 +1345,18 @@ export default function Home() {
         backgroundAttachment: "fixed",
       }}
     >
-      <header className="sticky top-0 z-40 border-b border-[#d6e0f0] bg-white/88 backdrop-blur-xl dark:border-white/10 dark:bg-[#07141c]/84">
-        <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 py-4 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-8">
-          <div className="hidden lg:block" />
-          <nav className="hidden items-center justify-center gap-2 overflow-x-auto text-sm text-[#516079] dark:text-white/68 lg:flex">
-            {navItems.map(item => (
-              <a
-                key={item.key}
-                href={item.href}
-                className={`min-w-fit rounded-full px-3 py-2 transition hover:bg-[#eff5ff] hover:text-[#0f172a] dark:hover:bg-white/8 dark:hover:text-white ${
-                  item.key === "blog"
-                    ? "font-extrabold uppercase tracking-[0.18em] text-[#0f172a] dark:text-white"
-                    : ""
-                }`}
-              >
-                {t.nav[item.key]}
-              </a>
-            ))}
-          </nav>
-          <div className="flex items-center justify-end gap-2">
-            <div className="relative">
-              <select
-                value={language}
-                onChange={event => setLanguage(event.target.value as Language)}
-                className="rounded-full border border-[#dce7f9] bg-white px-4 py-2 text-sm font-semibold uppercase tracking-[0.12em] text-[#0f172a] outline-none dark:border-white/10 dark:bg-white/6 dark:text-white"
-              >
-                <option value="en">EN</option>
-                <option value="de">DE</option>
-                <option value="tr">TR</option>
-              </select>
-            </div>
-            <button
-              type="button"
-              onClick={() =>
-                setTheme(current => (current === "light" ? "dark" : "light"))
-              }
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#dce7f9] bg-white text-[#0f172a] transition hover:border-[#bfd3f6] dark:border-white/10 dark:bg-white/6 dark:text-white"
-              aria-label={
-                theme === "light" ? t.themeToggleDark : t.themeToggleLight
-              }
-            >
-              {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-            </button>
-          </div>
-        </div>
-      </header>
+      <PortfolioHeader
+        language={language}
+        onLanguageChange={setLanguage}
+        theme={theme}
+        onThemeToggle={() =>
+          setTheme(current => (current === "light" ? "dark" : "light"))
+        }
+        navLabels={t.nav}
+        themeToggleDarkLabel={t.themeToggleDark}
+        themeToggleLightLabel={t.themeToggleLight}
+        homePage
+      />
 
       <main id="top">
         <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,0.84)_0%,rgba(245,248,252,0.76)_52%,rgba(237,244,255,0.82)_100%)] dark:bg-[linear-gradient(180deg,rgba(7,20,28,0.86)_0%,rgba(11,31,41,0.82)_54%,rgba(7,20,28,0.9)_100%)]">
@@ -2167,40 +2123,16 @@ export default function Home() {
                 />
               ) : mediaModal.type === "detail" ? (
                 <div className="p-6 sm:p-8">
-                  {mediaModal.images?.length ? (
-                    <div
-                      className={`grid gap-4 ${
-                        mediaModal.images.length > 1
-                          ? "md:grid-cols-[1.45fr_0.55fr]"
-                          : "grid-cols-1"
-                      }`}
-                    >
-                      {mediaModal.images.map((image, index) => (
-                        <div
-                          key={image}
-                          className={`overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#06151b] ${
-                            index === 0
-                              ? "aspect-[16/9]"
-                              : "min-h-[18rem] md:min-h-0"
-                          }`}
-                        >
-                          <img
-                            src={image}
-                            alt={`${mediaModal.title} — ${index + 1}`}
-                            className="h-full w-full object-contain object-center"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ) : mediaModal.image ? (
-                    <div className="aspect-[16/9] max-h-[32rem] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#06151b]">
-                      <img
-                        src={mediaModal.image}
-                        alt={mediaModal.title}
-                        className="h-full w-full object-cover object-center"
-                      />
-                    </div>
-                  ) : null}
+                  <DetailImageCarousel
+                    images={
+                      mediaModal.images?.length
+                        ? mediaModal.images
+                        : mediaModal.image
+                          ? [mediaModal.image]
+                          : []
+                    }
+                    title={mediaModal.title}
+                  />
                   <div className="mt-6 space-y-5">
                     {mediaModal.body.map((paragraph, index) =>
                       isDetailSectionHeading(paragraph) ? (
